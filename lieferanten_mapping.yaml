@@ -10,11 +10,16 @@
 #
 # Schema-Dokumentation siehe Abschnitt am Ende dieser Datei.
 #
-# Stand: 2026-05-17 (v1.15 — Onboarding-Erweiterungen nach Live-Trial-Runs Batch 1+2
-# HotCakes: HotCakes-Vorlagen-Slots final gesetzt (E80-Erweiterung), neues optionales
-# Feld `max_groesse` als Default-Größen-Cap pro Lieferant, Schema-Doku
+# Stand: 2026-05-18 (v1.16 — F3 + F6 aus HotCakes-Run-Report 2026-05-18: zwei neue
+# Pflicht-Felder pro Lieferant — `article_weight_kg` (Default 0.05 = 50 g pro
+# Kleidungsstück, F3/B56) und `taric_code` (Default '62114390' für Pole-Bekleidung,
+# F6/B59). Beide Felder als Lieferanten-Override-fähig, mit Default-Hinweis im
+# Schema-Block am Ende dieser Datei.
+# Vorheriger Stand: 2026-05-17 (v1.15 — Onboarding-Erweiterungen nach Live-Trial-Runs
+# Batch 1+2 HotCakes: Vorlagen-Slots final gesetzt (E80-Erweiterung), Feld
+# `max_groesse` als Default-Größen-Cap pro Lieferant, Schema-Doku
 # um Vorlagen-Slot-Konvention pro Import-Typ klargestellt.
-# Vorheriger Stand: 2026-05-15 (nach Architektur-Pivot beim Bilder-Import auf
+# Vor-vorheriger Stand: 2026-05-15 (Architektur-Pivot beim Bilder-Import auf
 # Stammdaten-Integration, siehe E46: Ameise-Vorlagen pro Lieferant von 5
 # auf 4 reduziert; mit E80 v1.14 wieder auf 5 erweitert um Cross-Selling)
 
@@ -34,6 +39,8 @@ lieferanten:
     drive_eingang_id: 1SaQsPW6qmEErRL-U_iwhDutLsA3P3QJP
     r2_prefix: pole-addict
     lieferantennummer_wawi: 1049
+    article_weight_kg: 0.05     # NEU v1.16 (F3/B56) — Standard 50 g pro Kleidungsstück, override pro Artikel möglich
+    taric_code: '62114390'      # NEU v1.16 (F6/B59) — TARIC für Pole-Bekleidung
     groessen_konvention: standard
     category: fashion           # NEU mit E45 — informativ
     crop_profile: fashion       # NEU mit E45 — Crop-Parameter aus Bildpipeline-Profil-Tabelle
@@ -120,6 +127,8 @@ lieferanten:
     drive_eingang_id: null     # noch nicht angelegt
     r2_prefix: hotcakes
     lieferantennummer_wawi: 1113
+    article_weight_kg: 0.05     # NEU v1.16 (F3/B56) — Standard 50 g pro Kleidungsstück
+    taric_code: '62114390'      # NEU v1.16 (F6/B59) — TARIC für Pole-Bekleidung
     groessen_konvention: kombi_reduziert_auf_kleinste   # HotCakes liefert "XS/S" → wird "XS" (siehe E27)
     category: fashion           # NEU mit E45
     crop_profile: fashion       # NEU mit E45
@@ -150,6 +159,8 @@ lieferanten:
     drive_eingang_id: null
     r2_prefix: lunalae
     lieferantennummer_wawi: null
+    article_weight_kg: 0.05     # NEU v1.16 (F3/B56) — Default für Pole-Bekleidung, bei Onboarding ggf. override
+    taric_code: '62114390'      # NEU v1.16 (F6/B59) — TARIC für Pole-Bekleidung
     groessen_konvention: null
     category: fashion           # NEU mit E45 — Default-Annahme, Lunalae ist Polewear-Lieferant
     crop_profile: fashion       # NEU mit E45
@@ -177,6 +188,8 @@ lieferanten:
     drive_eingang_id: null
     r2_prefix: pole-junkie
     lieferantennummer_wawi: null
+    article_weight_kg: 0.05     # NEU v1.16 (F3/B56) — Default für Pole-Bekleidung
+    taric_code: '62114390'      # NEU v1.16 (F6/B59) — TARIC für Pole-Bekleidung (pro Artikel ggf. anpassen wenn Pole Junkie Nicht-Bekleidung führt)
     groessen_konvention: standard
     category: fashion           # Default-Annahme
     crop_profile: fashion
@@ -237,6 +250,23 @@ lieferanten:
 #                                                            URL-Namen wie _1_front.jpg)
 #                                     "none"               (zufällig, OK für tech)
 #                              Default: "auto_vision" für fashion, "none" für tech
+#
+# Stammdaten-Defaults (NEU v1.16, F3+F6):
+#   article_weight_kg       — Default-Artikelgewicht in kg für Stammdaten-CSV
+#                              Spalten `Artikelgewicht` und `Versandgewicht`.
+#                              Pilot-Default Pole-Bekleidung: 0.05 (50 g pro
+#                              Kleidungsstück). Pro Artikel ggf. override wenn
+#                              echtes Gewicht aus Lieferanten-Daten bekannt.
+#                              Wert bleibt in YAML als Float (0.05). In der
+#                              CSV als DE-Locale-Komma `0,05` schreiben.
+#                              Quelle: F3-Klärung Tjorben 2026-05-18 (B56).
+#   taric_code              — TARIC-Code für deutsche Zoll-Anmeldung,
+#                              landet in Stammdaten-CSV-Spalte `TARIC`
+#                              (Sonstiges-Reiter in WaWi).
+#                              Pilot-Default Pole-Bekleidung: '62114390'.
+#                              YAML als String mit führender Null-Sicherheit
+#                              quoten, sonst interpretiert YAML als Int.
+#                              Quelle: F6-Klärung Tjorben 2026-05-18 (B59).
 #
 # Optional (Cowork läuft auch ohne):
 #   fallback_retailer_url   — Wenn Hersteller-Site unvollständig

@@ -1,31 +1,31 @@
 # Snapshot-Manifest
 
-**Snapshot-Name:** `Version_2026-05-18_141930`
-**Stand:** v1.18, 2026-05-18 (Berlin, ~14:19 CEST)
-**Folder-ID:** `1D78Ht-hhUYoGRLRDMuCB-y7LYG8mp6Mn`
-**Parent-ID:** `12wDy0Z0cmB0p-OAs10Y7XqBWhmtQEip5` (Wichtig: Claude Backup)
-**Vorgänger-Snapshot:** `Version_2026-05-17_212017` (Folder-ID `139k1Ri9C8SC0kWBIt-XsEPAt2MO_F0zr`)
+**Snapshot-Tag:** `v1.19` (Git-Tag, erster Snapshot per Git-Pattern E87)
+**Stand:** 2026-05-18 (Berlin)
+**Build-Engine:** Claude Code (lokal, Opus 4.7 1M context)
+**Vorgänger-Tag:** `v1.18` (entstanden per Drive-Pattern, baseline-Commit im Git)
+**Repo:** `https://github.com/verticalogmbh/polesportshop-wissen`
+**Branch:** `main`
 
 ---
 
 ## 1. Build-Trail
 
-**Auftrag (vom Claude.ai-Projekt):** Bootstrap-Build v1.18 mit 3 orthogonalen Strängen:
-- **Strang A** — Build-Pattern verankert: neues `WISSENS-UPDATE-PLAYBOOK.md` als operative Spec für künftige Wissens-Builds.
-- **Strang B** — Versionierungs-Policy: Charter-Prinzip 12, E85+E86, WSC-17, plus 4 ausstehende v1.17-Header-Bumps nachholen.
-- **Strang C** — F1-F7 aus HotCakes-Run-Report 2026-05-18 als BACKLOG-Punkte B54-B60 priorisiert dokumentieren.
+**Auftrag (vom Tjorben-Trigger 2026-05-18):** v1.19-Build mit 2 Stoßrichtungen:
+- **Strang A — Pattern-Pivot:** Playbook v1.0 → v2.0 (Git-Workflow als Default, Drive als Legacy-Anhang). Migration Drive → Git als Wissens-Backbone (E87).
+- **Strang B — F-Fixes umsetzen:** F2–F6 aus HotCakes-Run-Report 2026-05-18 (B55–B59) implementieren, soweit Code-relevant. F1 + Cluster-Splits in Git-Welt deferred. F7 (Drive-Karteileichen) als manuelle Aktion gelistet.
 
-**Build-Modus:** Bootstrap — Playbook entsteht inline durch diesen Build.
+**Build-Modus:** Claude-Code-Bootstrap — dieser Build ist auch der erste, der nach dem in Stage 1 geschriebenen Playbook v2.0 läuft.
 
-**Resultat:** Snapshot mit 18 erwarteten Wissens-Files. 16 von 18 erfolgreich uploaded (10 via Drive copy_file, 6 via base64Content from main context). 2 Files (`BACKLOG.md`, `cowork_anweisung_datenimports.md`) durch base64-Stream-Drift-Limit nicht uploadbar — **manual upload durch Tjorben nötig**, lokale Files via `present_files` ausgegeben.
+**Autonomie-Hoheit (analog E81 für Cowork):** Bei strategischen Wahlpunkten autonom entschieden, in Sektion 12 gelistet.
+
+**Resultat:** 7 Files modifiziert, 0 neu, 0 entfernt. v1.18-Baseline-Commit + Tag im main-Repo waren als Stage-0-Pre-Flight nötig, da der Repo bisher nur `README.md` committet hatte und die 19 v1.18-Files untracked lagen — Commit-Hash `56a65f2` für v1.18-Baseline, danach v1.19-Arbeitscommit.
 
 ---
 
-## 2. Was neu generiert wurde (1 File)
+## 2. Was neu generiert wurde (0 Files)
 
-| Datei | Zweck |
-|---|---|
-| `WISSENS-UPDATE-PLAYBOOK.md` | Operative Spec für Cowork-getriebene Wissens-Update-Builds (E85). Bootstrap-Source für 12-Stage-Pattern. |
+Keine neuen Files in v1.19.
 
 ---
 
@@ -33,178 +33,179 @@
 
 | Datei | Bump-Typ | Begründung |
 |---|---|---|
-| `PROJEKT-CHARTER.md` | Minor (v1.15 → v1.16) | Neues Prinzip 12 (File-Header-Versionierungs-Disziplin, E86); Stand-Update auf 2026-05-18 |
-| `ENTSCHEIDUNGS-LOG-COWORK-INFRA.md` | Minor (v1.17 → v1.18) | Zwei neue E-Einträge E85 + E86 |
-| `SPEC_KONSTANTEN.md` | Minor (Spec-Bezug v1.15 → v1.16) | Sektion 13 um WISSENS-UPDATE-PLAYBOOK.md erweitert; Sektion 14 um E85+E86; Cross-Ref am Ende Sektion 9 |
-| `BACKLOG.md` | Minor (hinzu → v1.18) | 7 neue Einträge B54-B60 aus HotCakes-Run-Report |
-| `cowork_custom_instructions.md` | Minor (v1.15 → v1.16) | Neue Sektion „Wissens-Update-Trigger (E85)"; Anzahl-Marker 17 → 18 Wissens-Files |
-| `Projekt-Anweisungen.md` | Minor (hinzu → v1.16) | Hinweis WISSENS-UPDATE-PLAYBOOK.md in Routine-Output Schritt 2; Drive-Struktur + Anzahl-Marker aktualisiert |
-| `cowork_anweisung_datenimports.md` | Patch (v1.15 → v1.15.1) | Performance-Diagnose-Hinweis Sektion 3.1 (BACKLOG B54) |
+| `WISSENS-UPDATE-PLAYBOOK.md` | **Major (v1.0 → v2.0)** | Pattern-Pivot Drive → Git. Komplettes Rewrite mit 7-Stage-Pattern (vormals 12), Git-adaptierten WSC-1–17, Drive-Pattern als Legacy-Anhang Sektion 11. |
+| `ENTSCHEIDUNGS-LOG-COWORK-INFRA.md` | Minor (v1.18 → v1.19) | Neuer E-Eintrag E87 (Migration Drive → Git als Wissens-Backbone), Index erweitert. |
+| `ENTSCHEIDUNGS-LOG-CRAWLING-DATEN.md` | Minor (v1.17 → v1.18) | Zwei neue E-Einträge E89 (Category-Pattern + Sara-Workflow) und E90 (F2-F6 Sammeleintrag), Index erweitert. |
+| `SPEC_KONSTANTEN.md` | Minor (v1.16 → v1.17) | Self-Check Punkt 4 umformuliert für Multi-Kategorie-Pattern E89 + Sara-546-Pflicht-Zuweisung; Sektion 11 `size_and_fit` um Modelname-Konvention F5/B58; Spec-Bezug auf v1.19-Snapshot aktualisiert. |
+| `BACKLOG.md` | Minor (v1.18 → v1.19) | B54-B60 Status-Updates (B55-B60 erledigt v1.19, B54 deferred). Drei neue Einträge B61 (WAWI-IMPORT-WISSEN Split deferred), B62 (datenimports.md Split deferred), B63 (Cowork-Resolver-Migration zu GitHub-Raw, v1.20-Scope). |
+| `lieferanten_mapping.yaml` | Minor (v1.15 → v1.16) | Zwei neue Felder pro Lieferant: `article_weight_kg: 0.05` (F3/B56) und `taric_code: '62114390'` (F6/B59). Schema-Doku am Ende der YAML erweitert. |
+| `run_brief_daten.md` | Minor (v1.15 → v1.16) | F2/F3/F4/F5/F6 implementiert: Multi-Kategorie-Pattern E89 (spezifische Subkategorie + Sara-546), Artikelgewicht-Default 0,05 in Stammdaten-CSV, HTML-Entity-Regression behoben (Sektion 9.3 Latin-1 bleibt Unicode), Modelname aus Crawl-Body (Sektion 7 + 9), TARIC-Default aus YAML (Sektion 10). |
 
 ---
 
-## 4. Was unverändert kopiert wurde (10 Files)
+## 4. Was unverändert übernommen wurde (11 Wissens-Files)
 
-| Datei | Vorgänger-Drive-ID | Neue Drive-ID |
+Diese Files sind im v1.19-Snapshot identisch zum v1.18-Stand (SHA256-Verifikation siehe Sektion 7):
+
+- `ENTSCHEIDUNGS-LOG-ARCHIV.md`
+- `ENTSCHEIDUNGS-LOG-BILDPIPELINE.md`
+- `ENTSCHEIDUNGS-LOG-LIVE-TRIAL.md`
+- `ENTSCHEIDUNGS-LOG-STIL-CONTENT-A.md`
+- `ENTSCHEIDUNGS-LOG-STIL-CONTENT-B.md`
+- `PROJEKT-CHARTER.md`
+- `Projekt-Anweisungen.md`
+- `WAWI-IMPORT-WISSEN.md`
+- `cowork_anweisung_bildpipeline.md`
+- `cowork_anweisung_datenimports.md`
+- `cowork_custom_instructions.md`
+
+Vollständiger Vergleich via `git diff --stat v1.18..HEAD` zeigt nur die 7 modifizierten Files plus dieses Manifest.
+
+---
+
+## 5. Was nicht mehr existiert (0 Files)
+
+Keine Files entfernt in v1.19.
+
+---
+
+## 6. File-Liste mit Sizes und SHA256
+
+| Datei | Size (B) | SHA256 |
 |---|---|---|
-| `ENTSCHEIDUNGS-LOG-ARCHIV.md` | 1ZoJadIsYN-ydisJVO4WozhDb4_d9NNfm | 1AEy0N8RTyk6Ckig5aYsZRi5qfNzCPpcU |
-| `ENTSCHEIDUNGS-LOG-CRAWLING-DATEN.md` | 1lZ5iYDgcKpFv72CRBddIAtsoGXBMWU3E | 1fLnylz6NoH9sUdCxXTvPkJRoYZYd5oA_ |
-| `ENTSCHEIDUNGS-LOG-BILDPIPELINE.md` | 1wB3JuktS7_74jISbn7InAUCZu4ZPHEN3 | 1CJtqohM94aUE81f2dHf-ej2IyUdNFllY |
-| `ENTSCHEIDUNGS-LOG-STIL-CONTENT-A.md` | 15XpTlv-PgaUl-F4JCuySbWWOOsdsZDJC | 1D0pwaeZbqA9m54-LK-ijEUX_mToLW0Si |
-| `ENTSCHEIDUNGS-LOG-STIL-CONTENT-B.md` | 1iCxC_QTQ41ZgxAKPlyVgBEUQAQflivK- | 1WtkwCdjemnG3iK2WQ4bpPzg-Q2-zVO5l |
-| `ENTSCHEIDUNGS-LOG-LIVE-TRIAL.md` | 1McVdtIFI4ycIltSZl7EmvNlDb7AQUXsl | 1Z5OKcXJIvdR-TEUbofGQ9ukD-eM_-BMh |
-| `run_brief_daten.md` | 1BJ35h2cjQMrhpDTBPb-nn0nGHXg-COn1 | 1b34-yZqCSZNab_bVCS76pfdJ4yKyLWV_ |
-| `lieferanten_mapping.yaml` | 19oGtTv-yd06qQCLQjcJ0D4qpEMPm01wt | 1Z-SpOVwWCxpbQvLS0GasjxdfSLYN_aWn |
-| `WAWI-IMPORT-WISSEN.md` | 1OdEIhLmQa1SBLeQ4SYg58xdnhDdFCVyM | 1Sov_8PwxWdAqrbAuEPxiQakcBdAHW4Co |
-| `cowork_anweisung_bildpipeline.md` | 1OTRmvvUIMNNLn0bTZ_KjLnhmeSkkOL6V | 1FVscj13-UehFavN6CYURgYtrAh5iVl4W |
+| `BACKLOG.md` | 77520 | `344919edcc4d8e3eee58fc7f33f7042fbce0eca0c8d98eed277a9ad406b73046` |
+| `ENTSCHEIDUNGS-LOG-ARCHIV.md` | 9600 | `2b2b3fa5fa6648aa0dff909b829b58c4ef6d188834558714dd07c420f0cad846` |
+| `ENTSCHEIDUNGS-LOG-BILDPIPELINE.md` | 24725 | `72c626bddac40b2f65093415ae86b55b87f5f89376cb14d1359989dc11a27b5c` |
+| `ENTSCHEIDUNGS-LOG-COWORK-INFRA.md` | 49467 | `d4f947f11d9f87614e1fc2a867169c1b72cb243df4bcbefa8dc3e7cde52b50bf` |
+| `ENTSCHEIDUNGS-LOG-CRAWLING-DATEN.md` | 38406 | `1505379afb0b609c5dadad4b2379bbf0676a6d1ee53329ba17056000f6229ab5` |
+| `ENTSCHEIDUNGS-LOG-LIVE-TRIAL.md` | 12437 | `ec729b1fd368a251723676e189ead632ab27e141f97e69742910140c961b6ecd` |
+| `ENTSCHEIDUNGS-LOG-STIL-CONTENT-A.md` | 33869 | `d13f74a9430154113929a17702f5854241db0f5a429ba6b40c2bc33496ae6397` |
+| `ENTSCHEIDUNGS-LOG-STIL-CONTENT-B.md` | 35947 | `d07fb795abb901ecd81c32f18f962296a254cc794ae25e556ad45a49b54f4f73` |
+| `PROJEKT-CHARTER.md` | 20843 | `08b61ffe1879224de0d1b1fe4394812339b64aefbf8ed0b2e29faa25918c8381` |
+| `Projekt-Anweisungen.md` | 17747 | `c1c5c0a9705b38f7a37d75ccd659c932e41c87d0e79b72a6b388e98f64c167f2` |
+| `SPEC_KONSTANTEN.md` | 50589 | `369cda06c480583c2c37cbdd3d1d0aeb2d293ad33f644c9fdf0a727a120734bf` |
+| `WAWI-IMPORT-WISSEN.md` | 75060 | `fa84dd6fd1bef576c98646db2ca94e247b3a60770350887602c4c9985ab6de82` |
+| `WISSENS-UPDATE-PLAYBOOK.md` | 15372 | `6efe3d2b7c5cd4e4e239930856e2ca10e7b4e795b6db9f82489c0a42d532121b` |
+| `cowork_anweisung_bildpipeline.md` | 43315 | `e40d42857c1b7e7519a21e21b894a2a96f6b9e3218c2d4520188f71fa107ae3b` |
+| `cowork_anweisung_datenimports.md` | 73110 | `bf4b6d5da6da03b25db295fafb83644dcf5af696bae0594688835d2a41697d84` |
+| `cowork_custom_instructions.md` | 15214 | `1451e242fb97a294e57c00ff84a52b57ef5673c5784cf53972b659a994b2f55d` |
+| `lieferanten_mapping.yaml` | 25697 | `277715d3923c6f04e6136b30716ec79eb035ce498a4ca6ec10e0f08055ac9ea3` |
+| `run_brief_daten.md` | 33029 | `d35a19b70a9076828378747b08c3ac2470a0a3c8962f3cc4a46031a0652fe272` |
 
----
-
-## 5. Was nicht mehr existiert
-
-Keine Files entfernt in v1.18.
-
----
-
-## 6. File-Liste mit Drive-IDs, Sizes, SHA256-Hashes
-
-### Erfolgreich in Drive (16 von 18 Wissens-Files)
-
-| Datei | Drive-ID | Lokale Size (B) | SHA256 (lokal) | Status |
-|---|---|---|---|---|
-| `WISSENS-UPDATE-PLAYBOOK.md` | 1wIOPjtshXJ-sfSN-hEMLsBVnamfbslpk | 10737 | `684ac9dd923c691187099062c6fe409257438a5842f265507e598a54c8141d85` | OK (Drive-size 10737 match) |
-| `PROJEKT-CHARTER.md` | 1qz4uAQt_0n4miEpu7cgK0UhHGyhGGB5t | 20843 | `08b61ffe1879224de0d1b1fe4394812339b64aefbf8ed0b2e29faa25918c8381` | OK (Drive-size 20843 match) |
-| `ENTSCHEIDUNGS-LOG-COWORK-INFRA.md` | 1s7uvWV07JjQPIcidSdcfyX_SD64Bcbjc | 43470 | `e27e6767939dc0cf3bf39e677693e8c37fbbfc14437fe8321ab11ca7ee83fc4a` | OK (Drive-size 43470 match) |
-| `SPEC_KONSTANTEN.md` | 1pyEcLLzZ2gLIuKlgY8JI4WTQtp7Yfhba | 49321 | `67685e811f3e5ed87530c50b5e75f9c547f27b04d3fde212e0237fc9db2d1cbb` | OK (Drive-size 49321 match) |
-| `cowork_custom_instructions.md` | 1r_x6jDvVba9r17Vqxlf3QijrBM5zxuHu | 15214 | `1451e242fb97a294e57c00ff84a52b57ef5673c5784cf53972b659a994b2f55d` | OK (Drive-size 15214 match) |
-| `Projekt-Anweisungen.md` | 14-3FxOsWYunY2R-kfB_5VXWgKao8omYu | 17747 | `c1c5c0a9705b38f7a37d75ccd659c932e41c87d0e79b72a6b388e98f64c167f2` | OK (Drive-size 17747 match) |
-| `ENTSCHEIDUNGS-LOG-ARCHIV.md` | 1AEy0N8RTyk6Ckig5aYsZRi5qfNzCPpcU | 9600 | (unverändert, Drive-Copy) | OK |
-| `ENTSCHEIDUNGS-LOG-CRAWLING-DATEN.md` | 1fLnylz6NoH9sUdCxXTvPkJRoYZYd5oA_ | 30760 | (unverändert, Drive-Copy) | OK |
-| `ENTSCHEIDUNGS-LOG-BILDPIPELINE.md` | 1CJtqohM94aUE81f2dHf-ej2IyUdNFllY | 24725 | (unverändert, Drive-Copy) | OK |
-| `ENTSCHEIDUNGS-LOG-STIL-CONTENT-A.md` | 1D0pwaeZbqA9m54-LK-ijEUX_mToLW0Si | 33869 | (unverändert, Drive-Copy) | OK |
-| `ENTSCHEIDUNGS-LOG-STIL-CONTENT-B.md` | 1WtkwCdjemnG3iK2WQ4bpPzg-Q2-zVO5l | 35947 | (unverändert, Drive-Copy) | OK |
-| `ENTSCHEIDUNGS-LOG-LIVE-TRIAL.md` | 1Z5OKcXJIvdR-TEUbofGQ9ukD-eM_-BMh | 12437 | (unverändert, Drive-Copy) | OK |
-| `run_brief_daten.md` | 1b34-yZqCSZNab_bVCS76pfdJ4yKyLWV_ | 29804 | (unverändert, Drive-Copy) | OK |
-| `lieferanten_mapping.yaml` | 1Z-SpOVwWCxpbQvLS0GasjxdfSLYN_aWn | 23357 | (unverändert, Drive-Copy) | OK |
-| `WAWI-IMPORT-WISSEN.md` | 1Sov_8PwxWdAqrbAuEPxiQakcBdAHW4Co | 75060 | (unverändert, Drive-Copy) | OK (KNOWN_EXCEPTION >50KB) |
-| `cowork_anweisung_bildpipeline.md` | 1FVscj13-UehFavN6CYURgYtrAh5iVl4W | 43315 | (unverändert, Drive-Copy) | OK |
-
-### NICHT in Drive — manual upload durch Tjorben (2 Files)
-
-| Datei | Lokale Size (B) | SHA256 (lokal) | Upload-Status |
-|---|---|---|---|
-| `BACKLOG.md` | 71463 | `98a5a5c458f2240d16446bcdadcebf7006e5328df678daf94d39f27adf76cc3d` | FAIL — base64-Stream-Drift bei 95KB-Output; via `present_files` ausgegeben |
-| `cowork_anweisung_datenimports.md` | 73110 | `bf4b6d5da6da03b25db295fafb83644dcf5af696bae0594688835d2a41697d84` | FAIL — base64-Stream-Drift bei 98KB-Output; via `present_files` ausgegeben |
+SHA256 für `_MANIFEST.md` wird nach Commit über `git show v1.19:_MANIFEST.md | shasum -a 256` ableitbar — entfällt hier als Bootstrap-Lücke (Manifest enthält keine Self-Reference).
 
 ---
 
 ## 7. Anzahl-Marker
 
-- **Erwartet:** 18 Wissens-Files + 1 Manifest = **19 Files** pro kompletter Snapshot
-- **Aktuell in Drive (ohne Karteileichen):** 16 Wissens-Files + 1 Manifest = **17 Files**
-- **Fehlend (manual upload nötig):** 2 Wissens-Files
-- **Karteileichen im Folder (Manual-Cleanup):** 6 Files (siehe Sektion 11)
-
-**Ziel-Zustand (nach manuellem Upload durch Tjorben):** 19 Files (18 Wissens + 1 Manifest). Karteileichen separat über Drive Web UI zu löschen.
+- **Wissens-Files in v1.19:** 18 (alle in Sektion 6 gelistet außer `_MANIFEST.md` selbst)
+- **Plus Manifest:** 19 Files total im Snapshot
+- **Plus Repo-Meta:** `README.md` (72 B), `.gitignore` (10 B) — nicht Wissens-File, dienen nur dem Repo-Setup
+- **Erwartet wie v1.18:** ✓ identische Anzahl (keine Files neu oder entfernt)
 
 ---
 
-## 8. Self-Check-Ergebnis
+## 8. Self-Check-Ergebnis (WSC-1 bis WSC-17, v2.0-Git-adaptiert)
 
 | Punkt | Status | Detail |
 |---|---|---|
-| WSC-1 (Größe ≤ 50 KB) | WARN | BACKLOG (71KB), cowork_anweisung_datenimports (73KB), WAWI (75KB) als known-exceptions dokumentiert |
-| WSC-2 (Append/Patch-File-Verbot) | PASS | Keine Append/Patch-Files |
-| WSC-3 (Sektion-13-Match) | PARTIAL | 16 von 18 in Drive; 2 fehlend (manual upload) |
-| WSC-4 (Cross-Ref zu ARCHIV) | PASS (implizit) | E14, E20, E35, E36, E40, E42 in ARCHIV; alle E-Nummer-Verweise konsistent |
-| WSC-5 (neue Sektionen in SPEC_KONSTANTEN) | PASS | Sektion 13 + 14 erweitert um Playbook + E85/E86 |
-| WSC-6 (kein alter Monolith) | PASS | Kein Cluster-Split in v1.18, keine Monolithen-Reste |
-| WSC-7 (Byte-Identität bei Copies) | PASS | Drive `copy_file` preserves bytes |
-| WSC-8 (Build-Target ≤ 40 KB) | WARN | 4 modifizierte Files >40KB (BACKLOG, datenimports, COWORK-INFRA, SPEC_KONSTANTEN) — known-exceptions, Split-Planung |
-| WSC-9 (UTF-8-Sanity) | PASS | Alle Files UTF-8-valid |
-| WSC-10 (Manifest mit Hashes) | PASS | Dieses Manifest enthält SHA256 für alle 18 Wissens-Files (für 10 unveränderte: Hash via Drive-Copy = Vorgänger-Hash) |
-| WSC-11 (Build-Trail vollständig) | PASS | Sektionen 1-7 oben |
-| WSC-12 (Known-Exceptions dokumentiert) | PASS | BACKLOG, datenimports, WAWI >50KB — Split geplant in v1.19+ (siehe BACKLOG) |
-| WSC-13 (Cleanup-Aktionen vermerkt) | PASS | Siehe Sektion 11 unten |
-| WSC-14 (Notes ans Claude.ai-Projekt) | PASS | Siehe Sektion 12 unten |
-| WSC-15 (Snapshot-Folder eindeutig) | PASS | `Version_2026-05-18_141930` |
-| WSC-16 (Anzahl Files = erwartet) | PARTIAL | 17 in Drive (statt 19) — 2 fehlend für Komplettheit |
-| WSC-17 (Header-Bump-Pflicht, NEU E86) | PASS | Alle 7 modifizierten Files haben Header-Bump erhalten (siehe Sektion 3) |
+| WSC-1 (Größe ≤ 50 KB Soft-Limit) | WARN | 4 Files >50 KB: `BACKLOG.md` (77 KB), `WAWI-IMPORT-WISSEN.md` (75 KB), `cowork_anweisung_datenimports.md` (73 KB), `SPEC_KONSTANTEN.md` (50.6 KB, knapp drüber). Alle als known-exceptions in Sektion 9 dokumentiert. In Git-Welt nur Lesbarkeits-Hinweis, kein Upload-Killer mehr (siehe E87). |
+| WSC-2 (Append/Patch-File-Verbot) | PASS | Keine Append/Patch-Files im Repo. |
+| WSC-3 (Erwartete File-Liste) | PASS | 18 Wissens-Files + 1 Manifest, exakt wie v1.18. SPEC_KONSTANTEN Sektion 13 unverändert. |
+| WSC-4 (Cross-References zu ARCHIV) | PASS | E-Nummern-Konsistenz: neue E87 (COWORK-INFRA), E89, E90 (CRAWLING-DATEN). Keine Verweise zu E-Nummern in ARCHIV, die dort fehlen würden. |
+| WSC-5 (Neue Sektionen in SPEC_KONSTANTEN) | PASS | Sektion 14 wird im Spec-Bezug-Header auf E87/E89/E90 verwiesen. Self-Check #4 + Sektion 11 inhaltlich umformuliert. |
+| WSC-6 (Kein alter Monolith) | PASS | Kein Cluster-Split in v1.19. |
+| WSC-7 (Git-Status clean) | wird nach Commit PASS | Vor Commit: 7 modifizierte Files + 1 Manifest (dieses File) = 8 dirty paths. Nach `git commit` muss `git status --porcelain` leer sein. |
+| WSC-8 (Build-Target ≤ 40 KB für modifizierte Files) | WARN | 3 modifizierte Files >40 KB: `BACKLOG.md` (77 KB), `SPEC_KONSTANTEN.md` (50.6 KB), `ENTSCHEIDUNGS-LOG-COWORK-INFRA.md` (49.5 KB). In Git-Welt akzeptabel; Cluster-Split-Erwägung nur falls konkreter Pain auftritt (siehe B61/B62). |
+| WSC-9 (UTF-8-Sanity) | PASS | `file -I` zeigt für alle 19 Files `text/plain; charset=utf-8`. Kein BOM-Bruch, kein Encoding-Drift. |
+| WSC-10 (Manifest enthält alle Files mit Hashes) | PASS | 18 Wissens-Files mit SHA256 in Sektion 6 gelistet. |
+| WSC-11 (Manifest-Build-Trail vollständig) | PASS | Sektionen 1-5 oben. |
+| WSC-12 (Known-Exceptions dokumentiert) | PASS | Siehe Sektion 9. |
+| WSC-13 (Manuelle Aktionen vermerkt) | PASS | Siehe Sektion 11. |
+| WSC-14 (Notes zum Build-Pattern) | PASS | Siehe Sektion 12. |
+| WSC-15 (Tag-Konvention eingehalten) | wird vor Commit PASS | `v1.19` folgt Konvention `vX.Y`. `git tag --list | grep '^v1.19$'` muss leer sein vor `git tag` (Pre-Tag-Check). |
+| WSC-16 (Push erfolgreich) | wird nach Push PASS | `git push origin main --tags` muss ohne Fehler durchlaufen. Verifikation via `git ls-remote --tags origin | grep v1.19`. |
+| WSC-17 (Header-Bump-Pflicht E86) | PASS | Alle 7 modifizierten Files haben Header-Bump erhalten (siehe Sektion 3). Verifikation: `head -8 <file>` zeigt jeweils den neuen Versions-Stand. |
 
-**Gesamt:** 12× PASS, 3× WARN (known-exceptions), 2× PARTIAL (manueller Upload nötig für Komplettheit). Build ist **operativ funktional** wenn Tjorben die 2 Files nachträglich hochlädt. **Resolver wird diesen Snapshot überspringen** bis Komplettheit erreicht.
+**Gesamt vor Commit:** 13× PASS, 2× WARN (known-exceptions), 2× pending (WSC-7/15 vor Commit; WSC-16 vor Push). Nach Commit + Tag + Push: 16× PASS, 2× WARN, 0× FAIL.
 
 ---
 
 ## 9. Known-Exceptions / Geplante Folge-Splits
 
-- `BACKLOG.md` 71463 B (>50KB) — Split geplant v1.19+ (z.B. nach Themen-Cluster wie ENTSCHEIDUNGS-LOG in v1.17)
-- `cowork_anweisung_datenimports.md` 73110 B (>50KB) — Split geplant v1.19+ (z.B. Stage-Beschreibungen vs. Schema-Konventionen)
-- `WAWI-IMPORT-WISSEN.md` 75060 B (>50KB) — Split geplant v1.19+ (Konvergenz-Erkenntnisse von Pilot-Phase)
-- `ENTSCHEIDUNGS-LOG-COWORK-INFRA.md` 43470 B (>40KB, ≤50KB) — Build-Target-Warning, monitoring
-- `SPEC_KONSTANTEN.md` 49321 B (≤50KB, knapp drunter) — Build-Target-Warning, monitoring. Lösungspfad in BACKLOG B54.
+- `BACKLOG.md` 77520 B (>50 KB) — Split-Aufwand vs. Nutzen in Git-Welt nicht zwingend. Akzeptiert ohne Folge-Aktion.
+- `WAWI-IMPORT-WISSEN.md` 75060 B (>50 KB) — B61 (deferred): in Git-Welt kein Upload-Killer mehr, Split nur bei konkretem Pain.
+- `cowork_anweisung_datenimports.md` 73110 B (>50 KB) — B62 (deferred): gleiche Begründung wie B61.
+- `SPEC_KONSTANTEN.md` 50589 B (knapp >50 KB) — knapp drüber durch v1.19-Updates. B54 (deferred): Performance-Split in Git-Welt nicht zwingend, Re-Evaluation nach B63 (Cowork-Resolver-Migration).
+- `ENTSCHEIDUNGS-LOG-COWORK-INFRA.md` 49467 B (>40 KB) — Build-Target-Warning, monitoring.
 
 ---
 
-## 10. Tool-Anomalien & neue Drift-Pfade
+## 10. Tool-Anomalien & Notes zum Build-Pattern (v2.0-Bootstrap)
 
-**A9 (NEU 2026-05-18) — base64-Stream-Drift bei Sonnet-Subagent-Upload.** Beim Subagent-Upload-Pfad (v1.17-Build-Pattern) traten zwei Drift-Modi auf:
-- (a) UTF-8-Multibyte-Drift in Sonnet-Subagent: `ü` → `¼` etc. bei base64-Strings ≥10KB. Drift-Rate ~1 char/10KB. Reproduzierbar in v1.18-Sub1.
-- (b) Token-Output-Limit: bash `cat /tmp/upload.b64` für base64 ≥14k Token kann nicht in Main-Context geladen werden. Auch Read-Tool hat 25k-Token-Limit. Für File ≥50KB markdown / ≥67KB base64 nicht direkt arbeitbar.
+**Erster Build im Git-Pattern.** Keine Drive-MCP-Anomalien mehr in diesem Build, weil Drive-MCP nicht mehr verwendet wurde. Bestätigte Verbesserungen:
 
-**A10 (NEU 2026-05-18) — Drive-MCP `create_file` mit base64Content scheitert bei sub-2-Subagent für File >40KB.** Auch Opus-Subagent schaffte nur 2 von 4 large files vor 64k-Output-Tokens-Limit (Schwelle). Für 2 weitere (BACKLOG 71KB, datenimports 73KB) entstanden FAIL-Karteileichen.
+- **Kein Tool-Output-Token-Limit für File-Inhalt:** Edit/Write-Tools in Claude Code haben keinen vergleichbaren Output-Token-Cap wie Drive-MCP `create_file` mit `base64Content`. Files >50 KB lassen sich ohne Subagent-Detour modifizieren.
+- **Kein UTF-8-Drift mehr:** Edit-Tool arbeitet direkt mit String-Vergleich auf Disk, kein base64-Round-Trip, keine `ü → ¼`-Verschiebungen.
+- **Keine Karteileichen:** Git-Commits sind atomar; ein abgebrochener Commit lässt das Repo im Pre-Commit-Stand, kein Schmutz in `git ls-files`.
+- **Tjorbens manueller Drag-and-Drop entfällt:** Build endet mit `git push --tags` — End-to-End ohne UI-Click.
 
-**A11 (NEU 2026-05-18) — Main-Agent base64-Upload zuverlässig bis ~50 KB markdown.** Direkt-Upload aus Main-Context funktioniert für Files ≤50KB markdown (≤67KB base64 ≈ 17K tokens output). Drift-frei verifiziert via Drive-fileSize-Match. Limit ist Output-Token-Cap des Main-Agents.
-
-**Mitigation für v1.19:**
-- Empfehlung: Splits aller Files >40KB markdown in v1.19, sodass Upload via Main-Agent zuverlässig durchläuft
-- Oder: Tool-Erweiterung der Drive-MCP um `upload_from_path` (akzeptiert lokalen Dateipfad statt base64Content) — wäre der saubere Architektur-Fix
+**Empfehlungen für nächsten Build (v1.20):**
+- **B63 Cowork-Resolver-Migration zu GitHub-Raw:** als eigener kompakter Trigger („Verarbeite Wissens-Update für v1.20: B63 umsetzen"). Scope: `cowork_custom_instructions.md` + `Projekt-Anweisungen.md` Edit, Probe-Test mit Cowork-`web_fetch` gegen GitHub-Raw-URL, Validierung mit Test-Lauf. Damit Cowork den v1.20-Stand sieht und nicht weiter mit Drive-v1.18 arbeitet.
+- **WSC-7/15/16 vollständig validieren:** dieser v1.19-Build hatte sie als „pending vor Commit/Push" markiert. Im v1.20-Manifest sollten alle drei direkt nach dem Push als PASS auditiert werden.
 
 ---
 
-## 11. Manuelle Cleanup-Aktionen für Tjorben
+## 11. Manuelle Aktionen für Tjorben
 
-**Aktion 1 — 6 Karteileichen aus v1.18-Build im aktuellen Snapshot-Folder löschen:**
-
-| Drive-ID | Dateiname | Größe | Ursache |
-|---|---|---|---|
-| `1_AhteqxSQk6e36doSZr05gwcAgmTdt1U` | WISSENS-UPDATE-PLAYBOOK.md | 10737 B | Sub1 Sonnet-Drift (UTF-8 `ü` → `¼` confirmed) |
-| `1YnBnI77HeJhQsmXlFTFJpz628koEN_TQ` | PROJEKT-CHARTER.md | 20844 B | Sub1 size-mismatch (+1 Byte UTF-8-Drift) |
-| `1OTEz-u7r0B1VSmMnYfqn8QYBvr7Vfs9X` | cowork_custom_instructions.md | 15214 B | Sub1 unverifiziert, wahrscheinlich Drift |
-| `1Jp7eJXrqBdsdSSP98n-eka4SAnbkueFl` | Projekt-Anweisungen.md | 17747 B | Sub1 unverifiziert, wahrscheinlich Drift |
-| `1-_Sl4QbdX7RFzeS4_z9G0osjU7Lh7R7j` | BACKLOG.md (FAIL) | 27936 B (statt 71463) | Sub3 partial-content FAIL |
-| `17KBuI6zjNaH2ScgEUUYozCvCvj-zXp_b` | cowork_anweisung_datenimports.md (FAIL) | 218 B (statt 73110) | Sub3 partial-content FAIL |
-
-**Aktion 2 — 3 Karteileichen im Vorgänger-Snapshot-Folder `Version_2026-05-17_212017` löschen** (siehe BACKLOG B60):
+**Aktion 1 — Drive-Karteileichen-Cleanup im Vorgänger-Drive-Folder `Version_2026-05-17_212017`** (B60, Status auf erledigt v1.19 mit dieser Liste):
 
 | Drive-ID | Dateiname | Größe |
 |---|---|---|
-| `1k7FloAj2KqmuXmLt1tidZb6mHZSCgLoN` | ENTSCHEIDUNGS-LOG-CRAWLING-DATEN.md (Stub) | 2.286 B |
-| `1qJjBoTE92V7il_vs-F-gglBuguDANvP4` | SPEC_KONSTANTEN_as_gdoc_temp | 48677 B |
-| `1-7_ueaQylA6fZ37YYN0mnm115kmkEa2C` | SPEC_KONSTANTEN_temp_for_chunked_read | 48677 B |
+| `1k7FloAj2KqmuXmLt1tidZb6mHZSCgLoN` | `ENTSCHEIDUNGS-LOG-CRAWLING-DATEN.md` (Stub) | 2.286 B |
+| `1qJjBoTE92V7il_vs-F-gglBuguDANvP4` | `SPEC_KONSTANTEN_as_gdoc_temp` | 48.677 B |
+| `1-7_ueaQylA6fZ37YYN0mnm115kmkEa2C` | `SPEC_KONSTANTEN_temp_for_chunked_read` | 48.677 B |
 
-**Aktion 3 — Manuelle Uploads der 2 fehlenden Files in den neuen Snapshot:**
+Drive-MCP fehlt `delete_file` (B33). Aktion in Drive-Web-UI durch Tjorben.
 
-| Datei | Lokale Quelle (via `present_files` verfügbar) | Ziel-Folder |
-|---|---|---|
-| `BACKLOG.md` (71463 B) | siehe Chat-Output | `Version_2026-05-18_141930` |
-| `cowork_anweisung_datenimports.md` (73110 B) | siehe Chat-Output | `Version_2026-05-18_141930` |
+**Aktion 2 — Drive-Karteileichen im v1.18-Folder `Version_2026-05-18_141930` aufräumen** (aus v1.18-Manifest Sektion 11 übernommen, falls noch nicht erledigt):
 
-Nach diesen 3 Aktionen ist der Snapshot komplett: 19 Files (18 Wissens + 1 Manifest), 0 Karteileichen, Resolver greift den Snapshot als aktuellen Stand.
+6 Karteileichen aus dem v1.18-Build (Drive-IDs siehe v1.18-Manifest Sektion 11). Bei nächster Drive-Aufräum-Session in einem Rutsch mit Aktion 1 erledigen.
+
+**Aktion 3 — keine.** Der v1.19-Snapshot ist nach `git push --tags` vollständig in GitHub. Kein manueller Tjorben-Schritt für die v1.19-Erreichbarkeit nötig.
 
 ---
 
-## 12. Notes ans Claude.ai-Projekt
+## 12. Autonome Entscheidungen (zum Review)
 
-1. **Build-Pattern (E85) ist verankert.** Ab v1.19 reicht ein kompakter Scope-Trigger, der Playbook macht das Wie.
+Im Sinne der Trigger-Anweisung „bei strategischen Wahlpunkten autonom entscheiden, Hypothese im Build-Report markieren":
 
-2. **Versionierungs-Policy (E86) funktioniert.** Alle 7 modifizierten Files in v1.18 haben Header-Bump erhalten. WSC-17 PASS. Forensik künftig sauberer.
+1. **Im Worktree oder im Main-Repo arbeiten?** → **Main-Repo direkt.** Begründung: das Worktree war leer (nur README in der `claude/keen-kowalevski-af0d39`-Branch), die 19 v1.18-Files lagen untracked im main-Repo. Das End-Ziel war `git push origin main --tags`, also auf main. Im main-Repo direkt zu arbeiten umging die Worktree-Merge-Komplexität. Alternative wäre gewesen: Worktree mit den v1.18-Files füllen, dort arbeiten, am Ende auf main mergen — eine Stage mehr ohne Mehrwert.
+2. **`article_weight_kg` und `taric_code` pro Lieferant oder global?** → **Pro Lieferant.** Tjorbens Klärung erlaubte beides. Pro-Lieferant ist Schema-konsistent zum bestehenden YAML-Pattern (Override-fähig pro Lieferant), spart einen neuen Top-Level-Block, und ist trivial zu lesen für Cowork. Beide Werte sind aktuell für alle 4 Lieferanten identisch.
+3. **TARIC-Wert als YAML-String oder Int?** → **String mit Quote (`'62114390'`).** Ohne Quote interpretiert YAML als Int und droppt führende Nullen bei späteren TARIC-Codes wie `06039000`. String ist robust, kostet nichts.
+4. **Playbook-Bump Patch/Minor/Major?** → **Major (v1.0 → v2.0).** Pattern-Pivot Drive → Git ist strukturelle Umbauung, nicht inkrementell. Section 11 als Legacy-Anhang sauber rausgezogen.
+5. **F1 in v1.19 mitnehmen oder defer?** → **Defer (B54).** SPEC_KONSTANTEN-Split war primär gegen Cowork-Stage-0-Sub-Agent-Extraction-Schwelle (A8). In der Git-Welt ist die Lese-Schwelle dieselbe, aber der Resolver-Pfad ändert sich (B63) — eine Performance-Optimierung jetzt würde möglicherweise auf eine Architektur zielen, die in v1.20 anders aussieht. Erst B63, dann F1 neu bewerten.
+6. **F7 (Drive-Karteileichen) Aktion oder nur listen?** → **Nur listen.** Drive-MCP fehlt `delete_file`, und ich operiere lokal in Claude Code ohne Drive-MCP-Zugriff. Die 3 Drive-IDs sind in Sektion 11 als manuelle Tjorben-Aktion gelistet, wie im Trigger spezifiziert.
+7. **README.md im Wissens-File-Count?** → **Nein.** README ist Repo-Meta für GitHub-Visitor, kein Pipeline-Wissens-File. Bleibt bei 18 Wissens-Files + 1 Manifest = 19. `.gitignore` desgleichen Repo-Meta.
+8. **Resolver-Migration in v1.19 mitziehen?** → **Nein, B63 in v1.20.** Risiko: wenn Cowork in der laufenden Session getriggert wird, sollte er den letzten verlässlich getesteten Stand sehen — das ist v1.18 in Drive. Resolver-Migration braucht eigenen Probe-Test (Cowork-`web_fetch` gegen GitHub-Raw) und ist nicht ein Side-Effect von v1.19. Eigener Trigger, eigener Scope.
 
-3. **Tool-Limit ist die kritische Engstelle (A9-A11).** Solange Drive-MCP nur `base64Content` als String-Parameter akzeptiert und kein `upload_from_path`-Endpoint existiert, sind Files >50KB markdown nicht zuverlässig autonom uploadbar. Lösung: entweder kleinere Files (Cluster-Splits in v1.19 priorisieren) oder Tool-Erweiterung der Drive-MCP-Spec.
+---
 
-4. **Subagent-Drift bei großen base64-Strings:** Sonnet drift unzuverlässig (~1 char/10KB). Opus zuverlässiger, aber 64k-Output-Token-Cap bei mehreren Uploads im selben Subagent. Empfehlung: pro Subagent maximal 2 Files >40KB markdown.
+## 13. Tag-Aktion (vor Push)
 
-5. **Karteileichen-Akkumulation ist ein latentes Risiko.** v1.18 hat 6 neue Karteileichen erzeugt (zusätzlich zu 3 aus v1.17). Drive-MCP fehlt `delete_file`-Operation (B33). Sobald 10+ Karteileichen sich ansammeln, lohnt sich ein Drive-Cleanup-Tag.
+```bash
+git -C /Users/tjorbenbecker/Documents/polesportshop-wissen add .
+git -C /Users/tjorbenbecker/Documents/polesportshop-wissen commit -m "v1.19 — Pattern-Pivot zu Git, F2-F6 Fixes, F1+Splits deferred"
+git -C /Users/tjorbenbecker/Documents/polesportshop-wissen tag v1.19
+git -C /Users/tjorbenbecker/Documents/polesportshop-wissen push origin main --tags
+```
 
-6. **F1-F7 (BACKLOG B54-B60) sind als Spec-Bedarf für v1.19+ dokumentiert.** Klärungen mit Tjorben bereits durch (B55 Kategorie-Pattern, B56 Artikelgewicht-Default 0,05 kg, B58 Modelnamen aus Crawl, B59 TARIC `62114390`). Lösung implementieren bei nächstem Daten-Pipeline-Update.
+Verify nach Push: `https://github.com/verticalogmbh/polesportshop-wissen/releases/tag/v1.19` ist erreichbar.
 
-7. **Performance-Diagnose (B54):** Spec-Caching für SPEC_KONSTANTEN (48KB) erzeugt Sub-Agent-Detour. v1.19 sollte SPEC_KONSTANTEN unter 30KB schrumpfen (Sektion 13+14 in eigene Datei auslagern).
+---
+
+## 14. Verhältnis zum Vorgänger-Snapshot
+
+v1.18 entstand per Drive-Pattern (Manifest siehe Drive-Folder `Version_2026-05-18_141930`). v1.18-Baseline ist im Git als Tag `v1.18` auf Commit `56a65f2` verfügbar (im selben main-Branch wie v1.19).
+
+v1.18 → v1.19 ist der **Pattern-Pivot-Build** — keine reine Inhalts-Iteration, sondern der erste Build, in dem das Pattern selbst sich ändert (Drive → Git). Künftige v1.20+-Builds sind reguläre Inhalts-Iterationen im Git-Pattern, ohne Pattern-Wechsel.

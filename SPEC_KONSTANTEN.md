@@ -2,7 +2,7 @@
 
 **🔒 KANONISCH — IN STEIN GEMEISSELT** (Charter-Prinzipien 10 + 11, E61)
 
-**Stand:** v1.16, 2026-05-18 · **Spec-Bezug:** v1.18-Snapshot · **Quelle:** verbatim aus v1.9-Snapshot Version_2026-05-15_233800 (cowork_anweisung_datenimports.md Sektionen 5.1, 5.1.1, 5.1.2, 5.3, Stage 6 + WAWI-IMPORT-WISSEN.md Sektion 10.5), iterativ erweitert v1.13 (E72-E77), v1.14 (E78-E80), v1.15 (E80-Erweiterung Kinder-Replikation, E82-Stilprinzip, AP9-AP12), **v1.16 (Sektion 13 um WISSENS-UPDATE-PLAYBOOK.md erweitert, Sektion 14 um E85+E86 erweitert; bezogen auf v1.18-Snapshot E85/E86)**
+**Stand:** v1.17, 2026-05-18 · **Spec-Bezug:** v1.19-Snapshot (Git-Tag) · **Quelle:** verbatim aus v1.9-Snapshot Version_2026-05-15_233800 (cowork_anweisung_datenimports.md Sektionen 5.1, 5.1.1, 5.1.2, 5.3, Stage 6 + WAWI-IMPORT-WISSEN.md Sektion 10.5), iterativ erweitert v1.13 (E72-E77), v1.14 (E78-E80), v1.15 (E80-Erweiterung Kinder-Replikation, E82-Stilprinzip, AP9-AP12), v1.16 (Sektion 13 um WISSENS-UPDATE-PLAYBOOK.md erweitert, Sektion 14 um E85+E86 erweitert), **v1.17 (F2-F6-Fixes aus HotCakes-Run-Report 2026-05-18: Self-Check #4 umformuliert für Multi-Kategorie-Pattern E89 + Sara-546-Pflicht-Zuweisung; Sektion 11 size_and_fit um Modelname-Konvention F5/B58; Sektion 14 um E87/E89/E90)**
 
 ---
 
@@ -304,7 +304,7 @@ Jeder neue Artikel wird beim Self-Check (siehe Sektion 9) gegen diese drei abgeg
 | 1 | Schema-Spalten-Reihenfolge entspricht 1:1 der 48-Spalten-Liste (Sektion 1) | E54, Sektion 1 | CSV-Ameise-Import bricht oder mapped falsch |
 | 2 | Kategorie Ebene 1 = `Pole Dance Kleidung` (für Kleidungs-Pilot) — niemals `Damen` oder `Limited Editions` | E51, AP1 | Artikel landet in falscher Shop-Kategorie |
 | 3 | Kategorie Ebene 2 = nur die in Sektion 3 erlaubten Werte (`Bodysuits` / `Pole Dance Tops` / `Pole Dance Shorts` / `Leggings` / `Legwarmer` / `Shirts`) | E51 | Artikel in falscher Unterkategorie |
-| 4 | Multi-Kategorie-Doppelzeilen pro Artikel (eine Ober-, eine Unterkategorie) — **E57, kein Bug! Siehe E75 Anti-Confusion** | E57, Sektion 4 | Artikel nur in einer Kategorie statt beiden |
+| 4 | **Multi-Kategorie-Pattern (NEU v1.17, E89, ersetzt v1.15-Doppelzeilen-Pattern):** Pro Artikel **mindestens 2 Kategorie-Zeilen** in der CSV: (a) spezifischste Shop-Subkategorie (z.B. `Pole Dance Tops` → WaWi resolved den Pfad über die in WaWi gepflegte Hierarchie selbst, keine parallele Oberkategorie-Zeile mehr nötig); (b) Pflicht-Zuweisung `Intern > Neue Artikel für Sara` (WaWi-Kategorie-Key `546`) für den Sara-Review-Workflow. Mehr Kategorie-Zeilen erlaubt (Marketing-Tags), aber Mindest-Set sind diese 2. Vorlagen-Setting unverändert: „Kategorieverknüpfungen des Artikels aktualisieren" = „Neue Kategorien beim jeweiligen Artikel hinzuimportieren" (E57). Anti-Confusion E75 weiter gültig. | E57, E89, Sektion 4 | Artikel ohne Sara-Zuweisung im Sara-Review-Loop verloren, oder parallele Oberkategorie-Zeile bricht die Hierarchie-Resolution |
 | 5 | Titel-Tag pro Sprache **exakt** nach E55-Template (kein produkt-spezifischer Spin, kein erfundener Domain-TLD) | E55, Sektion 5 | SEO inkonsistent zum Shop-Bestand |
 | 6 | Meta-Description pro Sprache **exakt** nach E55-Template (HTML-Entities `&#10004;`/`&#10148;`, **nicht** Unicode `✓`/`➜`) | E55, AP3, AP7 | Shop zeigt falsche oder erfundene Meta-Beschreibung |
 | 7 | SEO-Felder (Titel-Tag + Meta-Description in allen 5 Sprachen) **nur auf Vater-Zeilen**, leer auf Kindern | E56 | unnötige SEO-Duplikation auf Variantenebene |
@@ -372,7 +372,7 @@ Cowork-Pflicht: vor jeder Stammdaten-CSV-Generation diese Liste durchgehen und i
 | `markentext` | **E74-aspirational** | Storytelling, Bindung zur Marke aufbauen, Persönlichkeit der Gründer:innen sichtbar machen. Brand-Story-Caching (E72/E79). |
 | `artikeldetails` | **E74-aspirational** | Kern-Verkaufstext pro Artikel, Zielgruppe direkt ansprechen, Funktion als zweite Stimme nach dem Hook. |
 | `material_and_care` | **clean/funktional (E78)** | Regulatorisch-funktionales Feld (EU-Textilkennzeichnungs-Pflicht). Kein Verkaufs-Text. |
-| `size_and_fit` | **E74-aspirational (gemäßigt)** | Passform ist Verkaufsthema („eng anliegend für freie Pole-Bewegung"). Funktion ist hier prominenter als bei `artikeldetails`, aber die Stimme bleibt warm/aspirational. |
+| `size_and_fit` | **E74-aspirational (gemäßigt) + Modelname aus Crawl (F5/B58, NEU v1.17)** | Passform ist Verkaufsthema („eng anliegend für freie Pole-Bewegung"). Funktion ist hier prominenter als bei `artikeldetails`, aber die Stimme bleibt warm/aspirational. **Modelname-Konvention:** statt „Unser Model trägt..." → `<Modelname> trägt Größe S bei 1,72 m...` (z.B. Yifan, Vika, Elena bei HotCakes). Modelname aus Crawl-Body-Metadaten ziehen. Bei mehreren Models pro Artikel: erstes Model im Crawl-Body. Bei null Modelname im Crawl: neutrale Formulierung („Das Model trägt...") oder Phrase weglassen. |
 
 ### 11.1 `material_and_care` Struktur (E78)
 

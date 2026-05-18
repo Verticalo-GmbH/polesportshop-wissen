@@ -2,7 +2,7 @@
 
 **Cluster:** Cowork-Architektur, R2-Mechanik, Wissens-Architektur, Resilience
 
-**Stand:** v1.18, 2026-05-18
+**Stand:** v1.19, 2026-05-18 (neuer Eintrag E87: Migration Drive → Git als Wissens-Backbone)
 
 **Bezug:** Dieser Cluster ist Teil des Splits der ursprünglichen `ENTSCHEIDUNGS-LOG.md` (v1.16, 165 KB → 6 Themen-Cluster ≤ 40 KB). Historische / abgelöste Einträge liegen weiterhin in `ENTSCHEIDUNGS-LOG-ARCHIV.md`. Cross-Cluster-Referenzen über E-Nummer; der Master-Index mit allen E-Nummern → Cluster-File-Zuordnung liegt in `SPEC_KONSTANTEN.md` unter `ENTSCHEIDUNGSLOG_E_NUMMER_INDEX`.
 
@@ -31,6 +31,7 @@
 - **E68** — Selective Spec-Loading in Stage 0 + Pre-Compiled Run-Brief
 - **E85** — Wissens-Update-Build-Pattern als Standard-Playbook (Cowork-Spec für Wissens-Builds)
 - **E86** — File-Header-Versionierungs-Konvention (SemVer für Snapshot-Disziplin)
+- **E87** — Migration Drive → Git als Wissens-Backbone (NEU v1.19, Pattern-Pivot)
 
 ---
 
@@ -385,3 +386,47 @@ Tjorben hat dann das Pattern selbst entwickelt: bei jedem Update wird ein neuer 
 Snapshot-Version (Folder-Name) und File-Header sind entkoppelt — der Snapshot ist der Stand des Sets, der Header ist der Stand des einzelnen Files.
 *Konsequenzen:* WSC-17 in Self-Check des Playbooks. Charter-Prinzip 12 verankert die Disziplin. v1.18-Build holt die 4 ausstehenden v1.17-Header-Bumps nach (Patch-Bumps).
 *Verworfen:* Patch-Bumps weglassen und nur Inhalts-Updates bumpen (würde das Original-Problem nicht lösen — forensische Lücke bleibt). Snapshot-Version 1:1 in File-Header spiegeln (würde Modifikations-Stand verschleiern).
+
+---
+
+**E87 — Migration Drive → Git als Wissens-Backbone.**
+*Stand:* 2026-05-18 (v1.19, Pattern-Pivot). *Bezug:* E47 (Drive-Snapshot-Architektur, abgelöst), E64 (Lokaler Workflow, präzedent), E85 (Build-Pattern als Standard), E86 (Versionierungs-Disziplin), A9/A10/A11 (Drive-MCP-Tool-Limits aus v1.18-Build).
+
+*Warum:* Drei voneinander unabhängige Schmerzpunkte hatten sich im v1.17- und v1.18-Build zur kritischen Engstelle akkumuliert:
+
+1. **Drive-MCP-Tool-Limits (A9/A10/A11):** Files >50 KB markdown (≈ >67 KB base64 ≈ >17k Output-Tokens) sind über `create_file` mit `base64Content`-Parameter weder im Main-Agent noch im Subagent zuverlässig uploadbar. Sonnet-Subagent leidet zusätzlich an UTF-8-Drift (~1 char/10KB) bei längeren base64-Strings. Im v1.18-Build mussten 2 von 18 Files (BACKLOG 71 KB, datenimports 73 KB) per `present_files` an Tjorben ausgegeben und manuell per Drag-and-Drop hochgeladen werden — bricht die End-to-End-Automation.
+
+2. **Karteileichen ohne `delete_file` (B33):** Drive-MCP hat keine Delete-Operation. Fehlgeschlagene Uploads bleiben als Karteileichen im Snapshot-Folder, müssen manuell in der Drive-Web-UI bereinigt werden. v1.18 hatte 6 neue Karteileichen + 3 Altlasten aus v1.17. Akkumulation latent, weil pro Build neue dazu kommen.
+
+3. **Manueller Tjorben-Upload als End-to-End-Bruch:** Selbst wenn die ersten beiden Probleme nicht zuschlagen, war Tjorbens Drag-and-Drop in den Drive-Sub-Folder ein expliziter manueller Schritt — bricht die „Mensch initiiert, Maschine arbeitet"-Disziplin (Charter Prinzip 1) genau in der falschen Richtung, weil hier die Maschine etwas tun könnte, das sie ans Werkzeug zurückgibt.
+
+Tjorben hat parallel auf Claude Code als lokale CLI umgestellt. Damit ist ein lokales Git-Repo + GitHub-Remote technisch trivial pflegbar — und löst alle drei Schmerzpunkte gleichzeitig.
+
+*Entscheidung:*
+- **Wissens-Backbone:** lokales Git-Repo `~/Documents/polesportshop-wissen/`, Remote `https://github.com/verticalogmbh/polesportshop-wissen` (Branch `main`).
+- **Snapshots:** Git-Tags `v1.19`, `v1.20`, ... — kein Sub-Folder-Pattern mehr, kein sekundengenaues Timestamp-Naming. Tag entspricht dem Stand des gesamten Sets, atomar referenzierbar.
+- **Build-Engine:** Claude Code (lokal, Opus 4.7 oder Sonnet) öffnet das Repo, modifiziert Files via Edit/Write-Tools direkt auf Disk, committet, taggt, pusht.
+- **Resolution-Pfad:** Lokales Repo für Claude-Code-Sessions und Klärungs-Chats sofort verfügbar. Cowork-Resolution auf GitHub-Raw (`https://raw.githubusercontent.com/verticalogmbh/polesportshop-wissen/<tag>/<file>`) wird in v1.20 nachgezogen (B63). Bis dahin läuft Cowork weiter mit dem Drive-Snapshot `Version_2026-05-18_141930` — der bleibt als Read-Only-Archiv erhalten.
+- **Playbook-Pivot:** `WISSENS-UPDATE-PLAYBOOK.md` v1.0 → v2.0 als Major-Bump. Drive-Pattern wandert in den Legacy-Anhang (Sektion 11). 7-Stage-Build-Pattern statt 12-Stage. WSC-1 bis WSC-17 Git-adaptiert (Drive-spezifische Checks ersetzt durch `git status`, Tag-Existenz, Push-Verifikation).
+
+*Konsequenzen:*
+- v1.19 ist der erste Build, der nach dem Git-Pattern entsteht.
+- Drive-Folder `Wichtig: Claude Backup/` bleibt als Read-Only-Archiv erhalten; keine neuen Sub-Folder ab v1.19.
+- B61 (WAWI-IMPORT-WISSEN.md Split) und B62 (cowork_anweisung_datenimports.md Split) deferred — in der Git-Welt ist >50 KB kein Upload-Killer mehr, nur noch ein Lesbarkeits-Hinweis. Re-Evaluation bei konkreter Performance-Notlage.
+- B33 (Drive-MCP fehlt `delete_file`) wird bedeutungslos für Wissens-Updates (Git-`rm` ersetzt es).
+- A9/A10/A11 sind im Git-Pfad keine Limits mehr (Edit/Write-Tools haben keinen vergleichbaren Token-Output-Cap für File-Inhalt).
+- Charter-Prinzip 9 („Klein nach groß, modular wachsen") greift: ein Werkzeug-Wechsel löst drei latente Probleme strukturell, statt jedes einzeln zu patchen.
+
+*Verworfen:*
+- *Drive-MCP-Erweiterung um `update_file` + `delete_file` anfordern:* würde A9/A10/A11 nicht lösen (Output-Token-Cap bleibt unabhängig von Tool-Repertoire). Plus: Wartezeit auf Anthropic-Feature-Release unkalkulierbar.
+- *Eigenen Workspace-Worker für Drive-API bauen:* zu viel Engineering-Aufwand für ein Symptom-Fix (Charter Prinzip 9). Git/GitHub ist seit Jahrzehnten gelöstes Problem.
+- *Drive-Pattern aufrechterhalten und Files unter 50 KB zwingen (Cluster-Split bei jedem >50 KB-File):* würde 3 große Files gleichzeitig splitten erzwingen (WAWI-IMPORT-WISSEN, cowork_anweisung_datenimports, BACKLOG). Aus Cowork-Token-Optik wünschenswert, aber als Mitigation gegen Drive-MCP-Limit überdimensioniert — der Limit verschwindet mit Git komplett.
+- *Hybrid-Pattern (Git für Build, Drive für Cowork-Resolution dauerhaft):* würde zwei Truth-Quellen erzeugen. Akzeptiert nur als Übergangsmodus für v1.19, mit klarem Migrations-Pfad (B63) zu Git als Single Truth.
+
+*Folgeaufgaben:*
+- B63 (NEU v1.19): Cowork-Resolution auf GitHub-Raw-URL umstellen, `cowork_custom_instructions.md` + `Projekt-Anweisungen.md` entsprechend anpassen. v1.20-Scope.
+- B61/B62 (NEU v1.19, deferred): Cluster-Splits in Git-Welt nicht zwingend, neu evaluieren wenn konkreter Pain auftritt.
+
+*Stolperfallen:*
+- **Cowork läuft bis v1.20 noch mit Drive-Snapshot.** Falls Tjorben in v1.19 einen Cowork-Pipeline-Lauf startet, zieht Cowork den letzten gültigen Drive-Snapshot (`Version_2026-05-18_141930` = v1.18-Stand). Die v1.19-Änderungen (E89, E90, F2-F6-Fixes) wirken sich erst aus, wenn (a) Cowork explizit auf Git umstellt (B63) oder (b) Tjorben die v1.19-Files manuell in einen neuen Drive-Sub-Folder kopiert. Übergangs-Workaround dokumentiert in Lauf-Brief-Trigger.
+- **Tag-Disziplin:** `git tag` muss nach `commit`, vor `push --tags`. Bei vergessenem `--tags` ist der Tag lokal nur, GitHub-Release-Page fehlt. WSC-16 prüft Remote-Tag-Existenz.

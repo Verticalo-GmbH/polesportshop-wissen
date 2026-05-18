@@ -1,6 +1,6 @@
 # Backlog: Strategische Entscheidungsbedarfe
 
-**Stand:** v1.18, 2026-05-18 (7 neue Einträge B54-B60 aus HotCakes-Run-Report 2026-05-18 mit Klärungen). · **Vorheriger Stand:** v1.17-Snapshot (B1-B53, inkl. Live-Trial-Erkenntnisse 2026-05-17).
+**Stand:** v1.19, 2026-05-18 (B54-B60 statussen nach v1.19-Build: B55-B60 erledigt oder deferred, B61-B63 neu aus Pattern-Pivot Drive → Git). · **Vorheriger Stand:** v1.18 (B54-B60 aus HotCakes-Run-Report). · **Vor-vorheriger Stand:** v1.17 (B1-B53, inkl. Live-Trial-Erkenntnisse 2026-05-17).
 
 Offene Punkte, die *Entscheidungen* brauchen — nicht Tasks. Tasks gehören in die Pipeline. Sortiert nach Priorität.
 
@@ -532,8 +532,9 @@ Trigger-Bedingung: nächster Lieferanten-Onboarding mit >15 Modellen in einem La
 
 ## v1.18 — neue Einträge B54-B60 aus HotCakes-Run-Report 2026-05-18
 
-**B54 — Cowork-Run-Performance: Snapshot-Resolution + Stage-0-Caching optimieren.**
-*Bezug:* HotCakes-Run-Report 2026-05-18 (Sektion 8, Notes N1+N6), Tool-Limit-Anomalie Stage 0, Sub-Agent-Detour für SPEC_KONSTANTEN.md (48 KB). *Stand:* offen, Priorität HOCH.
+**B54 — Cowork-Run-Performance: Snapshot-Resolution + Stage-0-Caching optimieren. — DEFERRED v1.19**
+*Update v1.19 (2026-05-18):* SPEC_KONSTANTEN-Split in Git-Welt nicht zwingend. In der Drive-Welt war >50 KB der Tool-Limit-Killer (A9/A10/A11); in der Git-Welt ist >50 KB nur ein Lesbarkeits-Hinweis. Re-Evaluation wenn Cowork-Resolver auf GitHub-Raw umgestellt ist (B63, v1.20-Scope) und konkreter Pain im neuen Pfad auftritt. Bis dahin: Stand bleiben lassen, Diagnose-Anforderung (Stage-Timing-Probe) bei nächster Datenimports-Spec-Touch mitnehmen.
+*Bezug:* HotCakes-Run-Report 2026-05-18 (Sektion 8, Notes N1+N6), Tool-Limit-Anomalie Stage 0, Sub-Agent-Detour für SPEC_KONSTANTEN.md (48 KB). *Stand v1.18:* offen, Priorität HOCH. *Stand v1.19:* deferred (Begründung siehe oben).
 *Problem:* Stage 0 (Snapshot-Resolution + Spec-Caching) dauerte im HotCakes-Run ~3-5 Min und überstieg damit die in Stage 0.5 geschätzte Wallclock. Treiber: SPEC_KONSTANTEN.md (48 KB) und lieferanten_mapping.yaml (23 KB) brauchen den Sandbox-Pfad-Trick (E68), weil Drive-`read_file_content` über Cowork-Token-Limit. Sub-Agent-Extraktion summiert pro File 2-5 Min Overhead. Bei End-to-End mit 21 Artikeln frisst der Pre-Run ~25 % der Gesamt-Wallclock.
 *Lösungs-Pfade (zu evaluieren in v1.19):*
 1. SPEC_KONSTANTEN-Split: Sektionen 13+14 in eigenes File `SPEC_KONSTANTEN_SNAPSHOT_INDEX.md` (~5-10 KB) auslagern, Hauptfile unter 30 KB halten.
@@ -541,39 +542,75 @@ Trigger-Bedingung: nächster Lieferanten-Onboarding mit >15 Modellen in einem La
 3. Sub-Agent-Pattern in `run_brief_daten.md` Sektion 1 als Standard dokumentieren — kein Versuch mehr mit direktem `read_file_content`.
 *Diagnose-Anforderung für künftige Runs:* in `cowork_anweisung_datenimports.md` eine Stage-Timing-Probe einbauen, die pro File-Load die Wallclock dokumentiert (Manifest oder Lauf-Bericht).
 
-**B55 — Kategorie-Pattern in WaWi-CSV: Hierarchie statt parallele Tags + Sara-Kategorie als zusätzliche Zuweisung.**
-*Bezug:* HotCakes-Run-Report 2026-05-18 (Note N2, Screenshot 1 aus Tjorbens Feedback), Self-Check #2/#3/#4 in SPEC_KONSTANTEN. *Stand:* offen, Priorität MITTEL, **Klärung mit Tjorben durch — Spec klar**.
+**B55 — Kategorie-Pattern in WaWi-CSV: Hierarchie statt parallele Tags + Sara-Kategorie als zusätzliche Zuweisung. — ERLEDIGT v1.19 → E89**
+*Update v1.19 (2026-05-18):* Als Architektur-Entscheidung E89 in ENTSCHEIDUNGS-LOG-CRAWLING-DATEN formalisiert. Spec-Updates: `run_brief_daten.md` Sektion 10 (Stammdaten-Spezifika), SPEC_KONSTANTEN.md Self-Check Punkt 4. Sara-Workflow: Pflicht-Zuweisung `Intern > Neue Artikel für Sara` (WaWi-Key 546) als zweite CSV-Zeile pro neuem Artikel.
+*Bezug:* HotCakes-Run-Report 2026-05-18 (Note N2, Screenshot 1 aus Tjorbens Feedback), Self-Check #2/#3/#4 in SPEC_KONSTANTEN, E89 (NEU v1.19). *Stand v1.18:* offen. *Stand v1.19:* erledigt.
 *Problem:* Aktuelles Doppelzeilen-Pattern erzwingt 2 Zeilen pro Artikel (eine mit Oberkategorie, eine mit Unterkategorie). WaWi interpretiert das als zwei parallele Tag-Zuweisungen statt als Hierarchie. Ergebnis im HotCakes-Test: Artikel hat `Pole Dance Tops` und `Pole Dance Kleidung` als zwei flache Tags angezeigt, nicht als Baum.
 *Klärung mit Tjorben (2026-05-18):* Pro Artikel-Zuweisung in der CSV nur die spezifischste Unterkategorie angeben — WaWi resolved den Pfad automatisch über die in WaWi gepflegte Kategorie-Hierarchie. Plus neuer Use-Case: Artikel zusätzlich in `Intern > Neue Artikel für Sara` (interner WaWi-Schlüssel 546) für Freigabe-Workflow durch Social-Media-Managerin.
 *Folge-Pattern:* N Kategorien-Zuweisungen pro Artikel = N Zeilen in der CSV. Jede Zeile spezifiziert nur die unterste Kategorie. Self-Check #4 wird umformuliert von „alle 2×" auf „mindestens 2× (Shop-Kategorie + Intern/Sara), kann durch Marketing-Tags 3+ werden".
 *Action für v1.19:* `run_brief_daten.md` Sektion 5 (Stammdaten) bekommt explizites Goldstandard-Beispiel mit den 2 Zeilen. SPEC_KONSTANTEN Self-Check-Sektion entsprechend umformuliert.
 
-**B56 — Artikelgewicht-Default einbauen.**
-*Bezug:* HotCakes-Run-Report 2026-05-18 (Screenshot 2 Maße/Gewicht leer). *Stand:* offen, Priorität MITTEL, **Klärung mit Tjorben durch — Default 0,05 kg pro Kleidungsstück**.
+**B56 — Artikelgewicht-Default einbauen. — ERLEDIGT v1.19**
+*Update v1.19 (2026-05-18):* `lieferanten_mapping.yaml` um `article_weight_kg: 0.05` pro Lieferant erweitert (POLE_ADDICT, HOTCAKES, LUNALAE, POLE_JUNKIE). `run_brief_daten.md` Sektion 10 dokumentiert den Default in Stammdaten-CSV-Spalten `Artikelgewicht` und `Versandgewicht` (DE-Locale `0,05`). Maße bleiben leer wie geplant.
+*Bezug:* HotCakes-Run-Report 2026-05-18 (Screenshot 2 Maße/Gewicht leer), E90 (Sammeleintrag v1.19). *Stand v1.18:* offen. *Stand v1.19:* erledigt.
 *Problem:* Pipeline füllt die Felder `Artikelgewicht` und `Versandgewicht` in der Stammdaten-CSV nicht. WaWi zeigt im Maße/Gewicht-Reiter alle Felder leer. Versand-Konfiguration in WaWi profitiert aber von einem realistischen Default.
 *Klärung mit Tjorben:* Standard 0,05 kg (50 g) pro Kleidungsstück. Konservativer Default, dient als Platzhalter für Versand-Schätzung.
 *Action für v1.19:* `cowork_anweisung_datenimports.md` Sektion Stammdaten bekommt Default-Eintrag `Artikelgewicht=0.05, Versandgewicht=0.05` (Komma-Dezimal). Maße bleiben leer (variabel pro Kleidungsstück, nicht pauschal sinnvoll).
 
-**B57 — HTML-Entity-Encoding-Regel präzisieren (Latin-1-Umlaute bleiben Unicode).**
-*Bezug:* HotCakes-Run-Report 2026-05-18 (Tjorbens Feedback: HotCakes-Meta-Description hat `gro&szlig;e` während FANNA `große` hatte). *Stand:* offen, Priorität MITTEL, **klarer Bug-Fix**.
+**B57 — HTML-Entity-Encoding-Regel präzisieren (Latin-1-Umlaute bleiben Unicode). — ERLEDIGT v1.19**
+*Update v1.19 (2026-05-18):* Regression-Quelle gefunden in `run_brief_daten.md` Zeile 319 (alte Regel „deutsche Umlaute als `&uuml;`, `&auml;`, `&szlig;` etc." war falsch). Korrigiert in v1.19: HTML-Entities NUR für Zeichen außerhalb Latin-1 (z.B. ✓ = `&#10004;`, ➔ = `&#10148;`). Latin-1-Zeichen (ß, ä, ö, ü, é, à etc.) bleiben Unicode im UTF-8-Output. SPEC_KONSTANTEN Sektion 5 + AP7 sind unverändert kanonisch korrekt.
+*Bezug:* HotCakes-Run-Report 2026-05-18 (Tjorbens Feedback: HotCakes-Meta-Description hat `gro&szlig;e` während FANNA `große` hatte), E90 (Sammeleintrag v1.19). *Stand v1.18:* offen. *Stand v1.19:* erledigt.
 *Problem:* Regression in v1.17 — Encoding-Filter wurde zu aggressiv. HTML-Entities werden auch für Latin-1-Umlaute (ß/ä/ö/ü) erzeugt, nicht nur für Symbole außerhalb der Range. Inkonsistenz zu vorherigem Run (FANNA) mit korrektem Unicode.
 *Regel-Definition für v1.19:* HTML-Entities nur für Zeichen außerhalb Latin-1-Range (z.B. ✓ = `&#10004;`, ➔ = `&#10148;`). Latin-1-Zeichen (ß, ä, ö, ü, é, à, etc.) bleiben Unicode im UTF-8-Output. Action: `cowork_anweisung_datenimports.md` SEO-Sektion (Meta-Description-Template) bekommt explizite Encoding-Regel.
 
-**B58 — "Unser Model"-Phrase im size_and_fit raus, persönlicher Tonfall mit Modelnamen aus Crawl.**
-*Bezug:* HotCakes-Run-Report 2026-05-18 (Note N4, Tjorbens Feedback), E74-aspirational vs. E78-funktional. *Stand:* offen, Priorität MITTEL, **Klärung mit Tjorben durch — Crawl-basiert mit echten Namen**.
+**B58 — "Unser Model"-Phrase im size_and_fit raus, persönlicher Tonfall mit Modelnamen aus Crawl. — ERLEDIGT v1.19**
+*Update v1.19 (2026-05-18):* `run_brief_daten.md` Sektion 7 (Attribute) + Sektion 9 (Stil-Briefing) + SPEC_KONSTANTEN.md Sektion 11 (`size_and_fit`) tragen jetzt die Modelname-Konvention: Modelname aus Crawl-Body ziehen (z.B. Yifan, Vika, Elena bei HotCakes), bei mehreren Models pro Artikel erstes Model im Crawl-Body, bei null Modelname neutrale Formulierung („Das Model trägt...") oder Phrase weglassen.
+*Bezug:* HotCakes-Run-Report 2026-05-18 (Note N4, Tjorbens Feedback), E74-aspirational vs. E78-funktional, E90 (Sammeleintrag v1.19). *Stand v1.18:* offen. *Stand v1.19:* erledigt.
 *Problem:* HotCakes-Output enthielt im size_and_fit-Block die Phrase `Unser Model trägt Größe S bei 1,72 m. Passt regulär.` — das ist sachlich falsch (es sind Hersteller-Bilder, nicht „unser" Model) und stilistisch zu funktional. FANNA-Vorgänger-Run war persönlicher mit echten Modelnamen aus dem Crawl-Body.
 *Klärung mit Tjorben:* An Herstellertexten orientieren. Wenn der Crawl-Body Modelnamen enthält (`Yifan`, `Vika`, `Elena` — im HotCakes-Run-Report N4 dokumentiert): mit Namen schreiben. Beispiel: `Yifan trägt Größe S bei 1,72 m. Der Schnitt fällt regulär aus, bei breiteren Schultern lieber zu M greifen.` Wenn kein Modelname im Crawl: neutralere Formulierung ohne „unser" (z.B. „Das Model trägt..." oder ganz weglassen).
 *Action für v1.19:* `cowork_anweisung_datenimports.md` size_and_fit-Template + SPEC_KONSTANTEN Sektion 11 (Attribute-Stil-Differenzierung) bekommt explizite Modelnamen-Konvention.
 
-**B59 — TARIC-Code als Default für Pole-Bekleidung in lieferanten_mapping.yaml.**
-*Bezug:* HotCakes-Run-Report 2026-05-18 (Screenshot 4 Sonstiges TARIC leer). *Stand:* offen, Priorität MITTEL, **Klärung mit Tjorben durch — Code 62114390**.
+**B59 — TARIC-Code als Default für Pole-Bekleidung in lieferanten_mapping.yaml. — ERLEDIGT v1.19**
+*Update v1.19 (2026-05-18):* `lieferanten_mapping.yaml` um `taric_code: '62114390'` pro Lieferant erweitert (POLE_ADDICT, HOTCAKES, LUNALAE, POLE_JUNKIE). `run_brief_daten.md` Sektion 10 dokumentiert den TARIC-Eintrag in Stammdaten-CSV-Spalte `TARIC` (Sonstiges-Reiter in WaWi). YAML-Wert als String gequotet (sonst interpretiert YAML als Int).
+*Bezug:* HotCakes-Run-Report 2026-05-18 (Screenshot 4 Sonstiges TARIC leer), E90 (Sammeleintrag v1.19). *Stand v1.18:* offen. *Stand v1.19:* erledigt.
 *Problem:* TARIC-Code-Feld in WaWi-Sonstiges-Reiter wird nicht befüllt. Standard für deutsche Zoll-Anmeldung bei Pole-Bekleidung fehlt.
 *Klärung mit Tjorben:* TARIC `62114390` für Pole-Bekleidung. Eintrag in `lieferanten_mapping.yaml` als globaler Default oder pro Lieferant. Action für v1.19: YAML-Update + `cowork_anweisung_datenimports.md` Stammdaten-Sektion „Sonstiges" zieht den Code aus YAML.
 
-**B60 — Drive-Karteileichen-Cleanup für v1.17-Snapshot.**
-*Bezug:* HotCakes-Run-Report 2026-05-18 (Note N5) + v1.17-Manifest (Warning #4). *Stand:* offen, Priorität NIEDRIG, **manuelle Aktion durch Tjorben**.
+**B60 — Drive-Karteileichen-Cleanup für v1.17-Snapshot. — ERLEDIGT v1.19 (als manuelle Aktion an Tjorben gelistet im v1.19-Manifest)**
+*Update v1.19 (2026-05-18):* 3 Drive-IDs sind im v1.19-Manifest Sektion 11 (Manuelle Aktionen für Tjorben) gelistet — Aktion bleibt manuell, da Drive-MCP `delete_file` fehlt (B33). Mit dem Migrations-Pivot E87 (Drive → Git) wird B33 für künftige Snapshots bedeutungslos; bestehende Drive-Karteileichen bleiben aber als historische Aufräum-Aktion.
+*Bezug:* HotCakes-Run-Report 2026-05-18 (Note N5) + v1.17-Manifest (Warning #4) + v1.19-Manifest (siehe Sektion 11 dort). *Stand v1.18:* offen, Priorität NIEDRIG. *Stand v1.19:* erledigt (auf Manifest-Aktion verlagert).
 *Karteileichen im `Version_2026-05-17_212017`-Folder:*
 1. ID `1k7FloAj2KqmuXmLt1tidZb6mHZSCgLoN` (`ENTSCHEIDUNGS-LOG-CRAWLING-DATEN.md` Stub, 2.286 B) — fehlgeschlagener erster Upload-Versuch im v1.17-Build.
 2. ID `1qJjBoTE92V7il_vs-F-gglBuguDANvP4` (`SPEC_KONSTANTEN_as_gdoc_temp`) — Subagent-Detour im HotCakes-Run.
 3. ID `1-7_ueaQylA6fZ37YYN0mnm115kmkEa2C` (`SPEC_KONSTANTEN_temp_for_chunked_read`) — Subagent-Detour im HotCakes-Run.
 Drive-MCP hat keine Delete-Operation. Tjorben muss die 3 Files in Drive-Web-UI rauswerfen. Beeinflussen aktuell nicht den Resolver (der prüft Sektion-13-Match, nicht „nur diese Files"), aber stören die Komplettheits-Wahrnehmung im Folder.
+
+
+## v1.19 — neue Einträge B61-B63 aus Pattern-Pivot Drive → Git (E87)
+
+**B61 — WAWI-IMPORT-WISSEN.md Cluster-Split. — DEFERRED v1.19**
+*Bezug:* WAWI-IMPORT-WISSEN.md 75060 B (>50 KB known-exception), v1.18-Manifest Sektion 9, E87 (Drive → Git Pivot).
+*Stand:* deferred — in der Drive-Welt war >50 KB der Tool-Limit-Killer (A9/A10/A11), in der Git-Welt nur ein Lesbarkeits-Hinweis. Re-Evaluation:
+- wenn konkreter Lesbarkeits-/Pflege-Pain in der Praxis auftritt
+- wenn Cowork-Resolution auf GitHub-Raw umgestellt ist (B63) und sich zeigt, dass GitHub-Raw-Token-Verbrauch oder Cowork-Sub-Agent-Extraction-Schwelle für so große Files dort wieder problematisch wird
+*Priorität:* niedrig.
+
+**B62 — cowork_anweisung_datenimports.md Cluster-Split. — DEFERRED v1.19**
+*Bezug:* cowork_anweisung_datenimports.md 73110 B (>50 KB known-exception), v1.18-Manifest Sektion 9, E87 (Drive → Git Pivot).
+*Stand:* deferred — gleiche Begründung wie B61. In der Drive-Welt war >50 KB der Tool-Limit-Killer, in der Git-Welt nur ein Lesbarkeits-Hinweis. Re-Evaluation bei konkretem Pain oder nach B63-Migration.
+*Priorität:* niedrig.
+
+**B63 — Cowork-Resolver-Migration zu GitHub-Raw-URL. — NEU v1.19, v1.20-Scope**
+*Bezug:* E87 (Drive → Git Pivot v1.19), `cowork_custom_instructions.md`, `Projekt-Anweisungen.md`, WISSENS-UPDATE-PLAYBOOK v2.0 Sektion 2.3.
+*Stand:* offen, Priorität HOCH (v1.20-Scope, eigener Trigger).
+*Problem:* Cowork resolved aktuell den letzten gültigen Drive-Sub-Folder (`Version_2026-05-18_141930` = v1.18-Stand). Mit dem v1.19-Pattern-Pivot E87 liegt der aktuelle Stand als Git-Tag `v1.19` im GitHub-Repo `verticalogmbh/polesportshop-wissen`, nicht in Drive. Cowork sieht den v1.19-Stand also bis zur Resolver-Migration nicht.
+*Lösungs-Pfad:*
+1. `cowork_custom_instructions.md` Sektion „Snapshot-Resolution": Drive-Folder-Resolution → GitHub-Raw-URL-Resolution. Pattern: `https://raw.githubusercontent.com/verticalogmbh/polesportshop-wissen/<tag>/<file>` mit `<tag>` = letzter `v<X.Y>`-Tag aus GitHub-API (`gh api repos/verticalogmbh/polesportshop-wissen/tags`).
+2. `Projekt-Anweisungen.md` Routine-Output-Schritt 2 entsprechend anpassen.
+3. Cowork-Tool-Probe: kann Cowork-`web_fetch` GitHub-Raw-URLs lesen? Falls private Repo: Auth-Token-Mechanik klären (analog zu R2-Credentials, E33).
+4. Validierung: Cowork-Test-Lauf gegen den dann aktuellen Git-Tag, prüfen ob Stage 0 sauber durchläuft.
+*Stolperfallen:*
+- Repo-Visibility: Bei privatem Repo braucht Cowork ein GitHub-Token. Bei public Repo: trivial.
+- Tag-Aktualität: Wenn ein Build noch nicht gepusht ist, sieht Cowork den alten Stand. Push-Disziplin (siehe WISSENS-UPDATE-PLAYBOOK v2.0 Sektion 5) ist Pflicht.
+- Drive-Snapshot bleibt parallel als Read-Only-Archiv erhalten, aber wird ab v1.19 nicht mehr aktualisiert. Klar in der Spec markieren, damit niemand versehentlich Drive-Stand als aktuellen Stand interpretiert.
+*Trigger:* eigener Wissens-Update-Trigger für v1.20, sobald Tjorben für die Resolver-Migration bereit ist.

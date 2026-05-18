@@ -1,4 +1,4 @@
-# RUN-BRIEF: Daten-Pipeline (E68, offiziell in v1.12 verankert, Stand 2026-05-17, v1.15)
+# RUN-BRIEF: Daten-Pipeline (E68, offiziell in v1.12 verankert, Stand 2026-05-18, v1.16)
 
 Dieser Brief ist die kompakte operative Spec für einen reinen Daten-Lauf. Er
 ersetzt das Laden von `WAWI-IMPORT-WISSEN.md` und
@@ -12,7 +12,14 @@ Bei Konflikten zwischen diesem Brief und SPEC_KONSTANTEN.md gewinnt
 SPEC_KONSTANTEN.md (kanonisch nach Charter-Prinzip 11). Bei Unsicherheit:
 STOPP + User-Frage, niemals raten (Charter-Prinzip 10, E59).
 
-**Was v1.15 ändert (NEU 2026-05-17, nach Live-Trial-Runs Batch 1+2 HotCakes, 21 Modelle in WaWi):**
+**Was v1.16 ändert (NEU 2026-05-18, F2-F6-Fixes aus HotCakes-Run-Report 2026-05-18):**
+- F2 (E89): Kategorie-Pattern korrigiert — pro CSV-Zeile nur die spezifischste Subkategorie (WaWi resolved den Pfad über die Hierarchie). Plus: jeder neue Artikel bekommt zusätzlich `Intern > Neue Artikel für Sara` (WaWi-Key 546) für den Sara-Review-Workflow. Self-Check Punkt 4 entsprechend umformuliert.
+- F3: Artikelgewicht-Default 0.05 kg + Versandgewicht-Default 0.05 kg pro Kleidungsstück in der Stammdaten-CSV (Sektion 10 unten).
+- F4 (B57): HTML-Entity-Regression behoben — Latin-1-Umlaute (ß, ä, ö, ü, é, à etc.) bleiben Unicode. HTML-Entities NUR für Zeichen außerhalb Latin-1 (z.B. ✓ = `&#10004;`, ➔ = `&#10148;`). Korrigiert die v1.15-Regression `gro&szlig;e` statt `große`.
+- F5 (B58): „Unser Model"-Phrase raus aus `size_and_fit`. Modelnamen aus Crawl-Body ziehen (z.B. Yifan, Vika, Elena bei HotCakes). Bei mehreren Models pro Artikel: erstes Model im Crawl-Body verwenden. Bei null Modelname: neutralere Formulierung („Das Model trägt...") oder Phrase weglassen.
+- F6: TARIC-Code-Default `62114390` für Pole-Bekleidung in `lieferanten_mapping.yaml` als Default pro Lieferant. Wird in Stammdaten-CSV-Spalte „TARIC" eingetragen.
+
+**Was v1.15 änderte (2026-05-17, nach Live-Trial-Runs Batch 1+2 HotCakes, 21 Modelle in WaWi):**
 - Stage 0.5 Pre-Run Scope-Analyse (E83) — Cowork schätzt Token/Wallclock-Verbrauch eigenständig und entscheidet autonom über Batch-Aufteilung (E81-Autonomie-Hoheit), Batch-Plan im Lauf-Bericht
 - Stage 5.8 Cross-Selling jetzt mit Kinder-Replikation (E80-Erweiterung): linke Spalte (ArtNr) erhält Vater UND alle Kinder, rechte Spalte (Cross-Seller) bleibt strikt Vater
 - Modell-Stamm-Schlüssel bei Farbvarianten inkludiert Farbe: `(modell_basis, farbe_im_namen)` statt nur `modell_basis` (Bug-Fix Batch 2 Iter. 1)
@@ -170,7 +177,7 @@ Ein Stamm aus 1 Vater + 5 Kindern mit 4 Attributen → 24 Zeilen.
 | `markentext` | Brand-Pitch (80-150 Wörter, evergreen) | `<h2>Marke</h2><p>Story</p>` | **E74-aspirational** (E72/E79 Caching im Mapping) |
 | `artikeldetails` | Tagline + Fließtext + Features (100-300 Wörter) | siehe Stil-Briefing Sektion 9 | **E74-aspirational** |
 | `material_and_care` | **2 Paragraphen: P1 Stoffzusammensetzung, P2 Pflegehinweise** | `<p>...</p><p>...</p>` | **clean/funktional (E78, NEU v1.14)** |
-| `size_and_fit` | Passform + Modellgröße + Tragehöhe. **Keine Größentabelle** | Plaintext oder leichtes HTML | E74-aspirational gemäßigt |
+| `size_and_fit` | Passform + Modellgröße + Tragehöhe. **Modelname aus Crawl-Body (F5/B58, v1.16):** statt „Unser Model trägt..." → `<Modelname> trägt Größe S bei 1,72 m...` (z.B. Yifan, Vika, Elena bei HotCakes). Bei mehreren Models: erstes Model im Crawl-Body. Bei null Modelname: „Das Model trägt..." oder Phrase weglassen. **Keine Größentabelle** | Plaintext oder leichtes HTML | E74-aspirational gemäßigt |
 | `anwendung` | 3-8 Imperativ-Schritte (wenn relevant) | `<ul class="check"><li>Schritt</li></ul>` | klar/funktional |
 | `faqs` | mehrere Blöcke à 30-80 Wörter (wenn relevant) | wiederholte `<h3>Frage?</h3><p>Antwort</p>` | warm-funktional |
 | `inhaltsstoffe` | Komma-Liste (wenn relevant) | `<p>` | clean |
@@ -282,7 +289,7 @@ Eigennamen (Brand, Modell, Print-Familien) unverändert lassen — siehe E58.
 - Adjektive: „sexy", „verführerisch", „aufreizend", „provokant", „atemberaubend", „einzigartig", „verlockend", „erotisch"
 - **Em-Dashes (—) im Fließtext** — ersetzen mit `,` (KI-Marker, E74)
 - **Doppelpunkt (`:`) im Fließtext (NEU v1.15, E82, verschärft E74)** — Doppelpunkt war in E74 als Em-Dash-Ersatz erlaubt. Mit E82 jetzt auch verboten in Fließtext und `<h2>`-Taglines. Stattdessen umformulieren (zwei Sätze, oder Hauptsatz mit Komma). Beispiel: `<h2>Marble-Print Mesh-Bodysuit: dein Statement-Piece</h2>` → `<h2>Marble-Print Mesh-Bodysuit, dein Statement-Piece</h2>` oder `<h2>Marble-Print Mesh-Bodysuit für ein Statement</h2>`.
-- **Meta-Einleitungs-Sätze (NEU v1.15, E82)** — kein „Die Maße:", „Die Pflege:", „Das Material:" als Aufzählungs-Einleitung. Direkt zum Inhalt. Beispiel: `<p>Die Maße: Unser Model trägt Größe S bei 1,72 m...</p>` → `<p>Unser Model trägt Größe S bei 1,72 m...</p>`.
+- **Meta-Einleitungs-Sätze (NEU v1.15, E82)** — kein „Die Maße:", „Die Pflege:", „Das Material:" als Aufzählungs-Einleitung. Direkt zum Inhalt. Beispiel: `<p>Die Maße: Yifan trägt Größe S bei 1,72 m...</p>` → `<p>Yifan trägt Größe S bei 1,72 m...</p>` (Modelname aus Crawl-Body, F5/B58 v1.16).
 - Pathos-Adjektiv-Kaskaden („atemberaubend, einzigartig, exklusiv und absolut traumhaft")
 - Eingedeutschte Anglizismen — „Polewear", „Pole Dance", „Cheeky" bleiben
 - Marketing-Imperative: „shop now", „jetzt kaufen", „greif zu"
@@ -316,7 +323,7 @@ offene Rücken gibt dir freie Schultern für jeden Climb.</p>
 ```
 
 ### HTML-Regeln
-- HTML-Entities: deutsche Umlaute als `&uuml;`, `&auml;`, `&szlig;` etc.
+- **HTML-Entities NUR für Zeichen außerhalb Latin-1** (v1.16-Korrektur F4/B57): z.B. ✓ = `&#10004;`, ➔ = `&#10148;`, ✦ = `&#10022;`. **Latin-1-Zeichen (ß, ä, ö, ü, é, à, ñ, ç etc.) bleiben Unicode** im UTF-8-Output. Beispiel falsch (Regression v1.15): `gro&szlig;e Auswahl` → richtig: `große Auswahl`. SPEC_KONSTANTEN Sektion 5 + AP7 sind kanonisch.
 - Custom-CSS-Klassen: nur `check`
 
 ---
@@ -334,9 +341,11 @@ Pro Lieferant einmal mappen + Vorlage speichern, dann klonen.
 - Varkombi: „Variationen und Werte im Vaterartikel erstellen"
 - Lieferantenblock-Spalten unter „Lieferanteneinstellungen des Artikels"; Standardwert „Währung" in Vorlage setzen (z.B. EUR für HotCakes), nicht als CSV-Spalte (E36)
 - **Standardlieferant in der Vorlage (Pflicht, klargestellt v1.15):** im Standardwerte-Bereich „Lieferant" explizit auf den Lieferanten setzen (z.B. „HotCakes Polewear"). Bug-Beleg 2026-05-17: HotCakes-Attribute-Vorlage hatte Standardlieferanten auf „nicht gewählt", Import schlug mit 220 Warnungen „Lieferant HOTCAKES existiert nicht" fehl. Gilt für ALLE 5 Vorlagen pro Lieferant.
+- **Artikelgewicht + Versandgewicht (F3/B56, NEU v1.16):** Default `0,05` (50 g) pro Kleidungsstück in die Spalten `Artikelgewicht` und `Versandgewicht` schreiben. Komma-Dezimal (DE-Locale). Override pro Artikel möglich wenn echtes Gewicht aus Lieferanten-Daten bekannt. Maße (Länge/Breite/Höhe) bleiben leer (pro Kleidungsstück variabel, kein sinnvoller Pauschal-Default).
+- **TARIC-Code (F6/B59, NEU v1.16):** Default `62114390` für Pole-Bekleidung aus `lieferanten_mapping.yaml` Feld `taric_code` ziehen → Spalte `TARIC` in Stammdaten-CSV. Sonstiges-Reiter in WaWi wird damit gefüllt.
 - Bild-Spalten `Bild 1` bis `Bild 10` → JTL-Felder `Bild Pfad/URL 1` bis `Bild Pfad/URL 10`
 - Reiter „Bilder/Plattformen": alle 11 Plattform-Häkchen in der Vorlage gesetzt (B5-Lösung)
-- Multi-Kategorie: „Kategorieverknüpfungen des Artikels aktualisieren" = „Neue Kategorien beim jeweiligen Artikel hinzuimportieren" (E57)
+- **Multi-Kategorie (E89, NEU v1.16, ersetzt v1.15-Doppelzeilen-Pattern):** Pro Kategorie-Zuweisung eine CSV-Zeile mit **nur der spezifischsten Subkategorie** — WaWi resolved den Pfad automatisch über die in WaWi gepflegte Kategorie-Hierarchie. Zusätzlich Pflicht-Zuweisung für jeden neuen Artikel: `Intern > Neue Artikel für Sara` (WaWi-Kategorie-Key `546`) als zweite Zeile, für den Sara-Review-Workflow (Social-Media-Manager prüft + entfernt Zuweisung manuell in WaWi nach Approval). Ergebnis pro Artikel: mindestens 2 Kategorie-Zeilen (Shop-Subkategorie + Sara). Vorlagen-Setting: „Kategorieverknüpfungen des Artikels aktualisieren" = „Neue Kategorien beim jeweiligen Artikel hinzuimportieren" (E57) unverändert.
 - Reiter „Verkaufskanal aktiv": Häkchen in Vorlage entfernt + Vorlage gespeichert (E37/B21)
 
 **Reiter „Weitere Texte" (E31):** pro Sprache (EN/FR/IT/ES) → CSV `Global-{Sprache}: Artikelname`, `Global-{Sprache}: Titel-Tag`, `Global-{Sprache}: Meta-Description`.
@@ -389,7 +398,7 @@ Pro Lieferant einmal mappen + Vorlage speichern, dann klonen.
 - **Eigennamen übersetzen** (Modell-Namen, Brand-Namen wie „Hekate", „Arachne", „HotCakes")
 - **Schema-Spalten-Reihenfolge umorganisieren** — Schema ist append-only (E54, AP4)
 - **Kategorie-Werte außerhalb der E51-Tabelle nutzen** (AP1 — „Damen" und „Limited Editions" sind keine gültigen Kategorien)
-- **Multi-Kategorie ohne Doppelzeilen umsetzen** (E57, AP6). **🔒 Anti-Confusion (E75, v1.13):** wenn jemand „doppelte Größen" als Bug meldet → KEIN Spec-Fix. Erst Vorlagen-Setting `Kategorieverknüpfungen des Artikels aktualisieren = Neue Kategorien beim jeweiligen Artikel hinzuimportieren` in WaWi prüfen. Goldstandard-Referenz: `1_Stammdaten_HotCakes_2026-05-16.csv` (Doppelzeilen + korrektes Setting = sauberer Import).
+- **Multi-Kategorie ohne separate Zeilen umsetzen** (E57, AP6). **🔒 Anti-Confusion (E75, v1.13):** wenn jemand „doppelte Größen" als Bug meldet → KEIN Spec-Fix. Erst Vorlagen-Setting `Kategorieverknüpfungen des Artikels aktualisieren = Neue Kategorien beim jeweiligen Artikel hinzuimportieren` in WaWi prüfen. **NEU v1.16 (E89):** Pro Zeile nur die spezifischste Subkategorie (nicht parallel Ober- und Unterkategorie auf gleicher Hierarchie-Ebene — WaWi resolved den Pfad selbst). Plus Pflicht-Zeile für `Intern > Neue Artikel für Sara` (Key 546). Mindestens 2 Kategorie-Zeilen pro Artikel.
 - **Kind-Artikelname ohne Größen-Suffix lassen** (E56, AP5 — Kind-Name = Vater-Sprachname + Leerzeichen + Variationswert)
 - **SEO-Felder auf Kind-Zeilen befüllen** (E56 — Titel-Tag und Meta-Description leben nur auf Vater-Zeilen)
 - **Workflow-Frage statt autonomer Entscheidung (NEU v1.15, AP9)** — Batch-Splitting, Token-Budget, Stage-Reihenfolge gehören zur Autonomie (E81). Cowork entscheidet, dokumentiert im Bericht, fragt nicht.

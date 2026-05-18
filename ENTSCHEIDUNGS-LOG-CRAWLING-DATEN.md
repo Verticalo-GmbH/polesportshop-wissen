@@ -2,7 +2,7 @@
 
 **Cluster:** Crawling, Quellen, CSV-Schema, Datenmodell, Mappings
 
-**Stand:** v1.17, 2026-05-17
+**Stand:** v1.18, 2026-05-18 (neue Einträge E89 Category-Pattern + Sara-Workflow, E90 F-Fixes Sammeleintrag v1.19)
 
 **Bezug:** Dieser Cluster ist Teil des Splits der ursprünglichen `ENTSCHEIDUNGS-LOG.md` (v1.16, 165 KB → 6 Themen-Cluster ≤ 40 KB). Historische / abgelöste Einträge liegen weiterhin in `ENTSCHEIDUNGS-LOG-ARCHIV.md`. Cross-Cluster-Referenzen über E-Nummer; der Master-Index mit allen E-Nummern → Cluster-File-Zuordnung liegt in `SPEC_KONSTANTEN.md` unter `ENTSCHEIDUNGSLOG_E_NUMMER_INDEX`.
 
@@ -26,6 +26,8 @@
 - **E54** — Stammdaten-CSV-Schema-Layout: 38 alte Spalten + 10 Bilder am Ende (Reverse-Engineering für Vorlagen-Kontinuität)
 - **E57** — Multi-Kategorie-Zuweisung via mehrfache CSV-Zeilen mit gleicher Artikelnummer + Ameise-Setting „Kategorieverknüpfungen des Artikels aktualisieren = Neue Kategorien beim jeweiligen Artikel hinzuimportieren"
 - **E69** — E52-Implementation in Cowork-CI und Datenimports-Spec verankern, A6 formell archivieren
+- **E89** — Category-Pattern + Sara-Review-Workflow (NEU v1.18, präzisiert E57)
+- **E90** — F2-F6-Implementierung in v1.19 (Sammeleintrag, NEU v1.18)
 
 ---
 
@@ -381,6 +383,64 @@ Ameise-Vorlagen-Setting (einmalig pro Lieferanten-Vorlage zu setzen, dann in der
 *Verworfen:*
 - *A6-Workaround stabilisieren statt entfernen:* widerspricht E52, würde die Token-Kosten nur reduzieren, nicht eliminieren.
 - *Beide Pfade parallel anbieten (Drive + lokal):* schafft Wahl-Logik in Cowork, die wieder verbrennt. Eine Architektur, klar entschieden.
+
+---
+
+**E89 — Category-Pattern + Sara-Review-Workflow.**
+*Stand:* 2026-05-18 (v1.19). *Bezug:* E51 (Kategoriebaum-Mapping), E57 (Multi-Kategorie via mehrfache CSV-Zeilen, präzisiert hier), B55 (Klärung mit Tjorben 2026-05-18), HotCakes-Run-Report 2026-05-18 (Note N2, Screenshot 1).
+
+*Warum:* Im HotCakes-Run 2026-05-18 wurde sichtbar, dass das v1.15-Doppelzeilen-Pattern aus E57 (eine Zeile mit Oberkategorie `Pole Dance Kleidung`, eine Zeile mit Unterkategorie `Pole Dance Tops`) in WaWi nicht als Hierarchie-Pfad gelesen wird, sondern als zwei parallele Tag-Zuweisungen auf gleicher Ebene. Screenshot zeigte Artikel mit beiden Tags flach nebeneinander statt als Baum-Pfad. Plus: bei der Tjorben-Klärung kam ein neuer Use-Case dazu — Social-Media-Managerin Sara braucht eine WaWi-interne Kategorie `Intern > Neue Artikel für Sara` (Key 546) als Review-Inbox für jeden neuen Artikel.
+
+*Entscheidung:*
+- **Pro Artikel-Kategorie-Zuweisung in der Stammdaten-CSV nur die spezifischste Unterkategorie** (z.B. `Pole Dance Tops`, nicht parallel `Pole Dance Kleidung`). WaWi resolved den Pfad über die in WaWi gepflegte Kategorie-Hierarchie selbst. Keine parallele Oberkategorie-Zeile mehr.
+- **Pflicht-Zuweisung für jeden neuen Artikel** in `Intern > Neue Artikel für Sara` (WaWi-Kategorie-Key `546`) — eine zweite CSV-Zeile mit gleicher `Artikelnummer` und dieser Kategorie. Sara prüft den Artikel im WaWi-Backend und entfernt die `546`-Zuweisung manuell nach Approval. Damit entsteht ein einfacher Review-Workflow ohne zusätzliche WaWi-Felder oder externes Tooling.
+- Mindest-Set pro Artikel: **2 Kategorie-Zeilen** (Shop-Subkategorie + Sara-546). Weitere Marketing-Tag-Zuweisungen erlaubt → mehr Zeilen.
+- Vorlagen-Setting unverändert: „Kategorieverknüpfungen des Artikels aktualisieren" = „Neue Kategorien beim jeweiligen Artikel hinzuimportieren" (E57). E75-Anti-Confusion (Doppelzeilen-Bug-Report-Lehre) weiter gültig: bei „doppelte Größen"-Bug-Reports erst Vorlagen-Setting prüfen, nicht Spec-Fix.
+
+*Konsequenzen:*
+- `run_brief_daten.md` Sektion 10 (Stammdaten-Spezifika): explizite Anweisung für Multi-Kategorie mit nur Subkategorie + Sara-546-Zeile.
+- `SPEC_KONSTANTEN.md` Self-Check Punkt 4 umformuliert auf neues Pattern (mindestens 2 Zeilen, spezifischste Subkategorie + Sara-546).
+- E57 bleibt gültig im Sinne von „mehrere CSV-Zeilen pro Artikel mit gleicher Artikelnummer", aber die Inhalts-Semantik pro Zeile ändert sich: jede Zeile ist eine spezifische Kategorie, nicht mehr Oberkategorie + Unterkategorie als zwei parallele Tags.
+- Sara hat einen klaren Review-Indikator in WaWi (Filter auf Kategorie 546 listet alle noch nicht abgenommenen neuen Artikel).
+- Self-Check-Spalte „Multi-Kategorie 2× Pflicht" bleibt erhalten, aber die zwei Zeilen sind jetzt (a) Shop-Subkategorie + (b) Sara-546, nicht mehr Ober + Unter.
+
+*Verworfen:*
+- *Pfad-Notation in einer Zelle (`Pole Dance Kleidung > Pole Dance Tops`):* nicht von Ameise unterstützt (bereits in E57 verworfen).
+- *Eigener Sara-Workflow über separates WaWi-Attribut (z.B. `review_pending: true`):* würde WaWi-Konvention sprengen, keine native Filter-Möglichkeit. Kategorie ist bestehende Mechanik.
+- *Sara-Zuweisung dem Anti-Pattern „Cowork pflegt WaWi-Status-Felder" zuschlagen:* Charter Prinzip 3 sagt „Cowork schreibt nichts in WaWi" — aber das bezieht sich auf API-Schreib-Calls, nicht auf CSV-Zellen-Werte. Eine Kategorie-Zuweisung via Ameise-CSV ist normale Pipeline-Mechanik. Sara entfernt manuell, das ist der menschliche Loop.
+- *Auf Sara-Email als Workflow-Trigger statt WaWi-Kategorie:* fragmentiert die Tools. Sara arbeitet eh in WaWi für Social-Media-Vorbereitung, die Inbox-Liste ist genau dort sichtbar wo sie sie braucht.
+
+*Stolperfallen:*
+- **Sara muss die 546-Zuweisung wirklich manuell entfernen** — sonst akkumuliert die Kategorie und der Review-Loop wird unbrauchbar. Tjorben-Konvention: jede Sara-Approval = Zuweisung weg. Audit pro Quartal über WaWi-Filter empfohlen.
+- **Wenn WaWi-Hierarchie sich ändert (z.B. neue Unterkategorie eingeführt):** Pipeline muss die neue Kategorie kennen. SPEC_KONSTANTEN Sektion 3 oder lieferanten_mapping.yaml gegebenenfalls erweitern.
+
+---
+
+**E90 — F2-F6-Implementierung in v1.19 (Sammeleintrag).**
+*Stand:* 2026-05-18 (v1.19). *Bezug:* HotCakes-Run-Report 2026-05-18 (Notes N1-N6, Screenshots), BACKLOG B55-B59 (Tjorben-Klärungen 2026-05-18 durch).
+
+*Warum:* HotCakes-Run-Report 2026-05-18 hatte sieben offene Findings F1-F7. Tjorben hat in der Klärungs-Session am 2026-05-18 für F2-F6 konkrete Antworten gegeben. v1.19 setzt diese als Architektur-Entscheidungen / Spec-Updates um. F1 (SPEC_KONSTANTEN Performance-Split) und F7 (Drive-Karteileichen-Cleanup) sind in v1.19 deferred bzw. als manuelle Aktion gelistet.
+
+*Entscheidung (zusammengefasst):*
+- **F2 → E89** (siehe oben): Category-Pattern + Sara-Workflow als eigenständige Architektur-Entscheidung formalisiert.
+- **F3 (B56) → lieferanten_mapping.yaml:** neues Feld `article_weight_kg: 0.05` pro Lieferant. Stammdaten-CSV-Spalten `Artikelgewicht` und `Versandgewicht` mit DE-Locale-Komma `0,05` befüllen.
+- **F4 (B57) → run_brief_daten.md Sektion 9.3:** HTML-Entity-Regression behoben. Latin-1-Umlaute (ß, ä, ö, ü, é, à etc.) bleiben Unicode im UTF-8-Output. HTML-Entities NUR für Zeichen außerhalb Latin-1 (z.B. ✓ = `&#10004;`, ➔ = `&#10148;`). SPEC_KONSTANTEN Sektion 5 + AP7 sind bereits kanonisch korrekt; der Bug saß in `run_brief_daten.md` Zeile 319 (alte Regel „deutsche Umlaute als `&uuml;` etc." — falsch, korrigiert).
+- **F5 (B58) → run_brief_daten.md Sektion 7 + SPEC_KONSTANTEN Sektion 11:** „Unser Model trägt..." raus aus `size_and_fit`. Statt dessen Modelname aus Crawl-Body ziehen (z.B. Yifan, Vika, Elena bei HotCakes). Bei mehreren Models pro Artikel: erstes Model im Crawl-Body. Bei null Modelname: „Das Model trägt..." oder Phrase weglassen.
+- **F6 (B59) → lieferanten_mapping.yaml:** neues Feld `taric_code: '62114390'` pro Lieferant (TARIC für Pole-Bekleidung). Stammdaten-CSV-Spalte `TARIC` (Sonstiges-Reiter in WaWi).
+
+*Konsequenzen:*
+- `lieferanten_mapping.yaml` wächst pro Lieferant um 2 Felder (`article_weight_kg`, `taric_code`). Schema-Doku am Ende der YAML erweitert.
+- `run_brief_daten.md` Header v1.15 → v1.16, neuer „Was v1.16 ändert"-Block.
+- `SPEC_KONSTANTEN.md` Header-Spec-Bezug auf v1.19-Snapshot aktualisiert (Sektion 11 size_and_fit-Modelname + Self-Check #4 Multi-Kategorie + E87/E89/E90 in Sektion 14).
+- BACKLOG B55 → erledigt v1.19 (→ E89), B56-B59 → erledigt v1.19, B60 → erledigt v1.19 (manuelle Tjorben-Aktion in Drive, 3 IDs in Manifest gelistet).
+
+*Verworfen:*
+- *F-Fixes verstreut über mehrere E-Einträge schreiben:* würde den Cluster aufblähen. Ein Sammeleintrag verweist auf BACKLOG-IDs, die die konkrete Klärung halten.
+- *F1 (Performance-Split SPEC_KONSTANTEN) im v1.19-Build mitnehmen:* in der neuen Git-Welt ist >50 KB kein Upload-Killer mehr (siehe E87), nur noch ein Lesbarkeits-Hinweis. Split-Aufwand ohne aktuellen Mehrwert; deferred auf v1.20+, Re-Evaluation wenn Cowork-Resolver auf GitHub umgestellt ist (B63).
+- *F7 (Drive-Karteileichen) automatisch lösen:* Drive-MCP fehlt `delete_file` (B33). Manuelle Aktion durch Tjorben bleibt; v1.19-Manifest listet die 3 Drive-IDs.
+
+*Folgeaufgaben:*
+- B61, B62, B63 (alle NEU v1.19) — siehe BACKLOG.md.
 
 ---
 
