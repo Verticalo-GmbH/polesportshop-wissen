@@ -1,6 +1,6 @@
 # CLAUDE.md — Daily-Workflow für Wissens-Management
 
-**Stand:** v1.0, 2026-05-18 (NEU mit v1.20-Refactor E91)
+**Stand:** v1.1, 2026-05-19 (v1.21-Update: Bildpipeline reaktiviert E93, Multi-Kategorie + Farb-Lokalisierung-Korrektur E92). · **Vorheriger Stand:** v1.0, 2026-05-18 (v1.20)
 **Zweck:** Cheatsheet für Tjorben + jede Claude-Code-Session, die das Repo `polesportshop-wissen` aufmacht. Beantwortet: Wie starte ich was, wie reviewe ich, wo finde ich was, wie commite ich kleine Edits.
 **Auch von Claude Code automatisch gelesen:** Diese Datei liegt im Repo-Root und wird von Claude Code beim Session-Start als Projekt-Kontext aufgenommen. Daher kurz und bündig halten.
 
@@ -24,7 +24,7 @@
 | Cowork-Side (Daten-Pipeline-Ausführung) | `cowork_custom_instructions.md` |
 | Cowork-Daten-Pipeline operative Spec | `cowork_anweisung_datenimports.md` |
 | Cowork-Daten-Pipeline kompakter Run-Brief (Cowork-Stage-0) | `run_brief_daten.md` |
-| Cowork-Bildpipeline (archiviert) | `cowork_anweisung_bildpipeline.md` |
+| Cowork-Bildpipeline (REAKTIVIERT v1.21, E93) | `cowork_anweisung_bildpipeline.md` v2.1 |
 | Onboarding neuer Lieferant | `LIEFERANTEN-ONBOARDING.md` |
 | Lieferanten-Metadaten | `lieferanten_mapping.yaml` |
 | WaWi-Pilot-Wissen (CSV-Stolperfallen, Vorlagen-Setup) | `WAWI-IMPORT-WISSEN.md` |
@@ -53,8 +53,9 @@
 
 → Claude Code folgt `LIEFERANTEN-ONBOARDING.md`. Ergebnis: erweitertes `lieferanten_mapping.yaml`, ggf. neue Brand-Stories, dann minimaler Commit oder Sammel-Commit. Anschließend Probe-Lauf in Cowork.
 
-**Bildpipeline** (archiviert):
-- „Verarbeite Bilder von <LIEFERANT>" → Hinweis: nicht aktiv, Bilder manuell in WaWi.
+**Bildpipeline** (REAKTIVIERT v1.21, E93):
+- Läuft als Sub-Process aus dem Daten-Pipeline-Lauf (Stage 5.6 + 5.7 in `cowork_anweisung_datenimports.md` v2.1). R2-URLs landen direkt in den Stammdaten-CSV-Spalten Bild 1-10.
+- Standalone-Trigger: „Verarbeite Bilder von <LIEFERANT>" — Cowork lädt `cowork_anweisung_bildpipeline.md` v2.1, Output Map `{artikelnummer: [bild_urls]}`.
 
 ## Daily-Ops für Tjorben (Quick-Reference)
 

@@ -1,6 +1,6 @@
 # Backlog: Strategische Entscheidungsbedarfe
 
-**Stand:** v1.20, 2026-05-18 (im v1.20-Refactor E91: erledigte/deferred Einträge nach `BACKLOG-ARCHIV.md` ausgelagert als kompakter Index, B63 erledigt, B64 neu für Brand-Story-Skalierung). · **Vorheriger Stand:** v1.19 (B54-B60 statussen). · **Vor-vorheriger Stand:** v1.18 (B54-B60 aus HotCakes-Run-Report). · Älteste Einträge B1-B53 aus v1.17 (Live-Trial).
+**Stand:** v1.21, 2026-05-18 (Trial-Findings v1.20 → v1.21-Refactor E92+E93: B49 teilvalidiert durch Override im Trial 2026-05-18 21:06, B36-B40 deferred-Status auf gelöst-durch-Reaktivierung, B66 + B67 neu für v1.21-Validierung). · **Vorheriger Stand:** v1.20 (Skalierungs-Refactor, B63 erledigt). · Älteste Einträge B1-B53 aus v1.17 (Live-Trial).
 
 > **Hinweis ab v1.20:** Erledigte und deferred B-Einträge stehen kompakt als Index in `BACKLOG-ARCHIV.md`. Diese Datei enthält weiter alle Details — ARCHIV gibt nur schnelle Übersicht „was ist nicht mehr aktiv".
 
@@ -494,6 +494,8 @@ Was NOCH NICHT validiert ist:
 
 Trigger-Bedingung für Verifikation: vor erstem produktiven Re-Import mit Cross-Selling auf bereits importierte Beziehungen. Sicherheitsmechanismus bis dahin: vor Re-Import alle Cross-Selling-Beziehungen des betroffenen Lieferanten in WaWi manuell löschen, dann frischer Import. Sobald verifiziert, Anweisung an Cowork-Lauf-Bericht.
 
+*Update v1.21 (2026-05-18):* **Re-Import-Verhalten weiter unverifiziert, aber durch Trial-Lauf 2026-05-18 21:06 umgangen:** Tjorben hat die 21 Live-Trial-Modelle in WaWi gelöscht vor dem v1.20-Trial-Lauf, daher war es ein Initial-Import (kein Re-Import-Test). Cowork-Stage-0.5 hat den Re-Import-Schutz (STOPP-Trigger) ausgelöst, Tjorben hat manuell deaktiviert mit „behandle es als wäre es das erste Mal". → B49 bleibt offen, wird beim v1.21-Trial-Lauf erneut umgangen weil Artikel weiterhin gelöscht sind. Echter Re-Import-Test erst, wenn auf eine bestehende Anlage später eine zweite Lieferung mit Schwester-Artikeln drauf-importiert wird (B52-Family-Refresh-Trigger).
+
 **B50 — Bodysuit-Outfit-Cross-Selling: aktuell ohne Pendant, soll perspektivisch zu Top oder Bottom mit gleichem Print vorgeschlagen werden?**
 Bezug: E80, Tjorben-Direktive.
 Kontext: der aktuelle Algorithmus generiert für Bodysuits keine „Vervollständige Dein Outfit"-Beziehung, weil sie kein direktes Pendant haben. Aber: wenn HotCakes einen Hekate-Bodysuit UND ein Hekate-Top + Hekate-Bottom hätte (gleicher Print), wäre eine Cross-Selling-Empfehlung sinnvoll. Heute (2026-05-16) keine konkrete Konstellation im Bestand, aber denkbar.
@@ -639,4 +641,26 @@ Drive-MCP hat keine Delete-Operation. Tjorben muss die 3 Files in Drive-Web-UI r
 *Lösungs-Pfad:* beim ersten produktiven Cowork-Daten-Lauf nach v1.20-Push verifizieren. Im Lauf-Bericht dokumentieren: Stage 0 Wallclock, ob Raw-URLs erreichbar, ob Egress-Allowlist angepasst werden muss.
 *Falls Issue:* Fallback: Tjorben kopiert die 3 Stage-0-Files in den Drive-Folder als temporäre Brücke, B63-Migration in v1.21 nachschärfen mit Auth/Allowlist-Klärung.
 *Trigger zur Re-Evaluation:* erster Cowork-Lauf nach v1.20-Push.
+
+*Update v1.21 (2026-05-18):* Trial-Lauf 2026-05-18 21:06 `run_2026-05-18_2106_HotCakes.md` hat B65 zumindest teilvalidiert — Cowork hat alle 4 GitHub-Raw-Files in 1,25 s parallelem `curl`-Batch geladen (HTTP 200, B65-Wallclock < 5 s Toleranz, "GitHub-Raw schlägt Drive-Connector um Faktor ~5"). **Aber:** das war über den Drive-Übergang oder mit Public-Repo (im Trial wurde das Repo public für den Lauf, oder Cowork hatte Auth). Repo ist aktuell privat (404 für anonyme Reads), daher: B65 bleibt bis zur sauberen Klärung der Auth-Mechanik offen. v1.21 nutzt weiter Drive-Übergang als Fallback (siehe v1.21-Manifest Aktion 1).
+
+
+## v1.21 — neue Einträge B66+ aus Trial-Findings + Bildpipeline-Reaktivierung (E92, E93)
+
+**B66 — Trial-Lauf-Wiederholung nach v1.21-Push (Validierung E92 + E93). — NEU v1.21**
+*Bezug:* E92 (Multi-Kategorie 3-Zeilen + Farb-Lokalisierung DE), E93 (Bildpipeline reaktiviert), Trial-Lauf 2026-05-18 21:06 zeigte beide Bugs sichtbar.
+*Stand:* offen, Priorität HOCH, soll im nächsten Cowork-Lauf validiert werden.
+*Zu validieren:*
+1. **Multi-Kategorie 3-Zeilen-Pattern (E92.1):** Oberkategorie `Pole Dance Kleidung` erscheint im Shop bei allen Artikeln (war im Trial-Lauf 2026-05-18 fehlend). Subkategorie + Sara-546 wie bisher korrekt.
+2. **Farb-Lokalisierung DE (E92.2):** `Teal → Türkis`, `Sky → Himmelblau`, ggf. weitere wenn relevant in der Lieferung. Artikelnamen DE prüfen.
+3. **Bildpipeline-Output (E93):** Stammdaten-CSV-Spalten Bild 1-10 mit R2-URLs befüllt, im Shop alle Plattform-Häkchen aktiv, Hero-Bild Front, Mouse-Hover-Bild Rück.
+4. **Wallclock-Bilanz:** Stage 5.6 + 5.7 (Bildpipeline) wie lange? Vermutung ~10-20 Min zusätzlich bei 21 Artikeln. Im Lauf-Bericht dokumentieren.
+*Trigger:* nächster Cowork-Daten-Lauf nach v1.21-Push.
+
+**B67 — Bildpipeline-Performance bei Vision-Token-Verbrauch — NEU v1.21, monitoring**
+*Bezug:* E93-Reaktivierung, E45 (Thumbnail-Vision Faktor 10 Token-Reduktion), B28 (Vision-Klassifikation validiert).
+*Stand:* offen, Priorität NIEDRIG (Monitoring), zu reviewen wenn Lieferanten-Volumen steigt.
+*Kontext:* Bei 21 Artikeln × ~10 Bilder/Artikel = ~210 Thumbnail-Vision-Calls pro Lauf. Bei 50 Artikeln × 10 Bilder × 20 Lieferanten = ~10.000 Vision-Calls pro Monat (Hochrechnung).
+*Trigger:* wenn Cowork-Credit-Verbrauch in Vision-Stage sichtbar dominiert, Re-Evaluation der `pose_sort`-Strategie pro Lieferant (`auto_vision` vs. `manufacturer_order` vs. `none`). Für HotCakes konkret: nach erstem v1.21-Trial-Lauf prüfen ob `auto_vision` weiter sinnvoll ist, oder ob B28-Verifikation mit mehr Datenpunkten zu `manufacturer_order` führt.
+
 

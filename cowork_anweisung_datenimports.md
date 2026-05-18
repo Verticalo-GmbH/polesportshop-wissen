@@ -1,6 +1,6 @@
 # Cowork-Anweisung: Daten-Pipeline (Stammdaten + Variationen + Merkmale + Attribute + Cross-Selling)
 
-**Stand:** v2.0, 2026-05-18 (Major-Verschlankung im v1.20-Refactor E91: Konstanten-Sektionen 5.1/5.1.1/5.1.2 + Self-Check-Detail + AP1-AP12 nach SPEC_KONSTANTEN ausgelagert, Drive-Resolution durch GitHub-Raw ersetzt). · **Vorheriger Stand:** v1.15.1, 2026-05-18 (vor Verschlankung). · **Vor-vorheriger Stand:** v1.15, 2026-05-17 (Live-Trial Batch 1+2).
+**Stand:** v2.1, 2026-05-18 (Minor-Update im v1.21-Refactor E92+E93: Multi-Kategorie zurück auf 3-Zeilen-Pattern (Oberkategorie + Subkategorie + Sara-546), Farb-Lokalisierung DE für Marketing-Farben mit DE-Pendant, Stage 5.6+5.7 Bildpipeline wieder aktiv). · **Vorheriger Stand:** v2.0, 2026-05-18 (Major-Verschlankung v1.20). · **Vor-vorheriger Stand:** v1.15.1, 2026-05-18 (vor Verschlankung).
 
 > **Zweck dieser Datei:** vollständige operative Spec für Daten-Pipeline-Läufe in Cowork. **NICHT in Stage 0 für reguläre Läufe geladen** (E68: dort lädst du `run_brief_daten.md`). Diese Datei wird lazy-geladen bei tiefen Architektur-Klärungen, Onboarding-Detailfragen, oder beim ersten Setup eines neuen Lieferanten.
 
@@ -156,9 +156,17 @@ Pflicht-Set: `markentext`, `artikeldetails`, `material_and_care`, `size_and_fit`
 
 **Originalitäts-Pflicht (E77):** Kein 5-Wort-N-Gramm aus Hersteller-Body. Pole-Junkie-Stil-Inspiration erlaubt (E49+E53+E70), aber Eigenformulierung in polesportshop-DNA — nicht paraphrasieren, nicht synonymisieren.
 
-### Stage 5.6 / 5.7: ~~Bildpipeline-Sub-Process~~ — DEAKTIVIERT mit E63
+### Stage 5.6: Bildpipeline-Sub-Process aufrufen (REAKTIVIERT v1.21, E93)
 
-Bildpipeline ist archiviert (E63, 2026-05-16). Bild-Spalten in Stammdaten-CSV bleiben leer (Schema-Konformität erhalten). Tjorben pflegt Bilder manuell in WaWi. Re-Aktivierung über BACKLOG-Cluster B36-B40.
+Cowork ruft `cowork_anweisung_bildpipeline.md` v2.1 als Sub-Process auf und erhält die Map `{artikelnummer: [bild_urls]}` zurück. Pro Vater wird die Bild-Quelle aus Crawl-Body / Drive-`_Eingang` / Hersteller-Site nach Anti-Bot-Fallback-Reihenfolge geladen, durch Crop-Profil (`crop_profile` aus Mapping: `fashion` 2:3 1000×1500 oder `tech` 1:1 1200×1200) verarbeitet, per Vision auf Pose klassifiziert (`pose_sort` aus Mapping: `auto_vision` für Fashion mit Hero/Back/Side-Reihenfolge, oder `manufacturer_order` / `none`), auf R2 hochgeladen unter `<r2_prefix>/<filename>.jpg` (verarbeitetes Shop-Bild) und `originals/<r2_prefix>/<filename>.<ext>` (Magic-Byte-detektiertes Original, A2-Pattern).
+
+### Stage 5.7: Bild-URLs in Stammdaten-CSV einbetten (REAKTIVIERT v1.21)
+
+Aus der Bildpipeline-Map die ersten 10 URLs pro Artikel in die Stammdaten-CSV-Spalten `Bild 1` bis `Bild 10` schreiben. Auf Vater UND alle Kinder duplizieren (E34/E46). Bei <10 Bildern pro Artikel: übrige Spalten leer (Re-Import-Verhalten siehe Stage 10 Konventionen).
+
+**Ameise-Vorlage-Voraussetzungen** (Stammdaten-Vorlage):
+- 10 Bild-Spalten `Bild 1` bis `Bild 10` auf JTL-Felder `Bild Pfad/URL 1` bis `Bild Pfad/URL 10` gemappt
+- Reiter „Bilder/Plattformen": alle 11 Plattform-Häkchen gesetzt (E46/B5 — automatische Plattform-Aktivierung)
 
 ### Stage 5.8: Cross-Selling-Beziehungen (E80 v1.14, Kinder-Replikation v1.15)
 
@@ -202,9 +210,12 @@ Lauf-Bericht `run_<YYYY-MM-DD_HHMM>_<lieferant>.md` daneben im Workspace. Alle F
 
 Pflichtfelder pro Vater: Artikelnummer, Sprach-Artikelnamen, Brutto-VK, EK Netto, Steuersatz, Hersteller, Lieferantenblock-Spalten, TARIC-Code (`taric_code` aus Mapping, NEU v1.16), Artikelgewicht + Versandgewicht (`article_weight_kg` aus Mapping, NEU v1.16, DE-Komma), 10 Bild-Spalten (leer ab E63).
 
-Multi-Kategorie (E89, NEU v1.17): pro Artikel ≥2 CSV-Zeilen mit gleicher Artikelnummer:
-- (a) spezifischste Shop-Subkategorie (WaWi resolved Pfad über Hierarchie)
-- (b) `Intern > Neue Artikel für Sara` (WaWi-Kategorie-Key `546`) für Sara-Review-Workflow
+Multi-Kategorie (E57 + E92 korrigiert E89, v1.21): pro Artikel **3 CSV-Zeilen** mit gleicher Artikelnummer:
+- (a) Oberkategorie-Zuweisung: `Pole Dance Kleidung` (Ebene 2 leer)
+- (b) Unterkategorie-Zuweisung: `Pole Dance Kleidung` + spezifische Subkategorie (`Pole Dance Tops` / `Pole Dance Shorts` / `Bodysuits` / `Leggings` / `Legwarmer` / `Shirts`)
+- (c) Sara-Review-Pflicht-Zuweisung: `Intern` + `Neue Artikel für Sara` (WaWi-Kategorie-Key `546`)
+
+**Korrektur v1.21 (E92):** v1.19-E89-Annahme „WaWi resolved Pfad selbst" war falsch (Trial-Lauf 2026-05-18 21:06 zeigte fehlende Oberkategorie). E57-Doppel-Pattern bleibt gültig, Sara als 3. Zeile ergänzt.
 
 Vorlagen-Setting unverändert: „Kategorieverknüpfungen des Artikels aktualisieren" = „Neue Kategorien beim jeweiligen Artikel hinzuimportieren".
 
@@ -245,9 +256,9 @@ Englisch: Attributwert;Französisch: Attributwert;Italienisch: Attributwert;Span
 Artikelnummer;Artikelnummer Cross-Seller;Cross-Selling-Gruppe
 ```
 
-### 5.6 ~~Bilder~~ — entfallen mit E46, eingefroren mit E63
+### 5.6 Bilder — als Spalten in Stammdaten-CSV (E46), Pipeline-Generierung REAKTIVIERT v1.21 (E93)
 
-Bilder als Spalten in Stammdaten-CSV (E46). Pipeline-Generierung deaktiviert mit E63.
+Bild-URLs sind 10 Spalten am Ende der Stammdaten-CSV (`Bild 1` bis `Bild 10`). Generierung läuft via Bildpipeline-Sub-Process (Stage 5.6 + 5.7), R2-Public-URLs nach E43/E44-Mechanik. Crop-Profile pro Lieferant (E45), Pose-Sortierung via Vision (E45). Spec-Details: `cowork_anweisung_bildpipeline.md` v2.1.
 
 ### 5.7 Feature-Erfassungs-Quellen (E70)
 
@@ -338,7 +349,7 @@ Die 5 CSVs werden in WaWi in dieser Reihenfolge importiert (Vorlagen-Slots `_1_`
 - A-Nummern vergeben
 - `lieferanten_mapping.yaml` ohne User-Bestätigung schreiben
 - API-Keys/Credentials im Chat ausgeben oder akzeptieren (E33)
-- Bild-Spalten in Stammdaten-CSV mit Hersteller-CDN-URLs befüllen (E44; während E63 leer lassen)
+- Bild-Spalten in Stammdaten-CSV mit Hersteller-CDN-URLs befüllen (E44 — nur R2-Public-URLs erlaubt, aus Bildpipeline-Map)
 - Produkt-spezifische Meta-Descriptions/Titel-Tags erfinden (E55, AP3)
 - Sprach-Namen außerhalb E58-Lookup erfinden (AP8)
 - Eigennamen übersetzen (Modellnamen, Brand-Namen)
@@ -364,8 +375,8 @@ Die 5 CSVs werden in WaWi in dieser Reihenfolge importiert (Vorlagen-Slots `_1_`
 ### Idempotenz
 Pro Trigger ein eigener Lauf — keine implizite Wiederholungs-Logik. Re-Import durch Tjorben in WaWi (gleiche CSV erneut) ist außerhalb des Cowork-Scopes.
 
-### Re-Import-Verhalten bei leeren Bild-Spalten (UNVERIFIZIERT — B30)
-Mit E63 unkritisch im aktuellen Pilot (Bild-Spalten immer leer). Bei Re-Aktivierung der Bildpipeline: Verifikation des JTL-Verhaltens vor produktivem Re-Import.
+### Re-Import-Verhalten bei leeren Bild-Spalten (UNVERIFIZIERT — B30, akut ab v1.21)
+Mit Bildpipeline-Reaktivierung (E93) wieder relevant: bei Re-Import mit <10 Bildern hinterlässt Cowork die Spalten Bild N..10 leer. Ob JTL die leeren Spalten als „kein Update" oder „aktiv leeren" interpretiert ist UNVERIFIZIERT. Risiko: manuell gepflegte Bilder werden überschrieben. Vor erstem produktiven Re-Import auf bebilderte Artikel: Test-Lauf mit kontrolliertem Artikel.
 
 ### Re-Import-Verhalten bei Cross-Selling (TEILVALIDIERT — B49)
 Initial-Import validiert in Live-Trial Batch 1+2 2026-05-17 (16/16 Self-Check grün). Re-Import auf bestehende Cross-Selling-Beziehungen NOCH NICHT validiert. Vor erstem produktivem Re-Import: in WaWi alle Cross-Selling-Beziehungen des betroffenen Lieferanten manuell löschen, dann frischer Import.

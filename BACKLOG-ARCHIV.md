@@ -1,6 +1,6 @@
 # BACKLOG-ARCHIV — erledigte und deferred B-Einträge
 
-**Stand:** v1.0, 2026-05-18 (NEU mit v1.20-Refactor E91)
+**Stand:** v1.1, 2026-05-18 (v1.21-Update: B63 final mit B65-Teilvalidierung, neue Sektion „v1.21 Trial-Findings" mit B49-Stand)
 **Zweck:** Kompakter Index der nicht-mehr-aktiven B-Einträge aus `BACKLOG.md`. Erleichtert Übersicht über das wirklich Offene. Vollständige Eintrags-Details bleiben in `BACKLOG.md` — diese Datei verlinkt nicht, weil Markdown-Anchor unsicher; stattdessen Search-Hint (Stichwort grep-bar).
 
 ---

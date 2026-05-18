@@ -1,4 +1,4 @@
-# RUN-BRIEF: Daten-Pipeline (E68, offiziell in v1.12 verankert, Stand 2026-05-18, v1.17)
+# RUN-BRIEF: Daten-Pipeline (E68, offiziell in v1.12 verankert, Stand 2026-05-18, v1.18)
 
 Dieser Brief ist die kompakte operative Spec für einen reinen Daten-Lauf. Er
 ersetzt das Laden von `WAWI-IMPORT-WISSEN.md` und
@@ -12,7 +12,12 @@ Bei Konflikten zwischen diesem Brief und SPEC_KONSTANTEN.md gewinnt
 SPEC_KONSTANTEN.md (kanonisch nach Charter-Prinzip 11). Bei Unsicherheit:
 STOPP + User-Frage, niemals raten (Charter-Prinzip 10, E59).
 
-**Was v1.17 ändert (NEU 2026-05-18, im Rahmen v1.20-Skalierungs-Refactor E91):**
+**Was v1.18 ändert (NEU 2026-05-18, Trial-Findings v1.21 E92 + E93):**
+- **Multi-Kategorie korrigiert (E92 verfeinert E89):** pro Artikel **3 Zeilen** statt 2 — (a) Oberkategorie `Pole Dance Kleidung` (Ebene 2 leer), (b) spezifische Subkategorie (Pole Dance Tops/Shorts/Bodysuits/etc.), (c) Sara-Pflicht-Zeile `Intern > Neue Artikel für Sara` (Key 546). Trial-Lauf 2026-05-18 21:06 zeigte: Oberkategorie fehlte im Shop — WaWi resolved den Pfad NICHT automatisch über die Subkategorie. E57-Doppel-Pattern bleibt gültig, Sara kommt als 3. Zeile dazu. Self-Check #4 entsprechend.
+- **Farb-Lokalisierung DE (E92):** Marketing-Farben mit DE-Pendant werden im deutschen Artikelnamen lokalisiert. Teal→Türkis, Sky→Himmelblau, Cherry→Kirschrot, Emerald→Smaragdgrün, Lime→Limettengrün. Marketing-Farben ohne sinnvolles DE-Pendant bleiben identisch: Nude, Mauve, Tan, Skin. Print-Familien (Original, Heat) bleiben überall identisch. Volle Tabelle in SPEC_KONSTANTEN Sektion 6.
+- **Bildpipeline reaktiviert (E93, kehrt E63 um):** Stage 5.6 + 5.7 wieder aktiv. Cowork ruft Bildpipeline als Sub-Process auf, R2-URLs werden in die Stammdaten-CSV-Spalten Bild 1-10 eingebettet (E46-Mechanik unverändert). Crop-Profile (E45), Vision-Pose-Sortierung (E45), Magic-Byte-Detection — alles wie in v1.6 spezifiziert. Cowork-Anweisung-Bildpipeline ist auf v2.1 aktiv. Tjorben pflegt Bilder NICHT mehr manuell in WaWi.
+
+**Was v1.17 änderte (2026-05-18, im Rahmen v1.20-Skalierungs-Refactor E91):**
 - Wissens-Resolution: GitHub-Raw-URL statt Drive-Folder-Path (E87/E91/B63 erledigt v1.20). Tag-Pattern `vX.Y` auf `main`. Beispiel: `https://raw.githubusercontent.com/verticalogmbh/polesportshop-wissen/v1.20/run_brief_daten.md`.
 - Stage-0-File-Count unverändert (3 Files: dieser Brief, SPEC_KONSTANTEN, lieferanten_mapping). Lade-Mechanik via `web_fetch` oder `curl/requests` auf Raw-URL.
 
@@ -61,9 +66,10 @@ nachladen — das ist legitime Klärung. Im Lauf-Bericht dokumentieren.
 | 3 | Daten normalisieren (Lieferanten-Format → 48-Spalten-Schema laut SPEC_KONSTANTEN Sektion 1) |
 | **0.5** | **Pre-Run Scope-Analyse (NEU v1.15, E83):** Token/Wallclock-Schätzung für den geplanten Lauf eigenständig durchführen. Bei Schätzungen > 100k Output-Tokens oder > 8 Min Wallclock pro Stage: Batch-Aufteilung im Lauf-Bericht dokumentieren mit Begründung. **Familien-erhaltende Split-Regel (E84):** Outfit-Pair-Familien (gleicher Modell-Stamm + alle Farben + Top/Bottom) bleiben pro Batch zusammen. **E81-Autonomie:** Entscheidung autonom, keine User-Rückfrage. Im Bericht: Batch-Plan, geschätzte Tokens/Wallclock pro Batch, welche Familien in welchem Batch landen. Stage 5.8 Cross-Selling läuft im letzten Batch über alle bisher importierten Modelle vereint. |
 | 4 | Pricing berechnen — siehe Sektion 8 unten |
-| 5 | Mehrsprachige Felder ableiten (DE-Quelle → EN/FR/IT/ES via E58-Sprach-Lookup in SPEC_KONSTANTEN Sektion 6) |
+| 5 | Mehrsprachige Felder ableiten (DE-Quelle → EN/FR/IT/ES via E58-Sprach-Lookup in SPEC_KONSTANTEN Sektion 6). **Farb-Lokalisierung KORRIGIERT v1.18 (E92):** Marketing-Farben mit DE-Pendant ins Deutsche übersetzen (Teal→Türkis, Sky→Himmelblau, Cherry→Kirschrot, Emerald→Smaragdgrün, Lime→Limettengrün). Marketing-Farben ohne DE-Pendant bleiben identisch in allen 5 Sprachen (Nude, Mauve, Tan, Skin). |
 | 5.5 | HTML-Texte für Attribute (markentext, artikeldetails, material_and_care, size_and_fit) generieren gemäß Stil-Briefing Sektion 9. **material_and_care clean Pattern (E78, NEU v1.14): 2 Paragraphen, P1 Stoffzusammensetzung, P2 Pflegehinweise — kein E74-Stil hier.** |
-| 5.6 / 5.7 | DEAKTIVIERT mit E63. Bild-Spalten in Stammdaten-CSV bleiben leer. |
+| 5.6 | **Bildpipeline-Sub-Process aufrufen (REAKTIVIERT v1.21, E93):** `cowork_anweisung_bildpipeline.md` v2.1 starten, Map `{artikelnummer: [bild_urls]}` zurückbekommen. R2-Upload für Verarbeitete + Originale, Crop nach Lieferanten-`crop_profile`, Pose-Sortierung nach `pose_sort`. Lieferanten-Drive-`_Eingang` als alternative Quelle bei manuellen Uploads. |
+| 5.7 | Bild-URLs aus Map in Stammdaten-CSV Spalten Bild 1-10 einbetten. Auf Vater UND alle Kinder duplizieren (E34/E46). Bei <10 Bildern: übrige Spalten leer (B30 weiter unverifiziert, aber im aktuellen Verhalten unproblematisch). |
 | 5.8 | **Cross-Selling-Beziehungen ableiten (E80, erweitert v1.15):** „Vervollständige Dein Outfit" (Top↔Bottom gleiche Farbe) + „Ähnliche Artikel" (gleiches Modell, andere Farbe). **Linke Spalte (Artikelnummer) wird auf Vater UND alle Kinder repliziert; rechte Spalte (Cross-Seller) bleibt strikt Vater.** Beide Richtungen (A↔B). Voller Datensatz aus Stage 2. Modell-Stamm-Schlüssel bei Farbvarianten: `(modell_basis, farbe_im_namen)` — nicht nur `modell_basis`. Details: SPEC_KONSTANTEN Sektion 12. |
 | 6 | Validierung: **16-Punkte-Self-Check** aus SPEC_KONSTANTEN Sektion 9 (12 alte + Punkt 13 Originalitäts-Check (E77) + Punkte 14-16 Cross-Selling-Check, **Punkt 15 + 16 neu formuliert v1.15** für Kinder-Replikation). Bei Fehler: STOPP + User. |
 | 7 | **5 CSVs** im Workspace schreiben (Stammdaten/Variationen/Merkmale/Attribute/CrossSelling) mit Datei-Naming-Konvention (AP11, v1.15), keine leeren CSVs ausgeben (AP12, v1.15), Lauf-Bericht erstellen, via `present_files` ausgeben |
@@ -349,7 +355,7 @@ Pro Lieferant einmal mappen + Vorlage speichern, dann klonen.
 - **TARIC-Code (F6/B59, NEU v1.16):** Default `62114390` für Pole-Bekleidung aus `lieferanten_mapping.yaml` Feld `taric_code` ziehen → Spalte `TARIC` in Stammdaten-CSV. Sonstiges-Reiter in WaWi wird damit gefüllt.
 - Bild-Spalten `Bild 1` bis `Bild 10` → JTL-Felder `Bild Pfad/URL 1` bis `Bild Pfad/URL 10`
 - Reiter „Bilder/Plattformen": alle 11 Plattform-Häkchen in der Vorlage gesetzt (B5-Lösung)
-- **Multi-Kategorie (E89, NEU v1.16, ersetzt v1.15-Doppelzeilen-Pattern):** Pro Kategorie-Zuweisung eine CSV-Zeile mit **nur der spezifischsten Subkategorie** — WaWi resolved den Pfad automatisch über die in WaWi gepflegte Kategorie-Hierarchie. Zusätzlich Pflicht-Zuweisung für jeden neuen Artikel: `Intern > Neue Artikel für Sara` (WaWi-Kategorie-Key `546`) als zweite Zeile, für den Sara-Review-Workflow (Social-Media-Manager prüft + entfernt Zuweisung manuell in WaWi nach Approval). Ergebnis pro Artikel: mindestens 2 Kategorie-Zeilen (Shop-Subkategorie + Sara). Vorlagen-Setting: „Kategorieverknüpfungen des Artikels aktualisieren" = „Neue Kategorien beim jeweiligen Artikel hinzuimportieren" (E57) unverändert.
+- **Multi-Kategorie (E92 verfeinert E89, KORRIGIERT v1.18 nach Trial 2026-05-18):** Pro Artikel **3 CSV-Zeilen** mit gleicher Artikelnummer: (a) Oberkategorie `Pole Dance Kleidung` (Ebene 2 leer), (b) Unterkategorie `Pole Dance Kleidung` + spezifische Subkategorie (`Pole Dance Tops` / `Pole Dance Shorts` / `Bodysuits` / `Leggings` / `Legwarmer` / `Shirts`), (c) Sara-Pflicht-Zuweisung `Intern` + `Neue Artikel für Sara` (WaWi-Key 546). **Korrektur:** v1.16/E89-Annahme „WaWi resolved Pfad selbst" war falsch — Trial-Lauf 2026-05-18 21:06 zeigte fehlende Oberkategorie im Shop. Zurück zum E57-Doppel-Pattern + Sara-Zeile. Vorlagen-Setting unverändert: „Kategorieverknüpfungen des Artikels aktualisieren" = „Neue Kategorien beim jeweiligen Artikel hinzuimportieren".
 - Reiter „Verkaufskanal aktiv": Häkchen in Vorlage entfernt + Vorlage gespeichert (E37/B21)
 
 **Reiter „Weitere Texte" (E31):** pro Sprache (EN/FR/IT/ES) → CSV `Global-{Sprache}: Artikelname`, `Global-{Sprache}: Titel-Tag`, `Global-{Sprache}: Meta-Description`.
@@ -396,13 +402,13 @@ Pro Lieferant einmal mappen + Vorlage speichern, dann klonen.
 - A-Nummern vergeben
 - `lieferanten_mapping.yaml` ohne User-Bestätigung schreiben
 - API-Keys/Credentials im Chat ausgeben oder akzeptieren (E33)
-- **Bild-Spalten in Stammdaten-CSV mit Hersteller-CDN-URLs befüllen** (E44 — Validierung Stage 6 bricht ab). Während E63-Phase bleiben Bild-Spalten leer.
+- **Bild-Spalten in Stammdaten-CSV mit Hersteller-CDN-URLs befüllen** (E44 — Validierung Stage 6 bricht ab). Bild-URLs müssen R2-Public-URLs sein (E43/E44), aus der Bildpipeline-Sub-Process-Map. **NEU v1.18 (E93):** Bildpipeline ist wieder aktiv, Stage 5.6 + 5.7 erzeugen die R2-URLs. Nicht mehr leer wie in E63-Phase.
 - **Produkt-spezifische Meta-Descriptions oder Titel-Tags erfinden** (E55, AP3 — Templates aus SPEC_KONSTANTEN sind hardcoded, einzige Variable ist `{name}`). LLM-Generation für SEO strikt verboten.
 - **Sprach-Namen außerhalb der E58-Lookup-Tabellen erfinden** (AP8) — STOPP, User-Frage
 - **Eigennamen übersetzen** (Modell-Namen, Brand-Namen wie „Hekate", „Arachne", „HotCakes")
 - **Schema-Spalten-Reihenfolge umorganisieren** — Schema ist append-only (E54, AP4)
 - **Kategorie-Werte außerhalb der E51-Tabelle nutzen** (AP1 — „Damen" und „Limited Editions" sind keine gültigen Kategorien)
-- **Multi-Kategorie ohne separate Zeilen umsetzen** (E57, AP6). **🔒 Anti-Confusion (E75, v1.13):** wenn jemand „doppelte Größen" als Bug meldet → KEIN Spec-Fix. Erst Vorlagen-Setting `Kategorieverknüpfungen des Artikels aktualisieren = Neue Kategorien beim jeweiligen Artikel hinzuimportieren` in WaWi prüfen. **NEU v1.16 (E89):** Pro Zeile nur die spezifischste Subkategorie (nicht parallel Ober- und Unterkategorie auf gleicher Hierarchie-Ebene — WaWi resolved den Pfad selbst). Plus Pflicht-Zeile für `Intern > Neue Artikel für Sara` (Key 546). Mindestens 2 Kategorie-Zeilen pro Artikel.
+- **Multi-Kategorie ohne separate Zeilen umsetzen** (E57, AP6). **🔒 Anti-Confusion (E75, v1.13):** wenn jemand „doppelte Größen" als Bug meldet → KEIN Spec-Fix. Erst Vorlagen-Setting `Kategorieverknüpfungen des Artikels aktualisieren = Neue Kategorien beim jeweiligen Artikel hinzuimportieren` in WaWi prüfen. **KORRIGIERT v1.18 (E92, kehrt E89-Annahme zurück):** Pro Artikel 3 Zeilen — Oberkategorie + Subkategorie + Sara-546. Nicht nur Subkategorie (WaWi resolved den Pfad NICHT automatisch — Trial-Lauf 2026-05-18 zeigte fehlende Oberkategorie im Shop).
 - **Kind-Artikelname ohne Größen-Suffix lassen** (E56, AP5 — Kind-Name = Vater-Sprachname + Leerzeichen + Variationswert)
 - **SEO-Felder auf Kind-Zeilen befüllen** (E56 — Titel-Tag und Meta-Description leben nur auf Vater-Zeilen)
 - **Workflow-Frage statt autonomer Entscheidung (NEU v1.15, AP9)** — Batch-Splitting, Token-Budget, Stage-Reihenfolge gehören zur Autonomie (E81). Cowork entscheidet, dokumentiert im Bericht, fragt nicht.

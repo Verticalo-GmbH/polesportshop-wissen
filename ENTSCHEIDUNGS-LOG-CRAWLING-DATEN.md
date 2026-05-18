@@ -2,7 +2,7 @@
 
 **Cluster:** Crawling, Quellen, CSV-Schema, Datenmodell, Mappings
 
-**Stand:** v1.18, 2026-05-18 (neue Einträge E89 Category-Pattern + Sara-Workflow, E90 F-Fixes Sammeleintrag v1.19)
+**Stand:** v1.19, 2026-05-18 (neuer Eintrag E92: Trial-Findings v1.20 — Multi-Kategorie auf 3-Zeilen korrigiert, Farb-Lokalisierung DE). · **Vorheriger Stand:** v1.18, 2026-05-18 (E89 + E90)
 
 **Bezug:** Dieser Cluster ist Teil des Splits der ursprünglichen `ENTSCHEIDUNGS-LOG.md` (v1.16, 165 KB → 6 Themen-Cluster ≤ 40 KB). Historische / abgelöste Einträge liegen weiterhin in `ENTSCHEIDUNGS-LOG-ARCHIV.md`. Cross-Cluster-Referenzen über E-Nummer; der Master-Index mit allen E-Nummern → Cluster-File-Zuordnung liegt in `SPEC_KONSTANTEN.md` unter `ENTSCHEIDUNGSLOG_E_NUMMER_INDEX`.
 
@@ -26,8 +26,9 @@
 - **E54** — Stammdaten-CSV-Schema-Layout: 38 alte Spalten + 10 Bilder am Ende (Reverse-Engineering für Vorlagen-Kontinuität)
 - **E57** — Multi-Kategorie-Zuweisung via mehrfache CSV-Zeilen mit gleicher Artikelnummer + Ameise-Setting „Kategorieverknüpfungen des Artikels aktualisieren = Neue Kategorien beim jeweiligen Artikel hinzuimportieren"
 - **E69** — E52-Implementation in Cowork-CI und Datenimports-Spec verankern, A6 formell archivieren
-- **E89** — Category-Pattern + Sara-Review-Workflow (NEU v1.18, präzisiert E57)
+- **E89** — Category-Pattern + Sara-Review-Workflow (NEU v1.18, präzisiert E57) — KORRIGIERT durch E92
 - **E90** — F2-F6-Implementierung in v1.19 (Sammeleintrag, NEU v1.18)
+- **E92** — Trial-Findings v1.20 (NEU v1.19): Multi-Kategorie auf 3-Zeilen-Pattern korrigiert (E89-Annahme falsch), Farb-Lokalisierung DE für Marketing-Farben mit DE-Pendant
 
 ---
 
@@ -443,4 +444,51 @@ Ameise-Vorlagen-Setting (einmalig pro Lieferanten-Vorlage zu setzen, dann in der
 - B61, B62, B63 (alle NEU v1.19) — siehe BACKLOG.md.
 
 ---
+
+**E92 — Trial-Findings v1.20: Multi-Kategorie auf 3-Zeilen-Pattern korrigiert, Farb-Lokalisierung DE.**
+*Stand:* 2026-05-18 (v1.21). *Bezug:* E57 (Multi-Kategorie via mehrfache CSV-Zeilen), E58 (Sprach-Lokalisierungs-Konvention), E89 (Category-Pattern + Sara — durch E92 korrigiert), Trial-Lauf 2026-05-18 21:06 (HotCakes End-to-End mit v1.20-Stand, Lauf-Bericht `run_2026-05-18_2106_HotCakes.md`).
+
+*Warum:* Trial-Lauf hat zwei Bugs aus v1.20-Stand sichtbar gemacht — beide Self-Check 16/16 grün, beide trotzdem im Shop falsch.
+
+**Bug 1: Oberkategorie „Pole Dance Kleidung" fehlte im Shop.** v1.19-E89-Annahme „WaWi resolved den Pfad selbst über die Hierarchie, eine spezifische Subkategorie-Zeile reicht" war falsch — WaWi behandelt jede Kategorie-Zeile in der Stammdaten-CSV als eigenständige flache Zuweisung, keine Pfad-Auflösung. Im Shop landeten die Artikel ohne Oberkategorie, was die Browse-Hierarchie bricht. E57-Doppel-Pattern (Oberkategorie + Subkategorie als zwei separate Zeilen, beide mit Kategorie Ebene 1 = `Pole Dance Kleidung`, die zweite zusätzlich mit Kategorie Ebene 2 gefüllt) war vor E89 das funktionierende Pattern und bleibt gültig.
+
+**Bug 2: „Teal" im deutschen Artikelnamen.** „HotCakes Top Arachne Teal" (DE) statt erwartet „HotCakes Top Arachne Türkis". v1.15-Konvention „Niemals lokalisieren (Marketing-Farbe Teal, Sky, Cherry, Emerald, Lime)" war zu restriktiv — Tjorbens Direktive 2026-05-18: „Wir haben die Konvention für deutsche Artikelnamen, dass wir da auch immer die deutsche Farbe nehmen." Wo ein etabliertes deutsches Wort existiert, wird es verwendet. Englisch bleibt nur bei Marketing-Begriffen ohne sinnvolles DE-Pendant (Nude, Mauve, Tan, Skin).
+
+*Entscheidung (Doppel-Eintrag):*
+
+**E92.1 — Multi-Kategorie auf 3 Zeilen pro Artikel:**
+- Zeile A (Oberkategorie): `Kategorie Ebene 1` = `Pole Dance Kleidung`, `Kategorie Ebene 2` leer
+- Zeile B (Unterkategorie): `Kategorie Ebene 1` = `Pole Dance Kleidung`, `Kategorie Ebene 2` = spezifische Subkategorie (`Pole Dance Tops` / `Pole Dance Shorts` / `Bodysuits` / `Leggings` / `Legwarmer` / `Shirts`)
+- Zeile C (Sara-Pflicht): `Kategorie Ebene 1` = `Intern`, `Kategorie Ebene 2` = `Neue Artikel für Sara` (WaWi-Kategorie-Key 546)
+
+E89-Sara-Workflow bleibt unverändert (Sara entfernt 546 nach Approval). Vorlagen-Setting unverändert.
+
+**E92.2 — Farb-Lokalisierung DE für Marketing-Farben mit DE-Pendant:**
+- Teal → Türkis
+- Sky → Himmelblau
+- Cherry → Kirschrot
+- Emerald → Smaragdgrün
+- Lime → Limettengrün
+- (analog für FR/IT/ES, siehe SPEC_KONSTANTEN Sektion 6 Standard-Tabelle)
+
+**Identisch bleiben in allen 5 Sprachen** (kein etabliertes DE-Pendant): Nude, Mauve, Tan, Skin. Print-Familien (Original, Heat) bleiben auch identisch.
+
+*Konsequenzen:*
+- SPEC_KONSTANTEN Sektion 4 (Vater-Kind-Konventionen) und Sektion 9 Self-Check Punkt 4 auf 3-Zeilen-Pattern aktualisiert.
+- SPEC_KONSTANTEN Sektion 6 (Sprach-Lokalisierung) Farb-Tabelle erweitert, „Niemals lokalisieren"-Liste auf 4 Begriffe reduziert.
+- run_brief_daten.md Sektion 10 + Stage-Tabelle + cowork_anweisung_datenimports.md Sektionen 5 + 7 angepasst.
+- Header-Bumps: SPEC_KONSTANTEN v1.18 → v1.19, run_brief_daten v1.17 → v1.18, datenimports v2.0 → v2.1 (Minor).
+
+*Verworfen:*
+- **„WaWi-Konfiguration anpassen statt CSV-Pattern":** Multi-Kategorie-Resolution-Verhalten ist JTL-Kern und nicht über Vorlagen-Settings änderbar. CSV-Pattern bleibt der einzige Hebel.
+- **„Auch Mauve → Altrosa lokalisieren":** Mauve ist im deutschen Mode-Vokabular etabliert, Altrosa wäre semantisch nicht identisch (Mauve hat einen Lila-Touch, Altrosa nicht). Bleibt identisch.
+- **„Pole-Junkie-Doppelchecks zur Farb-Validierung":** Pole Junkie als Stil-Inspirations-Quelle (E49+E53) ist für Beschreibungstexte, nicht für Farb-Konvention. Cowork hält sich an SPEC_KONSTANTEN Sektion 6.
+
+*Folgeaufgaben:*
+- B66 (NEU v1.21): Trial-Lauf-Wiederholung nach v1.21-Push, Verifikation dass Oberkategorie im Shop ankommt und deutsche Farben korrekt sind.
+
+*Stolperfallen:*
+- **Self-Check #4 muss bei künftigen Trial-Läufen explizit prüfen** dass Oberkategorie + Subkategorie + Sara-Zeile alle drei vorhanden sind. Nicht nur „≥2 Zeilen" wie in v1.19-Wording.
+- **Bei neuen Marketing-Farben** (z.B. wenn Lieferant 2-21 etwas wie „Coral" oder „Lavender" liefert): vor Auto-Lokalisierung Tjorben-Klärung. SPEC_KONSTANTEN Sektion 6 als kanonische Quelle erweitern, nicht ad-hoc lokalisieren.
+
 

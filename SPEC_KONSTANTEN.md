@@ -2,7 +2,7 @@
 
 **🔒 KANONISCH — IN STEIN GEMEISSELT** (Charter-Prinzipien 10 + 11, E61)
 
-**Stand:** v1.18, 2026-05-18 · **Spec-Bezug:** v1.20-Snapshot (Git-Tag) · **Quelle:** verbatim aus v1.9-Snapshot Version_2026-05-15_233800 (cowork_anweisung_datenimports.md Sektionen 5.1, 5.1.1, 5.1.2, 5.3, Stage 6 + WAWI-IMPORT-WISSEN.md Sektion 10.5), iterativ erweitert v1.13 (E72-E77), v1.14 (E78-E80), v1.15 (E80-Erweiterung Kinder-Replikation, E82-Stilprinzip, AP9-AP12), v1.16 (Sektion 13 um WISSENS-UPDATE-PLAYBOOK.md erweitert, Sektion 14 um E85+E86 erweitert), v1.17 (F2-F6-Fixes aus HotCakes-Run-Report 2026-05-18), **v1.18 (Skalierungs-Refactor v1.20: Sektion 13 auf Git-Tag-Pattern + Snapshot-Set angepasst auf 21 Files inkl. CLAUDE.md/LIEFERANTEN-ONBOARDING.md/BACKLOG-ARCHIV.md; Sektion 14 um E87/E89/E90/E91 nachgezogen — E87 + E91 Cluster-COWORK-INFRA, E89 + E90 Cluster-CRAWLING-DATEN)**
+**Stand:** v1.19, 2026-05-18 · **Spec-Bezug:** v1.21-Snapshot (Git-Tag) · **Quelle:** verbatim aus v1.9-Snapshot Version_2026-05-15_233800, iterativ erweitert v1.13-v1.17, v1.18 (Skalierungs-Refactor v1.20), **v1.19 (Trial-Findings v1.21: Sektion 4 + Self-Check #4 korrigiert auf 3-Zeilen-Multi-Kategorie inkl. Oberkategorie + Sara-546 — E89 verfeinert durch E92; Sektion 6 Farb-Lokalisierung Teal/Sky/Emerald/Lime/Kirschrot ins DE übersetzt — E92; Sektion 14 um E92/E93)**
 
 ---
 
@@ -139,7 +139,12 @@ Position 39-48 — Bild-URLs (E46 angehängt):
 - `Identifizierungsspalte Vaterartikel` = leer
 - `Artikelname` = ohne Größe (Konvention E26): `{Hersteller} {Produkttyp} {Modell} {Farbe}`
 - `Variationswert 1` = leer
-- **Multi-Kategorie (E57):** Pro Vater zwei Zeilen — eine mit `Kategorie Ebene 2` leer (Oberkategorie-Zuweisung), eine mit `Kategorie Ebene 2` gefüllt (Unterkategorie-Zuweisung). Beide Zeilen haben die gleiche Artikelnummer und sind sonst identisch.
+- **Multi-Kategorie (E57 + E89, korrigiert v1.21/E92):** Pro Vater **drei Zeilen** mit gleicher Artikelnummer:
+  - **Zeile A (Oberkategorie-Zuweisung):** `Kategorie Ebene 1` = `Pole Dance Kleidung`, `Kategorie Ebene 2` leer.
+  - **Zeile B (Unterkategorie-Zuweisung):** `Kategorie Ebene 1` = `Pole Dance Kleidung`, `Kategorie Ebene 2` = spezifische Subkategorie (`Pole Dance Tops` / `Pole Dance Shorts` / `Bodysuits` / `Leggings` / `Legwarmer` / `Shirts`).
+  - **Zeile C (Sara-Review-Pflicht-Zuweisung):** `Kategorie Ebene 1` = `Intern`, `Kategorie Ebene 2` = `Neue Artikel für Sara` (WaWi-Key 546).
+
+  **Warum drei Zeilen:** Lauf-Bericht 2026-05-18 21:06 zeigte: WaWi resolved die Hierarchie NICHT automatisch über die Subkategorie — Oberkategorie fehlte im Shop. Korrektur v1.21/E92: Oberkategorie muss explizit als eigene Zeile gesetzt sein (E57-Doppel-Pattern), zusätzlich Sara-Pflicht-Zeile (E89 verfeinert).
 - **SEO-Felder (E55):** Titel-Tag und Meta-Description in allen 5 Sprachen befüllt nach **deterministischem Template** (siehe Sektion 5 unten). Identisch auf beiden Multi-Kategorie-Vater-Zeilen.
 - **Sprach-Artikelnamen (E58):** Brand+Eigennamen unverändert, Produkt-Substantive nach Übersetzungstabelle, Farb-Adjektive konsequent lokalisiert (siehe Sektion 6 unten).
 - Lieferantenblock befüllt (Netto-EK in Originalwährung)
@@ -199,35 +204,50 @@ Hard-coded in Cowork-Python. Keine LLM-Generation für SEO-Felder.
 | Top | Top | Haut | Top | Top |
 | Leggings | Leggings | Legging | Leggings | Leggings |
 
-**Farb-Adjektiv (immer lokalisieren):**
+**Farb-Adjektiv (immer lokalisieren — KORRIGIERT v1.21/E92 nach Trial-Lauf 2026-05-18 21:06):**
 
-| DE | EN | FR | IT | ES |
-|---|---|---|---|---|
-| Schwarz | Black | Noir | Nero | Negro |
-| Weiß | White | Blanc | Bianco | Blanco |
-| Türkis | Teal | Turquoise | Turchese | Turquesa |
-| Pink | Pink | Rose | Rosa | Rosa |
-| Burgundrot | Burgundy | Bordeaux | Borgogna | Burdeos |
-| Beige | Beige | Beige | Beige | Beige |
-| Grau | Grey | Gris | Grigio | Gris |
-| Braun | Brown | Marron | Marrone | Marrón |
-| Rot | Red | Rouge | Rosso | Rojo |
-| Blau | Blue | Bleu | Blu | Azul |
-| Gelb | Yellow | Jaune | Giallo | Amarillo |
-| Grün | Green | Vert | Verde | Verde |
+Tjorben-Direktive 2026-05-18: „Wir haben die Konvention für deutsche Artikelnamen, dass wir da auch immer die deutsche Farbe nehmen." Die alte v1.15-Liste „Niemals lokalisieren (Marketing-Farben)" wurde damit teilweise ausser Kraft gesetzt — wo ein deutsches Wort existiert, wird es verwendet. Englische Marketing-Begriffe bleiben nur dort, wo es **kein** etabliertes DE-Pendant gibt.
 
-**Niemals lokalisieren (in allen 5 Sprachen identisch):**
+**Standard-Tabelle (alle Standard-Farben + lokalisierte Marketing-Farben):**
+
+| DE | EN | FR | IT | ES | Merkmal-Hauptfarbe (Sektion 7) |
+|---|---|---|---|---|---|
+| Schwarz | Black | Noir | Nero | Negro | Schwarz |
+| Weiß | White | Blanc | Bianco | Blanco | Weiß |
+| Türkis | Teal | Turquoise | Turchese | Turquesa | Blau |
+| Himmelblau | Sky | Bleu Ciel | Azzurro Cielo | Azul Cielo | Blau |
+| Smaragdgrün | Emerald | Émeraude | Smeraldo | Esmeralda | Grün |
+| Limettengrün | Lime | Vert Citron | Verde Lime | Verde Lima | Grün |
+| Kirschrot | Cherry | Cerise | Ciliegia | Cereza | Rot |
+| Pink | Pink | Rose | Rosa | Rosa | Pink |
+| Burgundrot | Burgundy | Bordeaux | Borgogna | Burdeos | Rot |
+| Beige | Beige | Beige | Beige | Beige | Beige |
+| Grau | Grey | Gris | Grigio | Gris | Grau |
+| Braun | Brown | Marron | Marrone | Marrón | Braun |
+| Rot | Red | Rouge | Rosso | Rojo | Rot |
+| Blau | Blue | Bleu | Blu | Azul | Blau |
+| Gelb | Yellow | Jaune | Giallo | Amarillo | Gelb |
+| Grün | Green | Vert | Verde | Verde | Grün |
+
+**Niemals lokalisieren** (kein etabliertes DE-Pendant existiert, Marketing-Begriff ist im DE eingebürgert — bleibt in allen 5 Sprachen identisch inkl. DE):
+
+| Marketing-Farbe | Bleibt in allen Sprachen | Merkmal-Hauptfarbe |
+|---|---|---|
+| Nude | Nude | Beige |
+| Mauve | Mauve | Lila |
+| Tan | Tan | Beige |
+| Skin | Skin | Beige |
+
+Plus identisch in allen Sprachen (keine Farbe, sondern Eigenname/Print-Variante/Material):
 - Brand-Namen: HotCakes, FANNA, Polerina, Pole Addict, Shark Polewear, etc.
 - Modell-Eigennamen: Hekate, Arachne, Savanna, Bali Grape, X Spark Edition, etc.
+- Print-Familien-Namen: Original, Heat, Lynx-Print etc. (Merkmal-Hauptfarbe folgt dominanter Druckfarbe oder `Bunt`)
 - Größen-Suffix: XS, S, M, L, XL, 2XL
-- Velvet (bleibt überall)
-- **Nude** (Marketing-Farbe, etablierter internationaler Begriff für Hauttöne — bleibt in allen 5 Sprachen identisch. Wichtig: die Farb-Merkmal-Kategorie für „Nude" ist trotzdem `Beige`, weil das WaWi-Filter-Merkmal aus der erlaubten Wertliste kommen muss. NEU mit v1.12 nach Pilot-Lauf 2026-05-16, vorher pragmatisch identisch belassen, jetzt explizit verankert.)
-- **Mauve** (Marketing-Farbe, identisch in allen 5 Sprachen; Merkmal-Hauptfarbe `Lila` — NEU v1.15 nach Live-Trial Batch 1)
-- **Original** (Marketing-Eigenname für Print-Variante, identisch in allen 5 Sprachen; Merkmal-Hauptfarbe folgt der dominanten Druckfarbe oder `Bunt` bei dezenter Multi-Farbe — NEU v1.15)
-- **Sky** (Marketing-Farbe für Hellblau, identisch in allen 5 Sprachen; Merkmal-Hauptfarbe `Blau` — NEU v1.15)
-- **Teal** (Marketing-Farbe, identisch in allen 5 Sprachen wenn als Eigenname im Modellnamen verwendet; Merkmal-Hauptfarbe `Blau`. Hinweis: die Standard-Tabelle oben übersetzt „Türkis → Teal" für die EN-Spalte; wenn der Hersteller den Modellnamen mit „Teal" benennt, bleibt „Teal" in allen 5 Sprachen — NEU v1.15)
+- Material-Eigennamen: Velvet (bleibt überall)
 
-**Bei seltenen Begriffen außerhalb der Tabelle:** STOPP, User-Frage in den Lauf-Bericht, **niemals raten**.
+**Begründung Tjorben-Direktive 2026-05-18:** „HotCakes Top Arachne Teal" (DE) im Trial-Lauf war falsch. Korrekt: „HotCakes Top Arachne Türkis" (DE). Bei Sky analog: „HotCakes Top Savanna Himmelblau" statt „Savanna Sky". Bei Mauve/Nude/Tan/Skin: keine sinnvolle DE-Übersetzung existiert (Altrosa für Mauve wäre nicht gleich semantisch) — bleibt englisch.
+
+**Bei neuen Marketing-Begriffen außerhalb der zwei Tabellen oben:** STOPP, User-Frage, **niemals raten**. Tjorben entscheidet pro neuer Marketing-Farbe ob lokalisieren oder identisch belassen.
 
 ### 6.1 Hartkodierte DE-Konventionen (NEU v1.14, E76)
 
@@ -304,7 +324,7 @@ Jeder neue Artikel wird beim Self-Check (siehe Sektion 9) gegen diese drei abgeg
 | 1 | Schema-Spalten-Reihenfolge entspricht 1:1 der 48-Spalten-Liste (Sektion 1) | E54, Sektion 1 | CSV-Ameise-Import bricht oder mapped falsch |
 | 2 | Kategorie Ebene 1 = `Pole Dance Kleidung` (für Kleidungs-Pilot) — niemals `Damen` oder `Limited Editions` | E51, AP1 | Artikel landet in falscher Shop-Kategorie |
 | 3 | Kategorie Ebene 2 = nur die in Sektion 3 erlaubten Werte (`Bodysuits` / `Pole Dance Tops` / `Pole Dance Shorts` / `Leggings` / `Legwarmer` / `Shirts`) | E51 | Artikel in falscher Unterkategorie |
-| 4 | **Multi-Kategorie-Pattern (NEU v1.17, E89, ersetzt v1.15-Doppelzeilen-Pattern):** Pro Artikel **mindestens 2 Kategorie-Zeilen** in der CSV: (a) spezifischste Shop-Subkategorie (z.B. `Pole Dance Tops` → WaWi resolved den Pfad über die in WaWi gepflegte Hierarchie selbst, keine parallele Oberkategorie-Zeile mehr nötig); (b) Pflicht-Zuweisung `Intern > Neue Artikel für Sara` (WaWi-Kategorie-Key `546`) für den Sara-Review-Workflow. Mehr Kategorie-Zeilen erlaubt (Marketing-Tags), aber Mindest-Set sind diese 2. Vorlagen-Setting unverändert: „Kategorieverknüpfungen des Artikels aktualisieren" = „Neue Kategorien beim jeweiligen Artikel hinzuimportieren" (E57). Anti-Confusion E75 weiter gültig. | E57, E89, Sektion 4 | Artikel ohne Sara-Zuweisung im Sara-Review-Loop verloren, oder parallele Oberkategorie-Zeile bricht die Hierarchie-Resolution |
+| 4 | **Multi-Kategorie-Pattern (KORRIGIERT v1.21, E92 verfeinert E89):** Pro Artikel **mindestens 3 Kategorie-Zeilen** in der CSV mit gleicher Artikelnummer: (a) Oberkategorie-Zuweisung `Pole Dance Kleidung` (Kategorie Ebene 2 leer); (b) Unterkategorie-Zuweisung `Pole Dance Kleidung` + spezifische Subkategorie (Pole Dance Tops/Shorts/Bodysuits/Leggings/etc.); (c) Sara-Review-Pflicht-Zuweisung `Intern` + `Neue Artikel für Sara` (WaWi-Key 546). **Korrektur:** v1.19/E89-Annahme „WaWi resolved Pfad selbst" war falsch — Lauf-Bericht 2026-05-18 21:06 zeigte fehlende Oberkategorie im Shop. Zurück zum E57-Doppel-Pattern, ergänzt um Sara-Zeile aus E89. Vorlagen-Setting unverändert: „Kategorieverknüpfungen des Artikels aktualisieren" = „Neue Kategorien beim jeweiligen Artikel hinzuimportieren". Anti-Confusion E75 weiter gültig. | E57, E89, E92, Sektion 4 | Artikel fehlt Oberkategorie im Shop, oder Sara-Workflow bricht weil 546-Zuweisung fehlt |
 | 5 | Titel-Tag pro Sprache **exakt** nach E55-Template (kein produkt-spezifischer Spin, kein erfundener Domain-TLD) | E55, Sektion 5 | SEO inkonsistent zum Shop-Bestand |
 | 6 | Meta-Description pro Sprache **exakt** nach E55-Template (HTML-Entities `&#10004;`/`&#10148;`, **nicht** Unicode `✓`/`➜`) | E55, AP3, AP7 | Shop zeigt falsche oder erfundene Meta-Beschreibung |
 | 7 | SEO-Felder (Titel-Tag + Meta-Description in allen 5 Sprachen) **nur auf Vater-Zeilen**, leer auf Kindern | E56 | unnötige SEO-Duplikation auf Variantenebene |
@@ -515,7 +535,7 @@ Hekate Bodysuit hat keine Outfit-Pair-Beziehung (Bodysuit ist Solo-Typ) und in d
 | SPEC_KONSTANTEN.md | 50 | OK (knapp >50 KB nach v1.19, monitoring) |
 | run_brief_daten.md | 50 | OK |
 | cowork_anweisung_datenimports.md | 50 | OK (ab v2.0 v1.20 verschlankt — Konstanten + Self-Check + AP1-AP12 ausgelagert nach SPEC_KONSTANTEN) |
-| cowork_anweisung_bildpipeline.md | 50 | OK (ab v2.0 v1.20 als Stub mit Verweis auf E63 + B36-B40; Voll-Spec im v1.19-Tag erhalten) |
+| cowork_anweisung_bildpipeline.md | 50 | KNOWN_EXCEPTION — Voll-Spec wieder aktiv ab v2.1/E93 (ca. 43 KB knapp unter 50 KB; Reaktivierung der Bildpipeline aus v1.19-Tag rekonstruiert) |
 | WAWI-IMPORT-WISSEN.md | 50 | KNOWN_EXCEPTION — operatives Pilot-Wissen, Verschlankung bei B61-Trigger |
 | lieferanten_mapping.yaml | 50 | OK (linear-skalierend; bei N≥5 Lieferanten Brand-Story-Split per B64) |
 | BACKLOG.md | 50 | KNOWN_EXCEPTION — Pflege-Datei; erledigte Einträge in BACKLOG-ARCHIV.md ausgegliedert ab v1.20 |
@@ -651,7 +671,9 @@ Repo-Meta-Files NICHT im Snapshot-Count: `README.md` (GitHub-Visitor-Doku), `.gi
 | E87 | COWORK-INFRA | Migration Drive → Git als Wissens-Backbone (Pattern-Pivot v1.19) |
 | E89 | CRAWLING-DATEN | Category-Pattern + Sara-Review-Workflow (präzisiert E57, WaWi-Key 546) |
 | E90 | CRAWLING-DATEN | F2-F6-Implementierung in v1.19 (Sammeleintrag: B55-B59 erledigt) |
-| E91 | COWORK-INFRA | Skalierungs-Refactor v1.20 — Verschlankung, neue Anker (CLAUDE.md, LIEFERANTEN-ONBOARDING.md, BACKLOG-ARCHIV.md), Cowork-Resolver auf GitHub-Raw (B63 erledigt) |
+| E91 | COWORK-INFRA | Skalierungs-Refactor v1.20 — Verschlankung, neue Anker, Cowork-Resolver auf GitHub-Raw (B63 erledigt) |
+| E92 | CRAWLING-DATEN | Trial-Findings v1.20 — Multi-Kategorie auf 3-Zeilen-Pattern korrigiert (Oberkategorie + Subkategorie + Sara-546), Farb-Lokalisierung DE (Teal→Türkis, Sky→Himmelblau, Cherry→Kirschrot, Emerald→Smaragdgrün, Lime→Limettengrün) |
+| E93 | BILDPIPELINE | Bildpipeline reaktiviert (kehrt E63 um) — Stage 5.6+5.7 wieder aktiv, R2-Architektur unverändert, Spec von Stub auf v2.1 voll-aktiv |
 
 **Cluster-File-Kurz-Lookup (Datei-Mapping zum Cluster-Namen oben):**
 

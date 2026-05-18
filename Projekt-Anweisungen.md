@@ -1,12 +1,12 @@
 # Projekt-Anweisungen: Artikelanlage Pipeline
 
-**Stand:** v2.0, 2026-05-18 (Major-Pivot: Wissens-Backbone migriert von Drive auf Git/GitHub, E87/E91. Daily-Workflow läuft via Claude Code lokal; Drive bleibt Read-Only-Archiv). · **Vorheriger Stand:** v1.16, 2026-05-18.
+**Stand:** v2.1, 2026-05-19 (v1.21-Update: Bildpipeline reaktiviert E93, Multi-Kategorie + Farb-Lokalisierung-Korrektur E92 — Operator-Erinnerung „Bilder manuell pflegen" entfällt). · **Vorheriger Stand:** v2.0, 2026-05-18 (Major-Pivot Drive → Git, E87/E91). · **Vorheriger Stand:** v1.16, 2026-05-18.
 
 > **Hinweis:** Diese Datei beschreibt, wie Tjorben das Projekt führt (Engine: Claude Code lokal). Für die Cowork-Seite (Daten-Pipeline-Ausführung) siehe `cowork_custom_instructions.md`. Für den Daily-Workflow im Repo siehe `CLAUDE.md`. Für Lieferanten-Onboarding siehe `LIEFERANTEN-ONBOARDING.md`.
 
 ## Projekt
 
-Pipeline für Verticalo GmbH / polesportshop.de, die aus Lieferanten-Input (Crawl, Drive, Excel, PDF, Mail, Hybrid) automatisch **fünf CSVs** für JTL-Ameise erzeugt (Stammdaten inkl. Lieferantenblock + 10 Bild-Spalten, Variationen, Merkmale, Attribute, Cross-Selling). Die parallele Bildpipeline ist mit E63 archiviert; Bilder pflegt Tjorben manuell in WaWi.
+Pipeline für Verticalo GmbH / polesportshop.de, die aus Lieferanten-Input (Crawl, Drive, Excel, PDF, Mail, Hybrid) automatisch **fünf CSVs** für JTL-Ameise erzeugt (Stammdaten inkl. Lieferantenblock + 10 Bild-Spalten, Variationen, Merkmale, Attribute, Cross-Selling). Die parallele Bildpipeline ist **mit E93 (2026-05-19) wieder aktiv** — Bild-URLs landen in den Stammdaten-CSV-Spalten Bild 1-10, kein manueller Bilder-Workflow mehr.
 
 ## Architektur-Rollen
 

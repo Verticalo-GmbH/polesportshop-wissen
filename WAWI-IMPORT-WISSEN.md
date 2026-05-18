@@ -142,6 +142,8 @@ Dieser Hinweis steht hier weil im Klärungs-Chat 2026-05-16 die Diagnose voreili
 
 **v1.15-Validierung:** Live-Trial Batch 1+2 (2026-05-17) hat E57-Doppelzeilen erneut produktiv bestätigt — 21 Modelle mit Multi-Kategorie-Mechanik, alle Artikel landen sowohl in Oberkategorie als auch in passender Unterkategorie. Doppelzeilen-Architektur ist endgültig stabil.
 
+**Update v1.16/E92 (2026-05-18): 3-Zeilen-Pattern ab v1.21.** Zusätzlich zu den E57-Doppelzeilen (Oberkategorie + Unterkategorie) kommt seit E89/E92 eine **3. Zeile** pro Artikel für den Sara-Review-Workflow: `Kategorie Ebene 1 = Intern`, `Kategorie Ebene 2 = Neue Artikel für Sara` (WaWi-Key 546). Sara prüft, entfernt die 546-Zuweisung nach Approval manuell. Hintergrund: v1.19/E89 hatte fälschlich angenommen, dass eine einzige Subkategorie-Zeile reicht (WaWi resolved Pfad selbst) — Trial-Lauf 2026-05-18 21:06 zeigte fehlende Oberkategorie im Shop, E57-Doppel-Pattern bleibt also gültig, Sara als 3. Zeile ergänzt.
+
 ---
 
 JTL-Ameise bietet **keine zusätzlichen Kategorie-Spalten** in der Stammdaten-CSV. Multi-Kategorie pro Artikel geht ausschließlich über **doppelte Zeilen** mit gleicher Artikelnummer:

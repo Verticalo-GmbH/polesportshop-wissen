@@ -1,8 +1,8 @@
 # ENTSCHEIDUNGS-LOG-BILDPIPELINE
 
-**Cluster:** Bilder, R2-Storage, Crop, Pose, Vision — archiviert mit E63
+**Cluster:** Bilder, R2-Storage, Crop, Pose, Vision — **reaktiviert mit E93 (v1.21, 2026-05-18)**, vorher archiviert seit E63 (2026-05-16)
 
-**Stand:** v1.17, 2026-05-17
+**Stand:** v1.18, 2026-05-18 (neuer Eintrag E93: Bildpipeline reaktiviert, kehrt E63 um). · **Vorheriger Stand:** v1.17, 2026-05-17
 
 **Bezug:** Dieser Cluster ist Teil des Splits der ursprünglichen `ENTSCHEIDUNGS-LOG.md` (v1.16, 165 KB → 6 Themen-Cluster ≤ 40 KB). Historische / abgelöste Einträge liegen weiterhin in `ENTSCHEIDUNGS-LOG-ARCHIV.md`. Cross-Cluster-Referenzen über E-Nummer; der Master-Index mit allen E-Nummern → Cluster-File-Zuordnung liegt in `SPEC_KONSTANTEN.md` unter `ENTSCHEIDUNGSLOG_E_NUMMER_INDEX`.
 
@@ -17,8 +17,9 @@
 - **E45** — Crop-Profile pro Produkttyp und Vision-basierte Pose-Sortierung für Fashion
 - **E46** — Bilder integriert in Stammdaten-CSV, separater Bilder-Import abgeschafft
 - **E60** — Bild-Größen-Cap < 100 KB im JPEG-Encoding mit Quality-Iteration und Floor
-- **E63** — Bildpipeline archiviert, manueller Bilder-Workflow im Pilot
+- **E63** — Bildpipeline archiviert, manueller Bilder-Workflow im Pilot — **REVERTIERT durch E93**
 - **E70** — Feature-Erfassung text-basiert, Vision-API-Extraktion bewusst aufgeschoben
+- **E93** — Bildpipeline reaktiviert (kehrt E63 um), NEU v1.21
 
 ---
 
@@ -242,5 +243,44 @@ Im 2026-05-16-Lauf wurde das empirisch sichtbar: Farben (Beige für „Nude", Sc
 - *Vision-API für Feature-Extraktion jetzt einbauen:* parallel zur Daten-Pipeline-Stabilisierung wäre die nächste Baustelle. Tjorbens Disziplin: erst Kern robust, dann erweitern. Verschoben in B-Cluster „Feature-Erfassung".
 - *Cowork-eigene Vision-Capability für Features nutzen:* technisch verfügbar, aber dieselbe Token-/Wallclock-Kosten-Diskussion wie bei Pose-Klassifikation (E63-Begründungen gelten analog).
 - *Feature-Erfassung ganz an Tjorben auslagern:* würde die Daten-Pipeline-Idee aushöhlen, alles selbst zu machen.
+
+---
+
+**E93 — Bildpipeline reaktiviert (kehrt E63 um).**
+*Stand:* 2026-05-18 (v1.21). *Bezug:* E63 (vorherige Archivierung 2026-05-16), E43 (R2-Upload-Mechanik), E45 (Crop-Profile + Vision-Pose-Sortierung), E46 (Bilder in Stammdaten-CSV), E60 (Bild-Größen-Cap), Trial-Lauf 2026-05-18 21:06 (HotCakes End-to-End, 21 Modelle, 25 Min Wallclock).
+
+*Warum:* E63 archivierte die Bildpipeline 2026-05-16 mit der Begründung „Token-Budget für parallelen Vision-Call-Lauf + Architektur-Refactor-Bedarf bei Bildpipeline-Performance". Stand 2026-05-18 nach v1.20-Skalierungs-Refactor + Trial-Lauf:
+
+1. **Daten-Pipeline ist stabil.** Live-Trial Batch 1+2 2026-05-17 und Trial-Lauf 2026-05-18 21:06 mit 16/16 Self-Check grün. Die Begründung „erst Daten-Pipeline robust" ist erfüllt.
+2. **Wallclock-Bilanz rechtfertigt Bilder-Inklusion.** 25 Min für 21 Modelle + 90 Kinder (Daten) sind passabel; Bilder manuell pro Artikel in WaWi pflegen (Drag-and-Drop für 21 × bis zu 10 Bilder = bis zu 210 manuelle Bild-Uploads) ist deutlich teurer für Tjorben.
+3. **R2-Architektur ist unverändert verfügbar.** E43 (boto3 + Egress-Allowlist + Drive-Credentials-File), E44 (R2 als Voll-Storage), E45 (Crop + Vision), E60 (Größen-Cap), B34 (Original-Index-HTML) — alles aus v1.6-Spec implementiert und mit Arachne-Bottom-Black 2026-05-15 validiert. Keine neue Infrastruktur nötig.
+4. **Bildpipeline-Spec ist im `v1.19`-Git-Tag erhalten.** Voll-Spec v1.6 (43 KB) ist via `git show v1.19:cowork_anweisung_bildpipeline.md` rekonstruierbar — keine Wissens-Lücke.
+
+Tjorben-Direktive 2026-05-18: „Ich frage mich, ob wir die Artikelbilder doch wieder mit reinnehmen, weil da haben wir ja alles angebunden, was die Architektur angeht und das wäre jetzt natürlich auch eine große Erleichterung, wenn die Artikelbilder mitgemacht werden würden."
+
+*Entscheidung:* Bildpipeline reaktivieren ab v1.21. Stage 5.6 + 5.7 in `cowork_anweisung_datenimports.md` wieder aktiv. `cowork_anweisung_bildpipeline.md` von Stub (v2.0 in v1.20) auf Voll-Spec v2.1 (rekonstruiert aus v1.19-Tag, plus Wissens-Resolution-Update von Drive auf GitHub-Raw).
+
+*Konsequenzen:*
+- `cowork_anweisung_bildpipeline.md` von 3.2 KB Stub auf ~43 KB Voll-Spec. v2.0 → v2.1 (Minor, weil Wissens-Resolution-Pivot von Drive auf GitHub-Raw + Reaktivierungs-Header). ARCHIVIERT-Header durch AKTIV-Header ersetzt.
+- `cowork_anweisung_datenimports.md` Stage 5.6 + 5.7 aktiv. Bild-URLs in Stammdaten-CSV-Spalten Bild 1-10. v2.0 → v2.1 (Minor).
+- `run_brief_daten.md` Stage-Tabelle: Stage 5.6 + 5.7 wieder aktiv. v1.17 → v1.18 (Minor).
+- B30 (Re-Import-Verhalten bei leeren Bild-Spalten) wird wieder akut — Verifikations-Test vor erstem produktivem Re-Import auf bebilderte Artikel.
+- BACKLOG-Cluster „Bilder-Architektur-Refactor" (B36-B40) bleibt offen für künftige Tiefen-Optimierungen, aber der Pilot-Workflow läuft wieder.
+- WaWi-Manuelle-Bilder-Pflege durch Tjorben entfällt (war seit E63 Bottleneck).
+
+*Verworfen:*
+- **„Bildpipeline-Refactor erst abschließen, dann reaktivieren":** der Refactor ist eine Tiefenoptimierung. Die v1.6-Spec ist produktionsreif (Arachne-Bottom-Black validiert), Refactor ist Optimierung nicht Voraussetzung.
+- **„Hybride Variante: Cowork generiert R2-URLs, Tjorben pflegt manuell":** doppelter Aufwand statt einer Lösung.
+- **„Mac-Daemon für Bildpipeline statt Cowork-Sandbox":** war eine E63-Refactor-Idee. v1.6-Cowork-Sandbox-Pattern funktioniert, kein Pivot nötig.
+
+*Folgeaufgaben:*
+- B30 (Re-Import-Verhalten bei leeren Bild-Spalten) — vor erstem Re-Import auf bebilderte Artikel verifizieren.
+- B67 (NEU v1.21) — siehe BACKLOG.md.
+
+*Stolperfallen:*
+- **Egress-Allowlist:** Cowork braucht Zugriff auf `d0393bbf896236cd9033d769383756f0.r2.cloudflarestorage.com` (R2-Endpoint), `pub-94a3cf669ee343b2857aa4d656f9b5d6.r2.dev` (Public-URL), Lieferanten-CDN-Domain (z.B. `cdn.shopify.com` für HotCakes), `pypi.org` + `files.pythonhosted.org` (boto3). Aktueller B29-Workaround „All domains" deckt das ab.
+- **R2-Credentials in Drive-File** (E33-Pfad-b): `_Credentials/r2_credentials.json` muss zugreifbar sein. Bei Drive-Down: Lauf abbrechen, kein Fallback.
+- **Vision-Token-Verbrauch** pro Artikel: ~10 Thumbnail-Vision-Calls × 21 Artikel = ~210 Vision-Calls pro Lauf. Stage 0.5 Scope-Analyse muss das in Token-Schätzung einbeziehen.
+- **Wallclock-Erwartung v1.21:** Vermutlich 35-50 Min für 21 Artikel inkl. Bilder (statt 25 Min nur Daten). Erste Validierung beim v1.21-Trial-Lauf.
 
 ---
