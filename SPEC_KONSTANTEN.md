@@ -10,7 +10,9 @@
 
 Diese Datei ist der **alleinige Speicherort** aller harten Konstanten der Daten-Pipeline: Schemata, Templates, Lookup-Tabellen, Mapping-Listen, Self-Check-Vorgaben, Anti-Patterns. Sie wurde mit E61 (2026-05-16) aus `cowork_anweisung_datenimports.md` und `WAWI-IMPORT-WISSEN.md` extrahiert, weil Cowork beim Versuch, diese Konstanten pro Lauf aus den großen Spec-Dateien zu extrahieren, ~50K Tokens nur fürs Lesen verbrannte und Stage 0 nie hinter sich brachte.
 
-**Charter-Prinzip 11 (Konstanten-Datei-Architektur, E61):** Konstanten leben in einer einzigen Datei und werden vom Cowork-Code 1:1 als Quelle gelesen. Operative Specs (`cowork_anweisung_datenimports.md`) verweisen nur noch auf diese Datei. Wenn eine Konstante sich ändert, ändert sie sich **hier** — und nirgends sonst.
+**Charter-Prinzip 11 (Konstanten-Datei-Architektur, E61):** Konstanten leben in einer einzigen Datei und werden vom ausführenden Code 1:1 gespiegelt (`pipeline/spec.py`). Wenn eine Konstante sich ändert, ändert sie sich **hier** — und im Code, nirgends sonst.
+
+> **Hinweis ab v1.22 (Code-Pivot):** Ausführende Engine ist jetzt die lokale **Code-Pipeline** (`pipeline/`), nicht mehr Cowork. Wo unten „Cowork" in einer **Anweisung/Regel** steht, gilt sie sinngemäß für die Pipeline (der Code spiegelt diese Konstanten, `pipeline/spec.py`). **Historische Beispiele** (Anti-Patterns AP1–AP12, E-Nummer-Index) behalten „Cowork" bewusst — sie berichten, was damals passiert ist.
 
 **Charter-Prinzip 10 (E59, weiter gültig):** WaWi-Mapping ist gefrorenes Wissen — niemals erfinden, immer konsultieren. Bei Unsicherheit über ein Feld, einen Standardwert, eine Spalten-Reihenfolge oder ein Sprach-Pattern: **STOPP + User-Frage**, niemals durch generierte Plausibilität füllen.
 
@@ -19,7 +21,7 @@ Diese Datei ist der **alleinige Speicherort** aller harten Konstanten der Daten-
 Bei Widerspruch zwischen Quellen gilt die Hierarchie:
 
 1. **SPEC_KONSTANTEN.md** (diese Datei) — kanonische Quelle für alle Konstanten ab v1.10.
-2. **WAWI-IMPORT-WISSEN.md** — operatives Pilot-Wissen aus echten Ameise-Imports. Wenn hier ein Widerspruch zu SPEC_KONSTANTEN entsteht, ist das ein **Bug** in SPEC_KONSTANTEN und muss korrigiert werden — niemals umgekehrt durch Cowork-Plausibilität gefüllt.
+2. **WAWI-IMPORT-WISSEN.md** — operatives Pilot-Wissen aus echten Ameise-Imports. Wenn hier ein Widerspruch zu SPEC_KONSTANTEN entsteht, ist das ein **Bug** in SPEC_KONSTANTEN und muss korrigiert werden — niemals umgekehrt durch generierte Plausibilität gefüllt.
 3. **cowork_anweisung_datenimports.md** — beschreibt das *Was und Warum* (Stages, Lieferantenkontext, Output-Konventionen). Verweist für Konstanten auf SPEC_KONSTANTEN.md.
 4. **ENTSCHEIDUNGS-LOG.md / PROJEKT-CHARTER.md** — Begründung und Architektur-Hintergrund.
 
@@ -33,7 +35,7 @@ Diese Datei ist nicht versioniert mit Major/Minor (kein v1.X-Header). Stattdesse
 
 ## 1. Stammdaten-Schema (48 Spalten, v3.1 nach E54)
 
-**WICHTIG (E54, 2026-05-15 Abend):** Diese Spalten-Reihenfolge ist explizit so gewählt, dass bestehende Lieferanten-Vorlagen aus der v2-Ära (vor E46) für die ersten 38 Spalten **unverändert** funktionieren. Cowork generiert die CSV **strikt in dieser Reihenfolge**. Nur die 10 Bild-Spalten (39-48) müssen einmalig pro Lieferanten-Vorlage neu gemappt werden. Append-only-Konvention für künftige Schema-Bumps.
+**WICHTIG (E54, 2026-05-15 Abend):** Diese Spalten-Reihenfolge ist explizit so gewählt, dass bestehende Lieferanten-Vorlagen aus der v2-Ära (vor E46) für die ersten 38 Spalten **unverändert** funktionieren. Die Pipeline generiert die CSV **strikt in dieser Reihenfolge**. Nur die 10 Bild-Spalten (39-48) müssen einmalig pro Lieferanten-Vorlage neu gemappt werden. Append-only-Konvention für künftige Schema-Bumps.
 
 **Spalten-Reihenfolge (exakt):**
 
@@ -167,7 +169,7 @@ Position 39-48 — Bild-URLs (E46 angehängt):
 
 ## 5. SEO-Templates pro Sprache (E55) — DETERMINISTISCH
 
-**Cowork-Verbot (AP3 aus Sektion 10 unten):** keine produkt-spezifischen Meta-Descriptions erfinden. Einzige Variable im Template: `{name}` = Vater-Artikelname **ohne Größe**.
+**Verbot (AP3 aus Sektion 10 unten):** keine produkt-spezifischen Meta-Descriptions erfinden. Einzige Variable im Template: `{name}` = Vater-Artikelname **ohne Größe**.
 
 **Titel-Tag pro Sprache:**
 
@@ -189,11 +191,11 @@ IT: {name} &#10004; Assistenza clienti a cinque stelle &#10004; Qualità e prezz
 ES: {name} &#10004; Soporte al cliente de cinco estrellas &#10004; Calidad y precio superiores &#10004; Envío instantáneo &#10148; ¡Ordénalo ahora!
 ```
 
-Hard-coded in Cowork-Python. Keine LLM-Generation für SEO-Felder.
+Hard-coded in der Pipeline (Python). Keine LLM-Generation für SEO-Felder.
 
 ## 6. Sprach-Lokalisierungs-Konvention (E58) — Lookup-Tabellen
 
-**Cowork-Verbot (AP8 aus Sektion 10 unten):** keine Sprach-Namen erfinden. Bei Begriff außerhalb der Tabellen: STOPP + User-Frage in den Lauf-Bericht.
+**Verbot (AP8 aus Sektion 10 unten):** keine Sprach-Namen erfinden. Bei Begriff außerhalb der Tabellen: STOPP + User-Frage in den Lauf-Bericht.
 
 **Produkt-Substantiv (immer lokalisieren):**
 
@@ -257,7 +259,7 @@ Begriffe, die im **deutschen Freitext** (alle HTML-Attribute, Meta-Description, 
 |---|---|---|
 | Bottom | Shorts | „Pole Dance Shorts" ist zentrales SEO-Keyword für polesportshop (E76). |
 
-**Cowork-Anti-Pattern (E76):** Wenn der Hersteller-Body „Bottom" sagt, übernimm das nicht ins DE — schreib „Shorts". Im Strukturfeld „Artikelname" war's eh schon durch E58 richtig — diese Regel wirkt zusätzlich auf den Freitext.
+**Anti-Pattern (E76):** Wenn der Hersteller-Body „Bottom" sagt, übernimm das nicht ins DE — schreib „Shorts". Im Strukturfeld „Artikelname" war's eh schon durch E58 richtig — diese Regel wirkt zusätzlich auf den Freitext.
 
 ## 7. Merkmalwerte (E50, statische WaWi-Listen)
 
@@ -265,11 +267,11 @@ Schema der Merkmale-CSV: `Lieferant; Artikelnummer (Lieferant); Merkmalname; Mer
 
 **Pro Artikel mehrere Zeilen — auf Vater UND Kind explizit gepflegt** (E19, validiert JTL-Export 13.05.2026).
 
-**Sprache: NUR Deutsch in der CSV.** WaWi pflegt die Übersetzungen statisch pro Merkmalwert intern. Cowork generiert AUSSCHLIESSLICH die deutschen Werte. Keine Mehrsprachigkeit in den Merkmale-CSV-Spalten.
+**Sprache: NUR Deutsch in der CSV.** WaWi pflegt die Übersetzungen statisch pro Merkmalwert intern. Die Pipeline generiert AUSSCHLIESSLICH die deutschen Werte. Keine Mehrsprachigkeit in den Merkmale-CSV-Spalten.
 
 **Statische WaWi-Merkmalwert-Listen (E50, Stand 2026-05-15 aus WaWi-Screenshots):**
 
-| Merkmalname | Wer hat ihn | Erlaubte Werte (statisch in WaWi gepflegt — Cowork wählt aus diesen) |
+| Merkmalname | Wer hat ihn | Erlaubte Werte (statisch in WaWi gepflegt — die Pipeline wählt aus diesen) |
 |---|---|---|
 | `Farbe Kleidung` | Vater UND alle Kinder | **(15)** Bunt, Gold, Schwarz, Weiß, Braun, Beige, Grau, Blau, Grün, Gelb, Orange, Rot, Pink, Lila, Silber |
 | `Größe Kleidung` | nur Kinder | XS, S, M, L, XL, 2XL |
@@ -317,7 +319,7 @@ Jeder neue Artikel wird beim Self-Check (siehe Sektion 9) gegen diese drei abgeg
 
 ## 9. Stage 6 Mapping-Bibel-Self-Check (E59, erweitert v1.15 auf 16 Punkte, Punkte 15+16 für Kinder-Replikation neu formuliert)
 
-**Vor Stage 7 (CSV schreiben) muss Cowork diese 16-Punkte-Checkliste durchgehen und im Lauf-Bericht pro Punkt eine Ja/Nein-Bestätigung dokumentieren.** Bei Fail eines Punkts: Lauf abbrechen, Punkt eindeutig benennen, User-Frage formulieren.
+**Vor Stage 7 (CSV schreiben) muss die Pipeline diese 16-Punkte-Checkliste durchgehen und im Lauf-Bericht pro Punkt eine Ja/Nein-Bestätigung dokumentieren.** Bei Fail eines Punkts: Lauf abbrechen, Punkt eindeutig benennen, User-Frage formulieren.
 
 | # | Self-Check-Punkt | Wo verankert | Fail-Symptom |
 |---|---|---|---|
@@ -352,7 +354,7 @@ Jeder neue Artikel wird beim Self-Check (siehe Sektion 9) gegen diese drei abgeg
 **Bei Fail eines Punkts:** Lauf-Bericht enthält explizit:
 ```
 [#N] ✗ <Punkt> — <Detail des Fehlschlags>
-   STOPP-Grund: <was Cowork unsicher ist>
+   STOPP-Grund: <was die Pipeline unsicher ist>
    User-Frage: <konkrete Frage an Tjorben>
 ```
 
@@ -379,7 +381,7 @@ Cowork-Pflicht: vor jeder Stammdaten-CSV-Generation diese Liste durchgehen und i
 | AP11 | **Datei-Naming ohne Nummer-Präfix (NEU v1.15)** | Live-Trial-Runs Batch 1+2 HotCakes 2026-05-17: Cowork generierte CSV-Namen ohne Reihenfolge-Nummer (`Stammdaten_HotCakes_2026-05-17.csv` statt `1_Stammdaten_HotCakes_2026-05-17.csv`). Tjorben konnte Import-Reihenfolge nicht visuell prüfen. | Konvention `<NR>_<Typ>_<LIEFERANT>_<YYYY-MM-DD_HHMM>.csv` mit Reihenfolge-Nummer 1-5 (1=Stammdaten, 2=Variationen, 3=Merkmale, 4=Attribute, 5=CrossSelling). Bei Batch-Aufteilung Batch-Index im Lieferanten-Teil einbauen: `1_Stammdaten_HotCakes_Batch1_2026-05-17_1500.csv`. |
 | AP12 | **Leere CSV mit nur Header (NEU v1.15)** | Live-Trial-Runs Batch 1 HotCakes 2026-05-17: Cowork generierte eine `5_CrossSelling`-CSV mit nur Header-Zeile (0 Daten-Zeilen), weil Batch 1 zu früh ohne den vollen Lieferanten-Crawl lief. Tjorben importierte das CSV-File und WaWi meldete „kein Datensatz importiert" — unklar ob Bug oder OK. | Wenn 0 Daten-Zeilen, CSV NICHT ausgeben sondern im Lauf-Bericht vermerken („Cross-Selling-CSV nicht ausgegeben, 0 Beziehungen gefunden — Grund: voller Lieferanten-Crawl fehlte"). |
 
-**Generelle Regel (E59):** Wenn Cowork eine Cowork-Generation überlegt, bei der ein WaWi-Feld nicht aus einer Lookup-Tabelle, einem E-Eintrag oder einer Lieferanten-Mapping-Zeile direkt abgeleitet werden kann → **STOPP + User-Frage**, niemals durch generierte Plausibilität füllen.
+**Generelle Regel (E59):** Wenn die Pipeline eine Generation überlegt, bei der ein WaWi-Feld nicht aus einer Lookup-Tabelle, einem E-Eintrag oder einer Lieferanten-Mapping-Zeile direkt abgeleitet werden kann → **STOPP + User-Frage**, niemals durch generierte Plausibilität füllen.
 
 ---
 
@@ -416,7 +418,7 @@ Zwei klare HTML-Paragraphen, in dieser Reihenfolge:
 - Beschreibende Begründungen („weil das Material besonders empfindlich ist")
 - E74-Wendungen wie „geht von Studio zu Brunch" — hier komplett fehl am Platz
 
-**Erlaubt:** Du-Form (z.B. „Wasche bei 30°C") oder förmlicher Imperativ („Bei 30°C waschen"). Cowork wählt eine Variante und hält sie pro Lieferant konsistent.
+**Erlaubt:** Du-Form (z.B. „Wasche bei 30°C") oder förmlicher Imperativ („Bei 30°C waschen"). Die Pipeline wählt eine Variante und hält sie pro Lieferant konsistent.
 
 ---
 
@@ -445,7 +447,7 @@ Zwei klare HTML-Paragraphen, in dieser Reihenfolge:
 
 ### 12.1 Cross-Selling-Algorithmus (pro Lauf)
 
-1. **Vollständiger Lieferanten-Crawl:** Cowork lädt den vollen Shopify-`/products.json`-Datensatz (nicht nur die Trigger-Modelle). Bei HotCakes: 124 Produkte.
+1. **Vollständiger Lieferanten-Crawl:** Die Pipeline lädt den vollen Shopify-`/products.json`-Datensatz (nicht nur die Trigger-Modelle). Bei HotCakes: 124 Produkte.
 
 2. **Modell-Stamm-Schlüssel (Algorithmus-Präzisierung NEU v1.15):** Für Outfit-Pair und Ähnliche-Artikel-Suche wird der Modell-Stamm-Schlüssel **inklusive Farbe** verwendet, nicht nur das Basis-Modell. Konkret:
    - Für **„Vervollständige Dein Outfit"**: Schlüssel `(modell_basis, farbe_im_namen)` — Top und Bottom müssen sowohl im Modell-Stamm als auch in der Farbe übereinstimmen. Beispiel: `(Savanna, Black)` Top matched nur mit `(Savanna, Black)` Bottom, nicht mit `(Savanna, Skin)` Bottom.
@@ -466,7 +468,7 @@ Zwei klare HTML-Paragraphen, in dieser Reihenfolge:
 
 6. **CSV-Format:** UTF-8 BOM, `;`, CRLF, Quote `MINIMAL`.
 
-7. **Cross-Selling-Family-Refresh-Modus (NEU v1.15, E80-Erweiterung 3 — optionaler Trigger-Modus):** Bei späterem Nachzug von Schwester-Artikeln (z.B. wenn Tjorben weitere Farbgeschwister Arachne Tan/Cherry, Savanna Black/Skin/Emerald/Lime/Heat oder Peonies-Bodysuit-skin-tones anlegt), kann Cowork in einem Refresh-Lauf für betroffene Modell-Familien das komplette Cross-Selling neu berechnen statt nur die neuen Artikel. Trigger: `Verarbeite Cross-Selling-Refresh für Lieferant X, Modell-Stamm Y`. Output: nur CSV 5, andere CSVs nicht ausgegeben (AP12 — keine leeren CSVs).
+7. **Cross-Selling-Family-Refresh-Modus (NEU v1.15, E80-Erweiterung 3 — optionaler Trigger-Modus):** Bei späterem Nachzug von Schwester-Artikeln (z.B. wenn Tjorben weitere Farbgeschwister Arachne Tan/Cherry, Savanna Black/Skin/Emerald/Lime/Heat oder Peonies-Bodysuit-skin-tones anlegt), kann die Pipeline in einem Refresh-Lauf für betroffene Modell-Familien das komplette Cross-Selling neu berechnen statt nur die neuen Artikel. Trigger: `Verarbeite Cross-Selling-Refresh für Lieferant X, Modell-Stamm Y`. Output: nur CSV 5, andere CSVs nicht ausgegeben (AP12 — keine leeren CSVs).
 
 ### 12.2 Beispiel-CSV-Output (mit Kinder-Replikation v1.15)
 

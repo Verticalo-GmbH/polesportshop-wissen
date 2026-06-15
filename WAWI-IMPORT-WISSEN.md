@@ -8,7 +8,7 @@
 >
 > **Diese Datei ändert sich selten.** Updates kommen nur durch echte WaWi-Import-Läufe (nicht durch Spekulation), durch JTL-WaWi-Version-Updates (alle 12+ Monate), oder durch dokumentierte Verifikation eines bisher unverifizierten Verhaltens (z.B. B30).
 >
-> **Cowork hat eine prozedurale Pflicht zur Konsultation** dieser Datei (zusammen mit Sektion 5 der `cowork_anweisung_datenimports.md`) **vor jeder CSV-Generation**. Die Mapping-Bibel-Self-Check-Checkliste in Sektion 6 der Cowork-Anweisung ist verpflichtend, nicht optional. Bezug: Charter-Prinzip 10, E59.
+> **Hinweis ab v1.22 (Code-Pivot):** Ausführende Engine ist jetzt die Code-Pipeline (`pipeline/`), nicht mehr Cowork. Wo unten der Begriff Cowork in einer **Regel** steht, gilt sie für die Pipeline; **historische Beispiele** behalten den Begriff. Diese Datei ist **Schema-/WaWi-Referenz** und wird vom Code konsultiert; der 16-Punkte-Self-Check ist als `pipeline/selfcheck.py` verpflichtend (Charter-Prinzip 10, E59).
 >
 > **Goldstandard-Referenz-Artikel** (E59): die drei HotCakes-Pilot-Artikel Hekate Bodysuit, Arachne Bottom Teal, Savanna Original Top. Strukturelle Abweichungen davon ohne Lieferanten-Mapping-Eintrag = STOPP + User-Frage.
 
@@ -36,7 +36,7 @@ Dieses Dokument bündelt das gesamte operative Wissen über die Daten-Übergabe 
 
 ## 1. Architektur in einem Absatz
 
-JTL-WaWi 1.10.15.0 ist das Warenwirtschafts-Backend. **JTL-Ameise** ist das CSV-Import-Tool von JTL, mit dem strukturierte Daten in WaWi reinkommen. Die Pipeline produziert pro Lieferanten-Lauf **fünf CSVs** (Stammdaten mit integriertem Lieferantenblock und 10 Bild-URL-Spalten, Variationen, Merkmale, Attribute, Cross-Selling — Cross-Selling seit v1.14, E80), die in einer bestimmten Reihenfolge in Ameise importiert werden. Jede CSV hat ihr eigenes Ameise-Vorlagen-Profil mit spezifischem Spalten-Mapping und Identifikator-Setting. Cowork generiert die CSVs, der Einkäufer führt die Ameise-Imports manuell durch — Cowork schreibt nicht selbst in WaWi. Die Bildpipeline läuft als eigenständiger Sub-Process (E12), gibt aber keine separate CSV mehr aus, sondern eine Map `{artikelnummer: [bild_urls]}`, die die Daten-Pipeline in die 10 Bild-Spalten der Stammdaten-CSV einbettet.
+JTL-WaWi 1.10.15.0 ist das Warenwirtschafts-Backend. **JTL-Ameise** ist das CSV-Import-Tool von JTL, mit dem strukturierte Daten in WaWi reinkommen. Die Pipeline produziert pro Lieferanten-Lauf **fünf CSVs** (Stammdaten mit integriertem Lieferantenblock und 10 Bild-URL-Spalten, Variationen, Merkmale, Attribute, Cross-Selling — Cross-Selling seit v1.14, E80), die in einer bestimmten Reihenfolge in Ameise importiert werden. Jede CSV hat ihr eigenes Ameise-Vorlagen-Profil mit spezifischem Spalten-Mapping und Identifikator-Setting. Die Pipeline generiert die CSVs, der Einkäufer führt die Ameise-Imports manuell durch — die Pipeline schreibt nicht selbst in WaWi. Die Bildpipeline läuft als eigenständiger Sub-Process (E12), gibt aber keine separate CSV mehr aus, sondern eine Map `{artikelnummer: [bild_urls]}`, die die Daten-Pipeline in die 10 Bild-Spalten der Stammdaten-CSV einbettet.
 
 ## 2. Globale CSV-Format-Regeln (für alle fünf CSVs gleich)
 
@@ -200,7 +200,7 @@ Gilt **sowohl für Vater als auch für jedes Kind**. Pro Modell mit N Kind-Grö�
 
 **SEO-Felder leben ausschließlich auf Vater-Zeilen** (siehe Kind-Zeile oben). Auf allen Kind-Zeilen sind alle 10 SEO-Spalten (DE + 4 Sprachen × 2 Felder) leer.
 
-**Cowork-Verbot:** keine produkt-spezifische Meta-Description erfinden („Mesh-Bodysuit mit Marmor-Print, tiefem Ausschnitt..." — Cowork-Erfindung aus 3-Modell-Batch). Die produktspezifische Beschreibung lebt im Attribut `artikeldetails` mit E53-Stil, klar getrennt von SEO-Metadaten.
+**Verbot:** keine produkt-spezifische Meta-Description erfinden („Mesh-Bodysuit mit Marmor-Print, tiefem Ausschnitt..." — Cowork-Erfindung aus 3-Modell-Batch). Die produktspezifische Beschreibung lebt im Attribut `artikeldetails` mit E53-Stil, klar getrennt von SEO-Metadaten.
 
 ### Sprach-Lokalisierungs-Konvention für Artikelnamen (E58)
 
@@ -235,9 +235,9 @@ Aus polesportshop-Bestand abgeleitet (30 Stichproben über mehrere Brands):
 | Burgundrot | Burgundy | Bordeaux | Borgogna | Burdeos |
 | Beige | Beige | Beige | Beige | Beige |
 
-Cowork hat damit eine geschlossene Lookup-Tabelle für Standard-Vokabular — keine LLM-Übersetzung für die gängigen Pole-Wear-Begriffe. Bei seltenen/neuen Begriffen darf Cowork übersetzen, muss das aber im Lauf-Bericht markieren.
+Die Pipeline hat damit eine geschlossene Lookup-Tabelle für Standard-Vokabular — keine LLM-Übersetzung für die gängigen Pole-Wear-Begriffe. Bei seltenen/neuen Begriffen darf die Pipeline übersetzen, muss das aber im Lauf-Bericht markieren.
 
-**Cowork-Verbot:** keine Sprach-Namen erfinden. Konkrete Vorfälle aus 3-Modell-Batch:
+**Verbot:** keine Sprach-Namen erfinden. Konkrete Vorfälle aus 3-Modell-Batch:
 - „Arachne Blau" (EN) statt „Arachne Teal" — falsche Farb-Übersetzung
 - DE-Begriff im EN-Slot belassen (z.B. „Burgundrot" statt „Burgundy")
 
@@ -677,7 +677,7 @@ Die Anti-Pattern-Liste AP1-AP12 ist mit v1.10 (E61) in die kanonische Konstanten
 
 **v1.15-Erweiterung:** AP9-AP12 sind in SPEC_KONSTANTEN.md ergänzt (AP9 Drive-CSV-Upload-Verbot, AP10 Lokal-Datei-Schreib-Pflicht, AP11 Datei-Naming `<NR>_<Typ>_<LIEFERANT>_<DATUM>.csv`, AP12 keine leeren CSVs).
 
-**Generelle Regel (E59, unverändert):** Wenn Cowork eine Generation überlegt, bei der ein WaWi-Feld nicht aus einer Lookup-Tabelle, einem E-Eintrag oder einer Lieferanten-Mapping-Zeile direkt abgeleitet werden kann → **STOPP + User-Frage**, niemals durch generierte Plausibilität füllen.
+**Generelle Regel (E59, unverändert):** Wenn die Pipeline eine Generation überlegt, bei der ein WaWi-Feld nicht aus einer Lookup-Tabelle, einem E-Eintrag oder einer Lieferanten-Mapping-Zeile direkt abgeleitet werden kann → **STOPP + User-Frage**, niemals durch generierte Plausibilität füllen.
 
 ---
 
