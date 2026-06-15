@@ -18,6 +18,9 @@ COLUMNS = [
     "Global-Französisch: Variationsname", "Global-Französisch: Variationswertname",
     "Global-Italienisch: Variationsname", "Global-Italienisch: Variationswertname",
     "Global-Spanisch: Variationsname", "Global-Spanisch: Variationswertname",
+    # JTL-Ameise sortiert Variationswerte sonst ALPHABETISCH (L,M,S,XS). Mit
+    # expliziter Sortiernummer respektiert JTL die Reihenfolge (XS=1..XL=5).
+    "Sortiernummer Variation", "Sortiernummer Variationswert",
 ]
 
 VARIATIONSNAME = {"de": "Größe", "en": "Size", "fr": "Taille", "it": "Taglia", "es": "Talla"}
@@ -27,9 +30,9 @@ def build_rows(vaeter: list[Vater], supplier: dict, run_date: str) -> list[dict]
     rows: list[dict] = []
     for v in vaeter:
         vnr = spec.vater_artnr(v.garment_type, v.modell_basis, v.farbe_raw)
-        # Absteigend ausgeben (L,M,S,XS): JTL-Ameise kehrt die Import-Reihenfolge
-        # um, sodass der Shop aufsteigend XS->L anzeigt (Tjorben-Beobachtung 2026-06-15).
-        for k in sorted(v.kinder, key=lambda x: _rank(x.groesse), reverse=True):
+        # Aufsteigend ausgeben; die Anzeige-Reihenfolge steuert die Sortiernummer.
+        for k in sorted(v.kinder, key=lambda x: _rank(x.groesse)):
+            sort_wert = _rank(k.groesse) + 1  # XS=1, S=2, M=3, L=4, XL=5
             rows.append({
                 "Artikelnummer": vnr,
                 "Variationsname": VARIATIONSNAME["de"], "Darstellungsform": "DROPDOWN",
@@ -42,5 +45,7 @@ def build_rows(vaeter: list[Vater], supplier: dict, run_date: str) -> list[dict]
                 "Global-Italienisch: Variationswertname": k.groesse,
                 "Global-Spanisch: Variationsname": VARIATIONSNAME["es"],
                 "Global-Spanisch: Variationswertname": k.groesse,
+                "Sortiernummer Variation": "1",
+                "Sortiernummer Variationswert": str(sort_wert),
             })
     return rows
