@@ -1,1 +1,11 @@
 .claude/
+
+# Pipeline (P1+) — Code wird getrackt, aber nicht Outputs/Secrets/venv
+pipeline/.venv/
+pipeline/outputs/
+pipeline/EK_input/
+pipeline/**/__pycache__/
+pipeline/**/*.pyc
+# Secrets niemals committen (E33)
+*r2_credentials*.json
+.env
