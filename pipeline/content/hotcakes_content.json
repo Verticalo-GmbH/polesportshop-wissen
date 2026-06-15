@@ -328,7 +328,10 @@
     }
   },
   "HC-Echidna-Top": {
-    "merkmal_farbe": "Braun",
+    "merkmal_farbe": [
+      "Rot",
+      "Braun"
+    ],
     "style_werte": [
       "Triangle Ausschnitt"
     ],
@@ -357,7 +360,10 @@
     }
   },
   "HC-Echidna-Bottom": {
-    "merkmal_farbe": "Braun",
+    "merkmal_farbe": [
+      "Rot",
+      "Braun"
+    ],
     "style_werte": [
       "High Waist"
     ],
@@ -386,7 +392,7 @@
     }
   },
   "HC-Lynx-Top": {
-    "merkmal_farbe": "Bunt",
+    "merkmal_farbe": "Schwarz",
     "style_werte": [
       "Langärmlig"
     ],
@@ -415,7 +421,7 @@
     }
   },
   "HC-Lynx-Bottom": {
-    "merkmal_farbe": "Bunt",
+    "merkmal_farbe": "Schwarz",
     "style_werte": [
       "Mid Waist"
     ],
@@ -502,7 +508,7 @@
     }
   },
   "HC-Savanna-Top-Original": {
-    "merkmal_farbe": "Bunt",
+    "merkmal_farbe": "Weiß",
     "style_werte": [
       "Open Back",
       "Samt"
@@ -532,7 +538,7 @@
     }
   },
   "HC-Savanna-Bottom-Original": {
-    "merkmal_farbe": "Bunt",
+    "merkmal_farbe": "Weiß",
     "style_werte": [
       "High Waist",
       "High Leg",

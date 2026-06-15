@@ -31,19 +31,25 @@ def build_rows(vaeter: list[Vater], supplier: dict, content: dict) -> list[dict]
     for v in vaeter:
         vnr = spec.vater_artnr(v.garment_type, v.modell_basis, v.farbe_raw)
         c = content[vnr]
-        farbe = c["merkmal_farbe"]
+        # merkmal_farbe: str ODER Liste (mehrere Farben, wenn keine eindeutige
+        # Dominante -> Artikel wird unter mehreren Farbfiltern gefunden).
+        farben = c["merkmal_farbe"]
+        if isinstance(farben, str):
+            farben = [farben]
         style_name = _style_merkmalname(v.garment_type)
         style_werte = c["style_werte"]
 
-        # Vater: Farbe + Style (keine Größe)
-        add(vnr, "Farbe Kleidung", farbe)
+        # Vater: Farbe(n) + Style (keine Größe)
+        for f in farben:
+            add(vnr, "Farbe Kleidung", f)
         for w in style_werte:
             add(vnr, style_name, w)
 
-        # Kinder: Farbe + Größe + Style
+        # Kinder: Farbe(n) + Größe + Style
         for k in v.kinder:
             knr = spec.kind_artnr(vnr, k.groesse)
-            add(knr, "Farbe Kleidung", farbe)
+            for f in farben:
+                add(knr, "Farbe Kleidung", f)
             add(knr, "Größe Kleidung", k.groesse)
             for w in style_werte:
                 add(knr, style_name, w)

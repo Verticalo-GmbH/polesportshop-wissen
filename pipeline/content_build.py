@@ -392,7 +392,7 @@ M("HC-Arachne-Bottom-Teal", "Blau", ["Riemchenshorts"],
   ("Arachne", "Maro", 1.79, "M", 82, 66, 97, "true"))
 
 # --- Echidna Top ---
-M("HC-Echidna-Top", "Braun", ["Triangle Ausschnitt"],
+M("HC-Echidna-Top", ["Rot", "Braun"], ["Triangle Ausschnitt"],
   {"de": {"h2": "Echidna Top in Terrakotta und Plum",
           "p": ["Weck dein wildes, kantiges Selbst. Das Echidna-Set kombiniert mutige Cutouts und Mesh-Details zu einem Look, der deine Stärke in jeder Performance in Szene setzt.",
                 "Hochwertige, super elastische Texturen geben dir Halt, der tiefe V-Ausschnitt und die Plum-Fütterung setzen Akzente. Athletisch und sleek zugleich."],
@@ -417,7 +417,7 @@ M("HC-Echidna-Top", "Braun", ["Triangle Ausschnitt"],
   ("Echidna", "Maro", 1.79, "M", 82, 66, 97, "true"))
 
 # --- Echidna Bottom ---
-M("HC-Echidna-Bottom", "Braun", ["High Waist"],
+M("HC-Echidna-Bottom", ["Rot", "Braun"], ["High Waist"],
   {"de": {"h2": "Echidna Shorts in Terrakotta und Plum",
           "p": ["Weck dein wildes, kantiges Selbst. Das Echidna-Set kombiniert mutige Cutouts und Mesh-Details zu einem Look, der deine Stärke in jeder Performance in Szene setzt.",
                 "Der hohe Bund und die seitlichen Mesh-Cutouts formen die Silhouette, die super elastische Textur gibt dir Halt bei jeder Bewegung."],
@@ -442,7 +442,7 @@ M("HC-Echidna-Bottom", "Braun", ["High Waist"],
   ("Echidna", "Maro", 1.79, "M", 82, 66, 97, "true"))
 
 # --- Lynx Top ---
-M("HC-Lynx-Top", "Bunt", ["Langärmlig"],
+M("HC-Lynx-Top", "Schwarz", ["Langärmlig"],
   {"de": {"h2": "Lynx Top mit Leopardenprint",
           "p": ["Zeig deine Raubkatzen-Energie. Das Lynx-Set kombiniert schwarzen Mesh-Tüll mit Leopardenprint-Details und markanten Cuts für einen Look mit Biss.",
                 "Das bedruckte Scuba-Brustband mit schwarzer Fütterung gibt Struktur, die langen Ärmel machen daraus ein echtes Statement. Ein dekorativer Ring setzt das Highlight."],
@@ -467,7 +467,7 @@ M("HC-Lynx-Top", "Bunt", ["Langärmlig"],
   ("Lynx", "Aphroditi", 1.77, "M", 85, 65, 96, "true"))
 
 # --- Lynx Bottom ---
-M("HC-Lynx-Bottom", "Bunt", ["Mid Waist"],
+M("HC-Lynx-Bottom", "Schwarz", ["Mid Waist"],
   {"de": {"h2": "Lynx Shorts mit Leopardenprint",
           "p": ["Zeig deine Raubkatzen-Energie. Das Lynx-Set kombiniert schwarzen Mesh-Tüll mit Leopardenprint-Details und markanten Cuts für einen Look mit Biss.",
                 "Der Leoparden-bedruckte Scuba-Mittelteil und das Taillenband treffen auf schwarzen Mesh-Tüll an den Seiten, schwarze Fütterung in allen Printteilen sorgt für Halt."],
@@ -542,7 +542,7 @@ M("HC-Savanna-Bottom-Mauve", "Lila", ["High Leg"],
   ("Savanna", "Vika", 1.75, "S", 84, 60, 90, "true"))
 
 # --- Savanna Top original ---
-M("HC-Savanna-Top-Original", "Bunt", ["Open Back", "Samt"],
+M("HC-Savanna-Top-Original", "Weiß", ["Open Back", "Samt"],
   {"de": {"h2": "Savanna Original Top mit Zebra-Print",
           "p": ["Ihr habt gerufen, wir haben geliefert. Die Original Savanna ist zurück und neu interpretiert. Zebra-Print trifft auf brandneue Samt-Optik. Die O.G. der Savanna-Designs bleibt.",
                 "Der gescoopte Rücken und die langen Elastikbänder zum Binden geben dir Freiheit beim Styling, die strukturierte Samt-Optik macht den Look besonders."],
@@ -567,7 +567,7 @@ M("HC-Savanna-Top-Original", "Bunt", ["Open Back", "Samt"],
   ("Savanna", "Yifan Lee", 1.67, "S", 85, 63, 90, "bit_small"))
 
 # --- Savanna Bottom original ---
-M("HC-Savanna-Bottom-Original", "Bunt", ["High Waist", "High Leg", "Samt"],
+M("HC-Savanna-Bottom-Original", "Weiß", ["High Waist", "High Leg", "Samt"],
   {"de": {"h2": "Savanna Original Shorts mit Zebra-Print",
           "p": ["Ihr habt gerufen, wir haben geliefert. Die Original Savanna ist zurück und neu interpretiert. Zebra-Print trifft auf brandneue Samt-Optik. Die O.G. der Savanna-Designs bleibt.",
                 "Der hohe Bund und der hohe Beinausschnitt strecken die Silhouette, die asymmetrischen Cut-out-Details setzen Akzente. Die strukturierte Samt-Optik macht den Look besonders."],
