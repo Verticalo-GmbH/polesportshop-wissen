@@ -1,0 +1,625 @@
+{
+  "HC-Hekate-Bodysuit": {
+    "merkmal_farbe": "Schwarz",
+    "style_werte": [
+      "Bodysuit",
+      "Rundausschnitt",
+      "Open Back"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Hekate, dein Statement-Piece mit Marble-Print</h2><p>Inspiriert von der griechischen Göttin der Magie zieht dich Hekate sofort in ihren Bann. Mesh-Tüll mit Marble-Print legt sich wie eine zweite Haut an und gibt dir genau den Halt, den du im Climb und am Boden brauchst.</p><p>Die schwarzen Details an den Kanten und an den Booty-Straps setzen klare Akzente, der athletische Rückenschnitt lässt deine Schultern frei für jede Bewegung.</p><ul class=\"check\"><li>Mesh-Tüll innen, Marble-Print außen</li><li>Schwarze Details an Kanten und Booty-Straps</li><li>Tiefer, runder Ausschnitt</li><li>Hoher Beinausschnitt für eine lange Beinlinie</li><li>Athletischer Open-Back-Schnitt, sitzt ohne zu verrutschen</li></ul>",
+        "en": "<h2>Hekate, your marble-print mesh statement</h2><p>Named after the Greek goddess of magic, Hekate pulls you in from the first glance. Mesh tulle with a marble print sits like a second skin and gives you the hold you want for every climb and floor sequence.</p><p>Black trims along the edges and booty straps sharpen the look, while the athletic back keeps your shoulders free to move.</p><ul class=\"check\"><li>Mesh tulle inside, marble print outside</li><li>Black details on edges and booty straps</li><li>Deep round neckline</li><li>High leg rise for a longer leg line</li><li>Athletic open-back cut that stays put</li></ul>",
+        "fr": "<h2>Hekate, ton statement en mesh marble-print</h2><p>Inspirée de la déesse grecque de la magie, Hekate te captive dès le premier regard. Le mesh tulle au marble-print épouse ta peau comme une seconde peau et te donne le maintien qu'il te faut pour chaque climb et chaque passage au sol.</p><p>Les détails noirs sur les bords et les booty straps affirment la silhouette, et le dos athlétique laisse tes épaules libres de bouger.</p><ul class=\"check\"><li>Mesh tulle à l'intérieur, marble-print à l'extérieur</li><li>Détails noirs sur les bords et les booty straps</li><li>Décolleté rond et profond</li><li>Échancrure haute pour allonger la jambe</li><li>Coupe dos ouvert athlétique qui ne bouge pas</li></ul>",
+        "it": "<h2>Hekate, il tuo statement in mesh marble-print</h2><p>Ispirato alla dea greca della magia, Hekate ti conquista al primo sguardo. Il mesh tulle con marble-print aderisce come una seconda pelle e ti dà il sostegno giusto per ogni climb e ogni sequenza a terra.</p><p>I dettagli neri sui bordi e sui booty straps danno carattere, mentre la schiena atletica lascia le spalle libere di muoversi.</p><ul class=\"check\"><li>Mesh tulle all'interno, marble-print all'esterno</li><li>Dettagli neri su bordi e booty straps</li><li>Scollo rotondo e profondo</li><li>Gamba alta per allungare la linea</li><li>Taglio schiena aperta atletico che resta al suo posto</li></ul>",
+        "es": "<h2>Hekate, tu statement en mesh marble-print</h2><p>Inspirado en la diosa griega de la magia, Hekate te atrapa desde la primera mirada. El mesh tulle con marble-print se ajusta como una segunda piel y te da el soporte que buscas en cada climb y cada secuencia de suelo.</p><p>Los detalles negros en los bordes y en las booty straps marcan el look, y la espalda atlética deja tus hombros libres para moverte.</p><ul class=\"check\"><li>Mesh tulle por dentro, marble-print por fuera</li><li>Detalles negros en bordes y booty straps</li><li>Escote redondo y profundo</li><li>Pierna alta para estilizar la silueta</li><li>Corte de espalda abierta atlético que no se mueve</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>92% Polyester, 8% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>92% Polyester, 8% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>92% Polyester, 8% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>92% Poliestere, 8% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>92% Poliéster, 8% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Elena trägt Größe S bei 1,72 m Körpergröße, mit 82 cm Brust, 61 cm Taille und 92 cm Hüfte. Hekate fällt größengetreu aus.</p>",
+        "en": "<p>Elena is 1.72 m tall and wears size S, with a 82 cm bust, 61 cm waist and 92 cm hips. Hekate runs true to size.</p>",
+        "fr": "<p>Elena mesure 1,72 m et porte la taille S, avec 82 cm de poitrine, 61 cm de taille et 92 cm de hanches. Hekate taille normalement.</p>",
+        "it": "<p>Elena è alta 1,72 m e indossa la taglia S, con 82 cm di seno, 61 cm di vita e 92 cm di fianchi. Hekate veste fedele alla taglia.</p>",
+        "es": "<p>Elena mide 1,72 m y lleva la talla S, con 82 cm de pecho, 61 cm de cintura y 92 cm de cadera. Hekate talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-Peonies-Top-Nude": {
+    "merkmal_farbe": "Beige",
+    "style_werte": [
+      "Rundausschnitt"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Peonies Top in zarten Nude-Tönen</h2><p>Der Peonies-Print in Hauttönen wirkt zart und bleibt dabei robust. Das leichte Neopren mit Vierwege-Stretch sitzt wie angegossen und macht jede Drehung und jeden Climb mit.</p><p>Das Mesh-Detail an der Front setzt einen feinen Akzent, der runde Ausschnitt schmeichelt deiner Silhouette. Dein neues Lieblingsstück für jede Dance-Class.</p><ul class=\"check\"><li>Leichtes Neopren mit Vierwege-Stretch</li><li>Peonies-Print in Nude-Tönen</li><li>Voll gefüttert</li><li>Mesh-Detail an der Front</li><li>Runder Ausschnitt</li></ul>",
+        "en": "<h2>Peonies top in soft nude tones</h2><p>The peonies print in skin tones feels delicate and stays durable. The light neoprene with four-way stretch fits like a glove and follows every spin and climb.</p><p>A mesh detail at the front adds a fine accent, and the round neckline flatters your silhouette. Your new go-to for every dance class.</p><ul class=\"check\"><li>Light neoprene with four-way stretch</li><li>Peonies print in nude tones</li><li>Fully lined</li><li>Mesh detail at the front</li><li>Round neckline</li></ul>",
+        "fr": "<h2>Peonies top dans des tons nude délicats</h2><p>L'imprimé peonies dans des tons chair reste délicat et résistant à la fois. Le néoprène léger à stretch quatre directions épouse ta silhouette et suit chaque rotation et chaque climb.</p><p>Le détail en mesh sur le devant pose un accent subtil, et le décolleté rond met ta silhouette en valeur. Ta nouvelle pièce favorite pour chaque cours de danse.</p><ul class=\"check\"><li>Néoprène léger à stretch quatre directions</li><li>Imprimé peonies dans des tons nude</li><li>Entièrement doublé</li><li>Détail mesh sur le devant</li><li>Décolleté rond</li></ul>",
+        "it": "<h2>Peonies top in delicate tonalità nude</h2><p>La stampa peonies in tonalità pelle resta delicata e allo stesso tempo resistente. Il neoprene leggero con stretch quattro direzioni calza alla perfezione e segue ogni giro e ogni climb.</p><p>Il dettaglio in mesh sul davanti aggiunge un tocco fine, e lo scollo rotondo valorizza la tua silhouette. Il tuo nuovo pezzo preferito per ogni lezione di danza.</p><ul class=\"check\"><li>Neoprene leggero con stretch quattro direzioni</li><li>Stampa peonies in tonalità nude</li><li>Completamente foderato</li><li>Dettaglio mesh sul davanti</li><li>Scollo rotondo</li></ul>",
+        "es": "<h2>Peonies top en suaves tonos nude</h2><p>El estampado peonies en tonos piel se siente delicado y a la vez resistente. El neopreno ligero con stretch en cuatro direcciones se ajusta como un guante y acompaña cada giro y cada climb.</p><p>El detalle de mesh en el frente aporta un acento fino, y el escote redondo favorece tu silueta. Tu nueva pieza favorita para cada clase de baile.</p><ul class=\"check\"><li>Neopreno ligero con stretch en cuatro direcciones</li><li>Estampado peonies en tonos nude</li><li>Totalmente forrado</li><li>Detalle de mesh en el frente</li><li>Escote redondo</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>70% Polyester, 30% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>70% Polyester, 30% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>70% Polyester, 30% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>70% Poliestere, 30% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>70% Poliéster, 30% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Yifan Li trägt Größe S bei 1,67 m Körpergröße, mit 81 cm Brust, 67 cm Taille und 94 cm Hüfte. Peonies fällt größengetreu aus.</p>",
+        "en": "<p>Yifan Li is 1.67 m tall and wears size S, with a 81 cm bust, 67 cm waist and 94 cm hips. Peonies runs true to size.</p>",
+        "fr": "<p>Yifan Li mesure 1,67 m et porte la taille S, avec 81 cm de poitrine, 67 cm de taille et 94 cm de hanches. Peonies taille normalement.</p>",
+        "it": "<p>Yifan Li è alta 1,67 m e indossa la taglia S, con 81 cm di seno, 67 cm di vita e 94 cm di fianchi. Peonies veste fedele alla taglia.</p>",
+        "es": "<p>Yifan Li mide 1,67 m y lleva la talla S, con 81 cm de pecho, 67 cm de cintura y 94 cm de cadera. Peonies talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-Peonies-Bottom-Nude": {
+    "merkmal_farbe": "Beige",
+    "style_werte": [
+      "High Waist",
+      "High Leg"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Peonies Shorts in zarten Nude-Tönen</h2><p>Der Peonies-Print in Hauttönen wirkt zart und bleibt dabei robust. Das leichte Neopren mit Vierwege-Stretch sitzt wie angegossen und macht jede Bewegung mit.</p><p>Der hohe Bund und der hohe Beinausschnitt verlängern optisch die Beine und geben dir Halt bei jedem Climb. Dein neues Lieblingsstück für jede Dance-Class.</p><ul class=\"check\"><li>Leichtes Neopren mit Vierwege-Stretch</li><li>Peonies-Print in Nude-Tönen</li><li>Voll gefüttert</li><li>Hoher Bund</li><li>Hoher Beinausschnitt</li></ul>",
+        "en": "<h2>Peonies shorts in soft nude tones</h2><p>The peonies print in skin tones feels delicate and stays durable. The light neoprene with four-way stretch fits like a glove and follows every move.</p><p>The high waist and high leg rise visually lengthen your legs and give you hold for every climb. Your new go-to for every dance class.</p><ul class=\"check\"><li>Light neoprene with four-way stretch</li><li>Peonies print in nude tones</li><li>Fully lined</li><li>High waist</li><li>High leg rise</li></ul>",
+        "fr": "<h2>Peonies short dans des tons nude délicats</h2><p>L'imprimé peonies dans des tons chair reste délicat et résistant à la fois. Le néoprène léger à stretch quatre directions épouse ta silhouette et suit chaque mouvement.</p><p>La taille haute et l'échancrure haute allongent visuellement les jambes et te donnent du maintien pour chaque climb. Ta nouvelle pièce favorite pour chaque cours de danse.</p><ul class=\"check\"><li>Néoprène léger à stretch quatre directions</li><li>Imprimé peonies dans des tons nude</li><li>Entièrement doublé</li><li>Taille haute</li><li>Échancrure haute</li></ul>",
+        "it": "<h2>Peonies shorts in delicate tonalità nude</h2><p>La stampa peonies in tonalità pelle resta delicata e allo stesso tempo resistente. Il neoprene leggero con stretch quattro direzioni calza alla perfezione e segue ogni movimento.</p><p>La vita alta e la gamba alta allungano otticamente le gambe e ti danno sostegno in ogni climb. Il tuo nuovo pezzo preferito per ogni lezione di danza.</p><ul class=\"check\"><li>Neoprene leggero con stretch quattro direzioni</li><li>Stampa peonies in tonalità nude</li><li>Completamente foderato</li><li>Vita alta</li><li>Gamba alta</li></ul>",
+        "es": "<h2>Peonies shorts en suaves tonos nude</h2><p>El estampado peonies en tonos piel se siente delicado y a la vez resistente. El neopreno ligero con stretch en cuatro direcciones se ajusta como un guante y acompaña cada movimiento.</p><p>El talle alto y la pierna alta alargan ópticamente las piernas y te dan soporte en cada climb. Tu nueva pieza favorita para cada clase de baile.</p><ul class=\"check\"><li>Neopreno ligero con stretch en cuatro direcciones</li><li>Estampado peonies en tonos nude</li><li>Totalmente forrado</li><li>Talle alto</li><li>Pierna alta</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>70% Polyester, 30% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>70% Polyester, 30% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>70% Polyester, 30% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>70% Poliestere, 30% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>70% Poliéster, 30% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Yifan Li trägt Größe S bei 1,67 m Körpergröße, mit 81 cm Brust, 67 cm Taille und 94 cm Hüfte. Peonies fällt größengetreu aus.</p>",
+        "en": "<p>Yifan Li is 1.67 m tall and wears size S, with a 81 cm bust, 67 cm waist and 94 cm hips. Peonies runs true to size.</p>",
+        "fr": "<p>Yifan Li mesure 1,67 m et porte la taille S, avec 81 cm de poitrine, 67 cm de taille et 94 cm de hanches. Peonies taille normalement.</p>",
+        "it": "<p>Yifan Li è alta 1,67 m e indossa la taglia S, con 81 cm di seno, 67 cm di vita e 94 cm di fianchi. Peonies veste fedele alla taglia.</p>",
+        "es": "<p>Yifan Li mide 1,67 m y lleva la talla S, con 81 cm de pecho, 67 cm de cintura y 94 cm de cadera. Peonies talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-DarkRoast-Top": {
+    "merkmal_farbe": "Schwarz",
+    "style_werte": [
+      "Rundausschnitt",
+      "Open Back"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Dark Roast Top, dein schwarzes Trainings-Piece</h2><p>Dein Liebling Black Coffee ist zurück, neu aufgelegt und auf den Punkt geröstet. Der gerippte Stoff folgt jeder Bewegung und gibt dir einen cleanen, satten Look fürs Training.</p><p>Der runde Ausschnitt vorn und der tiefe Rückenausschnitt setzen klare Linien, die Fütterung in Weinrot bringt einen warmen Twist. Nichts sitzt richtiger als ein schwarzes Outfit, wenn du Vollgas gibst.</p><ul class=\"check\"><li>Gerippter Stoff mit viel Stretch</li><li>Tiefschwarze Optik</li><li>Gefüttert in Weinrot</li><li>Runder Ausschnitt</li><li>Tiefer Rückenausschnitt</li></ul>",
+        "en": "<h2>Dark Roast top, your black training piece</h2><p>Your favourite Black Coffee is back, re-roasted to perfection. The ribbed fabric follows every move and gives you a clean, rich look for training.</p><p>The round neckline at the front and the low back cut draw clean lines, and the wine-red lining adds a warm twist. Nothing feels more right than a black outfit when you go full power.</p><ul class=\"check\"><li>Ribbed fabric with plenty of stretch</li><li>Deep black look</li><li>Lined in wine red</li><li>Round neckline</li><li>Low back cut</li></ul>",
+        "fr": "<h2>Dark Roast top, ta pièce noire d'entraînement</h2><p>Ton favori Black Coffee est de retour, torréfié à la perfection. Le tissu côtelé suit chaque mouvement et te donne un look net et profond pour l'entraînement.</p><p>Le décolleté rond devant et le dos échancré dessinent des lignes nettes, et la doublure rouge bordeaux apporte une touche chaleureuse. Rien ne te va mieux qu'une tenue noire quand tu donnes tout.</p><ul class=\"check\"><li>Tissu côtelé bien extensible</li><li>Noir profond</li><li>Doublure rouge bordeaux</li><li>Décolleté rond</li><li>Dos échancré</li></ul>",
+        "it": "<h2>Dark Roast top, il tuo pezzo nero da allenamento</h2><p>Il tuo preferito Black Coffee è tornato, tostato alla perfezione. Il tessuto a coste segue ogni movimento e ti dà un look pulito e intenso per l'allenamento.</p><p>Lo scollo rotondo davanti e la schiena profonda disegnano linee pulite, e la fodera rosso vino aggiunge un tocco caldo. Niente ti sta meglio di un completo nero quando dai il massimo.</p><ul class=\"check\"><li>Tessuto a coste molto elastico</li><li>Nero profondo</li><li>Foderato in rosso vino</li><li>Scollo rotondo</li><li>Schiena profonda</li></ul>",
+        "es": "<h2>Dark Roast top, tu pieza negra de entrenamiento</h2><p>Tu favorito Black Coffee está de vuelta, tostado a la perfección. El tejido de canalé sigue cada movimiento y te da un look limpio e intenso para entrenar.</p><p>El escote redondo delante y la espalda baja trazan líneas limpias, y el forro rojo vino aporta un toque cálido. Nada te queda mejor que un conjunto negro cuando lo das todo.</p><ul class=\"check\"><li>Tejido de canalé con mucha elasticidad</li><li>Negro profundo</li><li>Forrado en rojo vino</li><li>Escote redondo</li><li>Espalda baja</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>87% Polyamid, 13% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>87% Polyamide, 13% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>87% Polyamide, 13% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>87% Poliammide, 13% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>87% Poliamida, 13% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Konstantina trägt Größe M bei 1,78 m Körpergröße, mit 90 cm Brust, 82 cm Taille und 97 cm Hüfte. Dark Roast fällt größengetreu aus.</p>",
+        "en": "<p>Konstantina is 1.78 m tall and wears size M, with a 90 cm bust, 82 cm waist and 97 cm hips. Dark Roast runs true to size.</p>",
+        "fr": "<p>Konstantina mesure 1,78 m et porte la taille M, avec 90 cm de poitrine, 82 cm de taille et 97 cm de hanches. Dark Roast taille normalement.</p>",
+        "it": "<p>Konstantina è alta 1,78 m e indossa la taglia M, con 90 cm di seno, 82 cm di vita e 97 cm di fianchi. Dark Roast veste fedele alla taglia.</p>",
+        "es": "<p>Konstantina mide 1,78 m y lleva la talla M, con 90 cm de pecho, 82 cm de cintura y 97 cm de cadera. Dark Roast talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-DarkRoast-Bottom": {
+    "merkmal_farbe": "Schwarz",
+    "style_werte": [
+      "High Waist",
+      "High Leg"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Dark Roast Shorts, dein schwarzes Trainings-Piece</h2><p>Dein Liebling Black Coffee ist zurück, neu aufgelegt und auf den Punkt geröstet. Der gerippte Stoff folgt jeder Bewegung und gibt dir einen cleanen, satten Look fürs Training.</p><p>Der hohe Bund und der hohe Beinausschnitt verlängern optisch die Beine, die Fütterung in Weinrot bringt einen warmen Twist. Nichts sitzt richtiger als ein schwarzes Outfit, wenn du Vollgas gibst.</p><ul class=\"check\"><li>Gerippter Stoff mit viel Stretch</li><li>Tiefschwarze Optik</li><li>Gefüttert in Weinrot</li><li>Hoher Bund</li><li>Hoher Beinausschnitt</li></ul>",
+        "en": "<h2>Dark Roast shorts, your black training piece</h2><p>Your favourite Black Coffee is back, re-roasted to perfection. The ribbed fabric follows every move and gives you a clean, rich look for training.</p><p>The high waist and high leg rise visually lengthen your legs, and the wine-red lining adds a warm twist. Nothing feels more right than a black outfit when you go full power.</p><ul class=\"check\"><li>Ribbed fabric with plenty of stretch</li><li>Deep black look</li><li>Lined in wine red</li><li>High waist</li><li>High leg rise</li></ul>",
+        "fr": "<h2>Dark Roast short, ta pièce noire d'entraînement</h2><p>Ton favori Black Coffee est de retour, torréfié à la perfection. Le tissu côtelé suit chaque mouvement et te donne un look net et profond pour l'entraînement.</p><p>La taille haute et l'échancrure haute allongent visuellement les jambes, et la doublure rouge bordeaux apporte une touche chaleureuse. Rien ne te va mieux qu'une tenue noire quand tu donnes tout.</p><ul class=\"check\"><li>Tissu côtelé bien extensible</li><li>Noir profond</li><li>Doublure rouge bordeaux</li><li>Taille haute</li><li>Échancrure haute</li></ul>",
+        "it": "<h2>Dark Roast shorts, il tuo pezzo nero da allenamento</h2><p>Il tuo preferito Black Coffee è tornato, tostato alla perfezione. Il tessuto a coste segue ogni movimento e ti dà un look pulito e intenso per l'allenamento.</p><p>La vita alta e la gamba alta allungano otticamente le gambe, e la fodera rosso vino aggiunge un tocco caldo. Niente ti sta meglio di un completo nero quando dai il massimo.</p><ul class=\"check\"><li>Tessuto a coste molto elastico</li><li>Nero profondo</li><li>Foderato in rosso vino</li><li>Vita alta</li><li>Gamba alta</li></ul>",
+        "es": "<h2>Dark Roast shorts, tu pieza negra de entrenamiento</h2><p>Tu favorito Black Coffee está de vuelta, tostado a la perfección. El tejido de canalé sigue cada movimiento y te da un look limpio e intenso para entrenar.</p><p>El talle alto y la pierna alta alargan ópticamente las piernas, y el forro rojo vino aporta un toque cálido. Nada te queda mejor que un conjunto negro cuando lo das todo.</p><ul class=\"check\"><li>Tejido de canalé con mucha elasticidad</li><li>Negro profundo</li><li>Forrado en rojo vino</li><li>Talle alto</li><li>Pierna alta</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>87% Polyamid, 13% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>87% Polyamide, 13% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>87% Polyamide, 13% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>87% Poliammide, 13% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>87% Poliamida, 13% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Konstantina trägt Größe L bei 1,78 m Körpergröße, mit 90 cm Brust, 82 cm Taille und 97 cm Hüfte. Dark Roast fällt größengetreu aus.</p>",
+        "en": "<p>Konstantina is 1.78 m tall and wears size L, with a 90 cm bust, 82 cm waist and 97 cm hips. Dark Roast runs true to size.</p>",
+        "fr": "<p>Konstantina mesure 1,78 m et porte la taille L, avec 90 cm de poitrine, 82 cm de taille et 97 cm de hanches. Dark Roast taille normalement.</p>",
+        "it": "<p>Konstantina è alta 1,78 m e indossa la taglia L, con 90 cm di seno, 82 cm di vita e 97 cm di fianchi. Dark Roast veste fedele alla taglia.</p>",
+        "es": "<p>Konstantina mide 1,78 m y lleva la talla L, con 90 cm de pecho, 82 cm de cintura y 97 cm de cadera. Dark Roast talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-ToffeeLatte-Top": {
+    "merkmal_farbe": "Beige",
+    "style_werte": [
+      "Rundausschnitt",
+      "Open Back"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Toffee Latte Top in cremigem Beige</h2><p>Cremig, süß und auf den Punkt verfeinert. Dein Toffee-Liebling kommt neu aufgelegt in besserer Qualität und Passform und legt sich wie eine zweite Haut um deine Kurven.</p><p>Der gerippte Stoff in milchigem Beige bringt deine Linien zur Geltung, der runde Ausschnitt und der tiefe Rücken halten die Optik clean.</p><ul class=\"check\"><li>Gerippter Stoff mit viel Stretch</li><li>Milchiges Beige</li><li>Gefüttert im selben Ton</li><li>Runder Ausschnitt</li><li>Tiefer Rückenausschnitt</li></ul>",
+        "en": "<h2>Toffee Latte top in creamy beige</h2><p>Creamy, sweet and refined to the point. Your Toffee favourite returns in better quality and fit, hugging your curves like a second skin.</p><p>The ribbed fabric in milky beige shows off your lines, while the round neckline and low back keep the look clean.</p><ul class=\"check\"><li>Ribbed fabric with plenty of stretch</li><li>Milky beige</li><li>Lined in the same tone</li><li>Round neckline</li><li>Low back cut</li></ul>",
+        "fr": "<h2>Toffee Latte top en beige crémeux</h2><p>Crémeux, doux et peaufiné juste comme il faut. Ton favori Toffee revient en meilleure qualité et coupe, et épouse tes courbes comme une seconde peau.</p><p>Le tissu côtelé en beige laiteux met tes lignes en valeur, et le décolleté rond et le dos bas gardent le look net.</p><ul class=\"check\"><li>Tissu côtelé bien extensible</li><li>Beige laiteux</li><li>Doublé dans le même ton</li><li>Décolleté rond</li><li>Dos échancré</li></ul>",
+        "it": "<h2>Toffee Latte top in beige cremoso</h2><p>Cremoso, dolce e rifinito al punto giusto. Il tuo preferito Toffee torna in qualità e vestibilità migliori, e avvolge le tue curve come una seconda pelle.</p><p>Il tessuto a coste in beige latteo valorizza le tue linee, mentre lo scollo rotondo e la schiena bassa mantengono il look pulito.</p><ul class=\"check\"><li>Tessuto a coste molto elastico</li><li>Beige latteo</li><li>Foderato nello stesso tono</li><li>Scollo rotondo</li><li>Schiena profonda</li></ul>",
+        "es": "<h2>Toffee Latte top en beige cremoso</h2><p>Cremoso, dulce y perfilado en su punto. Tu favorito Toffee vuelve en mejor calidad y ajuste, y abraza tus curvas como una segunda piel.</p><p>El tejido de canalé en beige lechoso resalta tus líneas, mientras el escote redondo y la espalda baja mantienen el look limpio.</p><ul class=\"check\"><li>Tejido de canalé con mucha elasticidad</li><li>Beige lechoso</li><li>Forrado en el mismo tono</li><li>Escote redondo</li><li>Espalda baja</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>87% Polyamid, 13% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>87% Polyamide, 13% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>87% Polyamide, 13% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>87% Poliammide, 13% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>87% Poliamida, 13% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Yifan Li trägt Größe S bei 1,67 m Körpergröße, mit 81 cm Brust, 67 cm Taille und 94 cm Hüfte. Toffee Latte fällt größengetreu aus.</p>",
+        "en": "<p>Yifan Li is 1.67 m tall and wears size S, with a 81 cm bust, 67 cm waist and 94 cm hips. Toffee Latte runs true to size.</p>",
+        "fr": "<p>Yifan Li mesure 1,67 m et porte la taille S, avec 81 cm de poitrine, 67 cm de taille et 94 cm de hanches. Toffee Latte taille normalement.</p>",
+        "it": "<p>Yifan Li è alta 1,67 m e indossa la taglia S, con 81 cm di seno, 67 cm di vita e 94 cm di fianchi. Toffee Latte veste fedele alla taglia.</p>",
+        "es": "<p>Yifan Li mide 1,67 m y lleva la talla S, con 81 cm de pecho, 67 cm de cintura y 94 cm de cadera. Toffee Latte talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-ToffeeLatte-Bottom": {
+    "merkmal_farbe": "Beige",
+    "style_werte": [
+      "High Waist",
+      "High Leg"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Toffee Latte Shorts in cremigem Beige</h2><p>Cremig, süß und auf den Punkt verfeinert. Dein Toffee-Liebling kommt neu aufgelegt in besserer Qualität und Passform und legt sich wie eine zweite Haut um deine Kurven.</p><p>Der hohe Bund und der hohe Beinausschnitt verlängern optisch die Beine, der gerippte Stoff in milchigem Beige bringt deine Linien zur Geltung.</p><ul class=\"check\"><li>Gerippter Stoff mit viel Stretch</li><li>Milchiges Beige</li><li>Gefüttert im selben Ton</li><li>Hoher Bund</li><li>Hoher Beinausschnitt</li></ul>",
+        "en": "<h2>Toffee Latte shorts in creamy beige</h2><p>Creamy, sweet and refined to the point. Your Toffee favourite returns in better quality and fit, hugging your curves like a second skin.</p><p>The high waist and high leg rise visually lengthen your legs, and the ribbed fabric in milky beige shows off your lines.</p><ul class=\"check\"><li>Ribbed fabric with plenty of stretch</li><li>Milky beige</li><li>Lined in the same tone</li><li>High waist</li><li>High leg rise</li></ul>",
+        "fr": "<h2>Toffee Latte short en beige crémeux</h2><p>Crémeux, doux et peaufiné juste comme il faut. Ton favori Toffee revient en meilleure qualité et coupe, et épouse tes courbes comme une seconde peau.</p><p>La taille haute et l'échancrure haute allongent visuellement les jambes, et le tissu côtelé en beige laiteux met tes lignes en valeur.</p><ul class=\"check\"><li>Tissu côtelé bien extensible</li><li>Beige laiteux</li><li>Doublé dans le même ton</li><li>Taille haute</li><li>Échancrure haute</li></ul>",
+        "it": "<h2>Toffee Latte shorts in beige cremoso</h2><p>Cremoso, dolce e rifinito al punto giusto. Il tuo preferito Toffee torna in qualità e vestibilità migliori, e avvolge le tue curve come una seconda pelle.</p><p>La vita alta e la gamba alta allungano otticamente le gambe, e il tessuto a coste in beige latteo valorizza le tue linee.</p><ul class=\"check\"><li>Tessuto a coste molto elastico</li><li>Beige latteo</li><li>Foderato nello stesso tono</li><li>Vita alta</li><li>Gamba alta</li></ul>",
+        "es": "<h2>Toffee Latte shorts en beige cremoso</h2><p>Cremoso, dulce y perfilado en su punto. Tu favorito Toffee vuelve en mejor calidad y ajuste, y abraza tus curvas como una segunda piel.</p><p>El talle alto y la pierna alta alargan ópticamente las piernas, y el tejido de canalé en beige lechoso resalta tus líneas.</p><ul class=\"check\"><li>Tejido de canalé con mucha elasticidad</li><li>Beige lechoso</li><li>Forrado en el mismo tono</li><li>Talle alto</li><li>Pierna alta</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>87% Polyamid, 13% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>87% Polyamide, 13% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>87% Polyamide, 13% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>87% Poliammide, 13% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>87% Poliamida, 13% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Yifan Li trägt Größe S bei 1,67 m Körpergröße, mit 81 cm Brust, 67 cm Taille und 94 cm Hüfte. Toffee Latte fällt größengetreu aus.</p>",
+        "en": "<p>Yifan Li is 1.67 m tall and wears size S, with a 81 cm bust, 67 cm waist and 94 cm hips. Toffee Latte runs true to size.</p>",
+        "fr": "<p>Yifan Li mesure 1,67 m et porte la taille S, avec 81 cm de poitrine, 67 cm de taille et 94 cm de hanches. Toffee Latte taille normalement.</p>",
+        "it": "<p>Yifan Li è alta 1,67 m e indossa la taglia S, con 81 cm di seno, 67 cm di vita e 94 cm di fianchi. Toffee Latte veste fedele alla taglia.</p>",
+        "es": "<p>Yifan Li mide 1,67 m y lleva la talla S, con 81 cm de pecho, 67 cm de cintura y 94 cm de cadera. Toffee Latte talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-Arachne-Top-Black": {
+    "merkmal_farbe": "Schwarz",
+    "style_werte": [
+      "Langärmlig",
+      "High Neck"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Arachne Top in tiefem Schwarz</h2><p>Arachne war die begabte Weberin, die die Götter herausforderte und zur ewigen Weberin wurde. Ihr Set trägt diese ungezähmte Energie, mit Mesh und Schnürungen in dunklen, geheimnisvollen Tönen.</p><p>Der hohe Halsausschnitt und die langen Ärmel hüllen dich elegant ein, das satinierte Cut-out und die elastische Schnürung unter der Brust geben dem Look Struktur. Mystisch und selbstbewusst zugleich.</p><ul class=\"check\"><li>Elastischer Mesh-Tüll, vollständig transparent</li><li>Tiefschwarze Optik</li><li>Satiniertes Cut-out-Detail</li><li>Lange Ärmel</li><li>Hoher Halsausschnitt</li></ul>",
+        "en": "<h2>Arachne top in deep black</h2><p>Arachne was the gifted weaver who challenged the gods and was turned into a weaver for eternity. Her set carries that untamed energy, with mesh and lacing in dark, mysterious tones.</p><p>The high neckline and long sleeves wrap you elegantly, while the satin cut-out and the elastic lacing under the bust give the look structure. Mysterious and self-assured at once.</p><ul class=\"check\"><li>Elastic mesh tulle, fully sheer</li><li>Deep black look</li><li>Satin cut-out detail</li><li>Long sleeves</li><li>High neckline</li></ul>",
+        "fr": "<h2>Arachne top en noir profond</h2><p>Arachne était la tisseuse douée qui défia les dieux et fut condamnée à tisser pour l'éternité. Son ensemble porte cette énergie indomptée, avec du mesh et des laçages dans des tons sombres et mystérieux.</p><p>Le col haut et les manches longues t'enveloppent avec élégance, et le cut-out satiné et le laçage élastique sous la poitrine structurent le look. Mystérieuse et sûre de toi à la fois.</p><ul class=\"check\"><li>Mesh tulle élastique, totalement transparent</li><li>Noir profond</li><li>Détail cut-out satiné</li><li>Manches longues</li><li>Col haut</li></ul>",
+        "it": "<h2>Arachne top in nero profondo</h2><p>Arachne era la tessitrice di talento che sfidò gli dèi e fu trasformata in tessitrice per l'eternità. Il suo set porta quell'energia indomita, con mesh e lacci in toni scuri e misteriosi.</p><p>Il collo alto e le maniche lunghe ti avvolgono con eleganza, mentre il cut-out satinato e i lacci elastici sotto il seno danno struttura al look. Misteriosa e sicura di sé allo stesso tempo.</p><ul class=\"check\"><li>Mesh tulle elastico, totalmente trasparente</li><li>Nero profondo</li><li>Dettaglio cut-out satinato</li><li>Maniche lunghe</li><li>Collo alto</li></ul>",
+        "es": "<h2>Arachne top en negro profundo</h2><p>Arachne fue la tejedora talentosa que desafió a los dioses y fue convertida en tejedora para la eternidad. Su conjunto lleva esa energía indomable, con mesh y cordones en tonos oscuros y misteriosos.</p><p>El cuello alto y las mangas largas te envuelven con elegancia, y el cut-out satinado y el cordón elástico bajo el pecho dan estructura al look. Misteriosa y segura de ti a la vez.</p><ul class=\"check\"><li>Mesh tulle elástico, totalmente transparente</li><li>Negro profundo</li><li>Detalle cut-out satinado</li><li>Mangas largas</li><li>Cuello alto</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>92% Polyamid, 8% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>92% Polyamide, 8% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>92% Polyamide, 8% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>92% Poliammide, 8% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>92% Poliamida, 8% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Elena trägt Größe S bei 1,72 m Körpergröße, mit 82 cm Brust, 61 cm Taille und 92 cm Hüfte. Arachne fällt größengetreu aus.</p>",
+        "en": "<p>Elena is 1.72 m tall and wears size S, with a 82 cm bust, 61 cm waist and 92 cm hips. Arachne runs true to size.</p>",
+        "fr": "<p>Elena mesure 1,72 m et porte la taille S, avec 82 cm de poitrine, 61 cm de taille et 92 cm de hanches. Arachne taille normalement.</p>",
+        "it": "<p>Elena è alta 1,72 m e indossa la taglia S, con 82 cm di seno, 61 cm di vita e 92 cm di fianchi. Arachne veste fedele alla taglia.</p>",
+        "es": "<p>Elena mide 1,72 m y lleva la talla S, con 82 cm de pecho, 61 cm de cintura y 92 cm de cadera. Arachne talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-Arachne-Bottom-Black": {
+    "merkmal_farbe": "Schwarz",
+    "style_werte": [
+      "Riemchenshorts"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Arachne Shorts in tiefem Schwarz</h2><p>Arachne war die begabte Weberin, die die Götter herausforderte und zur ewigen Weberin wurde. Ihr Set trägt diese ungezähmte Energie, mit Mesh und Schnürungen in dunklen, geheimnisvollen Tönen.</p><p>Die criss-cross geschnürten Elastikbänder und das satinierte V-Detail vorn und hinten zeichnen klare Linien, der vollständig transparente Tüll macht daraus ein mutiges Statement.</p><ul class=\"check\"><li>Elastischer Mesh-Tüll, vollständig transparent</li><li>Tiefschwarze Optik</li><li>Criss-cross-Schnürung</li><li>Satiniertes V-Detail vorn und hinten</li><li>Schmale Passform</li></ul>",
+        "en": "<h2>Arachne shorts in deep black</h2><p>Arachne was the gifted weaver who challenged the gods and was turned into a weaver for eternity. Her set carries that untamed energy, with mesh and lacing in dark, mysterious tones.</p><p>The criss-cross elastic laces and the satin V detail front and back draw clean lines, and the fully sheer tulle turns it into a bold statement.</p><ul class=\"check\"><li>Elastic mesh tulle, fully sheer</li><li>Deep black look</li><li>Criss-cross lacing</li><li>Satin V detail front and back</li><li>Slim fit</li></ul>",
+        "fr": "<h2>Arachne short en noir profond</h2><p>Arachne était la tisseuse douée qui défia les dieux et fut condamnée à tisser pour l'éternité. Son ensemble porte cette énergie indomptée, avec du mesh et des laçages dans des tons sombres et mystérieux.</p><p>Les lacets élastiques croisés et le détail en V satiné devant et derrière dessinent des lignes nettes, et le tulle totalement transparent en fait un statement audacieux.</p><ul class=\"check\"><li>Mesh tulle élastique, totalement transparent</li><li>Noir profond</li><li>Laçage croisé</li><li>Détail en V satiné devant et derrière</li><li>Coupe ajustée</li></ul>",
+        "it": "<h2>Arachne shorts in nero profondo</h2><p>Arachne era la tessitrice di talento che sfidò gli dèi e fu trasformata in tessitrice per l'eternità. Il suo set porta quell'energia indomita, con mesh e lacci in toni scuri e misteriosi.</p><p>I lacci elastici incrociati e il dettaglio a V satinato davanti e dietro disegnano linee pulite, e il tulle totalmente trasparente lo rende uno statement audace.</p><ul class=\"check\"><li>Mesh tulle elastico, totalmente trasparente</li><li>Nero profondo</li><li>Allacciatura incrociata</li><li>Dettaglio a V satinato davanti e dietro</li><li>Vestibilità aderente</li></ul>",
+        "es": "<h2>Arachne shorts en negro profundo</h2><p>Arachne fue la tejedora talentosa que desafió a los dioses y fue convertida en tejedora para la eternidad. Su conjunto lleva esa energía indomable, con mesh y cordones en tonos oscuros y misteriosos.</p><p>Los cordones elásticos cruzados y el detalle en V satinado delante y detrás trazan líneas limpias, y el tul totalmente transparente lo convierte en un statement atrevido.</p><ul class=\"check\"><li>Mesh tulle elástico, totalmente transparente</li><li>Negro profundo</li><li>Cordones cruzados</li><li>Detalle en V satinado delante y detrás</li><li>Corte ajustado</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>92% Polyamid, 8% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>92% Polyamide, 8% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>92% Polyamide, 8% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>92% Poliammide, 8% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>92% Poliamida, 8% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Elena trägt Größe S bei 1,72 m Körpergröße, mit 82 cm Brust, 61 cm Taille und 92 cm Hüfte. Arachne fällt größengetreu aus.</p>",
+        "en": "<p>Elena is 1.72 m tall and wears size S, with a 82 cm bust, 61 cm waist and 92 cm hips. Arachne runs true to size.</p>",
+        "fr": "<p>Elena mesure 1,72 m et porte la taille S, avec 82 cm de poitrine, 61 cm de taille et 92 cm de hanches. Arachne taille normalement.</p>",
+        "it": "<p>Elena è alta 1,72 m e indossa la taglia S, con 82 cm di seno, 61 cm di vita e 92 cm di fianchi. Arachne veste fedele alla taglia.</p>",
+        "es": "<p>Elena mide 1,72 m y lleva la talla S, con 82 cm de pecho, 61 cm de cintura y 92 cm de cadera. Arachne talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-Arachne-Top-Teal": {
+    "merkmal_farbe": "Blau",
+    "style_werte": [
+      "Langärmlig",
+      "High Neck"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Arachne Top in dunklem Türkis</h2><p>Arachne war die begabte Weberin, die die Götter herausforderte und zur ewigen Weberin wurde. Ihr Set trägt diese ungezähmte Energie, mit Mesh und Schnürungen in dunklen, geheimnisvollen Tönen.</p><p>Der hohe Halsausschnitt und die langen Ärmel hüllen dich elegant ein, das satinierte Türkis-Cut-out und die elastische Schnürung unter der Brust geben dem Look Struktur. Mystisch und selbstbewusst zugleich.</p><ul class=\"check\"><li>Elastischer Mesh-Tüll, vollständig transparent</li><li>Dunkles Türkis</li><li>Satiniertes Türkis-Cut-out</li><li>Lange Ärmel</li><li>Hoher Halsausschnitt</li></ul>",
+        "en": "<h2>Arachne top in dark teal</h2><p>Arachne was the gifted weaver who challenged the gods and was turned into a weaver for eternity. Her set carries that untamed energy, with mesh and lacing in dark, mysterious tones.</p><p>The high neckline and long sleeves wrap you elegantly, while the satin teal cut-out and the elastic lacing under the bust give the look structure. Mysterious and self-assured at once.</p><ul class=\"check\"><li>Elastic mesh tulle, fully sheer</li><li>Dark teal</li><li>Satin teal cut-out</li><li>Long sleeves</li><li>High neckline</li></ul>",
+        "fr": "<h2>Arachne top en turquoise foncé</h2><p>Arachne était la tisseuse douée qui défia les dieux et fut condamnée à tisser pour l'éternité. Son ensemble porte cette énergie indomptée, avec du mesh et des laçages dans des tons sombres et mystérieux.</p><p>Le col haut et les manches longues t'enveloppent avec élégance, et le cut-out turquoise satiné et le laçage élastique sous la poitrine structurent le look. Mystérieuse et sûre de toi à la fois.</p><ul class=\"check\"><li>Mesh tulle élastique, totalement transparent</li><li>Turquoise foncé</li><li>Cut-out turquoise satiné</li><li>Manches longues</li><li>Col haut</li></ul>",
+        "it": "<h2>Arachne top in turchese scuro</h2><p>Arachne era la tessitrice di talento che sfidò gli dèi e fu trasformata in tessitrice per l'eternità. Il suo set porta quell'energia indomita, con mesh e lacci in toni scuri e misteriosi.</p><p>Il collo alto e le maniche lunghe ti avvolgono con eleganza, mentre il cut-out turchese satinato e i lacci elastici sotto il seno danno struttura al look. Misteriosa e sicura di sé allo stesso tempo.</p><ul class=\"check\"><li>Mesh tulle elastico, totalmente trasparente</li><li>Turchese scuro</li><li>Cut-out turchese satinato</li><li>Maniche lunghe</li><li>Collo alto</li></ul>",
+        "es": "<h2>Arachne top en turquesa oscuro</h2><p>Arachne fue la tejedora talentosa que desafió a los dioses y fue convertida en tejedora para la eternidad. Su conjunto lleva esa energía indomable, con mesh y cordones en tonos oscuros y misteriosos.</p><p>El cuello alto y las mangas largas te envuelven con elegancia, y el cut-out turquesa satinado y el cordón elástico bajo el pecho dan estructura al look. Misteriosa y segura de ti a la vez.</p><ul class=\"check\"><li>Mesh tulle elástico, totalmente transparente</li><li>Turquesa oscuro</li><li>Cut-out turquesa satinado</li><li>Mangas largas</li><li>Cuello alto</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>92% Polyamid, 8% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>92% Polyamide, 8% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>92% Polyamide, 8% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>92% Poliammide, 8% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>92% Poliamida, 8% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Maro trägt Größe M bei 1,79 m Körpergröße, mit 82 cm Brust, 66 cm Taille und 97 cm Hüfte. Arachne fällt größengetreu aus.</p>",
+        "en": "<p>Maro is 1.79 m tall and wears size M, with a 82 cm bust, 66 cm waist and 97 cm hips. Arachne runs true to size.</p>",
+        "fr": "<p>Maro mesure 1,79 m et porte la taille M, avec 82 cm de poitrine, 66 cm de taille et 97 cm de hanches. Arachne taille normalement.</p>",
+        "it": "<p>Maro è alta 1,79 m e indossa la taglia M, con 82 cm di seno, 66 cm di vita e 97 cm di fianchi. Arachne veste fedele alla taglia.</p>",
+        "es": "<p>Maro mide 1,79 m y lleva la talla M, con 82 cm de pecho, 66 cm de cintura y 97 cm de cadera. Arachne talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-Arachne-Bottom-Teal": {
+    "merkmal_farbe": "Blau",
+    "style_werte": [
+      "Riemchenshorts"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Arachne Shorts in dunklem Türkis</h2><p>Arachne war die begabte Weberin, die die Götter herausforderte und zur ewigen Weberin wurde. Ihr Set trägt diese ungezähmte Energie, mit Mesh und Schnürungen in dunklen, geheimnisvollen Tönen.</p><p>Die criss-cross geschnürten Elastikbänder und das satinierte Türkis-V-Detail vorn und hinten zeichnen klare Linien, der vollständig transparente Tüll macht daraus ein mutiges Statement.</p><ul class=\"check\"><li>Elastischer Mesh-Tüll, vollständig transparent</li><li>Dunkles Türkis</li><li>Criss-cross-Schnürung</li><li>Satiniertes Türkis-V-Detail</li><li>Schmale Passform</li></ul>",
+        "en": "<h2>Arachne shorts in dark teal</h2><p>Arachne was the gifted weaver who challenged the gods and was turned into a weaver for eternity. Her set carries that untamed energy, with mesh and lacing in dark, mysterious tones.</p><p>The criss-cross elastic laces and the satin teal V detail front and back draw clean lines, and the fully sheer tulle turns it into a bold statement.</p><ul class=\"check\"><li>Elastic mesh tulle, fully sheer</li><li>Dark teal</li><li>Criss-cross lacing</li><li>Satin teal V detail</li><li>Slim fit</li></ul>",
+        "fr": "<h2>Arachne short en turquoise foncé</h2><p>Arachne était la tisseuse douée qui défia les dieux et fut condamnée à tisser pour l'éternité. Son ensemble porte cette énergie indomptée, avec du mesh et des laçages dans des tons sombres et mystérieux.</p><p>Les lacets élastiques croisés et le détail en V turquoise satiné devant et derrière dessinent des lignes nettes, et le tulle totalement transparent en fait un statement audacieux.</p><ul class=\"check\"><li>Mesh tulle élastique, totalement transparent</li><li>Turquoise foncé</li><li>Laçage croisé</li><li>Détail en V turquoise satiné</li><li>Coupe ajustée</li></ul>",
+        "it": "<h2>Arachne shorts in turchese scuro</h2><p>Arachne era la tessitrice di talento che sfidò gli dèi e fu trasformata in tessitrice per l'eternità. Il suo set porta quell'energia indomita, con mesh e lacci in toni scuri e misteriosi.</p><p>I lacci elastici incrociati e il dettaglio a V turchese satinato davanti e dietro disegnano linee pulite, e il tulle totalmente trasparente lo rende uno statement audace.</p><ul class=\"check\"><li>Mesh tulle elastico, totalmente trasparente</li><li>Turchese scuro</li><li>Allacciatura incrociata</li><li>Dettaglio a V turchese satinato</li><li>Vestibilità aderente</li></ul>",
+        "es": "<h2>Arachne shorts en turquesa oscuro</h2><p>Arachne fue la tejedora talentosa que desafió a los dioses y fue convertida en tejedora para la eternidad. Su conjunto lleva esa energía indomable, con mesh y cordones en tonos oscuros y misteriosos.</p><p>Los cordones elásticos cruzados y el detalle en V turquesa satinado delante y detrás trazan líneas limpias, y el tul totalmente transparente lo convierte en un statement atrevido.</p><ul class=\"check\"><li>Mesh tulle elástico, totalmente transparente</li><li>Turquesa oscuro</li><li>Cordones cruzados</li><li>Detalle en V turquesa satinado</li><li>Corte ajustado</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>92% Polyamid, 8% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>92% Polyamide, 8% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>92% Polyamide, 8% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>92% Poliammide, 8% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>92% Poliamida, 8% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Maro trägt Größe M bei 1,79 m Körpergröße, mit 82 cm Brust, 66 cm Taille und 97 cm Hüfte. Arachne fällt größengetreu aus.</p>",
+        "en": "<p>Maro is 1.79 m tall and wears size M, with a 82 cm bust, 66 cm waist and 97 cm hips. Arachne runs true to size.</p>",
+        "fr": "<p>Maro mesure 1,79 m et porte la taille M, avec 82 cm de poitrine, 66 cm de taille et 97 cm de hanches. Arachne taille normalement.</p>",
+        "it": "<p>Maro è alta 1,79 m e indossa la taglia M, con 82 cm di seno, 66 cm di vita e 97 cm di fianchi. Arachne veste fedele alla taglia.</p>",
+        "es": "<p>Maro mide 1,79 m y lleva la talla M, con 82 cm de pecho, 66 cm de cintura y 97 cm de cadera. Arachne talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-Echidna-Top": {
+    "merkmal_farbe": "Braun",
+    "style_werte": [
+      "Triangle Ausschnitt"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Echidna Top in Terrakotta und Plum</h2><p>Weck dein wildes, kantiges Selbst. Das Echidna-Set kombiniert mutige Cutouts und Mesh-Details zu einem Look, der deine Stärke in jeder Performance in Szene setzt.</p><p>Hochwertige, super elastische Texturen geben dir Halt, der tiefe V-Ausschnitt und die Plum-Fütterung setzen Akzente. Athletisch und sleek zugleich.</p><ul class=\"check\"><li>Hochwertiger, elastischer Stoff</li><li>Dunkle Terrakotta- und Plum-Töne</li><li>Voll gefüttert in Plum</li><li>Tiefer V-Ausschnitt</li><li>Atmungsaktiv</li></ul>",
+        "en": "<h2>Echidna top in terracotta and plum</h2><p>Wake up your wild, edgy self. The Echidna set combines bold cutouts and mesh details for a look that puts your strength on show in every performance.</p><p>High-quality, super stretchy textures give you hold, while the deep V neckline and the plum lining set the accents. Athletic and sleek at once.</p><ul class=\"check\"><li>High-quality, stretchy fabric</li><li>Dark terracotta and plum tones</li><li>Fully lined in plum</li><li>Deep V neckline</li><li>Breathable</li></ul>",
+        "fr": "<h2>Echidna top en terracotta et prune</h2><p>Réveille ton moi sauvage et tranchant. L'ensemble Echidna combine des découpes audacieuses et des détails en mesh pour un look qui met ta force en avant à chaque performance.</p><p>Des textures de haute qualité et très extensibles te donnent du maintien, et le décolleté en V profond et la doublure prune posent les accents. Athlétique et sleek à la fois.</p><ul class=\"check\"><li>Tissu de haute qualité et extensible</li><li>Tons terracotta et prune foncés</li><li>Entièrement doublé en prune</li><li>Décolleté en V profond</li><li>Respirant</li></ul>",
+        "it": "<h2>Echidna top in terracotta e prugna</h2><p>Risveglia il tuo io selvaggio e spigoloso. Il set Echidna combina tagli audaci e dettagli in mesh per un look che mette in mostra la tua forza in ogni performance.</p><p>Texture di alta qualità e super elastiche ti danno sostegno, mentre lo scollo a V profondo e la fodera prugna creano gli accenti. Atletico e sleek allo stesso tempo.</p><ul class=\"check\"><li>Tessuto di alta qualità ed elastico</li><li>Tonalità terracotta e prugna scure</li><li>Completamente foderato in prugna</li><li>Scollo a V profondo</li><li>Traspirante</li></ul>",
+        "es": "<h2>Echidna top en terracota y ciruela</h2><p>Despierta tu lado salvaje y afilado. El conjunto Echidna combina cortes atrevidos y detalles de mesh para un look que muestra tu fuerza en cada performance.</p><p>Texturas de alta calidad y muy elásticas te dan soporte, y el escote en V profundo y el forro ciruela ponen los acentos. Atlético y sleek a la vez.</p><ul class=\"check\"><li>Tejido de alta calidad y elástico</li><li>Tonos terracota y ciruela oscuros</li><li>Totalmente forrado en ciruela</li><li>Escote en V profundo</li><li>Transpirable</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>80% Polyamid, 20% Elasthan.</p><p>Handwäsche oder Maschinenwäsche bei 40°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>80% Polyamide, 20% Spandex.</p><p>Hand or machine wash at 40°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>80% Polyamide, 20% Élasthanne.</p><p>Lavage à la main ou en machine à 40°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>80% Poliammide, 20% Elastan.</p><p>Lavare a mano o in lavatrice a 40°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>80% Poliamida, 20% Elastano.</p><p>Lavar a mano o a máquina a 40°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Maro trägt Größe M bei 1,79 m Körpergröße, mit 82 cm Brust, 66 cm Taille und 97 cm Hüfte. Echidna fällt größengetreu aus.</p>",
+        "en": "<p>Maro is 1.79 m tall and wears size M, with a 82 cm bust, 66 cm waist and 97 cm hips. Echidna runs true to size.</p>",
+        "fr": "<p>Maro mesure 1,79 m et porte la taille M, avec 82 cm de poitrine, 66 cm de taille et 97 cm de hanches. Echidna taille normalement.</p>",
+        "it": "<p>Maro è alta 1,79 m e indossa la taglia M, con 82 cm di seno, 66 cm di vita e 97 cm di fianchi. Echidna veste fedele alla taglia.</p>",
+        "es": "<p>Maro mide 1,79 m y lleva la talla M, con 82 cm de pecho, 66 cm de cintura y 97 cm de cadera. Echidna talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-Echidna-Bottom": {
+    "merkmal_farbe": "Braun",
+    "style_werte": [
+      "High Waist"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Echidna Shorts in Terrakotta und Plum</h2><p>Weck dein wildes, kantiges Selbst. Das Echidna-Set kombiniert mutige Cutouts und Mesh-Details zu einem Look, der deine Stärke in jeder Performance in Szene setzt.</p><p>Der hohe Bund und die seitlichen Mesh-Cutouts formen die Silhouette, die super elastische Textur gibt dir Halt bei jeder Bewegung.</p><ul class=\"check\"><li>Hochwertiger, elastischer Stoff</li><li>Dunkle Terrakotta- und Plum-Töne</li><li>Voll gefüttert in Plum-Mesh</li><li>Hoher Bund</li><li>Seitliche Mesh-Cutouts</li></ul>",
+        "en": "<h2>Echidna shorts in terracotta and plum</h2><p>Wake up your wild, edgy self. The Echidna set combines bold cutouts and mesh details for a look that puts your strength on show in every performance.</p><p>The high waist and the side mesh cutouts shape your silhouette, while the super stretchy texture gives you hold in every move.</p><ul class=\"check\"><li>High-quality, stretchy fabric</li><li>Dark terracotta and plum tones</li><li>Fully lined in plum mesh</li><li>High waist</li><li>Side mesh cutouts</li></ul>",
+        "fr": "<h2>Echidna short en terracotta et prune</h2><p>Réveille ton moi sauvage et tranchant. L'ensemble Echidna combine des découpes audacieuses et des détails en mesh pour un look qui met ta force en avant à chaque performance.</p><p>La taille haute et les découpes en mesh sur les côtés dessinent la silhouette, et la texture très extensible te donne du maintien dans chaque mouvement.</p><ul class=\"check\"><li>Tissu de haute qualité et extensible</li><li>Tons terracotta et prune foncés</li><li>Entièrement doublé en mesh prune</li><li>Taille haute</li><li>Découpes mesh sur les côtés</li></ul>",
+        "it": "<h2>Echidna shorts in terracotta e prugna</h2><p>Risveglia il tuo io selvaggio e spigoloso. Il set Echidna combina tagli audaci e dettagli in mesh per un look che mette in mostra la tua forza in ogni performance.</p><p>La vita alta e i tagli in mesh sui lati modellano la silhouette, mentre la texture super elastica ti dà sostegno in ogni movimento.</p><ul class=\"check\"><li>Tessuto di alta qualità ed elastico</li><li>Tonalità terracotta e prugna scure</li><li>Completamente foderato in mesh prugna</li><li>Vita alta</li><li>Tagli in mesh sui lati</li></ul>",
+        "es": "<h2>Echidna shorts en terracota y ciruela</h2><p>Despierta tu lado salvaje y afilado. El conjunto Echidna combina cortes atrevidos y detalles de mesh para un look que muestra tu fuerza en cada performance.</p><p>El talle alto y los cortes de mesh en los laterales moldean la silueta, y la textura muy elástica te da soporte en cada movimiento.</p><ul class=\"check\"><li>Tejido de alta calidad y elástico</li><li>Tonos terracota y ciruela oscuros</li><li>Totalmente forrado en mesh ciruela</li><li>Talle alto</li><li>Cortes de mesh laterales</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>80% Polyamid, 20% Elasthan.</p><p>Handwäsche oder Maschinenwäsche bei 40°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>80% Polyamide, 20% Spandex.</p><p>Hand or machine wash at 40°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>80% Polyamide, 20% Élasthanne.</p><p>Lavage à la main ou en machine à 40°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>80% Poliammide, 20% Elastan.</p><p>Lavare a mano o in lavatrice a 40°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>80% Poliamida, 20% Elastano.</p><p>Lavar a mano o a máquina a 40°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Maro trägt Größe M bei 1,79 m Körpergröße, mit 82 cm Brust, 66 cm Taille und 97 cm Hüfte. Echidna fällt größengetreu aus.</p>",
+        "en": "<p>Maro is 1.79 m tall and wears size M, with a 82 cm bust, 66 cm waist and 97 cm hips. Echidna runs true to size.</p>",
+        "fr": "<p>Maro mesure 1,79 m et porte la taille M, avec 82 cm de poitrine, 66 cm de taille et 97 cm de hanches. Echidna taille normalement.</p>",
+        "it": "<p>Maro è alta 1,79 m e indossa la taglia M, con 82 cm di seno, 66 cm di vita e 97 cm di fianchi. Echidna veste fedele alla taglia.</p>",
+        "es": "<p>Maro mide 1,79 m y lleva la talla M, con 82 cm de pecho, 66 cm de cintura y 97 cm de cadera. Echidna talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-Lynx-Top": {
+    "merkmal_farbe": "Bunt",
+    "style_werte": [
+      "Langärmlig"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Lynx Top mit Leopardenprint</h2><p>Zeig deine Raubkatzen-Energie. Das Lynx-Set kombiniert schwarzen Mesh-Tüll mit Leopardenprint-Details und markanten Cuts für einen Look mit Biss.</p><p>Das bedruckte Scuba-Brustband mit schwarzer Fütterung gibt Struktur, die langen Ärmel machen daraus ein echtes Statement. Ein dekorativer Ring setzt das Highlight.</p><ul class=\"check\"><li>Schwarzer Mesh-Tüll</li><li>Leopardenprint-Details</li><li>Bedrucktes Scuba-Brustband</li><li>Lange Ärmel</li><li>Dekorativer Ring vorn</li></ul>",
+        "en": "<h2>Lynx top with leopard print</h2><p>Show your feline energy. The Lynx set combines black mesh tulle with leopard print details and bold cuts for a look with bite.</p><p>The printed scuba chest band with black lining adds structure, while the long sleeves turn it into a real statement. A decorative ring sets the highlight.</p><ul class=\"check\"><li>Black mesh tulle</li><li>Leopard print details</li><li>Printed scuba chest band</li><li>Long sleeves</li><li>Decorative ring at the front</li></ul>",
+        "fr": "<h2>Lynx top à imprimé léopard</h2><p>Montre ton énergie féline. L'ensemble Lynx associe le tulle mesh noir à des détails imprimé léopard et des coupes marquées pour un look qui a du mordant.</p><p>La bande poitrine en scuba imprimé avec doublure noire apporte de la structure, et les manches longues en font un vrai statement. Un anneau décoratif pose le point fort.</p><ul class=\"check\"><li>Tulle mesh noir</li><li>Détails imprimé léopard</li><li>Bande poitrine scuba imprimée</li><li>Manches longues</li><li>Anneau décoratif sur le devant</li></ul>",
+        "it": "<h2>Lynx top con stampa leopardo</h2><p>Mostra la tua energia felina. Il set Lynx unisce il tulle mesh nero a dettagli stampa leopardo e tagli decisi per un look che ha mordente.</p><p>La fascia pettorale in scuba stampato con fodera nera aggiunge struttura, e le maniche lunghe lo rendono un vero statement. Un anello decorativo crea il punto luce.</p><ul class=\"check\"><li>Tulle mesh nero</li><li>Dettagli stampa leopardo</li><li>Fascia pettorale in scuba stampato</li><li>Maniche lunghe</li><li>Anello decorativo sul davanti</li></ul>",
+        "es": "<h2>Lynx top con estampado de leopardo</h2><p>Muestra tu energía felina. El conjunto Lynx combina tul mesh negro con detalles de estampado de leopardo y cortes marcados para un look con carácter.</p><p>La banda de pecho de scuba estampado con forro negro aporta estructura, y las mangas largas lo convierten en un verdadero statement. Un anillo decorativo pone el acento.</p><ul class=\"check\"><li>Tul mesh negro</li><li>Detalles de estampado de leopardo</li><li>Banda de pecho de scuba estampado</li><li>Mangas largas</li><li>Anillo decorativo en el frente</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>Bedruckter Stoff 87% Polyester, 13% Elasthan. Tüll 92% Polyamid, 8% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>Printed fabric 87% Polyester, 13% Spandex. Tulle 92% Polyamide, 8% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>Tissu imprimé 87% Polyester, 13% Élasthanne. Tulle 92% Polyamide, 8% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>Tessuto stampato 87% Poliestere, 13% Elastan. Tulle 92% Poliammide, 8% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>Tejido estampado 87% Poliéster, 13% Elastano. Tul 92% Poliamida, 8% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Aphroditi trägt Größe M bei 1,77 m Körpergröße, mit 85 cm Brust, 65 cm Taille und 96 cm Hüfte. Lynx fällt größengetreu aus.</p>",
+        "en": "<p>Aphroditi is 1.77 m tall and wears size M, with a 85 cm bust, 65 cm waist and 96 cm hips. Lynx runs true to size.</p>",
+        "fr": "<p>Aphroditi mesure 1,77 m et porte la taille M, avec 85 cm de poitrine, 65 cm de taille et 96 cm de hanches. Lynx taille normalement.</p>",
+        "it": "<p>Aphroditi è alta 1,77 m e indossa la taglia M, con 85 cm di seno, 65 cm di vita e 96 cm di fianchi. Lynx veste fedele alla taglia.</p>",
+        "es": "<p>Aphroditi mide 1,77 m y lleva la talla M, con 85 cm de pecho, 65 cm de cintura y 96 cm de cadera. Lynx talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-Lynx-Bottom": {
+    "merkmal_farbe": "Bunt",
+    "style_werte": [
+      "Mid Waist"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Lynx Shorts mit Leopardenprint</h2><p>Zeig deine Raubkatzen-Energie. Das Lynx-Set kombiniert schwarzen Mesh-Tüll mit Leopardenprint-Details und markanten Cuts für einen Look mit Biss.</p><p>Der Leoparden-bedruckte Scuba-Mittelteil und das Taillenband treffen auf schwarzen Mesh-Tüll an den Seiten, schwarze Fütterung in allen Printteilen sorgt für Halt.</p><ul class=\"check\"><li>Schwarzer Mesh-Tüll an den Seiten</li><li>Leopardenprint im Mittelteil</li><li>Schwarze Fütterung</li><li>Dekorativer Ring vorn</li><li>Moderate Bedeckung</li></ul>",
+        "en": "<h2>Lynx shorts with leopard print</h2><p>Show your feline energy. The Lynx set combines black mesh tulle with leopard print details and bold cuts for a look with bite.</p><p>The leopard-printed scuba middle part and the waist band meet black mesh tulle at the sides, and black lining in all printed parts keeps the hold.</p><ul class=\"check\"><li>Black mesh tulle at the sides</li><li>Leopard print in the middle part</li><li>Black lining</li><li>Decorative ring at the front</li><li>Moderate coverage</li></ul>",
+        "fr": "<h2>Lynx short à imprimé léopard</h2><p>Montre ton énergie féline. L'ensemble Lynx associe le tulle mesh noir à des détails imprimé léopard et des coupes marquées pour un look qui a du mordant.</p><p>La partie centrale en scuba imprimé léopard et la ceinture rencontrent le tulle mesh noir sur les côtés, et la doublure noire sur toutes les parties imprimées assure le maintien.</p><ul class=\"check\"><li>Tulle mesh noir sur les côtés</li><li>Imprimé léopard sur la partie centrale</li><li>Doublure noire</li><li>Anneau décoratif sur le devant</li><li>Couverture modérée</li></ul>",
+        "it": "<h2>Lynx shorts con stampa leopardo</h2><p>Mostra la tua energia felina. Il set Lynx unisce il tulle mesh nero a dettagli stampa leopardo e tagli decisi per un look che ha mordente.</p><p>La parte centrale in scuba stampato leopardo e la fascia in vita incontrano il tulle mesh nero sui lati, e la fodera nera in tutte le parti stampate mantiene il sostegno.</p><ul class=\"check\"><li>Tulle mesh nero sui lati</li><li>Stampa leopardo nella parte centrale</li><li>Fodera nera</li><li>Anello decorativo sul davanti</li><li>Copertura moderata</li></ul>",
+        "es": "<h2>Lynx shorts con estampado de leopardo</h2><p>Muestra tu energía felina. El conjunto Lynx combina tul mesh negro con detalles de estampado de leopardo y cortes marcados para un look con carácter.</p><p>La parte central de scuba estampado de leopardo y la banda de cintura se unen al tul mesh negro en los laterales, y el forro negro en todas las partes estampadas mantiene el soporte.</p><ul class=\"check\"><li>Tul mesh negro en los laterales</li><li>Estampado de leopardo en la parte central</li><li>Forro negro</li><li>Anillo decorativo en el frente</li><li>Cobertura moderada</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>Bedruckter Stoff 87% Polyester, 13% Elasthan. Tüll 92% Polyamid, 8% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>Printed fabric 87% Polyester, 13% Spandex. Tulle 92% Polyamide, 8% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>Tissu imprimé 87% Polyester, 13% Élasthanne. Tulle 92% Polyamide, 8% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>Tessuto stampato 87% Poliestere, 13% Elastan. Tulle 92% Poliammide, 8% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>Tejido estampado 87% Poliéster, 13% Elastano. Tul 92% Poliamida, 8% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Aphroditi trägt Größe M bei 1,77 m Körpergröße, mit 85 cm Brust, 65 cm Taille und 96 cm Hüfte. Lynx fällt größengetreu aus.</p>",
+        "en": "<p>Aphroditi is 1.77 m tall and wears size M, with a 85 cm bust, 65 cm waist and 96 cm hips. Lynx runs true to size.</p>",
+        "fr": "<p>Aphroditi mesure 1,77 m et porte la taille M, avec 85 cm de poitrine, 65 cm de taille et 96 cm de hanches. Lynx taille normalement.</p>",
+        "it": "<p>Aphroditi è alta 1,77 m e indossa la taglia M, con 85 cm di seno, 65 cm di vita e 96 cm di fianchi. Lynx veste fedele alla taglia.</p>",
+        "es": "<p>Aphroditi mide 1,77 m y lleva la talla M, con 85 cm de pecho, 65 cm de cintura y 96 cm de cadera. Lynx talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-Savanna-Top-Mauve": {
+    "merkmal_farbe": "Lila",
+    "style_werte": [
+      "Riemchentop"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Savanna Top im Mauve-Ton</h2><p>Earthy Vibes, die dein Herz erobern. Der neue Mauve-Ton bringt deinen Bestseller-Liebling Savanna in frischer, verbesserter Qualität. Ob im Studio oder am Strand, alle schauen hin.</p><p>Die verstellbaren Front-Schnürungen und die Tie-around-Bänder passen sich deiner Form an, die Fütterung in Dunkelrot bringt Tiefe.</p><ul class=\"check\"><li>Voll gefüttert in Dunkelrot</li><li>Mauve-Ton</li><li>Verstellbare Front-Schnürung</li><li>Tie-around-Bänder</li><li>Limitierte Farbe</li></ul>",
+        "en": "<h2>Savanna top in mauve</h2><p>Earthy vibes that win your heart. The new mauve shade brings your best-seller favourite Savanna in fresh, improved quality. Whether in the studio or at the beach, everyone is looking.</p><p>The adjustable front laces and the tie-around straps adapt to your shape, and the dark red lining adds depth.</p><ul class=\"check\"><li>Fully lined in dark red</li><li>Mauve shade</li><li>Adjustable front lacing</li><li>Tie-around straps</li><li>Limited colour</li></ul>",
+        "fr": "<h2>Savanna top en mauve</h2><p>Des vibes earthy qui conquièrent ton cœur. La nouvelle teinte mauve apporte ton best-seller favori Savanna dans une qualité fraîche et améliorée. Au studio ou à la plage, tous les regards se tournent.</p><p>Les laçages réglables sur le devant et les liens à nouer s'adaptent à ta forme, et la doublure rouge foncé apporte de la profondeur.</p><ul class=\"check\"><li>Entièrement doublé en rouge foncé</li><li>Teinte mauve</li><li>Laçage réglable sur le devant</li><li>Liens à nouer</li><li>Couleur limitée</li></ul>",
+        "it": "<h2>Savanna top in mauve</h2><p>Vibe earthy che conquistano il cuore. La nuova tonalità mauve porta il tuo best-seller preferito Savanna in qualità fresca e migliorata. In studio o in spiaggia, tutti ti guardano.</p><p>I lacci frontali regolabili e i nastri da annodare si adattano alla tua forma, e la fodera rosso scuro aggiunge profondità.</p><ul class=\"check\"><li>Completamente foderato in rosso scuro</li><li>Tonalità mauve</li><li>Allacciatura frontale regolabile</li><li>Nastri da annodare</li><li>Colore limitato</li></ul>",
+        "es": "<h2>Savanna top en mauve</h2><p>Vibes earthy que conquistan tu corazón. El nuevo tono mauve trae tu favorito best-seller Savanna en calidad fresca y mejorada. En el estudio o en la playa, todos miran.</p><p>Los cordones frontales ajustables y las cintas para atar se adaptan a tu forma, y el forro rojo oscuro aporta profundidad.</p><ul class=\"check\"><li>Totalmente forrado en rojo oscuro</li><li>Tono mauve</li><li>Cordón frontal ajustable</li><li>Cintas para atar</li><li>Color limitado</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>80% Polyamid, 20% Elasthan.</p><p>Handwäsche oder Maschinenwäsche bei 40°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>80% Polyamide, 20% Spandex.</p><p>Hand or machine wash at 40°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>80% Polyamide, 20% Élasthanne.</p><p>Lavage à la main ou en machine à 40°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>80% Poliammide, 20% Elastan.</p><p>Lavare a mano o in lavatrice a 40°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>80% Poliamida, 20% Elastano.</p><p>Lavar a mano o a máquina a 40°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Vika trägt Größe S bei 1,75 m Körpergröße, mit 84 cm Brust, 60 cm Taille und 90 cm Hüfte. Savanna fällt größengetreu aus.</p>",
+        "en": "<p>Vika is 1.75 m tall and wears size S, with a 84 cm bust, 60 cm waist and 90 cm hips. Savanna runs true to size.</p>",
+        "fr": "<p>Vika mesure 1,75 m et porte la taille S, avec 84 cm de poitrine, 60 cm de taille et 90 cm de hanches. Savanna taille normalement.</p>",
+        "it": "<p>Vika è alta 1,75 m e indossa la taglia S, con 84 cm di seno, 60 cm di vita e 90 cm di fianchi. Savanna veste fedele alla taglia.</p>",
+        "es": "<p>Vika mide 1,75 m y lleva la talla S, con 84 cm de pecho, 60 cm de cintura y 90 cm de cadera. Savanna talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-Savanna-Bottom-Mauve": {
+    "merkmal_farbe": "Lila",
+    "style_werte": [
+      "High Leg"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Savanna Shorts im Mauve-Ton</h2><p>Earthy Vibes, die dein Herz erobern. Der neue Mauve-Ton bringt deinen Bestseller-Liebling Savanna in frischer, verbesserter Qualität. Ob im Studio oder am Strand, alle schauen hin.</p><p>Der hohe Beinausschnitt verlängert optisch die Beine, die Cut-out-Details an der Seite setzen Akzente. Perfekt abgestimmt auf das Savanna Mauve Top.</p><ul class=\"check\"><li>Voll gefüttert in Dunkelrot</li><li>Mauve-Ton</li><li>Hoher Beinausschnitt</li><li>Seitliche Cut-out-Details</li><li>Limitierte Farbe</li></ul>",
+        "en": "<h2>Savanna shorts in mauve</h2><p>Earthy vibes that win your heart. The new mauve shade brings your best-seller favourite Savanna in fresh, improved quality. Whether in the studio or at the beach, everyone is looking.</p><p>The high leg rise visually lengthens your legs, and the side cut-out details set the accents. A perfect match for the Savanna mauve top.</p><ul class=\"check\"><li>Fully lined in dark red</li><li>Mauve shade</li><li>High leg rise</li><li>Side cut-out details</li><li>Limited colour</li></ul>",
+        "fr": "<h2>Savanna short en mauve</h2><p>Des vibes earthy qui conquièrent ton cœur. La nouvelle teinte mauve apporte ton best-seller favori Savanna dans une qualité fraîche et améliorée. Au studio ou à la plage, tous les regards se tournent.</p><p>L'échancrure haute allonge visuellement les jambes, et les détails découpés sur les côtés posent les accents. Le match parfait avec le top Savanna mauve.</p><ul class=\"check\"><li>Entièrement doublé en rouge foncé</li><li>Teinte mauve</li><li>Échancrure haute</li><li>Détails découpés sur les côtés</li><li>Couleur limitée</li></ul>",
+        "it": "<h2>Savanna shorts in mauve</h2><p>Vibe earthy che conquistano il cuore. La nuova tonalità mauve porta il tuo best-seller preferito Savanna in qualità fresca e migliorata. In studio o in spiaggia, tutti ti guardano.</p><p>La gamba alta allunga otticamente le gambe, e i dettagli con taglio sui lati creano gli accenti. L'abbinamento perfetto con il top Savanna mauve.</p><ul class=\"check\"><li>Completamente foderato in rosso scuro</li><li>Tonalità mauve</li><li>Gamba alta</li><li>Dettagli con taglio sui lati</li><li>Colore limitato</li></ul>",
+        "es": "<h2>Savanna shorts en mauve</h2><p>Vibes earthy que conquistan tu corazón. El nuevo tono mauve trae tu favorito best-seller Savanna en calidad fresca y mejorada. En el estudio o en la playa, todos miran.</p><p>La pierna alta alarga ópticamente las piernas, y los detalles de corte en los laterales ponen los acentos. El match perfecto con el top Savanna mauve.</p><ul class=\"check\"><li>Totalmente forrado en rojo oscuro</li><li>Tono mauve</li><li>Pierna alta</li><li>Detalles de corte laterales</li><li>Color limitado</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>80% Polyamid, 20% Elasthan.</p><p>Handwäsche oder Maschinenwäsche bei 40°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>80% Polyamide, 20% Spandex.</p><p>Hand or machine wash at 40°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>80% Polyamide, 20% Élasthanne.</p><p>Lavage à la main ou en machine à 40°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>80% Poliammide, 20% Elastan.</p><p>Lavare a mano o in lavatrice a 40°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>80% Poliamida, 20% Elastano.</p><p>Lavar a mano o a máquina a 40°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Vika trägt Größe S bei 1,75 m Körpergröße, mit 84 cm Brust, 60 cm Taille und 90 cm Hüfte. Savanna fällt größengetreu aus.</p>",
+        "en": "<p>Vika is 1.75 m tall and wears size S, with a 84 cm bust, 60 cm waist and 90 cm hips. Savanna runs true to size.</p>",
+        "fr": "<p>Vika mesure 1,75 m et porte la taille S, avec 84 cm de poitrine, 60 cm de taille et 90 cm de hanches. Savanna taille normalement.</p>",
+        "it": "<p>Vika è alta 1,75 m e indossa la taglia S, con 84 cm di seno, 60 cm di vita e 90 cm di fianchi. Savanna veste fedele alla taglia.</p>",
+        "es": "<p>Vika mide 1,75 m y lleva la talla S, con 84 cm de pecho, 60 cm de cintura y 90 cm de cadera. Savanna talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-Savanna-Top-Original": {
+    "merkmal_farbe": "Bunt",
+    "style_werte": [
+      "Open Back",
+      "Samt"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Savanna Original Top mit Zebra-Print</h2><p>Ihr habt gerufen, wir haben geliefert. Die Original Savanna ist zurück und neu interpretiert. Zebra-Print trifft auf brandneue Samt-Optik. Die O.G. der Savanna-Designs bleibt.</p><p>Der gescoopte Rücken und die langen Elastikbänder zum Binden geben dir Freiheit beim Styling, die strukturierte Samt-Optik macht den Look besonders.</p><ul class=\"check\"><li>Strukturierter Zebra-Print</li><li>Samt-Optik</li><li>Gescoopter Rücken</li><li>Lange Bänder zum Binden</li><li>Minimaler Halt</li></ul>",
+        "en": "<h2>Savanna Original top with zebra print</h2><p>You called, we delivered. The original Savanna is back and re-imagined. Zebra print meets a brand-new velvet look. The O.G. of the Savanna designs is here to stay.</p><p>The scooped back and the long elastic ties give you freedom to style, and the textured velvet look makes it special.</p><ul class=\"check\"><li>Textured zebra print</li><li>Velvet look</li><li>Scooped back</li><li>Long ties to wrap</li><li>Minimum support</li></ul>",
+        "fr": "<h2>Savanna Original top à imprimé zèbre</h2><p>Vous avez demandé, on a livré. La Savanna originale est de retour et réinventée. L'imprimé zèbre rencontre un tout nouveau look velours. La O.G. des designs Savanna est là pour rester.</p><p>Le dos échancré et les longs liens élastiques à nouer te donnent la liberté de styliser, et le look velours texturé le rend spécial.</p><ul class=\"check\"><li>Imprimé zèbre texturé</li><li>Look velours</li><li>Dos échancré</li><li>Longs liens à nouer</li><li>Maintien minimal</li></ul>",
+        "it": "<h2>Savanna Original top con stampa zebra</h2><p>Avete chiamato, abbiamo risposto. La Savanna originale è tornata e reinterpretata. La stampa zebra incontra un nuovissimo look velluto. La O.G. dei design Savanna è qui per restare.</p><p>La schiena scollata e i lunghi nastri elastici da annodare ti danno libertà di stile, e il look velluto testurizzato lo rende speciale.</p><ul class=\"check\"><li>Stampa zebra testurizzata</li><li>Look velluto</li><li>Schiena scollata</li><li>Lunghi nastri da annodare</li><li>Sostegno minimo</li></ul>",
+        "es": "<h2>Savanna Original top con estampado de cebra</h2><p>Lo pedisteis, lo entregamos. La Savanna original está de vuelta y reinventada. El estampado de cebra se encuentra con un nuevo look de terciopelo. La O.G. de los diseños Savanna llegó para quedarse.</p><p>La espalda escotada y las largas cintas elásticas para atar te dan libertad de estilo, y el look de terciopelo texturizado lo hace especial.</p><ul class=\"check\"><li>Estampado de cebra texturizado</li><li>Look de terciopelo</li><li>Espalda escotada</li><li>Cintas largas para atar</li><li>Soporte mínimo</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>92% Polyester, 8% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>92% Polyester, 8% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>92% Polyester, 8% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>92% Poliestere, 8% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>92% Poliéster, 8% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Yifan Lee trägt Größe S bei 1,67 m Körpergröße, mit 85 cm Brust, 63 cm Taille und 90 cm Hüfte. Savanna fällt etwas klein aus.</p>",
+        "en": "<p>Yifan Lee is 1.67 m tall and wears size S, with a 85 cm bust, 63 cm waist and 90 cm hips. Savanna runs a bit small.</p>",
+        "fr": "<p>Yifan Lee mesure 1,67 m et porte la taille S, avec 85 cm de poitrine, 63 cm de taille et 90 cm de hanches. Savanna taille un peu petit.</p>",
+        "it": "<p>Yifan Lee è alta 1,67 m e indossa la taglia S, con 85 cm di seno, 63 cm di vita e 90 cm di fianchi. Savanna veste un po' piccolo.</p>",
+        "es": "<p>Yifan Lee mide 1,67 m y lleva la talla S, con 85 cm de pecho, 63 cm de cintura y 90 cm de cadera. Savanna talla un poco pequeño.</p>"
+      }
+    }
+  },
+  "HC-Savanna-Bottom-Original": {
+    "merkmal_farbe": "Bunt",
+    "style_werte": [
+      "High Waist",
+      "High Leg",
+      "Samt"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Savanna Original Shorts mit Zebra-Print</h2><p>Ihr habt gerufen, wir haben geliefert. Die Original Savanna ist zurück und neu interpretiert. Zebra-Print trifft auf brandneue Samt-Optik. Die O.G. der Savanna-Designs bleibt.</p><p>Der hohe Bund und der hohe Beinausschnitt strecken die Silhouette, die asymmetrischen Cut-out-Details setzen Akzente. Die strukturierte Samt-Optik macht den Look besonders.</p><ul class=\"check\"><li>Strukturierter Zebra-Print</li><li>Samt-Optik</li><li>Hoher Bund</li><li>Hoher Beinausschnitt</li><li>Asymmetrische Cut-out-Details</li></ul>",
+        "en": "<h2>Savanna Original shorts with zebra print</h2><p>You called, we delivered. The original Savanna is back and re-imagined. Zebra print meets a brand-new velvet look. The O.G. of the Savanna designs is here to stay.</p><p>The high waist and high leg rise stretch your silhouette, and the asymmetric cut-out details set the accents. The textured velvet look makes it special.</p><ul class=\"check\"><li>Textured zebra print</li><li>Velvet look</li><li>High waist</li><li>High leg rise</li><li>Asymmetric cut-out details</li></ul>",
+        "fr": "<h2>Savanna Original short à imprimé zèbre</h2><p>Vous avez demandé, on a livré. La Savanna originale est de retour et réinventée. L'imprimé zèbre rencontre un tout nouveau look velours. La O.G. des designs Savanna est là pour rester.</p><p>La taille haute et l'échancrure haute étirent la silhouette, et les détails découpés asymétriques posent les accents. Le look velours texturé le rend spécial.</p><ul class=\"check\"><li>Imprimé zèbre texturé</li><li>Look velours</li><li>Taille haute</li><li>Échancrure haute</li><li>Détails découpés asymétriques</li></ul>",
+        "it": "<h2>Savanna Original shorts con stampa zebra</h2><p>Avete chiamato, abbiamo risposto. La Savanna originale è tornata e reinterpretata. La stampa zebra incontra un nuovissimo look velluto. La O.G. dei design Savanna è qui per restare.</p><p>La vita alta e la gamba alta allungano la silhouette, e i dettagli con taglio asimmetrico creano gli accenti. Il look velluto testurizzato lo rende speciale.</p><ul class=\"check\"><li>Stampa zebra testurizzata</li><li>Look velluto</li><li>Vita alta</li><li>Gamba alta</li><li>Dettagli con taglio asimmetrico</li></ul>",
+        "es": "<h2>Savanna Original shorts con estampado de cebra</h2><p>Lo pedisteis, lo entregamos. La Savanna original está de vuelta y reinventada. El estampado de cebra se encuentra con un nuevo look de terciopelo. La O.G. de los diseños Savanna llegó para quedarse.</p><p>El talle alto y la pierna alta estilizan la silueta, y los detalles de corte asimétrico ponen los acentos. El look de terciopelo texturizado lo hace especial.</p><ul class=\"check\"><li>Estampado de cebra texturizado</li><li>Look de terciopelo</li><li>Talle alto</li><li>Pierna alta</li><li>Detalles de corte asimétrico</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>92% Polyester, 8% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>92% Polyester, 8% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>92% Polyester, 8% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>92% Poliestere, 8% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>92% Poliéster, 8% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Yifan Lee trägt Größe S bei 1,67 m Körpergröße, mit 85 cm Brust, 63 cm Taille und 90 cm Hüfte. Savanna fällt klein aus, wir empfehlen eine Nummer größer.</p>",
+        "en": "<p>Yifan Lee is 1.67 m tall and wears size S, with a 85 cm bust, 63 cm waist and 90 cm hips. Savanna runs small, we recommend sizing up.</p>",
+        "fr": "<p>Yifan Lee mesure 1,67 m et porte la taille S, avec 85 cm de poitrine, 63 cm de taille et 90 cm de hanches. Savanna taille petit, prends une taille au-dessus.</p>",
+        "it": "<p>Yifan Lee è alta 1,67 m e indossa la taglia S, con 85 cm di seno, 63 cm di vita e 90 cm di fianchi. Savanna veste piccolo, consigliamo una taglia in più.</p>",
+        "es": "<p>Yifan Lee mide 1,67 m y lleva la talla S, con 85 cm de pecho, 63 cm de cintura y 90 cm de cadera. Savanna talla pequeño, recomendamos una talla más.</p>"
+      }
+    }
+  },
+  "HC-Savanna-Top-Sky": {
+    "merkmal_farbe": "Blau",
+    "style_werte": [
+      "Samt"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Savanna Top in Himmelblau aus Samt</h2><p>Die größte Liebe von allen. Dein Lieblings-Savanna-Design, jetzt in Samt, um deinen Tag zum Leuchten zu bringen.</p><p>Die hochwertige Samt-Optik und die asymmetrischen Cut-out-Details machen den Look besonders, der weiche Griff schmeichelt der Haut.</p><ul class=\"check\"><li>Hochwertige Samt-Optik</li><li>Himmelblauer Ton</li><li>Asymmetrische Cut-out-Details</li><li>Weicher Griff</li><li>Mittlerer Halt</li></ul>",
+        "en": "<h2>Savanna top in sky velvet</h2><p>The biggest love of them all. Your favourite Savanna design, now in velvet, to light up your day.</p><p>The high-quality velvet look and the asymmetric cut-out details make it special, and the soft hand flatters your skin.</p><ul class=\"check\"><li>High-quality velvet look</li><li>Sky shade</li><li>Asymmetric cut-out details</li><li>Soft hand</li><li>Medium support</li></ul>",
+        "fr": "<h2>Savanna top en velours bleu ciel</h2><p>Le plus grand amour de tous. Ton design Savanna favori, désormais en velours, pour illuminer ta journée.</p><p>Le look velours de haute qualité et les détails découpés asymétriques le rendent spécial, et le toucher doux flatte ta peau.</p><ul class=\"check\"><li>Look velours de haute qualité</li><li>Teinte bleu ciel</li><li>Détails découpés asymétriques</li><li>Toucher doux</li><li>Maintien moyen</li></ul>",
+        "it": "<h2>Savanna top in velluto azzurro cielo</h2><p>Il più grande amore di tutti. Il tuo design Savanna preferito, ora in velluto, per illuminare la tua giornata.</p><p>Il look velluto di alta qualità e i dettagli con taglio asimmetrico lo rendono speciale, e il tatto morbido valorizza la pelle.</p><ul class=\"check\"><li>Look velluto di alta qualità</li><li>Tonalità azzurro cielo</li><li>Dettagli con taglio asimmetrico</li><li>Tatto morbido</li><li>Sostegno medio</li></ul>",
+        "es": "<h2>Savanna top en terciopelo azul cielo</h2><p>El amor más grande de todos. Tu diseño Savanna favorito, ahora en terciopelo, para iluminar tu día.</p><p>El look de terciopelo de alta calidad y los detalles de corte asimétrico lo hacen especial, y el tacto suave favorece tu piel.</p><ul class=\"check\"><li>Look de terciopelo de alta calidad</li><li>Tono azul cielo</li><li>Detalles de corte asimétrico</li><li>Tacto suave</li><li>Soporte medio</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>90% Polyester, 10% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>90% Polyester, 10% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>90% Polyester, 10% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>90% Poliestere, 10% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>90% Poliéster, 10% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Elena trägt Größe M bei 1,72 m Körpergröße. Savanna fällt größengetreu aus.</p>",
+        "en": "<p>Elena is 1.72 m tall and wears size M. Savanna runs true to size.</p>",
+        "fr": "<p>Elena mesure 1,72 m et porte la taille M. Savanna taille normalement.</p>",
+        "it": "<p>Elena è alta 1,72 m e indossa la taglia M. Savanna veste fedele alla taglia.</p>",
+        "es": "<p>Elena mide 1,72 m y lleva la talla M. Savanna talla de forma fiel.</p>"
+      }
+    }
+  },
+  "HC-Savanna-Bottom-Sky": {
+    "merkmal_farbe": "Blau",
+    "style_werte": [
+      "High Waist",
+      "High Leg",
+      "Samt"
+    ],
+    "attribute": {
+      "artikeldetails": {
+        "de": "<h2>Savanna Shorts in Himmelblau aus Samt</h2><p>Die größte Liebe von allen. Dein Lieblings-Savanna-Design, jetzt in Samt, um deinen Tag zum Leuchten zu bringen.</p><p>Der hohe Bund und der hohe Beinausschnitt strecken die Silhouette, die hochwertige Samt-Optik macht den Look besonders.</p><ul class=\"check\"><li>Hochwertige Samt-Optik</li><li>Himmelblauer Ton</li><li>Hoher Bund</li><li>Hoher Beinausschnitt</li><li>Weicher Griff</li></ul>",
+        "en": "<h2>Savanna shorts in sky velvet</h2><p>The biggest love of them all. Your favourite Savanna design, now in velvet, to light up your day.</p><p>The high waist and high leg rise stretch your silhouette, and the high-quality velvet look makes it special.</p><ul class=\"check\"><li>High-quality velvet look</li><li>Sky shade</li><li>High waist</li><li>High leg rise</li><li>Soft hand</li></ul>",
+        "fr": "<h2>Savanna short en velours bleu ciel</h2><p>Le plus grand amour de tous. Ton design Savanna favori, désormais en velours, pour illuminer ta journée.</p><p>La taille haute et l'échancrure haute étirent la silhouette, et le look velours de haute qualité le rend spécial.</p><ul class=\"check\"><li>Look velours de haute qualité</li><li>Teinte bleu ciel</li><li>Taille haute</li><li>Échancrure haute</li><li>Toucher doux</li></ul>",
+        "it": "<h2>Savanna shorts in velluto azzurro cielo</h2><p>Il più grande amore di tutti. Il tuo design Savanna preferito, ora in velluto, per illuminare la tua giornata.</p><p>La vita alta e la gamba alta allungano la silhouette, e il look velluto di alta qualità lo rende speciale.</p><ul class=\"check\"><li>Look velluto di alta qualità</li><li>Tonalità azzurro cielo</li><li>Vita alta</li><li>Gamba alta</li><li>Tatto morbido</li></ul>",
+        "es": "<h2>Savanna shorts en terciopelo azul cielo</h2><p>El amor más grande de todos. Tu diseño Savanna favorito, ahora en terciopelo, para iluminar tu día.</p><p>El talle alto y la pierna alta estilizan la silueta, y el look de terciopelo de alta calidad lo hace especial.</p><ul class=\"check\"><li>Look de terciopelo de alta calidad</li><li>Tono azul cielo</li><li>Talle alto</li><li>Pierna alta</li><li>Tacto suave</li></ul>"
+      },
+      "material_and_care": {
+        "de": "<p>90% Polyester, 10% Elasthan.</p><p>Handwäsche bei 30°C, nicht bleichen, nicht in den Trockner, nicht bügeln, nicht chemisch reinigen.</p>",
+        "en": "<p>90% Polyester, 10% Spandex.</p><p>Hand wash at 30°C, do not bleach, do not tumble dry, do not iron, do not dry clean.</p>",
+        "fr": "<p>90% Polyester, 10% Élasthanne.</p><p>Lavage à la main à 30°C, ne pas blanchir, ne pas sécher en machine, ne pas repasser, ne pas nettoyer à sec.</p>",
+        "it": "<p>90% Poliestere, 10% Elastan.</p><p>Lavare a mano a 30°C, non candeggiare, non asciugare in asciugatrice, non stirare, non lavare a secco.</p>",
+        "es": "<p>90% Poliéster, 10% Elastano.</p><p>Lavar a mano a 30°C, no usar lejía, no secar en secadora, no planchar, no limpiar en seco.</p>"
+      },
+      "size_and_fit": {
+        "de": "<p>Elena trägt Größe M bei 1,72 m Körpergröße. Savanna fällt klein aus, wir empfehlen eine Nummer größer.</p>",
+        "en": "<p>Elena is 1.72 m tall and wears size M. Savanna runs small, we recommend sizing up.</p>",
+        "fr": "<p>Elena mesure 1,72 m et porte la taille M. Savanna taille petit, prends une taille au-dessus.</p>",
+        "it": "<p>Elena è alta 1,72 m e indossa la taglia M. Savanna veste piccolo, consigliamo una taglia in più.</p>",
+        "es": "<p>Elena mide 1,72 m y lleva la talla M. Savanna talla pequeño, recomendamos una talla más.</p>"
+      }
+    }
+  }
+}
