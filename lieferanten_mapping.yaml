@@ -208,7 +208,7 @@ lieferanten:
   ROLLING_CLOTHING:
     anzeigename: "Rolling Brand"     # = WaWi-Lieferantenname (Lieferant-Spalte Merkmale/Attribute muss exakt matchen)
     kuerzel: ROLLING
-    hersteller: "Rolling Clothing"
+    hersteller: "Rolling"           # WaWi-Herstellername (muss matchen)
     marke_kurz: "Rolling"           # Präfix vor dem Artikelnamen (z.B. "Rolling Top Ceci Schwarz")
     artnr_prefix: RO                # Artikelnummer-Präfix (analog HC bei HotCakes)
     herkunftsland: BR
