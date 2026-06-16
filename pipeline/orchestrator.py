@@ -24,6 +24,9 @@ SUPPLIERS = {
     "rolling":  {"key": "ROLLING_CLOTHING", "ek": "ek_rolling_april26.csv",
                  "content": "rolling_content.json", "builder": "rolling",
                  "scope": "Rechnung APRIL26 (4 Ceci)"},
+    "lunalae":  {"key": "LUNALAE", "ek": "ek_lunalae_3124.csv",
+                 "content": "lunalae_content.json", "builder": "lunalae",
+                 "scope": "Rechnung #3124 (Diamante May Release)"},
 }
 
 

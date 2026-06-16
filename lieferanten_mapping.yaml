@@ -147,33 +147,69 @@ lieferanten:
     bemerkung: "Stammdaten + Variationen + Merkmale + Attribute Import 2026-05-14 erfolgreich (3 Väter + 13 Kinder). R2-Migration für Arachne Bottom Black 2026-05-15 erfolgreich. v1.13-Generalprobe 2026-05-16. **Live-Trial-Runs Batch 1+2 abgeschlossen 2026-05-17:** 21 Modelle (10 Väter Batch 1 + 11 Väter Batch 2 + 84 Kinder), alle 5 CSVs importiert, 16/16 Self-Check grün in beiden Batches. Cross-Selling-CSV unified mit 36 Beziehungen (vor Kinder-Erweiterung; mit E80-Erweiterung v1.15 jetzt 180 Zeilen für Vater UND alle Kinder). Bekannte Schwester-Artikel im HotCakes-Sortiment, die NICHT in der Lieferung waren und später nachgezogen werden können: Arachne Tan/Cherry T+B, Savanna Black/Skin/Emerald/Lime/Heat T+B, Peonies Bodysuit-skin-tones. Bei Nachzug: Cross-Selling-Family-Refresh-Modus (E80-Erweiterung 3, siehe cowork_anweisung_datenimports.md)."
 
   LUNALAE:
-    anzeigename: "Lunalae"
+    anzeigename: "Lunalae"          # = WaWi-Lieferantenname (Nr. 1047)
     kuerzel: LUNALAE
-    hersteller: Lunalae
-    herkunftsland: null
-    waehrung: null
+    hersteller: "Lunalae"           # WaWi-Herstellername
+    marke_kurz: "Lunalae"           # Präfix vor dem Artikelnamen
+    artnr_prefix: LU
+    herkunftsland: AU
+    waehrung: AUD
+    fx_to_eur: 0.6104               # Tageskurs 2026-06-15 (AUD->EUR); EK*fx, dann *2 -> ,90
     steuerklasse: "OSS2-undefiniert - Standard alle Länder"
-    shop_url: null
+    shop_url: https://www.lunalae.com
     fallback_retailer_url: null
     drive_ordner_id: null
     drive_eingang_id: null
     r2_prefix: lunalae
-    lieferantennummer_wawi: null
-    article_weight_kg: 0.05     # NEU v1.16 (F3/B56) — Default für Pole-Bekleidung, bei Onboarding ggf. override
-    taric_code: '62114390'      # NEU v1.16 (F6/B59) — TARIC für Pole-Bekleidung
-    groessen_konvention: null
-    category: fashion           # NEU mit E45 — Default-Annahme, Lunalae ist Polewear-Lieferant
-    crop_profile: fashion       # NEU mit E45
-    pose_sort: auto_vision      # NEU mit E45
-    crawl_mechanik: null        # NEU mit E48 — beim Onboarding detektieren
+    lieferantennummer_wawi: 1047
+    article_weight_kg: 0.05
+    taric_code: '62114390'
+    groessen_konvention: au_to_xs_xl   # AU 6/8/10/12/14 -> XS/S/M/L/XL (Tjorben-Vorgabe; AU16 nicht übernommen)
+    category: fashion
+    crop_profile: fashion
+    pose_sort: manufacturer_order
+    crawl_mechanik: shopify_json       # lunalae.com ist Shopify, offen (products.json), 566 Produkte
+    # Brand-Story ENTWURF (E70, von Claude geschrieben, Tjorben-Review): australische Polewear-Marke
+    brand_story_de: |
+      Lunalae ist eine australische Polewear-Marke, die Bewegung und
+      Selbstbewusstsein in den Mittelpunkt stellt. Funktionale Schnitte
+      treffen auf glänzende Details und mutige Designs, gemacht für die
+      Stange und die Bühne. Lunalae denkt Größen inklusiv und feiert jeden
+      Körper. Wenn du Lunalae trägst, trägst du ein Stück Selbstvertrauen,
+      das mit dir performt.
+    brand_story_en: |
+      Lunalae is an Australian polewear label built around movement and
+      confidence. Functional cuts meet shimmering details and bold designs,
+      made for the pole and the stage. Lunalae thinks size inclusive and
+      celebrates every body. When you wear Lunalae, you wear a piece of
+      confidence that performs with you.
+    brand_story_fr: |
+      Lunalae est une marque australienne de polewear pensée autour du
+      mouvement et de la confiance. Des coupes fonctionnelles rencontrent
+      des détails brillants et des designs audacieux, faits pour la barre et
+      la scène. Lunalae pense en tailles inclusives et célèbre chaque corps.
+      Quand tu portes Lunalae, tu portes une dose de confiance qui performe
+      avec toi.
+    brand_story_it: |
+      Lunalae è un marchio australiano di polewear costruito attorno al
+      movimento e alla sicurezza in sé. Tagli funzionali incontrano dettagli
+      scintillanti e design audaci, fatti per il palo e per il palco.
+      Lunalae pensa in taglie inclusive e celebra ogni corpo. Quando indossi
+      Lunalae, indossi una dose di sicurezza che performa con te.
+    brand_story_es: |
+      Lunalae es una marca australiana de polewear centrada en el movimiento
+      y la confianza. Cortes funcionales se encuentran con detalles
+      brillantes y diseños atrevidos, hechos para la barra y el escenario.
+      Lunalae piensa en tallas inclusivas y celebra cada cuerpo. Cuando
+      llevas Lunalae, llevas una dosis de confianza que actúa contigo.
     ameise_vorlagen:
       stammdaten:       null
       variationen:      null
       merkmale:         null
       attribute:        null
-      cross_selling:    null    # NEU v1.14 (E80)
-    max_groesse: null   # NEU v1.15
-    bemerkung: "Onboarding ausstehend. Bei Anlage gemäß E29-Naming-Konvention `Lunalae_1_Stammdaten` etc. (5 Vorlagen pro Lieferant ab v1.14, E80). Stammdaten-Vorlage muss Bild-Spalten 1-10 mappen und im Reiter Bilder/Plattformen alle 11 Häkchen setzen. Standardlieferant in jeder Vorlage explizit setzen (Bug-Lehre 2026-05-17)."
+      cross_selling:    null
+    max_groesse: null
+    bemerkung: "Onboarding 2026-06-15 (3. Lieferant via Code-Pipeline). Shopify, offen. Erst-Lieferung Rechnung #3124 (B2B, AUD): NUR die Diamante-May-Release-Artikel im Scope (Lookbook), Rest der Rechnung = Restock/out-of-scope. 10 Väter (Imogen/Demi/Sarah/Roxie-Top/Roxie-Bottoms × Schwarz/Taupe/Flieder). AU6-14 → XS-XL. Brand-Story ist Claude-Entwurf (E70) — Tjorben prüfen/ersetzen."
 
   POLE_JUNKIE:
     anzeigename: "Pole Junkie"

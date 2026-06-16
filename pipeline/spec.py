@@ -95,6 +95,8 @@ COLOR_LOOKUP = {
     "mauve": {"de": "Mauve", "en": "Mauve", "fr": "Mauve", "it": "Mauve", "es": "Mauve", "merkmal": "Lila"},
     "tan":   {"de": "Tan", "en": "Tan", "fr": "Tan", "it": "Tan", "es": "Tan", "merkmal": "Beige"},
     "skin":  {"de": "Skin", "en": "Skin", "fr": "Skin", "it": "Skin", "es": "Skin", "merkmal": "Beige"},
+    "taupe": {"de": "Taupe", "en": "Taupe", "fr": "Taupe", "it": "Taupe", "es": "Taupe", "merkmal": "Beige"},
+    "lilac": {"de": "Flieder", "en": "Lilac", "fr": "Lilas", "it": "Lilla", "es": "Lila", "merkmal": "Lila"},
     # Print-Familien (§6/§7): identisch; Merkmal-Farbe = Bunt (Default Multi-Print)
     "original": {"de": "Original", "en": "Original", "fr": "Original", "it": "Original", "es": "Original", "merkmal": "Bunt"},
     "heat":     {"de": "Heat", "en": "Heat", "fr": "Heat", "it": "Heat", "es": "Heat", "merkmal": "Bunt"},
