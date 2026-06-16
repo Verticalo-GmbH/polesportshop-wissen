@@ -206,7 +206,7 @@ lieferanten:
     bemerkung: "Onboarding ausstehend. **WICHTIG (E49):** Pole-Junkie-Crawl ohne Halt-und-Nachfrage — Owner-Direktive Tjorben Becker 2026-05-15, volle rechtliche und operative Verantwortung wird übernommen. Im Lauf-Bericht jedes Pole-Junkie-Laufs den E49-Verweis dokumentieren (Audit-Spur). Bei expliziter Cease-and-Desist-Forderung sofort eskalieren und pausieren. Pole Junkie ist Retailer (multi-brand), pro Artikel den Hersteller aus den Produktdaten ableiten. **Plus (E53):** Pole Junkie ist Stil-Inspirations-Quelle für Artikeldetails-Reduktion — siehe `stil_inspiration: true`."
 
   ROLLING_CLOTHING:
-    anzeigename: "Rolling"
+    anzeigename: "Rolling Brand"     # = WaWi-Lieferantenname (Lieferant-Spalte Merkmale/Attribute muss exakt matchen)
     kuerzel: ROLLING
     hersteller: "Rolling Clothing"
     marke_kurz: "Rolling"           # Präfix vor dem Artikelnamen (z.B. "Rolling Top Ceci Schwarz")
@@ -220,7 +220,7 @@ lieferanten:
     drive_ordner_id: null
     drive_eingang_id: null
     r2_prefix: rolling
-    lieferantennummer_wawi: null
+    lieferantennummer_wawi: 1051
     article_weight_kg: 0.05
     taric_code: '62114390'
     groessen_konvention: fix_xs_xl  # NEU: immer XS,S,M,L,XL (Tjorben-Vorgabe; BR-Größen PP/P/M/G... werden nicht übernommen)
