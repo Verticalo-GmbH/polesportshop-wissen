@@ -14,19 +14,23 @@ def run(stammdaten, variationen, merkmale, attribute, crossselling, vaeter) -> l
 
     vnrs = {spec.vater_artnr(v.garment_type, v.modell_basis, v.farbe_raw) for v in vaeter}
 
-    chk(1, "Stammdaten 48 Spalten", len(spec.STAMMDATEN_COLUMNS) == 48)
+    # Weg B (E94): Artikelnummer = vorab vergebene A-Nummer (nicht leer).
+    vater_artnrs = {v.artikelnummer for v in vaeter}
+    art_set = all(r["Artikelnummer"] for r in stammdaten)
+    chk(1, "Stammdaten 48 Spalten + Artikelnummer gesetzt (Weg B)",
+        len(spec.STAMMDATEN_COLUMNS) == 48 and art_set)
 
-    # Multi-Kategorie: pro Vater 3 Zeilen, pro Kind 2
+    # Multi-Kategorie: pro Vater 3 Zeilen, pro Kind 2 — gruppiert über A-Nummer
     from collections import Counter
     artnr_rows = Counter(r["Artikelnummer"] for r in stammdaten)
-    vater_ok = all(artnr_rows[nr] == 3 for nr in vnrs)
+    vater_ok = all(artnr_rows[nr] == 3 for nr in vater_artnrs)
     kind_nrs = [r["Artikelnummer"] for r in stammdaten if r["Identifizierungsspalte Vaterartikel"]]
     kind_ok = all(c == 2 for c in Counter(kind_nrs).values())
     chk(2, "Multi-Kategorie Vater=3 / Kind=2 Zeilen", vater_ok and kind_ok)
 
     # Sara-Zeile pro Vater genau 1
     sara = Counter(r["Artikelnummer"] for r in stammdaten if r["Kategorie Ebene 2"] == spec.SARA_EBENE2)
-    chk(3, "Sara-546-Zeile je Vater", all(sara[nr] == 1 for nr in vnrs))
+    chk(3, "Sara-546-Zeile je Vater", all(sara[nr] == 1 for nr in vater_artnrs))
 
     # SEO nur auf Vater (Kinder leer)
     seo_on_kind = [r for r in stammdaten if r["Identifizierungsspalte Vaterartikel"] and r.get("Titel-Tag (SEO)")]
@@ -34,7 +38,7 @@ def run(stammdaten, variationen, merkmale, attribute, crossselling, vaeter) -> l
 
     # Bottom -> Shorts im DE-Namen
     bad_bottom = [r["Artikelname"] for r in stammdaten
-                  if r["Artikelnummer"].split("_")[0].count("-Bottom") and " Bottom " in f" {r['Artikelname']} "]
+                  if r["Artikelnummer (Lieferant)"].split("_")[0].count("-Bottom") and " Bottom " in f" {r['Artikelname']} "]
     chk(5, "Bottom->Shorts im DE-Namen (E76)", not bad_bottom, str(bad_bottom[:2]))
 
     # Farb-Lokalisierung teal->Türkis
@@ -58,7 +62,7 @@ def run(stammdaten, variationen, merkmale, attribute, crossselling, vaeter) -> l
 
     # Farbe Kleidung auf Vater UND Kind
     farbe_arts = {r["Artikelnummer (Lieferant)"] for r in merkmale if r["Merkmalname"] == "Farbe Kleidung"}
-    all_arts = {r["Artikelnummer"] for r in stammdaten}
+    all_arts = {r["Artikelnummer (Lieferant)"] for r in stammdaten}
     chk(11, "Farbe Kleidung auf Vater+Kind dupliziert", all_arts <= farbe_arts)
 
     # Attribute: 4 je Artikel, 5 Sprachen non-empty
@@ -70,10 +74,10 @@ def run(stammdaten, variationen, merkmale, attribute, crossselling, vaeter) -> l
     full = all(all(r[c] for c in langcols) for r in attribute)
     chk(13, "Attribute alle 5 Sprachen befüllt", full)
 
-    # Cross-Selling: rechte Spalte nur Väter, linke enthält Kinder
-    right_ok = all(r["Artikelnummer Cross-Seller"] in vnrs for r in crossselling)
-    left_has_kids = any("_" in r["Artikelnummer"] for r in crossselling)
-    chk(14, "Cross-Selling rechts nur Väter", right_ok)
+    # Cross-Selling (Weg B: über A-Nummer): rechts nur Väter, links inkl. Kinder
+    right_ok = all(r["Artikelnummer Cross-Seller"] in vater_artnrs for r in crossselling)
+    left_has_kids = any(r["Artikelnummer"] not in vater_artnrs for r in crossselling)
+    chk(14, "Cross-Selling rechts nur Väter (A-Nummer)", right_ok)
     chk(15, "Cross-Selling Kinder-Replikation links", left_has_kids or not crossselling)
 
     # Preise: VK = EK*2 -> ,90 (Komma-Dezimal)

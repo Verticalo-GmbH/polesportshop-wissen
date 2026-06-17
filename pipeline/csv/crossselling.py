@@ -24,9 +24,9 @@ _PARTNER = {"Top": "Bottom", "Bottom": "Top"}  # Bodysuit hat keinen Outfit-Part
 
 
 def _ids_links(v: Vater) -> list[str]:
-    """Linke Spalte: Vater + alle Kinder (Kinder-Replikation)."""
-    vnr = spec.vater_artnr(v.garment_type, v.modell_basis, v.farbe_raw)
-    return [vnr] + [spec.kind_artnr(vnr, k.groesse) for k in v.kinder]
+    """Linke Spalte: Vater + alle Kinder (Kinder-Replikation). Weg B (E94):
+    Verknüpfung über die vorab vergebene A-Nummer."""
+    return [v.artikelnummer] + [k.artikelnummer for k in v.kinder]
 
 
 def build_rows(vaeter: list[Vater]) -> list[dict]:
@@ -39,9 +39,8 @@ def build_rows(vaeter: list[Vater]) -> list[dict]:
     rows: list[dict] = []
 
     def add_relation(a: Vater, b: Vater, gruppe: str):
-        bnr = spec.vater_artnr(b.garment_type, b.modell_basis, b.farbe_raw)
         for left in _ids_links(a):
-            rows.append({"Artikelnummer": left, "Artikelnummer Cross-Seller": bnr,
+            rows.append({"Artikelnummer": left, "Artikelnummer Cross-Seller": b.artikelnummer,
                          "Cross-Selling-Gruppe": gruppe})
 
     for v in vaeter:

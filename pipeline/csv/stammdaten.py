@@ -61,6 +61,9 @@ def _seo_fields(names: dict[str, str]) -> dict:
 def build_rows(vaeter: list[Vater], supplier: dict, run_date: str) -> list[dict]:
     marke = supplier["marke_kurz"]
     rows: list[dict] = []
+    # Weg B (E94): Artikelnummer = vorab vergebene A-Nummer aus dem WaWi-Nummernkreis
+    # (numbering.assign). Verknüpfung Vater<->Kind + Cross-Selling über die A-Nummer;
+    # der sprechende Schlüssel bleibt in 'Artikelnummer (Lieferant)' für Merkmale/Attribute.
     for v in vaeter:
         vnr = spec.vater_artnr(v.garment_type, v.modell_basis, v.farbe_raw)
         vnames = _names(marke, v.garment_type, v.modell_basis, v.farbe_raw)
@@ -70,7 +73,7 @@ def build_rows(vaeter: list[Vater], supplier: dict, run_date: str) -> list[dict]
         for ebene1, ebene2 in _kategorie_rows(True, v.garment_type):
             r = _base_row(supplier, run_date)
             r.update({
-                "Artikelnummer": vnr, "Artikelnummer (Lieferant)": vnr,
+                "Artikelnummer": v.artikelnummer, "Artikelnummer (Lieferant)": vnr,
                 "Identifizierungsspalte Vaterartikel": "",
                 "Artikelname": vnames["de"],
                 "Variationsname 1": "Größe", "Variationswert 1": "",
@@ -93,8 +96,8 @@ def build_rows(vaeter: list[Vater], supplier: dict, run_date: str) -> list[dict]
             for ebene1, ebene2 in _kategorie_rows(False, v.garment_type):
                 r = _base_row(supplier, run_date)
                 r.update({
-                    "Artikelnummer": knr, "Artikelnummer (Lieferant)": knr,
-                    "Identifizierungsspalte Vaterartikel": vnr,
+                    "Artikelnummer": k.artikelnummer, "Artikelnummer (Lieferant)": knr,
+                    "Identifizierungsspalte Vaterartikel": v.artikelnummer,
                     "Artikelname": knames["de"],
                     "Variationsname 1": "Größe", "Variationswert 1": k.groesse,
                     "Kategorie Ebene 1": ebene1, "Kategorie Ebene 2": ebene2,

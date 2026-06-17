@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from . import config, extract, pricing, spec, content as C, selfcheck
+from . import config, extract, pricing, spec, numbering, content as C, selfcheck
 from .crawl import shopify_json
 from .csv import stammdaten, variationen, merkmale, attribute, crossselling
 from .csv._writer import write_csv
@@ -34,7 +34,8 @@ SUPPLIERS = {
 
 
 def run(supplier: str = "hotcakes", stamp: str | None = None,
-        with_images: bool = False) -> dict:
+        with_images: bool = False, start_artnr: int | None = None,
+        persist_counter: bool = False) -> dict:
     cfg = SUPPLIERS[supplier]
     stamp = stamp or datetime.now().strftime("%Y-%m-%d_%H%M")
     run_date = datetime.now().strftime("%d.%m.%Y")
@@ -54,6 +55,9 @@ def run(supplier: str = "hotcakes", stamp: str | None = None,
     # Pricing (EK aus Rechnung; fx falls Nicht-EUR)
     ek_map = pricing.load_ek_csv(config.EK_INPUT_DIR / cfg["ek"])
     priced, missing = pricing.apply_pricing(keep, ek_map, fx)
+
+    # Weg B (E94): A-Nummern aus dem WaWi-Nummernkreis vorab vergeben.
+    artnr_next = numbering.assign(priced, start=start_artnr, persist=persist_counter)
 
     if with_images:
         _run_images(priced, sup)
@@ -92,7 +96,9 @@ def run(supplier: str = "hotcakes", stamp: str | None = None,
         write_csv(p, cols, rows, quote_all=qa)
         written[typ] = (p, len(rows))
 
-    report = _report(sup, cfg, priced, missing, review, exclude, checks, written, stamp, with_images)
+    artnr_range = (priced[0].artikelnummer, priced[-1].artikelnummer, artnr_next) if priced else None
+    report = _report(sup, cfg, priced, missing, review, exclude, checks, written, stamp,
+                     with_images, artnr_range)
     (out / f"run_{stamp}_{kz}.md").write_text(report, encoding="utf-8")
 
     return {"out": out, "priced": priced, "missing": missing, "checks": checks,
@@ -118,14 +124,19 @@ def _run_images(priced, sup) -> None:
     r2.build_master_index(client)
 
 
-def _report(sup, cfg, priced, missing, review, exclude, checks, written, stamp, with_images) -> str:
+def _report(sup, cfg, priced, missing, review, exclude, checks, written, stamp,
+            with_images, artnr_range=None) -> str:
     n_ok = sum(1 for c in checks if c[2])
     kz = sup["kuerzel"]
     L = [f"# Lauf-Bericht {sup['anzeigename']} {stamp}", "",
          f"**Lieferant:** {sup['anzeigename']} ({kz}) | **Pipeline:** lokal (Claude Code)",
          f"**Scope:** {len(priced)} Väter ({cfg['scope']}), {sum(len(v.kinder) for v in priced)} Kinder",
-         f"**Währung:** EK {sup.get('waehrung','EUR')}, fx_to_eur {sup.get('fx_to_eur', 1.0)}", "",
-         "## Self-Check (16 Punkte)", ""]
+         f"**Währung:** EK {sup.get('waehrung','EUR')}, fx_to_eur {sup.get('fx_to_eur', 1.0)}", ""]
+    if artnr_range:
+        L += [f"**Nummernkreis (Weg B, E94):** Väter {artnr_range[0]}–{artnr_range[1]} "
+              f"(+ Kinder -001…). WaWi-Zähler 'Laufende Nummer' nach Import auf "
+              f"**{artnr_range[2]}** setzen.", ""]
+    L += ["## Self-Check (16 Punkte)", ""]
     for n, name, passed, detail in checks:
         L.append(f"[#{n}] {'✓' if passed else '✗'} {name}{(' — ' + detail) if detail else ''}")
     L += ["", f"**Self-Check: {n_ok}/16 {'GRÜN' if n_ok == 16 else 'ROT'}**", "", "## Outputs", ""]

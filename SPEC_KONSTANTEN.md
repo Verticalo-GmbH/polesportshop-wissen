@@ -676,6 +676,7 @@ Repo-Meta-Files NICHT im Snapshot-Count: `README.md` (GitHub-Visitor-Doku), `.gi
 | E91 | COWORK-INFRA | Skalierungs-Refactor v1.20 — Verschlankung, neue Anker, Cowork-Resolver auf GitHub-Raw (B63 erledigt) |
 | E92 | CRAWLING-DATEN | Trial-Findings v1.20 — Multi-Kategorie auf 3-Zeilen-Pattern korrigiert (Oberkategorie + Subkategorie + Sara-546), Farb-Lokalisierung DE (Teal→Türkis, Sky→Himmelblau, Cherry→Kirschrot, Emerald→Smaragdgrün, Lime→Limettengrün) |
 | E93 | BILDPIPELINE | Bildpipeline reaktiviert (kehrt E63 um) — Stage 5.6+5.7 wieder aktiv, R2-Architektur unverändert, Spec von Stub auf v2.1 voll-aktiv |
+| E94 | CRAWLING-DATEN | Artikelnummer aus dem WaWi-Nummernkreis vorab vergeben (A-Nummern, „Weg B"; Kinder `-001`…) — aktiviert E6, weil Lager-Scan an der Artikelnummer hängt; sprechender Schlüssel bleibt in `Artikelnummer (Lieferant)` |
 
 **Cluster-File-Kurz-Lookup (Datei-Mapping zum Cluster-Namen oben):**
 

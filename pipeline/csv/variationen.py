@@ -29,12 +29,12 @@ VARIATIONSNAME = {"de": "Größe", "en": "Size", "fr": "Taille", "it": "Taglia",
 def build_rows(vaeter: list[Vater], supplier: dict, run_date: str) -> list[dict]:
     rows: list[dict] = []
     for v in vaeter:
-        vnr = spec.vater_artnr(v.garment_type, v.modell_basis, v.farbe_raw)
+        # Weg B (E94): Variation referenziert den Vater über dessen A-Nummer.
         # Aufsteigend ausgeben; die Anzeige-Reihenfolge steuert die Sortiernummer.
         for k in sorted(v.kinder, key=lambda x: _rank(x.groesse)):
             sort_wert = _rank(k.groesse) + 1  # XS=1, S=2, M=3, L=4, XL=5
             rows.append({
-                "Artikelnummer": vnr,
+                "Artikelnummer": v.artikelnummer,
                 "Variationsname": VARIATIONSNAME["de"], "Darstellungsform": "DROPDOWN",
                 "Variationswertname": k.groesse,
                 "Global-Englisch: Variationsname": VARIATIONSNAME["en"],

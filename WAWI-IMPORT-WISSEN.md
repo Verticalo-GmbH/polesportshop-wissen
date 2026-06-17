@@ -94,10 +94,12 @@ Spalten in der Reihenfolge, die sich im HotCakes-Lauf etabliert hat. Vollständi
 
 Pro Modell+Farbe gibt es **eine Vater-Zeile** plus **eine Kind-Zeile pro Größenvariante**. Mit Multi-Kategorie-Zuweisung (E57) werden alle diese Zeilen verdoppelt — eine pro Kategorie-Zuweisung. Die Vater-Zeilen werden zuerst geschrieben, dann die zugehörigen Kinder direkt darunter.
 
+> **🔢 E94 (ab 2026-06-17) — Artikelnummer aus dem WaWi-Nummernkreis (Weg B):** Die `Artikelnummer` ist seit E94 die **numerische A-Nummer** aus dem fortlaufenden WaWi-Nummernkreis (`A` + laufende Nummer, z.B. `A1009262`; Kinder `A1009262-001`…), **vorab** von der Pipeline vergeben (`pipeline/numbering.py`, Zähler in `pipeline/state/nummernkreis.json`). Grund: Der Lager-Scan identifiziert über die Artikelnummer; sprechende Schlüssel waren nicht scannbar. Der sprechende Schlüssel (`HC-Hekate-Bodysuit`) lebt weiter in `Artikelnummer (Lieferant)`. Verknüpfung Vater-Kind + Cross-Selling laufen über die A-Nummer; Merkmale/Attribute weiter über `Artikelnummer (Lieferant)`. **Ameise-Vorlagen unverändert** (Identifikator = Artikelnummer, Auto-Vergabe AUS). In den folgenden Beispielen steht weiterhin `HC-Hekate-Bodysuit` zur Illustration der Struktur — der reale Wert in `Artikelnummer` ist die A-Nummer, in `Artikelnummer (Lieferant)` der sprechende Schlüssel.
+
 **Vater-Zeile:**
-- `Artikelnummer` = Lieferantenartikelnummer-Basis, z.B. `HC-Hekate-Bodysuit`
-- `Artikelnummer (Lieferant)` = identisch (siehe Mapping-Strategie in Abschnitt 8)
-- `HAN` = leer (reserviert für echte Barcodes vom Lieferanten)
+- `Artikelnummer` = **A-Nummer aus WaWi-Nummernkreis (E94)**, z.B. `A1009262` — vorab vergeben
+- `Artikelnummer (Lieferant)` = **sprechender Schlüssel** `HC-Hekate-Bodysuit` (Identifikator Merkmale/Attribute; Mapping-Strategie Abschnitt 8)
+- `HAN` = leer (reserviert für echte Hersteller-/Barcode-Nummern vom Lieferanten)
 - `Identifizierungsspalte Vaterartikel` = **leer** (das ist das Signal "ich bin der Vater")
 - `Artikelname` = Format `{Hersteller} {Produkttyp} {Modell} {Farbe}`, z.B. `HotCakes Bodysuit Hekate Schwarz` — **ohne Größe** (E56, Konvention siehe E26)
 - `Variationsname 1` = `Größe`
@@ -118,9 +120,9 @@ Pro Modell+Farbe gibt es **eine Vater-Zeile** plus **eine Kind-Zeile pro Größe
 - **SEO-Felder (Titel-Tag + Meta-Description in allen 5 Sprachen):** befüllt nach E55-Template — **nur auf Vater-Zeilen**, mit Vater-Namen ohne Größe als `{name}`-Variable. Bei Multi-Kategorie-Doppelzeilen sind die SEO-Felder auf **beiden** Vater-Zeilen identisch (es ist der gleiche Artikel).
 
 **Kind-Zeile:**
-- `Artikelnummer` = Vater-Nummer + `-001`, `-002`, etc. (z.B. `HC-Hekate-Bodysuit-001`)
-- `Artikelnummer (Lieferant)` = identisch zur Artikelnummer
-- `Identifizierungsspalte Vaterartikel` = **Vater-Artikelnummer** (z.B. `HC-Hekate-Bodysuit`) — das ist die Verknüpfung
+- `Artikelnummer` = **Vater-A-Nummer + `-001`, `-002`** … aufsteigend nach Größe (E94), z.B. `A1009262-001` (XS)
+- `Artikelnummer (Lieferant)` = sprechender Kind-Schlüssel (Vater-Schlüssel + `_<Größe>`, z.B. `HC-Hekate-Bodysuit_XS`) — Identifikator für Merkmale/Attribute
+- `Identifizierungsspalte Vaterartikel` = **Vater-A-Nummer** (z.B. `A1009262`) — das ist die Verknüpfung (E94: über A-Nummer, nicht mehr über den sprechenden Schlüssel)
 - `Artikelname` (alle 5 Sprachen) = Vater-Name + Leerzeichen + Variationswert (E56) — z.B. DE `HotCakes Bodysuit Hekate Schwarz XS`, FR `HotCakes Body Hekate Noir XS`, IT `HotCakes Body Hekate Nero XS`. Die Größe ist in allen 5 Sprachen identisch (XS/S/M/L/XL/2XL universal).
 - `Variationsname 1` = `Größe`
 - `Variationswert 1` = Variantenwert, z.B. `XS`

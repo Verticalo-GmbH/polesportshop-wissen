@@ -29,6 +29,7 @@
 - **E89** — Category-Pattern + Sara-Review-Workflow (NEU v1.18, präzisiert E57) — KORRIGIERT durch E92
 - **E90** — F2-F6-Implementierung in v1.19 (Sammeleintrag, NEU v1.18)
 - **E92** — Trial-Findings v1.20 (NEU v1.19): Multi-Kategorie auf 3-Zeilen-Pattern korrigiert (E89-Annahme falsch), Farb-Lokalisierung DE für Marketing-Farben mit DE-Pendant
+- **E94** — Artikelnummer aus dem WaWi-Nummernkreis vorab vergeben (A-Nummern, „Weg B") — aktiviert die in E6 aufgeschobene A-Nummer-Strategie; Grund: Lager-Scan hängt an der Artikelnummer
 
 ---
 
@@ -43,6 +44,7 @@
 **E6 — Artikelnummer = Lieferantenartikelnummer (A-Nummer-Strategie aufgeschoben).**
 *Warum:* Lieferanten-SKU ist eindeutig vorhanden, keine eigene Sequenz nötig, Pilot-Geschwindigkeit. Spätere Umstellung trifft nur die `Artikelnummer`-Spalte.
 *Verworfen:* Eigene A-Nummer-Sequenz (zu früh, ohne klaren Vorteil). HAN als Identifier (echte Barcodes oft nicht vorhanden bei Boutique-Lieferanten).
+*→ Abgelöst durch E94 (2026-06-17):* Die aufgeschobene A-Nummer-Strategie ist aktiviert. Der sprechende Schlüssel lebt weiter in `Artikelnummer (Lieferant)`; die `Artikelnummer`-Spalte führt jetzt die numerische WaWi-Nummernkreis-Nummer.
 
 **E7 — Vater-Kind-Struktur über `Identifizierungsspalte Vaterartikel`.**
 *Warum:* Native JTL-Struktur, Ameise erkennt Beziehung direkt beim Import.
@@ -492,3 +494,30 @@ E89-Sara-Workflow bleibt unverändert (Sara entfernt 546 nach Approval). Vorlage
 - **Bei neuen Marketing-Farben** (z.B. wenn Lieferant 2-21 etwas wie „Coral" oder „Lavender" liefert): vor Auto-Lokalisierung Tjorben-Klärung. SPEC_KONSTANTEN Sektion 6 als kanonische Quelle erweitern, nicht ad-hoc lokalisieren.
 
 
+
+---
+
+**E94 — Artikelnummer aus dem WaWi-Nummernkreis vorab vergeben (A-Nummern, „Weg B"). Aktiviert die in E6 aufgeschobene A-Nummer-Strategie. (NEU 2026-06-17)**
+
+*Auslöser:* Die sprechende Artikelnummer (`HC-Hekate-Bodysuit`) ließ sich **im Lager nicht scannen**. Der Lager-Scan identifiziert über die **Artikelnummer**, und der Bestand läuft über einen fortlaufenden numerischen Nummernkreis: `A` + laufende Nummer (z.B. `A1009262`), Variationen als `-001`, `-002` … (z.B. `A1009262-001`). Verifiziert am WaWi-Nummernkreis-Dialog (Artikel: Präfix `A`, laufende Nummer 1009261) + Artikelliste.
+
+*Entscheidung:* Die Pipeline vergibt die Artikelnummer **selbst vorab** aus dem WaWi-Nummernkreis:
+- Vater = `A` + laufende Nummer, **+1 pro Vater**
+- Kind = `<Vaternummer>-001`, `-002` … **aufsteigend nach Größe** (XS = `-001`); Kinder verbrauchen keine eigene Hauptnummer
+
+*Warum Vorab-Vergabe statt JTL-Auto-Vergabe beim Import („Weg A"):* JTL-Ameise kann das Kind-Muster `Vaternummer-001` **nicht** selbst erzeugen (Forum-Befund: sie gäbe Kindern eigene Hauptnummern). Damit das `-001`-Schema entsteht, müssen die Nummern zur CSV-Erzeugung bekannt sein.
+
+*Mechanik:*
+- `Artikelnummer` = A-Nummer → **Verknüpfungs-Schlüssel** Vater-Kind (`Identifizierungsspalte Vaterartikel`) + Cross-Selling (wie ursprünglich, nur numerische Werte).
+- `Artikelnummer (Lieferant)` behält den **sprechenden Schlüssel** (`HC-Hekate-Bodysuit`) → Identifikator für Merkmale + Attribute (unverändert).
+- Zähler im Repo mitgeführt: `pipeline/state/nummernkreis.json`, einmalig aus dem WaWi-Nummernkreis geseedet (2026-06-17: nächste frei `A1009262`), pro **bestätigtem** Lauf um Anzahl Väter erhöht (`persist_counter=True`). Tjorben hält den WaWi-Zähler („Laufende Nummer") auf gleichem Stand; bei Drift Resync über die State-Datei.
+
+*Ameise-Vorlagen:* bleiben auf der **bewährten Original-Konfiguration** (Identifikator = Artikelnummer, Auto-Nummern-Vergabe AUS, Vaterartikel-ID-Feld = Artikelnummer). Nur die Werte in der `Artikelnummer`-Spalte sind jetzt A-Nummern statt sprechend — kein Vorlagen-Umbau nötig.
+
+*Verworfen:*
+- *„Weg A"* (leere `Artikelnummer`-Spalte, JTL vergibt beim Import automatisch): scheitert am `-001`-Kind-Muster (Ameise kann nicht auto-suffixen) und hätte Vater-Kind/Cross-Selling-Verknüpfung über den Artikelnamen erzwungen (fragiler, Vorlagen-Umbau, Smoke-Test-Pflicht).
+- *Barcode-only* (sprechende ArtNr behalten, nur EAN/GTIN-Feld füllen): Lager-Scan hängt an der Artikelnummer, nicht am EAN-Feld → löst das Problem nicht.
+
+*Code:* `pipeline/numbering.py` (Vergabe + Zähler), `pipeline/state/nummernkreis.json` (Zähler-State), Stammdaten/Variationen/Cross-Selling/Self-Check auf A-Nummer umgestellt (`pipeline/csv/*.py`, `pipeline/selfcheck.py`, `pipeline/orchestrator.py`).
+
+*Production (2026-06-17):* 41 Väter neu mit A-Nummern + Bildern — HotCakes 21 (`A1009262`–`A1009282`), Lunalae Diamante 10 (`A1009283`–`A1009292`), Lunalae Odessa 6 (`A1009293`–`A1009298`), Rolling 4 (`A1009299`–`A1009302`); nächste frei `A1009303`. Self-Check je 16/16. Ersetzt die zuvor mit sprechenden Nummern importierten Artikel (in WaWi gelöscht + neu importiert).
