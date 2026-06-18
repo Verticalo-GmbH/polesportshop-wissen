@@ -31,6 +31,7 @@
 - **E92** — Trial-Findings v1.20 (NEU v1.19): Multi-Kategorie auf 3-Zeilen-Pattern korrigiert (E89-Annahme falsch), Farb-Lokalisierung DE für Marketing-Farben mit DE-Pendant
 - **E94** — Artikelnummer aus dem WaWi-Nummernkreis vorab vergeben (A-Nummern, „Weg B") — aktiviert die in E6 aufgeschobene A-Nummer-Strategie; Grund: Lager-Scan hängt an der Artikelnummer
 - **E95** — EAN/GTIN-Spalte im Stammdaten-Schema (48→49) + Barcode-Anreicherung pro Größe aus Lieferanten-Referenz (Lunalae UTC-Barcodes)
+- **E97** — Lieferanten-Netto-EK in Original-Währung (AUD) statt EUR + Lieferzeit/Lieferdatum pro Lieferant + Lieferantenbestellungs-Builder (Ameise-Import)
 
 ---
 
@@ -546,3 +547,29 @@ E89-Sara-Workflow bleibt unverändert (Sara entfernt 546 nach Approval). Vorlage
 *Code:* `pipeline/spec.py` (Schema 49 + EAN nach HAN), `pipeline/model.py` (`Kind.ean`), `pipeline/barcodes.py` (Loader/Attach), `pipeline/csv/stammdaten.py` (Kind-EAN), `pipeline/selfcheck.py` (#1 → 49), `pipeline/orchestrator.py` (Registry `ean` + Attach), `pipeline/content/ean_lunalae.csv` (80 Barcodes).
 
 *Production (2026-06-17):* Lunalae komplett (Diamante 10 `A1009283`–`A1009292` + Odessa 6 `A1009293`–`A1009298`) als **eine** Import-Datei neu generiert, 160 Kind-Zeilen mit EAN, je 16/16, mit Bildern. Re-Import der Stammdaten reichert die bestehenden Artikel um die GTIN an.
+
+---
+
+**E97 — Lieferanten-Netto-EK in Original-Währung + Lieferzeit/Lieferdatum + Lieferantenbestellungs-Builder. (NEU 2026-06-17)**
+
+*Auslöser:* Beim Lunalae-Import war der **Lieferanten-Netto-EK** (Lieferantenblock) fälschlich der EUR-Umrechnungswert. Richtig: der Lieferanten-EK ist die **Original-Währung des Lieferanten** (Lunalae = AUD, z.B. 29,50), so wie er auf der Rechnung steht und gezahlt wird. Nur der **GLD (Ø Einkaufspreis, „EK Netto für GLD")** ist EUR (JTL verrechnet/zeigt in Shop-Währung).
+
+*Entscheidung — EK-Trennung:*
+- `Netto-EK` (Lieferantenblock) = **`ek_original`** (Original-Währung, z.B. AUD). JTL kennt die Lieferanten-Währung über den Standardwert in der Vorlage.
+- `EK Netto (für GLD)` + VK-Kalkulation = **`ek_netto`** (EUR nach fx). Unverändert.
+- `pricing.apply_pricing` setzt jetzt beide (`v.ek_original` roh, `v.ek_netto` = roh×fx).
+
+*Entscheidung — Lieferzeit/Lieferdatum:*
+- Pro Lieferant `lieferzeit_tage` im Mapping (Lunalae = 30). Fließt in Stammdaten-Feld `Lieferzeit in Tagen (Lieferant)` (vorher Pilot-Default 0).
+- **Lieferdatum** der Lieferantenbestellung = Importdatum + `lieferzeit_tage`.
+
+*Lieferantenbestellungs-Builder (`pipeline/csv/bestellung.py`, Ameise-Typ „Lieferanten > Lieferantenbestellungen"):*
+- Übersetzt eine Bestell-Rechnung (Mengen pro Größe) in eine importierbare Bestellung.
+- Schema **`Artikelnummer; Menge; Lieferdatum`** (verifiziert am echten Import 2026-06-17): Artikel identifizieren **anhand Artikelnummer** (A-Nummer, JTL-Default — funktioniert direkt). Variante über Lieferantenartikelnummer möglich (anhand = Lieferantenartikelnummer, Feld „Artikelnummer Lieferant").
+- **Lieferant / Warenlager / Firma / Benutzer = Ameise-Standardwerte** (nicht als Spalte).
+- **EK NICHT mitgeben** — Einstellung „Netto-EK aus Lieferantenartikel übernehmen = Ja" zieht ihn aus dem Artikel (dort jetzt korrekt in Original-Währung).
+- Mengen-Quelle `EK_input/menge_<lieferant>.csv`. Diamante-Mengen aus TJ-Bestell-Mail (Regel pro Typ/Größe, Schwarz höher bei S/M), Odessa-Mengen explizit aus Rechnung #D413 (verifiziert: 88 Stück / 2.816 AUD = Rechnungssumme).
+
+*Code:* `pipeline/model.py` (`Kind`/`Vater` — `ek_original`), `pipeline/pricing.py`, `pipeline/csv/stammdaten.py` (Netto-EK = Original, Lieferzeit pro Lieferant), `pipeline/csv/bestellung.py` (Builder), `lieferanten_mapping.yaml` (LUNALAE `lieferzeit_tage: 30`).
+
+*Production (2026-06-17/18):* Lunalae-Stammdaten neu mit Netto-EK in AUD (Odessa Shorts 29,50 AUD / GLD 18,01 EUR) + Lieferzeit 30. Erste Lieferantenbestellung importiert (72 Positionen, 340 Stück), Lieferdatum Importdatum + 30 Tage.

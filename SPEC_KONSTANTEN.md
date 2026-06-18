@@ -679,6 +679,7 @@ Repo-Meta-Files NICHT im Snapshot-Count: `README.md` (GitHub-Visitor-Doku), `.gi
 | E93 | BILDPIPELINE | Bildpipeline reaktiviert (kehrt E63 um) — Stage 5.6+5.7 wieder aktiv, R2-Architektur unverändert, Spec von Stub auf v2.1 voll-aktiv |
 | E94 | CRAWLING-DATEN | Artikelnummer aus dem WaWi-Nummernkreis vorab vergeben (A-Nummern, „Weg B"; Kinder `-001`…) — aktiviert E6, weil Lager-Scan an der Artikelnummer hängt; sprechender Schlüssel bleibt in `Artikelnummer (Lieferant)` |
 | E95 | CRAWLING-DATEN | EAN/GTIN-Spalte im Stammdaten-Schema (48→49, ans Ende/Position 49 per E54 append-only) + Barcode-Anreicherung pro Größe aus committeter Lieferanten-Referenz (`content/ean_<lieferant>.csv`); nur auf Kind-Ebene; Lunalae UTC-Barcodes |
+| E97 | CRAWLING-DATEN | Lieferanten-Netto-EK = Original-Währung (z.B. AUD), GLD/VK = EUR (`ek_original` vs `ek_netto`); Lieferzeit pro Lieferant (`lieferzeit_tage` im Mapping) in Stammdaten + Lieferdatum = Importdatum+Lieferzeit; Lieferantenbestellungs-Builder `bestellung.py` (Ameise „Lieferanten > Lieferantenbestellungen", Schema Artikelnummer;Menge;Lieferdatum) |
 
 **Cluster-File-Kurz-Lookup (Datei-Mapping zum Cluster-Namen oben):**
 

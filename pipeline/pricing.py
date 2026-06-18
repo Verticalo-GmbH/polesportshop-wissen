@@ -53,7 +53,8 @@ def apply_pricing(vaeter: list[Vater], ek_map: dict[tuple[str, str, str], float]
             missing.append(v)
             continue
         ek_eur = round(ek * fx_to_eur, 2)
-        v.ek_netto = ek_eur
+        v.ek_original = round(ek, 2)   # Lieferanten-Währung (z.B. AUD) -> Lieferanten-Netto-EK
+        v.ek_netto = ek_eur            # EUR -> GLD / VK
         v.vk_brutto = round_vk_90(ek_eur * C.AUFSCHLAGSFAKTOR)
         priced.append(v)
     return priced, missing

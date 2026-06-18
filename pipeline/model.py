@@ -58,7 +58,8 @@ class Vater:
     artikelnummer: Optional[str] = None
 
     # Preise (P3)
-    ek_netto: Optional[float] = None
+    ek_netto: Optional[float] = None        # EUR (nach fx) — für GLD / VK-Kalkulation
+    ek_original: Optional[float] = None      # EK in Lieferanten-Währung (z.B. AUD) — Lieferanten-Netto-EK
     vk_brutto: Optional[float] = None
 
     # Bild-URLs nach R2 (P9)

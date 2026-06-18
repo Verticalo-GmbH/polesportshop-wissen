@@ -166,6 +166,7 @@ lieferanten:
     drive_eingang_id: null
     r2_prefix: lunalae
     lieferantennummer_wawi: 1047
+    lieferzeit_tage: 30             # Standard-Lieferzeit Lunalae (E97): Lieferdatum = Importdatum + 30 Tage; auch Artikel-Lieferzeit
     article_weight_kg: 0.05
     taric_code: '62114390'
     groessen_konvention: au_to_xs_xl   # AU 6/8/10/12/14 -> XS/S/M/L/XL (Tjorben-Vorgabe; AU16 nicht übernommen)
