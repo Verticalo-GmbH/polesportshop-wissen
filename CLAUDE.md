@@ -1,6 +1,6 @@
 # CLAUDE.md — Daily-Workflow für Wissens-Management
 
-**Stand:** v1.2, 2026-06-15 (v1.22: **Daten-Pipeline nach Claude Code lokal portiert** — neues `pipeline/`-Code-Package, siehe unten + `pipeline/README.md`). · **Vorheriger Stand:** v1.1, 2026-05-19 (v1.21: Bildpipeline reaktiviert E93, Multi-Kategorie + Farb-Lokalisierung E92)
+**Stand:** v1.24, 2026-06-18 (Konsolidierungs-Build: Wissensbasis verschlankt, Cowork-Docs deprecated gekennzeichnet, Backlog archiviert, Frontdoor auf Code-Stand). · **v1.22/v1.23:** Daten-Pipeline-Code-Pivot + Code-only-Refactor (`pipeline/`, `pipeline/README.md`). · **Seither E94–E98** (siehe unten).
 **Zweck:** Cheatsheet für Tjorben + jede Claude-Code-Session, die das Repo `polesportshop-wissen` aufmacht. Beantwortet: Wie starte ich was, wie reviewe ich, wo finde ich was, wie commite ich kleine Edits.
 **Auch von Claude Code automatisch gelesen:** Diese Datei liegt im Repo-Root und wird von Claude Code beim Session-Start als Projekt-Kontext aufgenommen. Daher kurz und bündig halten.
 
@@ -22,6 +22,15 @@
 - **Erst-Lauf 2026-06-15:** HotCakes 21 Modelle (Rechnung #00034), 5 CSVs + Bilder auf R2, Self-Check 16/16, in WaWi importiert.
 - **Code ist führend; Markdown-Specs = Referenz + Cowork-Fallback.** Bei Logik-Änderung: Code in `pipeline/` ändern + betroffene Spec synchron halten + commit/push.
 - **Lernpunkte (in WaWi 1.11 verifiziert):** (1) Variationen-CSV braucht Spalten `Sortiernummer Variation`+`Sortiernummer Variationswert`, sonst sortiert JTL alphabetisch (L,M,S,XS) — und sie müssen in der Ameise-Vorlage gemappt sein. (2) `Bild 1`–`Bild 10` müssen in der Stammdaten-Vorlage gemappt sein. (3) Farbmerkmal qualitativ aus Kundensicht (dominante Such-Farbe, im Zweifel mehrere) statt `Bunt`-Listen.
+
+### Was seit dem Pivot dazukam (E94–E98, 2026-06-17/18)
+- **E94 — A-Nummern (Weg B):** Artikelnummer = `A`+laufende Nummer aus WaWi-Nummernkreis, Kinder `-001`… (Lager-Scan hängt an der ArtNr). Pipeline vergibt vorab via `numbering.py`, Zähler in `state/nummernkreis.json`. Sprechender Schlüssel lebt in `Artikelnummer (Lieferant)`.
+- **E95 — EAN/GTIN-Spalte** (Schema 48→49, ans Ende): Barcodes pro Größe aus `content/ean_<x>.csv`, nur Kind-Ebene. Ameise: Spalte `EAN` → GTIN mappen.
+- **E97 — Lieferanten-EK in Original-Währung** (AUD), GLD/VK in EUR; `lieferzeit_tage` im Mapping nur fürs **Lieferdatum der Bestellung** (`csv/bestellung.py`, Ameise-Typ „Lieferanten > Lieferantenbestellungen"); Lieferanten-EK über Stammdaten-Feld „Netto-EK" (Lieferanteneinstellungen) + Standardwert Lieferant + Währung.
+- **E98 — Interim-Margen-Schutz** (bis GLD vollständig, B68): Nicht-EU **+5€ VK**, EU **+1€ EK**; **GLD +2,30€/Stück**; Lieferzeit aus Stammdaten raus. Erkennung EU/Nicht-EU über `waehrung`.
+
+### Pro-Lieferant-Slot-Pattern (Skalierung auf ~50 Lieferanten)
+Neuer Lieferant = Dateien in festen Fächern, kein Kern-Bloat: `lieferanten_mapping.yaml` (1 Eintrag) · `pipeline/content/<x>_content.json` · `pipeline/content/ean_<x>.csv` (wenn Barcodes) · `pipeline/suppliers/<x>.py` (nur Nicht-Shopify) · `EK_input/ek_<x>.csv` + `menge_<x>.csv` (gitignored) · `orchestrator.SUPPLIERS`-Eintrag. Checkliste: `LIEFERANTEN-ONBOARDING.md`. Die großen Wissens-Docs wachsen mit neuen **Mechaniken**, nicht mit der Lieferanten-Zahl.
 
 ## File-Map (Orientierung)
 

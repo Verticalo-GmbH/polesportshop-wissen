@@ -8,26 +8,8 @@ Offene Punkte, die *Entscheidungen* brauchen — nicht Tasks. Tasks gehören in 
 
 ## Hoch — vor Produktiv-Schalten zu entscheiden
 
-**B1 — Wie wird Cowork eingerichtet? — GELÖST 2026-05-14, präzisiert 2026-05-15**
-Cowork wird via Global Instructions in Settings → Cowork eingerichtet (nicht über projekt-spezifische Custom Instructions — Cowork-Realität, präzisiert nach Setup-Session 2026-05-15, siehe E32-Update). Die zwei Anweisungs-Markdowns (Daten + Bilder) werden nicht konkateniert, sondern liegen unverändert in Drive und werden von Cowork pro Lauf gelesen. Trigger steuert via Wortlaut, welche Pipeline läuft. Sub-Process-Aufruf (Daten → Bilder) ist Cowork-intern, kein zweiter User-Trigger.
-
-**B2 — Wo lebt das Lieferanten-Mapping? — GELÖST 2026-05-14**
-Auslagerung nach `Wichtig: Claude Backup/lieferanten_mapping.yaml` als Single Source of Truth (siehe E24). Beide Cowork-Anweisungen lesen aus dieser Datei, pflegen sie aber nicht selbst. Updates kommen über den Wissens-Update-Prozess (komplette neue Datei wird in Drive ausgetauscht). Format-Frage YAML vs. CSV/Sheet bleibt für Skalierung auf >20 Lieferanten offen — siehe E24-Folgeaufgabe.
-
-**B3 — Pole-Junkie-Crawling: Owner-Direktive aktiv. — GEKLÄRT 2026-05-15 durch E49**
-Stand: 2026-05-15. Bezug: E49.
-Frage war: Pole Junkie hat mit Sicherheit Terms of Service gegen gewerbliches Scraping. Konsequenzen können von Abmahnung bis UWG-Risiko reichen. Optionen waren: (a) weitermachen und auf „fliegt nicht auf" hoffen, (b) Kooperations-Anfrage, (c) Discovery + Direktkontakt, (d) Anwalt-Konsultation.
-Antwort: Tjorben Becker (GF Verticalo GmbH) hat mit Owner-Direktive E49 explizit und unverhandelbar die Freigabe für das Crawling der Pole-Junkie-Domain erteilt. Volle rechtliche und operative Verantwortung wird übernommen. Cowork führt Pole-Junkie-Crawls ohne Halt-und-Nachfrage durch, sobald der Lieferant getriggert wird.
-Beobachtungs-Pflichten: bei technischer Blockade (Anti-Bot, nicht rechtliche) gilt normales E48-Stolperfallen-Pattern. Bei expliziter Cease-and-Desist-Forderung sofort an Tjorben eskalieren und Crawl pausieren. Jeder Pole-Junkie-Lauf wird im Bericht mit Verweis auf E49-Direktive markiert (Audit-Spur).
-
 **B4 — A-Nummer-Strategie: wann kippen?**
 Aktuell ist Artikelnummer = Lieferantenartikelnummer. Wann lohnt sich die Umstellung auf eigene A-Nummern? Mögliche Trigger: Lieferanten-Wechsel bei gleichem Artikel, Lieferant ändert sein SKU-Schema, Marken-Diskussion mit dem Lieferanten, Wachstum auf >X Artikel. Migration für bestehende Artikel braucht Plan.
-
-**B5 — Plattform-Aktivierung: wie automatisieren? — GELÖST 2026-05-15**
-Stand: 2026-05-15. Bezug: E17, E46.
-Hintergrund: Bis 2026-05-15 manuell ("Alle aktivieren"-Klick pro Artikel im Bilder-Tab). Beim wachsenden Volumen Bottleneck.
-Lösung: Mit E46 (Bilder integriert in Stammdaten-Import) erledigt sich das Thema von alleine. Im Stammdaten-Import via Reiter „Bilder/Plattformen" werden alle 11 Plattform-Häkchen einmalig in der Vorlage gesetzt. Beim Re-Import werden alle Bild-URLs in den `Bild N`-Spalten direkt für alle aktivierten Plattformen geschrieben. Kein nachgelagerter Aktivierungs-Schritt mehr nötig.
-Validierung: HotCakes-Arachne-Bottom-Black-Re-Import 2026-05-15: alle 4 Bilder × 9 Plattformen aktiviert ohne weiteres Klicken.
 
 **B17 — Buchhaltungs-Connector für Lieferanten-Referenztabelle.**
 Stand: 2026-05-13. Bezug: E23. Vorbedingung für B18.
@@ -93,10 +75,6 @@ Status sichtbare MCP-Server in Cowork (aus Probe-Result):
 - Keine user-konfigurierten Local-MCP-Server sichtbar (Bridge tot, E42).
 Restaufgabe: Bei jedem zukünftigen Spec-Update neue Tool-Annahme gegen Cowork-Realität abgleichen, bevor sie schriftlich verankert wird (Charter Prinzip 9 mit konkreten Probe-Mechanismen).
 
-**B24 — cowork_anweisung_bildpipeline.md um Anti-Bot-Pattern und Fallback-Strategie erweitern. — GELÖST 2026-05-14**
-Stand: 2026-05-14. Bezug: E40.
-Status: In `cowork_anweisung_bildpipeline.md` v1.1 spezifiziert. Anti-Bot-Pattern (WebFetch → Retailer-Fallback E20 → Firecrawl-MCP → Halt mit User-Klärung) ist dokumentiert, CSV-Schema ist explizit im Spec-Text statt nur als Pfad-Verweis. Mit v1.2 wurde der Firecrawl-Pfad an die neue Realität angepasst (Firecrawl nicht als nativer Connector verfügbar, Crawl im Pilot geparkt, siehe E41/B25). Mit v1.3 ist die CSV-Output-Generierung abgelöst (Bilder in Stammdaten, E46).
-
 **B25 — Crawl-Tool-Verfügbarkeit in Anthropic-Registry beobachten. — NEU 2026-05-15**
 Stand: 2026-05-15. Bezug: E14, E41.
 Hintergrund: Firecrawl bleibt nach Marktcheck 2026-05 strategisch beste Wahl (Marktführer beim Web-Crawling, beste Anti-Bot-Performance, größte Tool-Vielfalt im MCP-Ökosystem). Aktuell aber nicht als nativer Cowork-Connector in der Anthropic-Registry verfügbar. Pilot läuft ohne autonomen Crawl-Modus — Drive-Upload/Excel/PDF/Mail/Hybrid (5 von 6 Input-Modi) decken die nächsten Lieferanten ab.
@@ -112,33 +90,6 @@ Aufgabe: Beobachten, ob Cloudflare-Code-Mode-MCP als zweiter Cloudflare-Connecto
 Stand: 2026-05-15. Bezug: E43.
 Hintergrund: Der Pilot nutzt Drive-File-Credentials (Pfad b von E43). Architektonisch ist das die einfachst-mögliche Variante, die noch funktioniert (Charter Prinzip 9). Aber: Blast-Radius im Worst-Case ist die volle R2-API (Bucket-Pollution, Object-Delete). Eine sauberere Architektur wäre ein eigener Cloudflare-Worker mit R2-Binding, der Upload-Requests von Cowork mit Bearer-Token-Auth annimmt. R2-Credentials leben dann nur im Worker-Setup; ein kompromittierter Worker-Token bricht nur Upload, nicht S3-API.
 Trigger zur Re-Evaluation: Wenn (a) >5 Lieferanten produktiv laufen und R2-Volume wächst, ODER (b) ein zweiter User Cowork-Pipelines triggern soll (Multi-User-Setup mit Permission-Trennung), ODER (c) ein Drive-Sicherheitsvorfall passiert. Bis dahin nicht angehen — Worker-Code zu schreiben + zu deployen ist Aufwand ohne aktuellen Mehrwert.
-
-**B28 — Vision-Klassifikations-Verifikation in der Praxis. — GELÖST 2026-05-15 mit Negativ-Ergebnis**
-Stand: 2026-05-15 Abend. Bezug: E45, E48.
-Hintergrund: Mit E45 ist Pose-Sortierung via Cowork-Vision-Klassifikation spezifiziert. Spec-Niveau stand, Praxis-Validierung war nötig — insbesondere die Frage, ob die `manufacturer_first_vision_audit`-Optimierung (Vision skippen wenn Hersteller-Reihenfolge stabil = pose-sortiert) sich für HotCakes anbietet.
-
-Konsolidierte Datenpunkte aus den 4 HotCakes-Modellen (2026-05-15):
-
-| Modell | manuf-Order = Pose-sortiert? |
-|---|---|
-| Arachne Top Black (Lauf 16:50) | ❌ Nein |
-| Hekate Bodysuit (Batch 20:30) | ✅ Ja |
-| Arachne Bottom Teal (Batch 20:30) | ❌ Nein |
-| Savanna Original Top (Batch 20:30) | ❌ Nein |
-
-→ **1/4 konsistent (25 %).** Die Hersteller-Reihenfolge bei HotCakes ist NICHT stabil pose-sortiert. `manufacturer_first_vision_audit` würde unzuverlässige Resultate liefern. **Strategie verworfen für HotCakes.**
-
-Positive Erkenntnisse:
-- Vision-Klassifikation auf 384×576-Thumbnails ist robust: 13/13 Bilder klassifiziert, 0 unknowns, Confidence 0.80-0.95
-- Thumbnail-Vision spart ~10× Tokens ohne Genauigkeits-Einbuße — Spec-Pfad ist richtig
-- Within-Pose-Konvention (full-body vor crop) hat sich heuristisch bewährt → in v1.8 formell verankert (cowork_anweisung_bildpipeline.md v1.6 Stage 5.5)
-
-Konsequenz für Spec:
-- `cowork_anweisung_bildpipeline.md` v1.6: Thumbnail-Vision-Pfad bleibt der Standard, kein `manufacturer_first_vision_audit` für HotCakes
-- Für andere Lieferanten kann die Konsistenz-Prüfung im ersten Lauf wiederholt werden
-- Confidence-Schwelle 0.7 bleibt, keine Anpassung nötig nach 13 Datenpunkten
-
-B28 ist abgeschlossen — kein offener Punkt mehr.
 
 **B33 — Drive-MCP fehlt update_file und delete_file. — NEU 2026-05-15, verschärft v1.15 (2026-05-17)**
 Stand: 2026-05-17. Bezug: A5, AP10.
@@ -257,9 +208,6 @@ Hypothese ist, dass eigener Stil Conversion-stärker ist. Ist nicht validiert. W
 **B14 — Internationalisierung des Shop-Stils.**
 Aktuell wird DE-Stil 1:1 in andere Sprachen übersetzt. Kann sein, dass der italienische Markt einen anderen Tonalitäts-Code hat. Stil-Adaption pro Sprache wäre möglich, ist aber deutlich mehr Aufwand. Mit E73 (v1.13) wird das wichtiger: alle 5 Sprachen voll ausformuliert pro Artikel, also wird Tonalität pro Sprache überhaupt erst sichtbar.
 
-**B15 — Versionierung der Cowork-Anweisungen — GELÖST durch E47 (2026-05-15).**
-Frage war: wie verfolgen wir, wann welche Anweisung scharf war? Drive-Versionsverlauf reicht? Git-Repo angemessener? Beantwortet durch das Immutable-Snapshot-Pattern in `Wichtig: Claude Backup/Version_YYYY-MM-DD_HHMMSS/` — jeder Snapshot ist ein vollständiger versionierter Stand mit Hash-Manifest, vollständige Audit-Trail-Historie als Nebeneffekt. Drive-Versionsverlauf pro Datei brauchen wir damit nicht mehr; Git-Repo wäre overkill für einen Nicht-Entwickler-Workflow.
-
 **B31 — Snapshot-Pattern im Praxis-Betrieb validieren.**
 Stand: 2026-05-15. Bezug: E47.
 Aufgabe: Bei den ersten 3-5 echten Wissens-Updates nach E47 beobachten, ob die Immutable-Snapshot-Architektur unter Real-Bedingungen hält. Beobachtungspunkte:
@@ -283,7 +231,6 @@ Aufgabe: Tjorben kann die 8 Legacy-Files plus die `Untitled`-Datei bei Gelegenhe
 Trigger zur Re-Evaluation: keiner — wann immer Tjorben Lust auf Aufräumen hat.
 
 ---
-
 
 ## Anomalien (separat von Entscheidungen)
 
@@ -539,7 +486,6 @@ Was NOCH NICHT validiert ist:
 
 Trigger-Bedingung: nächster Lieferanten-Onboarding mit >15 Modellen in einem Lauf ODER POLE ADDICT erster Lauf mit Cross-Selling.
 
-
 ## v1.18 — neue Einträge B54-B60 aus HotCakes-Run-Report 2026-05-18
 
 **B54 — Cowork-Run-Performance: Snapshot-Resolution + Stage-0-Caching optimieren. — DEFERRED v1.19**
@@ -551,50 +497,6 @@ Trigger-Bedingung: nächster Lieferanten-Onboarding mit >15 Modellen in einem La
 2. Parallel-Loading: SPEC_KONSTANTEN und YAML parallel statt sequenziell.
 3. Sub-Agent-Pattern in `run_brief_daten.md` Sektion 1 als Standard dokumentieren — kein Versuch mehr mit direktem `read_file_content`.
 *Diagnose-Anforderung für künftige Runs:* in `cowork_anweisung_datenimports.md` eine Stage-Timing-Probe einbauen, die pro File-Load die Wallclock dokumentiert (Manifest oder Lauf-Bericht).
-
-**B55 — Kategorie-Pattern in WaWi-CSV: Hierarchie statt parallele Tags + Sara-Kategorie als zusätzliche Zuweisung. — ERLEDIGT v1.19 → E89**
-*Update v1.19 (2026-05-18):* Als Architektur-Entscheidung E89 in ENTSCHEIDUNGS-LOG-CRAWLING-DATEN formalisiert. Spec-Updates: `run_brief_daten.md` Sektion 10 (Stammdaten-Spezifika), SPEC_KONSTANTEN.md Self-Check Punkt 4. Sara-Workflow: Pflicht-Zuweisung `Intern > Neue Artikel für Sara` (WaWi-Key 546) als zweite CSV-Zeile pro neuem Artikel.
-*Bezug:* HotCakes-Run-Report 2026-05-18 (Note N2, Screenshot 1 aus Tjorbens Feedback), Self-Check #2/#3/#4 in SPEC_KONSTANTEN, E89 (NEU v1.19). *Stand v1.18:* offen. *Stand v1.19:* erledigt.
-*Problem:* Aktuelles Doppelzeilen-Pattern erzwingt 2 Zeilen pro Artikel (eine mit Oberkategorie, eine mit Unterkategorie). WaWi interpretiert das als zwei parallele Tag-Zuweisungen statt als Hierarchie. Ergebnis im HotCakes-Test: Artikel hat `Pole Dance Tops` und `Pole Dance Kleidung` als zwei flache Tags angezeigt, nicht als Baum.
-*Klärung mit Tjorben (2026-05-18):* Pro Artikel-Zuweisung in der CSV nur die spezifischste Unterkategorie angeben — WaWi resolved den Pfad automatisch über die in WaWi gepflegte Kategorie-Hierarchie. Plus neuer Use-Case: Artikel zusätzlich in `Intern > Neue Artikel für Sara` (interner WaWi-Schlüssel 546) für Freigabe-Workflow durch Social-Media-Managerin.
-*Folge-Pattern:* N Kategorien-Zuweisungen pro Artikel = N Zeilen in der CSV. Jede Zeile spezifiziert nur die unterste Kategorie. Self-Check #4 wird umformuliert von „alle 2×" auf „mindestens 2× (Shop-Kategorie + Intern/Sara), kann durch Marketing-Tags 3+ werden".
-*Action für v1.19:* `run_brief_daten.md` Sektion 5 (Stammdaten) bekommt explizites Goldstandard-Beispiel mit den 2 Zeilen. SPEC_KONSTANTEN Self-Check-Sektion entsprechend umformuliert.
-
-**B56 — Artikelgewicht-Default einbauen. — ERLEDIGT v1.19**
-*Update v1.19 (2026-05-18):* `lieferanten_mapping.yaml` um `article_weight_kg: 0.05` pro Lieferant erweitert (POLE_ADDICT, HOTCAKES, LUNALAE, POLE_JUNKIE). `run_brief_daten.md` Sektion 10 dokumentiert den Default in Stammdaten-CSV-Spalten `Artikelgewicht` und `Versandgewicht` (DE-Locale `0,05`). Maße bleiben leer wie geplant.
-*Bezug:* HotCakes-Run-Report 2026-05-18 (Screenshot 2 Maße/Gewicht leer), E90 (Sammeleintrag v1.19). *Stand v1.18:* offen. *Stand v1.19:* erledigt.
-*Problem:* Pipeline füllt die Felder `Artikelgewicht` und `Versandgewicht` in der Stammdaten-CSV nicht. WaWi zeigt im Maße/Gewicht-Reiter alle Felder leer. Versand-Konfiguration in WaWi profitiert aber von einem realistischen Default.
-*Klärung mit Tjorben:* Standard 0,05 kg (50 g) pro Kleidungsstück. Konservativer Default, dient als Platzhalter für Versand-Schätzung.
-*Action für v1.19:* `cowork_anweisung_datenimports.md` Sektion Stammdaten bekommt Default-Eintrag `Artikelgewicht=0.05, Versandgewicht=0.05` (Komma-Dezimal). Maße bleiben leer (variabel pro Kleidungsstück, nicht pauschal sinnvoll).
-
-**B57 — HTML-Entity-Encoding-Regel präzisieren (Latin-1-Umlaute bleiben Unicode). — ERLEDIGT v1.19**
-*Update v1.19 (2026-05-18):* Regression-Quelle gefunden in `run_brief_daten.md` Zeile 319 (alte Regel „deutsche Umlaute als `&uuml;`, `&auml;`, `&szlig;` etc." war falsch). Korrigiert in v1.19: HTML-Entities NUR für Zeichen außerhalb Latin-1 (z.B. ✓ = `&#10004;`, ➔ = `&#10148;`). Latin-1-Zeichen (ß, ä, ö, ü, é, à etc.) bleiben Unicode im UTF-8-Output. SPEC_KONSTANTEN Sektion 5 + AP7 sind unverändert kanonisch korrekt.
-*Bezug:* HotCakes-Run-Report 2026-05-18 (Tjorbens Feedback: HotCakes-Meta-Description hat `gro&szlig;e` während FANNA `große` hatte), E90 (Sammeleintrag v1.19). *Stand v1.18:* offen. *Stand v1.19:* erledigt.
-*Problem:* Regression in v1.17 — Encoding-Filter wurde zu aggressiv. HTML-Entities werden auch für Latin-1-Umlaute (ß/ä/ö/ü) erzeugt, nicht nur für Symbole außerhalb der Range. Inkonsistenz zu vorherigem Run (FANNA) mit korrektem Unicode.
-*Regel-Definition für v1.19:* HTML-Entities nur für Zeichen außerhalb Latin-1-Range (z.B. ✓ = `&#10004;`, ➔ = `&#10148;`). Latin-1-Zeichen (ß, ä, ö, ü, é, à, etc.) bleiben Unicode im UTF-8-Output. Action: `cowork_anweisung_datenimports.md` SEO-Sektion (Meta-Description-Template) bekommt explizite Encoding-Regel.
-
-**B58 — "Unser Model"-Phrase im size_and_fit raus, persönlicher Tonfall mit Modelnamen aus Crawl. — ERLEDIGT v1.19**
-*Update v1.19 (2026-05-18):* `run_brief_daten.md` Sektion 7 (Attribute) + Sektion 9 (Stil-Briefing) + SPEC_KONSTANTEN.md Sektion 11 (`size_and_fit`) tragen jetzt die Modelname-Konvention: Modelname aus Crawl-Body ziehen (z.B. Yifan, Vika, Elena bei HotCakes), bei mehreren Models pro Artikel erstes Model im Crawl-Body, bei null Modelname neutrale Formulierung („Das Model trägt...") oder Phrase weglassen.
-*Bezug:* HotCakes-Run-Report 2026-05-18 (Note N4, Tjorbens Feedback), E74-aspirational vs. E78-funktional, E90 (Sammeleintrag v1.19). *Stand v1.18:* offen. *Stand v1.19:* erledigt.
-*Problem:* HotCakes-Output enthielt im size_and_fit-Block die Phrase `Unser Model trägt Größe S bei 1,72 m. Passt regulär.` — das ist sachlich falsch (es sind Hersteller-Bilder, nicht „unser" Model) und stilistisch zu funktional. FANNA-Vorgänger-Run war persönlicher mit echten Modelnamen aus dem Crawl-Body.
-*Klärung mit Tjorben:* An Herstellertexten orientieren. Wenn der Crawl-Body Modelnamen enthält (`Yifan`, `Vika`, `Elena` — im HotCakes-Run-Report N4 dokumentiert): mit Namen schreiben. Beispiel: `Yifan trägt Größe S bei 1,72 m. Der Schnitt fällt regulär aus, bei breiteren Schultern lieber zu M greifen.` Wenn kein Modelname im Crawl: neutralere Formulierung ohne „unser" (z.B. „Das Model trägt..." oder ganz weglassen).
-*Action für v1.19:* `cowork_anweisung_datenimports.md` size_and_fit-Template + SPEC_KONSTANTEN Sektion 11 (Attribute-Stil-Differenzierung) bekommt explizite Modelnamen-Konvention.
-
-**B59 — TARIC-Code als Default für Pole-Bekleidung in lieferanten_mapping.yaml. — ERLEDIGT v1.19**
-*Update v1.19 (2026-05-18):* `lieferanten_mapping.yaml` um `taric_code: '62114390'` pro Lieferant erweitert (POLE_ADDICT, HOTCAKES, LUNALAE, POLE_JUNKIE). `run_brief_daten.md` Sektion 10 dokumentiert den TARIC-Eintrag in Stammdaten-CSV-Spalte `TARIC` (Sonstiges-Reiter in WaWi). YAML-Wert als String gequotet (sonst interpretiert YAML als Int).
-*Bezug:* HotCakes-Run-Report 2026-05-18 (Screenshot 4 Sonstiges TARIC leer), E90 (Sammeleintrag v1.19). *Stand v1.18:* offen. *Stand v1.19:* erledigt.
-*Problem:* TARIC-Code-Feld in WaWi-Sonstiges-Reiter wird nicht befüllt. Standard für deutsche Zoll-Anmeldung bei Pole-Bekleidung fehlt.
-*Klärung mit Tjorben:* TARIC `62114390` für Pole-Bekleidung. Eintrag in `lieferanten_mapping.yaml` als globaler Default oder pro Lieferant. Action für v1.19: YAML-Update + `cowork_anweisung_datenimports.md` Stammdaten-Sektion „Sonstiges" zieht den Code aus YAML.
-
-**B60 — Drive-Karteileichen-Cleanup für v1.17-Snapshot. — ERLEDIGT v1.19 (als manuelle Aktion an Tjorben gelistet im v1.19-Manifest)**
-*Update v1.19 (2026-05-18):* 3 Drive-IDs sind im v1.19-Manifest Sektion 11 (Manuelle Aktionen für Tjorben) gelistet — Aktion bleibt manuell, da Drive-MCP `delete_file` fehlt (B33). Mit dem Migrations-Pivot E87 (Drive → Git) wird B33 für künftige Snapshots bedeutungslos; bestehende Drive-Karteileichen bleiben aber als historische Aufräum-Aktion.
-*Bezug:* HotCakes-Run-Report 2026-05-18 (Note N5) + v1.17-Manifest (Warning #4) + v1.19-Manifest (siehe Sektion 11 dort). *Stand v1.18:* offen, Priorität NIEDRIG. *Stand v1.19:* erledigt (auf Manifest-Aktion verlagert).
-*Karteileichen im `Version_2026-05-17_212017`-Folder:*
-1. ID `1k7FloAj2KqmuXmLt1tidZb6mHZSCgLoN` (`ENTSCHEIDUNGS-LOG-CRAWLING-DATEN.md` Stub, 2.286 B) — fehlgeschlagener erster Upload-Versuch im v1.17-Build.
-2. ID `1qJjBoTE92V7il_vs-F-gglBuguDANvP4` (`SPEC_KONSTANTEN_as_gdoc_temp`) — Subagent-Detour im HotCakes-Run.
-3. ID `1-7_ueaQylA6fZ37YYN0mnm115kmkEa2C` (`SPEC_KONSTANTEN_temp_for_chunked_read`) — Subagent-Detour im HotCakes-Run.
-Drive-MCP hat keine Delete-Operation. Tjorben muss die 3 Files in Drive-Web-UI rauswerfen. Beeinflussen aktuell nicht den Resolver (der prüft Sektion-13-Match, nicht „nur diese Files"), aber stören die Komplettheits-Wahrnehmung im Folder.
-
 
 ## v1.19 — neue Einträge B61-B63 aus Pattern-Pivot Drive → Git (E87)
 
@@ -609,23 +511,6 @@ Drive-MCP hat keine Delete-Operation. Tjorben muss die 3 Files in Drive-Web-UI r
 *Bezug:* cowork_anweisung_datenimports.md 73110 B (>50 KB known-exception), v1.18-Manifest Sektion 9, E87 (Drive → Git Pivot).
 *Stand:* deferred — gleiche Begründung wie B61. In der Drive-Welt war >50 KB der Tool-Limit-Killer, in der Git-Welt nur ein Lesbarkeits-Hinweis. Re-Evaluation bei konkretem Pain oder nach B63-Migration.
 *Priorität:* niedrig.
-
-**B63 — Cowork-Resolver-Migration zu GitHub-Raw-URL. — ERLEDIGT v1.20 → E91**
-*Update v1.20 (2026-05-18):* GitHub-Raw-Resolution in `cowork_custom_instructions.md` v2.0 verankert (Sektion „Wissens-Quelle: GitHub-Raw-Resolution"), `Projekt-Anweisungen.md` v2.0, `cowork_anweisung_datenimports.md` v2.0 Stage 0, `run_brief_daten.md` Sektion „DARF". Drive-Folder bleibt Read-Only-Archiv für Pre-v1.19-Stände. Probe-Test mit Cowork `web_fetch` gegen Tag-URL ausstehend bei nächstem Cowork-Lauf — falls Auth-Issue (Public-Repo sollte aber ohne Auth funktionieren): in `BACKLOG.md` erfassen.
-*Bezug:* E87 (Drive → Git Pivot v1.19), `cowork_custom_instructions.md`, `Projekt-Anweisungen.md`, WISSENS-UPDATE-PLAYBOOK v2.0 Sektion 2.3.
-*Stand:* offen, Priorität HOCH (v1.20-Scope, eigener Trigger).
-*Problem:* Cowork resolved aktuell den letzten gültigen Drive-Sub-Folder (`Version_2026-05-18_141930` = v1.18-Stand). Mit dem v1.19-Pattern-Pivot E87 liegt der aktuelle Stand als Git-Tag `v1.19` im GitHub-Repo `verticalogmbh/polesportshop-wissen`, nicht in Drive. Cowork sieht den v1.19-Stand also bis zur Resolver-Migration nicht.
-*Lösungs-Pfad:*
-1. `cowork_custom_instructions.md` Sektion „Snapshot-Resolution": Drive-Folder-Resolution → GitHub-Raw-URL-Resolution. Pattern: `https://raw.githubusercontent.com/verticalogmbh/polesportshop-wissen/<tag>/<file>` mit `<tag>` = letzter `v<X.Y>`-Tag aus GitHub-API (`gh api repos/verticalogmbh/polesportshop-wissen/tags`).
-2. `Projekt-Anweisungen.md` Routine-Output-Schritt 2 entsprechend anpassen.
-3. Cowork-Tool-Probe: kann Cowork-`web_fetch` GitHub-Raw-URLs lesen? Falls private Repo: Auth-Token-Mechanik klären (analog zu R2-Credentials, E33).
-4. Validierung: Cowork-Test-Lauf gegen den dann aktuellen Git-Tag, prüfen ob Stage 0 sauber durchläuft.
-*Stolperfallen:*
-- Repo-Visibility: Bei privatem Repo braucht Cowork ein GitHub-Token. Bei public Repo: trivial.
-- Tag-Aktualität: Wenn ein Build noch nicht gepusht ist, sieht Cowork den alten Stand. Push-Disziplin (siehe WISSENS-UPDATE-PLAYBOOK v2.0 Sektion 5) ist Pflicht.
-- Drive-Snapshot bleibt parallel als Read-Only-Archiv erhalten, aber wird ab v1.19 nicht mehr aktualisiert. Klar in der Spec markieren, damit niemand versehentlich Drive-Stand als aktuellen Stand interpretiert.
-*Trigger:* eigener Wissens-Update-Trigger für v1.20, sobald Tjorben für die Resolver-Migration bereit ist.
-
 
 ## v1.20 — neue Einträge B64+ aus Skalierungs-Refactor (E91)
 
@@ -650,7 +535,6 @@ Drive-MCP hat keine Delete-Operation. Tjorben muss die 3 Files in Drive-Web-UI r
 
 *Update v1.21 (2026-05-18):* Trial-Lauf 2026-05-18 21:06 `run_2026-05-18_2106_HotCakes.md` hat B65 zumindest teilvalidiert — Cowork hat alle 4 GitHub-Raw-Files in 1,25 s parallelem `curl`-Batch geladen (HTTP 200, B65-Wallclock < 5 s Toleranz, "GitHub-Raw schlägt Drive-Connector um Faktor ~5"). **Aber:** das war über den Drive-Übergang oder mit Public-Repo (im Trial wurde das Repo public für den Lauf, oder Cowork hatte Auth). Repo ist aktuell privat (404 für anonyme Reads), daher: B65 bleibt bis zur sauberen Klärung der Auth-Mechanik offen. v1.21 nutzt weiter Drive-Übergang als Fallback (siehe v1.21-Manifest Aktion 1).
 
-
 ## v1.21 — neue Einträge B66+ aus Trial-Findings + Bildpipeline-Reaktivierung (E92, E93)
 
 **B66 — Trial-Lauf-Wiederholung nach v1.21-Push (Validierung E92 + E93). — NEU v1.21**
@@ -668,5 +552,3 @@ Drive-MCP hat keine Delete-Operation. Tjorben muss die 3 Files in Drive-Web-UI r
 *Stand:* offen, Priorität NIEDRIG (Monitoring), zu reviewen wenn Lieferanten-Volumen steigt.
 *Kontext:* Bei 21 Artikeln × ~10 Bilder/Artikel = ~210 Thumbnail-Vision-Calls pro Lauf. Bei 50 Artikeln × 10 Bilder × 20 Lieferanten = ~10.000 Vision-Calls pro Monat (Hochrechnung).
 *Trigger:* wenn Cowork-Credit-Verbrauch in Vision-Stage sichtbar dominiert, Re-Evaluation der `pose_sort`-Strategie pro Lieferant (`auto_vision` vs. `manufacturer_order` vs. `none`). Für HotCakes konkret: nach erstem v1.21-Trial-Lauf prüfen ob `auto_vision` weiter sinnvoll ist, oder ob B28-Verifikation mit mehr Datenpunkten zu `manufacturer_order` führt.
-
-

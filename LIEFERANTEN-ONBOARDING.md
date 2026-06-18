@@ -1,8 +1,10 @@
 # Lieferanten-Onboarding — Standard-Prozess
 
-**Stand:** v1.0, 2026-05-18 (NEU mit v1.20-Refactor E91)
-**Zweck:** Zentraler Spec für das Onboarding eines neuen Lieferanten (Nr. 2–21). Konsolidiert die vorher verstreuten Schritte aus `WAWI-IMPORT-WISSEN.md` Sektion 9, `cowork_anweisung_datenimports.md` Sektion 3+6, `lieferanten_mapping.yaml` Schema-Doku, und `Projekt-Anweisungen.md` Operator-Erinnerung.
-**Trigger im Claude-Code-Chat:** „Onboarde Lieferant <NAME>" (Mapping + Brand-Story-Recherche in Claude Code), gefolgt von Probe-Lauf in Cowork („Verarbeite neue Artikel von <NAME>: Probe-Lauf").
+**Stand:** v1.23, 2026-06-18 (auf Code-Pipeline aktualisiert; Ausführung lokal in Claude Code, nicht mehr Cowork)
+**Zweck:** Zentraler Spec für das Onboarding eines neuen Lieferanten (Skalierung auf ~50). Konsolidiert Mapping-Schema, Code-Artefakte und Ameise-Vorlagen-Anlage.
+**Trigger im Claude-Code-Chat:** „Onboarde Lieferant <NAME>" (Mapping + Brand-Story in Claude Code), dann „Verarbeite neue Artikel von <NAME>: Probe-Lauf" — **lokaler Code-Lauf** (`pipeline/orchestrator`), kein Cowork.
+
+> **Skalierungs-Kern:** Ein Lieferant = Dateien in **festen Fächern** (siehe „Code-Artefakte pro Lieferant" unten) + ein Mapping-Eintrag + 5 Ameise-Vorlagen. Der Pipeline-Kern und die Wissens-Docs wachsen dadurch **nicht** — sie wachsen nur mit neuen Mechaniken. So bleiben 50 Lieferanten handhabbar.
 
 ---
 
@@ -13,6 +15,21 @@ Vor dem ersten produktiven Daten-Pipeline-Lauf für einen neuen Lieferanten. Lie
 Nicht relevant bei: Refresh-Läufen (neue Lieferung eines bekannten Lieferanten), Re-Imports auf bestehende Artikel, Cross-Selling-Family-Refresh.
 
 ---
+
+## Code-Artefakte pro Lieferant (feste Slots)
+
+Neben dem Mapping-Eintrag legt ein neuer Lieferant Dateien in diese festen Fächer:
+
+| Slot | Datei | Pflicht? |
+|---|---|---|
+| Mapping/Config + Brand-Story | `lieferanten_mapping.yaml` (1 Eintrag) | ja (Schritt 1) |
+| Content (Merkmale/Style + Attribut-Texte, 5 Sprachen) | `pipeline/content/<kuerzel>_content.json` | ja |
+| Barcodes (UTC/EAN pro Größe) | `pipeline/content/ean_<kuerzel>.csv` (`modell_basis;garment_type;farbe;groesse;ean`) | nur wenn Lieferant Barcodes liefert (E95) |
+| Crawl-Builder (Nicht-Shopify) | `pipeline/suppliers/<kuerzel>.py` mit `build_vaeter()` | nur Nicht-Shopify (Shopify → `builder: None`, Crawl automatisch) |
+| EK + Bestell-Mengen (aus Rechnung) | `EK_input/ek_<x>.csv`, `EK_input/menge_<x>.csv` (gitignored) | pro Lauf |
+| Registry-Eintrag | `orchestrator.SUPPLIERS` (`key`, `ek`, `content`, `builder`, ggf. `ean`, `scope`) | ja |
+
+Mapping-Währung steuert den Margen-Aufschlag (E98: EUR → +1€ EK, sonst +5€ VK) und ob EK umgerechnet wird (`fx_to_eur`). `lieferzeit_tage` nur fürs Lieferdatum der Bestellung.
 
 ## Pflicht-Checkliste (5 Schritte, in dieser Reihenfolge)
 
@@ -89,16 +106,15 @@ Recherche-Quelle: Hersteller-„About"-Seite, ggf. Wikipedia/Presse-Mitteilungen
 
 **Wenn null:** Cowork generiert Brand-Story pro Lauf neu und markiert als E70 (Eigeninterpretation). Akzeptabel als Übergang, aber ineffizient — beim Onboarding einmal richtig pflegen.
 
-### Schritt 4 — Probe-Lauf in Cowork
+### Schritt 4 — Probe-Lauf (lokaler Code)
 
-Trigger im Cowork-Chat: `Verarbeite neue Artikel von <LIEFERANT>: Probe-Lauf, 1–3 Modelle aus <Lieferung/Crawl>`. EK pro Modell explizit angeben.
+`orchestrator.run(supplier="<kuerzel>", with_images=...)` (bzw. `python -m pipeline.orchestrator --supplier <x> [--images]`). EK/Mengen vorher in `EK_input/` ablegen.
 
 **Erwartetes Ergebnis (Go-Kriterien):**
-- Stage 0 läuft sauber (Cowork findet das Mapping, lädt Brand-Story aus YAML).
-- Stage 0.5 Scope-Analyse dokumentiert Batch-Plan im Lauf-Bericht.
-- 5 CSVs in `present_files` ausgegeben, Datei-Naming-Konvention eingehalten (AP11).
+- Pricing findet für jeden Vater einen EK (sonst STOPP, `missing`-Liste im Bericht).
+- A-Nummern aus dem Nummernkreis vergeben (E94), EAN angereichert falls Referenz (E95).
+- 5 CSVs (+ optional Bestellung) in `pipeline/outputs/<KUERZEL>_<stamp>/`, Lauf-Bericht daneben.
 - Self-Check 16/16 grün.
-- Eigeninterpretations-Marker (E70) erwartet bei dünnem Hersteller-Text — im Bericht prüfen, ob das in Ordnung ist.
 
 **No-Go-Kriterien:**
 - Cowork stoppt bei Sprach-Lookup-Lücke (AP8) → SPEC_KONSTANTEN Sektion 6 erweitern, Re-Lauf.
@@ -112,7 +128,7 @@ Tjorben importiert die 5 CSVs in WaWi-Ameise in der Slot-Reihenfolge `_1_` bis `
 - WaWi-UI: Artikel-Liste prüfen — sind Vater/Kind-Strukturen korrekt? Sind Kategorien korrekt zugewiesen (inkl. Sara-546-Zuweisung, E89)?
 - Shop-Review: Frontend prüfen — sehen Titel-Tags + Meta-Description korrekt aus? Stimmt der Stil? Sind 5 Sprachen befüllt?
 - Sara (Social-Media-Manager) reviewt im WaWi-Filter „Intern > Neue Artikel für Sara" (Kategorie-Key 546) und entfernt die Zuweisung nach Approval (E89-Workflow).
-- Bilder: manuell pflegen (E63 — Bildpipeline archiviert).
+- Bilder: kommen automatisch aus der Pipeline (R2-URLs in Stammdaten `Bild 1`–`Bild 10`, E46/E93) — kein manuelles Pflegen.
 
 Findings: in `BACKLOG.md` aufnehmen oder direkt in den nächsten Wissens-Update-Build mitnehmen.
 

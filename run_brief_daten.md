@@ -1,3 +1,5 @@
+
+> **🗄️ DEPRECATED v1.22 — COLD STORAGE.** Diese Cowork-Spec ist seit dem Code-Pivot (v1.22) **nicht mehr der Primärpfad**. Die Artikelanlage läuft als lokaler Code in `pipeline/` (siehe `CLAUDE.md` + `pipeline/README.md`). Dieses Dokument bleibt als **Cowork-Fallback + Historie** erhalten (voller Stand auch im git-Tag `v1.21`). Nicht für die tägliche Arbeit lesen.
 > **🗄️ DEPRECATED ab v1.22 (2026-06-15).** Die Artikelanlage läuft jetzt als lokaler Code (`pipeline/`, siehe `pipeline/README.md`). Dieser Run-Brief war die kompakte Cowork-Ausführungs-Spec und ist jetzt **historische / Fallback-Referenz** — nicht mehr aktiv synchron gehalten, nicht für aktuelle Läufe verwenden. Das Schema bleibt kanonisch in `SPEC_KONSTANTEN.md`.
 
 # RUN-BRIEF: Daten-Pipeline (E68, offiziell in v1.12 verankert, Stand 2026-05-18, v1.18)
