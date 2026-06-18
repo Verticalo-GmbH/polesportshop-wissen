@@ -73,7 +73,7 @@ Wenn Schritt 1 fehlschlägt, alle anderen abbrechen. Wenn Schritte 2-5 fehlschla
 
 ## 4. CSV 1: Stammdaten
 
-### Schema (48 Spalten — Stand 2026-05-15 v3 nach E46)
+### Schema (49 Spalten — Stand 2026-06-17 v3.2 nach E95; vorher 48 v3 nach E46)
 
 Spalten in der Reihenfolge, die sich im HotCakes-Lauf etabliert hat. Vollständige Liste:
 
@@ -89,6 +89,7 @@ Spalten in der Reihenfolge, die sich im HotCakes-Lauf etabliert hat. Vollständi
 **Meta-Daten DE (2, nur Vater):** `Titel-Tag (SEO); Meta-Description (SEO)`
 **Meta-Daten Sprachen (8, nur Vater):** `Global-Englisch: Titel-Tag; Global-Englisch: Meta-Description` + analog für FR/IT/ES — gemappt über Reiter "Weitere Texte"
 **Bilder (10) — NEU mit E46:** `Bild 1; Bild 2; Bild 3; Bild 4; Bild 5; Bild 6; Bild 7; Bild 8; Bild 9; Bild 10` — Public-R2-URLs, leere Strings bei weniger Bildern. Plattform-Aktivierung läuft beim Import automatisch über die im Reiter „Bilder/Plattformen" der Vorlage konfigurierten 11 Plattform-Häkchen.
+**EAN (1) — NEU mit E95 (Position 49, ans Ende):** `EAN` — GTIN/UTC-Barcode pro Größe, **nur auf Kind-Zeilen** befüllt (Vater leer). Quelle = committete Lieferanten-Referenz `pipeline/content/ean_<lieferant>.csv`. **Ameise-Vorlage muss die Spalte `EAN` → JTL-Feld GTIN/EAN mappen** (einmalig pro Lieferant mit Barcodes; bei HotCakes/Rolling leer, kein Mapping nötig).
 
 ### Vater-Kind-Logik
 
@@ -122,6 +123,7 @@ Pro Modell+Farbe gibt es **eine Vater-Zeile** plus **eine Kind-Zeile pro Größe
 **Kind-Zeile:**
 - `Artikelnummer` = **Vater-A-Nummer + `-001`, `-002`** … aufsteigend nach Größe (E94), z.B. `A1009262-001` (XS)
 - `Artikelnummer (Lieferant)` = sprechender Kind-Schlüssel (Vater-Schlüssel + `_<Größe>`, z.B. `HC-Hekate-Bodysuit_XS`) — Identifikator für Merkmale/Attribute
+- `EAN` = GTIN/UTC-Barcode dieser Größe (E95), wenn Lieferant eine Barcode-Referenz hat (z.B. Lunalae); sonst leer. Vater-Zeile bleibt EAN-leer.
 - `Identifizierungsspalte Vaterartikel` = **Vater-A-Nummer** (z.B. `A1009262`) — das ist die Verknüpfung (E94: über A-Nummer, nicht mehr über den sprechenden Schlüssel)
 - `Artikelname` (alle 5 Sprachen) = Vater-Name + Leerzeichen + Variationswert (E56) — z.B. DE `HotCakes Bodysuit Hekate Schwarz XS`, FR `HotCakes Body Hekate Noir XS`, IT `HotCakes Body Hekate Nero XS`. Die Größe ist in allen 5 Sprachen identisch (XS/S/M/L/XL/2XL universal).
 - `Variationsname 1` = `Größe`

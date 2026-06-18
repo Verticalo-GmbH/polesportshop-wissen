@@ -26,9 +26,11 @@ SUPPLIERS = {
                  "scope": "Rechnung APRIL26 (4 Ceci)"},
     "lunalae":  {"key": "LUNALAE", "ek": "ek_lunalae_3124.csv",
                  "content": "lunalae_content.json", "builder": "lunalae",
+                 "ean": "ean_lunalae.csv",
                  "scope": "Rechnung #3124 (Diamante May Release)"},
     "lunalae-odessa": {"key": "LUNALAE", "ek": "ek_lunalae_odessa.csv",
                  "content": "lunalae_odessa_content.json", "builder": "lunalae_odessa",
+                 "ean": "ean_lunalae.csv",
                  "scope": "Rechnung #D413 (Odessa)"},
 }
 
@@ -58,6 +60,13 @@ def run(supplier: str = "hotcakes", stamp: str | None = None,
 
     # Weg B (E94): A-Nummern aus dem WaWi-Nummernkreis vorab vergeben.
     artnr_next = numbering.assign(priced, start=start_artnr, persist=persist_counter)
+
+    # E95: EAN/GTIN-Barcodes pro Größe anreichern (falls Lieferant Referenz hat).
+    if cfg.get("ean"):
+        from . import barcodes
+        _, ean_fehlt = barcodes.attach(priced, config.PIPELINE_DIR / "content" / cfg["ean"])
+        if ean_fehlt:
+            print(f"[{supplier}] WARN EAN fehlt für {len(ean_fehlt)} Kinder: {ean_fehlt[:5]}")
 
     if with_images:
         _run_images(priced, sup)

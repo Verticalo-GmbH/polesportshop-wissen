@@ -97,6 +97,7 @@ def build_rows(vaeter: list[Vater], supplier: dict, run_date: str) -> list[dict]
                 r = _base_row(supplier, run_date)
                 r.update({
                     "Artikelnummer": k.artikelnummer, "Artikelnummer (Lieferant)": knr,
+                    "EAN": k.ean or "",   # GTIN/UTC pro Größe (E95), nur Kind
                     "Identifizierungsspalte Vaterartikel": v.artikelnummer,
                     "Artikelname": knames["de"],
                     "Variationsname 1": "Größe", "Variationswert 1": k.groesse,

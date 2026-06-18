@@ -33,7 +33,7 @@ Diese Datei ist nicht versioniert mit Major/Minor (kein v1.X-Header). Stattdesse
 
 ---
 
-## 1. Stammdaten-Schema (48 Spalten, v3.1 nach E54)
+## 1. Stammdaten-Schema (49 Spalten, v3.2 nach E95 — EAN ans Ende; v3.1 nach E54)
 
 **WICHTIG (E54, 2026-05-15 Abend):** Diese Spalten-Reihenfolge ist explizit so gewählt, dass bestehende Lieferanten-Vorlagen aus der v2-Ära (vor E46) für die ersten 38 Spalten **unverändert** funktionieren. Die Pipeline generiert die CSV **strikt in dieser Reihenfolge**. Nur die 10 Bild-Spalten (39-48) müssen einmalig pro Lieferanten-Vorlage neu gemappt werden. Append-only-Konvention für künftige Schema-Bumps.
 
@@ -105,6 +105,7 @@ Position 39-48 — Bild-URLs (E46 angehängt):
    46. Bild 8
    47. Bild 9
    48. Bild 10
+   49. EAN                  (NEU E95 — GTIN/UTC-Barcode pro Größe; nur Kind-Zeilen befüllt, sonst leer)
 ```
 
 **Hinweis zu Bild-Spalten (v1.10+):** Die 10 Bild-Spalten bleiben im Schema verpflichtend, werden aber in v1.10 **standardmäßig leer ausgegeben**, weil die Bildpipeline archiviert ist (E63). Tjorben pflegt Bilder bis auf Weiteres manuell in WaWi. Die Spalten sind nicht optional — alle 10 müssen mit leeren Strings in jeder Zeile vorhanden sein, um Schema-Konformität für Ameise zu wahren.
@@ -323,7 +324,7 @@ Jeder neue Artikel wird beim Self-Check (siehe Sektion 9) gegen diese drei abgeg
 
 | # | Self-Check-Punkt | Wo verankert | Fail-Symptom |
 |---|---|---|---|
-| 1 | Schema-Spalten-Reihenfolge entspricht 1:1 der 48-Spalten-Liste (Sektion 1) | E54, Sektion 1 | CSV-Ameise-Import bricht oder mapped falsch |
+| 1 | Schema-Spalten-Reihenfolge entspricht 1:1 der 49-Spalten-Liste (Sektion 1, E95: + EAN) | E54, E95, Sektion 1 | CSV-Ameise-Import bricht oder mapped falsch |
 | 2 | Kategorie Ebene 1 = `Pole Dance Kleidung` (für Kleidungs-Pilot) — niemals `Damen` oder `Limited Editions` | E51, AP1 | Artikel landet in falscher Shop-Kategorie |
 | 3 | Kategorie Ebene 2 = nur die in Sektion 3 erlaubten Werte (`Bodysuits` / `Pole Dance Tops` / `Pole Dance Shorts` / `Leggings` / `Legwarmer` / `Shirts`) | E51 | Artikel in falscher Unterkategorie |
 | 4 | **Multi-Kategorie-Pattern (KORRIGIERT v1.21, E92 verfeinert E89):** Pro Artikel **mindestens 3 Kategorie-Zeilen** in der CSV mit gleicher Artikelnummer: (a) Oberkategorie-Zuweisung `Pole Dance Kleidung` (Kategorie Ebene 2 leer); (b) Unterkategorie-Zuweisung `Pole Dance Kleidung` + spezifische Subkategorie (Pole Dance Tops/Shorts/Bodysuits/Leggings/etc.); (c) Sara-Review-Pflicht-Zuweisung `Intern` + `Neue Artikel für Sara` (WaWi-Key 546). **Korrektur:** v1.19/E89-Annahme „WaWi resolved Pfad selbst" war falsch — Lauf-Bericht 2026-05-18 21:06 zeigte fehlende Oberkategorie im Shop. Zurück zum E57-Doppel-Pattern, ergänzt um Sara-Zeile aus E89. Vorlagen-Setting unverändert: „Kategorieverknüpfungen des Artikels aktualisieren" = „Neue Kategorien beim jeweiligen Artikel hinzuimportieren". Anti-Confusion E75 weiter gültig. | E57, E89, E92, Sektion 4 | Artikel fehlt Oberkategorie im Shop, oder Sara-Workflow bricht weil 546-Zuweisung fehlt |
@@ -342,7 +343,7 @@ Jeder neue Artikel wird beim Self-Check (siehe Sektion 9) gegen diese drei abgeg
 
 **Self-Check-Output im Lauf-Bericht:** Format pro Punkt: `[#N] [✓/✗] <Punkt-Bezeichnung> — <Detail>`. Beispiel:
 ```
-[#1] ✓ Schema-Reihenfolge — 48 Spalten, exakt nach v3.1-Layout
+[#1] ✓ Schema-Reihenfolge — 49 Spalten, exakt nach v3.2-Layout (E95: + EAN ans Ende)
 [#5] ✓ Titel-Tag — DE: "HotCakes Bodysuit Hekate Schwarz | polesportshop.de"; alle 5 Sprachen aus Template
 [#12] ✓ Goldstandard-Abgleich — strukturell identisch zu HC-Hekate-Bodysuit (Vater + 4 Kinder, je 2 Kategorie-Zeilen)
 [#13] ✓ Originalitäts-Check — kein "Bottom" im DE-Freitext, kein 5-Wörter-Plagiat (Bullet-Separator-Scan greift), keine E82-Verletzung (keine Em-Dashes, keine Doppelpunkte im Fließtext, keine Meta-Einleitungen)
@@ -677,6 +678,7 @@ Repo-Meta-Files NICHT im Snapshot-Count: `README.md` (GitHub-Visitor-Doku), `.gi
 | E92 | CRAWLING-DATEN | Trial-Findings v1.20 — Multi-Kategorie auf 3-Zeilen-Pattern korrigiert (Oberkategorie + Subkategorie + Sara-546), Farb-Lokalisierung DE (Teal→Türkis, Sky→Himmelblau, Cherry→Kirschrot, Emerald→Smaragdgrün, Lime→Limettengrün) |
 | E93 | BILDPIPELINE | Bildpipeline reaktiviert (kehrt E63 um) — Stage 5.6+5.7 wieder aktiv, R2-Architektur unverändert, Spec von Stub auf v2.1 voll-aktiv |
 | E94 | CRAWLING-DATEN | Artikelnummer aus dem WaWi-Nummernkreis vorab vergeben (A-Nummern, „Weg B"; Kinder `-001`…) — aktiviert E6, weil Lager-Scan an der Artikelnummer hängt; sprechender Schlüssel bleibt in `Artikelnummer (Lieferant)` |
+| E95 | CRAWLING-DATEN | EAN/GTIN-Spalte im Stammdaten-Schema (48→49, ans Ende/Position 49 per E54 append-only) + Barcode-Anreicherung pro Größe aus committeter Lieferanten-Referenz (`content/ean_<lieferant>.csv`); nur auf Kind-Ebene; Lunalae UTC-Barcodes |
 
 **Cluster-File-Kurz-Lookup (Datei-Mapping zum Cluster-Namen oben):**
 

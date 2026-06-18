@@ -17,8 +17,8 @@ def run(stammdaten, variationen, merkmale, attribute, crossselling, vaeter) -> l
     # Weg B (E94): Artikelnummer = vorab vergebene A-Nummer (nicht leer).
     vater_artnrs = {v.artikelnummer for v in vaeter}
     art_set = all(r["Artikelnummer"] for r in stammdaten)
-    chk(1, "Stammdaten 48 Spalten + Artikelnummer gesetzt (Weg B)",
-        len(spec.STAMMDATEN_COLUMNS) == 48 and art_set)
+    chk(1, "Stammdaten 49 Spalten + Artikelnummer gesetzt (Weg B)",
+        len(spec.STAMMDATEN_COLUMNS) == 49 and art_set)
 
     # Multi-Kategorie: pro Vater 3 Zeilen, pro Kind 2 — gruppiert über A-Nummer
     from collections import Counter

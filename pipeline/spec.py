@@ -32,8 +32,9 @@ STAMMDATEN_COLUMNS = [
     "Netto-EK", "Ist Standardlieferant", "Lieferzeit in Tagen (Lieferant)",
     "Bild 1", "Bild 2", "Bild 3", "Bild 4", "Bild 5",
     "Bild 6", "Bild 7", "Bild 8", "Bild 9", "Bild 10",
+    "EAN",  # E95: GTIN/UTC-Barcode pro Größe. Append-only (E54) -> Position 49, ans Ende.
 ]
-assert len(STAMMDATEN_COLUMNS) == 48
+assert len(STAMMDATEN_COLUMNS) == 49  # E95: + EAN (Position 49)
 
 # --- §2 Standardwerte ----------------------------------------------------
 DEFAULTS = {

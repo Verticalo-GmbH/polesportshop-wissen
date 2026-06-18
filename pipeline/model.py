@@ -23,6 +23,7 @@ class Kind:
     groesse_raw: str             # wie vom Lieferanten, z.B. "XS/S"
     position: int                # Reihenfolge im Quell-Datensatz
     artikelnummer: Optional[str] = None   # Vater-ArtNr + Suffix (-001 ...), in P4 vergeben
+    ean: Optional[str] = None             # GTIN/UTC-Barcode pro Größe (E95), aus Lieferanten-Referenz
     sku: Optional[str] = None
     grams: Optional[int] = None
     price_retail: Optional[float] = None  # Shop-VK des Lieferanten (NICHT unser EK)

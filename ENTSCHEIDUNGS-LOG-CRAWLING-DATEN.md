@@ -30,6 +30,7 @@
 - **E90** — F2-F6-Implementierung in v1.19 (Sammeleintrag, NEU v1.18)
 - **E92** — Trial-Findings v1.20 (NEU v1.19): Multi-Kategorie auf 3-Zeilen-Pattern korrigiert (E89-Annahme falsch), Farb-Lokalisierung DE für Marketing-Farben mit DE-Pendant
 - **E94** — Artikelnummer aus dem WaWi-Nummernkreis vorab vergeben (A-Nummern, „Weg B") — aktiviert die in E6 aufgeschobene A-Nummer-Strategie; Grund: Lager-Scan hängt an der Artikelnummer
+- **E95** — EAN/GTIN-Spalte im Stammdaten-Schema (48→49) + Barcode-Anreicherung pro Größe aus Lieferanten-Referenz (Lunalae UTC-Barcodes)
 
 ---
 
@@ -521,3 +522,27 @@ E89-Sara-Workflow bleibt unverändert (Sara entfernt 546 nach Approval). Vorlage
 *Code:* `pipeline/numbering.py` (Vergabe + Zähler), `pipeline/state/nummernkreis.json` (Zähler-State), Stammdaten/Variationen/Cross-Selling/Self-Check auf A-Nummer umgestellt (`pipeline/csv/*.py`, `pipeline/selfcheck.py`, `pipeline/orchestrator.py`).
 
 *Production (2026-06-17):* 41 Väter neu mit A-Nummern + Bildern — HotCakes 21 (`A1009262`–`A1009282`), Lunalae Diamante 10 (`A1009283`–`A1009292`), Lunalae Odessa 6 (`A1009293`–`A1009298`), Rolling 4 (`A1009299`–`A1009302`); nächste frei `A1009303`. Self-Check je 16/16. Ersetzt die zuvor mit sprechenden Nummern importierten Artikel (in WaWi gelöscht + neu importiert).
+
+---
+
+**E95 — EAN/GTIN-Spalte im Stammdaten-Schema + Barcode-Anreicherung pro Größe. (NEU 2026-06-17)**
+
+*Auslöser:* Lunalae liefert pro Größe einen **UTC-Barcode** (im Wholesale-Sheet). Diese gehören in der WaWi ins **EAN/GTIN-Feld** und sind lager-relevant. Im ersten Lunalae-Run fehlten sie komplett — das Stammdaten-Schema (48 Spalten) hatte gar keine EAN-Spalte.
+
+*Entscheidung:* **EAN als feste Spalte** ins Stammdaten-Schema aufgenommen — **ans Ende (Position 49, nach `Bild 10`)** gemäß Append-only-Konvention E54, damit bestehende Vorlagen-Mappings stabil bleiben → **48 → 49 Spalten**. Befüllt **nur auf Kind-Ebene** (jede Größe hat ihren eigenen Barcode); Vater-Zeilen bleiben EAN-leer (Variationsartikel-Container hat keine GTIN). Lieferanten ohne Barcode-Referenz (HotCakes, Rolling) führen die Spalte leer mit — kein Bruch der bestehenden Vorlagen (Ameise ignoriert nicht-gemappte Spalten).
+
+*Mechanik:*
+- Referenz committet pro Lieferant: `pipeline/content/ean_<lieferant>.csv` mit `modell_basis;garment_type;farbe;groesse;ean`. Schlüssel deckt sich mit der Väter-Identität + Kind-Größe.
+- `pipeline/barcodes.py` lädt die Referenz und setzt `Kind.ean`; Orchestrator ruft das, wenn die Registry für den Lieferanten einen `ean`-Eintrag hat.
+- Self-Check #1 prüft jetzt 49 Spalten.
+
+*Lunalae-Spezifika beim Einlesen (verifiziert 2026-06-17):*
+- Odessa: je Größe eine eigene Barcode-Spalte (`UTC barcode (6)/(XS)` … `(14)/(XL)`).
+- Diamante: alle Barcodes in **einer** Zelle (XS-Spalte), Leerzeichen-getrennt, in aufsteigender Größen-Reihenfolge (AU6,8,10,12,14,16). Zuordnung **nach Größen-Rang** (XS=Index 0 … XL=Index 4), nicht nach Position — robust gegen fehlende Mittel-Größen. AU16 (XXL) wird nicht übernommen (au_to_xs_xl).
+- Match Sheet-Zeile ↔ Artikel über Style-Name (Modell + Farbe + Typ; Diamante-Filter schließt „Sarah Flowy" aus). 16 Artikel × bis zu 5 Größen = **80 Barcodes, alle eindeutig, 0 Fehlzuordnungen**. SKU-Codes bestätigen (Imogen 1438bs, Demi 1399tp, Sarah 1208-1ST, Roxie Top 1446tp / Bottom 1284-1HW, Odessa 1401TP/1402HW).
+
+*Ameise-Vorlage:* Lunalae-Stammdaten-Vorlage muss die neue Spalte **`EAN` → JTL-Feld GTIN/EAN/Barcode** mappen (einmalig). Für HotCakes/Rolling nicht nötig (Spalte leer).
+
+*Code:* `pipeline/spec.py` (Schema 49 + EAN nach HAN), `pipeline/model.py` (`Kind.ean`), `pipeline/barcodes.py` (Loader/Attach), `pipeline/csv/stammdaten.py` (Kind-EAN), `pipeline/selfcheck.py` (#1 → 49), `pipeline/orchestrator.py` (Registry `ean` + Attach), `pipeline/content/ean_lunalae.csv` (80 Barcodes).
+
+*Production (2026-06-17):* Lunalae komplett (Diamante 10 `A1009283`–`A1009292` + Odessa 6 `A1009293`–`A1009298`) als **eine** Import-Datei neu generiert, 160 Kind-Zeilen mit EAN, je 16/16, mit Bildern. Re-Import der Stammdaten reichert die bestehenden Artikel um die GTIN an.
