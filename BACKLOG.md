@@ -43,6 +43,12 @@ Aufgaben:
 - `warengruppen_aufschlag.csv`: Tjorben exportiert die aktuelle Aufschlagsfaktoren-Logik aus dem System. Claude leitet daraus die Tabelle ab. *Zwischenstand 2026-05-13:* erste Version v0.1 aus JTL-Export abgeleitet, muss noch auf 2-Cluster-Logik (Kleidung + Technik) konsolidiert und mit preisabhängiger Marge-Kurve versehen werden.
 - Physische Ablage der Tabellen klären (in Abstimmung mit B17).
 
+**B68 — GLD enthält nur Waren-EK, nicht Zoll/Versand/Bankgebühren → Marge verzerrt. Interim +4€ auf VK. — NEU 2026-06-18**
+Stand: 2026-06-18. Bezug: B17, B18, E23, E98.
+Problem: Der GLD (Ø-EK netto, Basis für den Brutto-VK) enthält aktuell nur den Waren-EK. **Zoll, Versandkosten und Bankgebühren** (z.B. AUD-Auslandsüberweisung) fehlen → GLD zu niedrig → bei VK = EK×2 ist die Marge verzerrt, wir nehmen weniger ein als nötig.
+Interim-Maßnahme (E98, aktiv seit 2026-06-18): pauschal **+4,00 EUR auf den Brutto-VK** (`constants.VK_AUFSCHLAG_EUR`, erhält das ,90-Ende) als Margen-Schutz, bis die echten Kostenanteile vorliegen. Gilt für alle Lieferanten.
+Zukunft (zu diskutieren): pro Lieferant **historische Mittelwerte** (Zoll/Versand/Bankgebühren aus den letzten N Rechnungen) ins `lieferanten_mapping.yaml` aufnehmen und in die GLD/VK-Kalkulation einfließen lassen — knüpft direkt an B17/B18 (`lieferanten_zoll_versand.csv`) an, erweitert um Bankgebühren. Offene Entscheidung: pauschaler Aufschlag vs. echte Kostentabelle pro Lieferant vs. Mix; und ob der Aufschlag in den GLD oder (wie jetzt) direkt in den VK fließt.
+
 **B19 — WaWi-Merkmalswerte als Validierungs-Quelle.**
 Stand: 2026-05-14. Bezug: E19, Charter-Prinzip 7.
 Hintergrund: JTL-Export *Artikelmerkmale* vom 13.05.2026 zeigt die real existierenden Merkmalsnamen und deren erlaubte Werte (`Farbe Kleidung`, `Größe Kleidung`, `Style Tops`, `Style Shorts` plus UI-Extras). Cowork generiert teils Werte, die nicht im WaWi-Bestand sind — z.B. "Style Bodysuits" existiert nicht als Merkmalsname, Bodysuits werden über `Style Tops` mit Werten wie "Bodysuit" gepflegt.

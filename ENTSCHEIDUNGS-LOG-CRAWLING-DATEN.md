@@ -32,6 +32,7 @@
 - **E94** — Artikelnummer aus dem WaWi-Nummernkreis vorab vergeben (A-Nummern, „Weg B") — aktiviert die in E6 aufgeschobene A-Nummer-Strategie; Grund: Lager-Scan hängt an der Artikelnummer
 - **E95** — EAN/GTIN-Spalte im Stammdaten-Schema (48→49) + Barcode-Anreicherung pro Größe aus Lieferanten-Referenz (Lunalae UTC-Barcodes)
 - **E97** — Lieferanten-Netto-EK in Original-Währung (AUD) statt EUR + Lieferzeit/Lieferdatum pro Lieferant + Lieferantenbestellungs-Builder (Ameise-Import)
+- **E98** — Interim-Margen-Aufschlag +4,00 EUR auf den Brutto-VK (GLD ohne Zoll/Versand/Bankgebühren → Marge verzerrt); Zukunft pro Lieferant aus historischen Mittelwerten (B68)
 
 ---
 
@@ -573,3 +574,17 @@ E89-Sara-Workflow bleibt unverändert (Sara entfernt 546 nach Approval). Vorlage
 *Code:* `pipeline/model.py` (`Kind`/`Vater` — `ek_original`), `pipeline/pricing.py`, `pipeline/csv/stammdaten.py` (Netto-EK = Original, Lieferzeit pro Lieferant), `pipeline/csv/bestellung.py` (Builder), `lieferanten_mapping.yaml` (LUNALAE `lieferzeit_tage: 30`).
 
 *Production (2026-06-17/18):* Lunalae-Stammdaten neu mit Netto-EK in AUD (Odessa Shorts 29,50 AUD / GLD 18,01 EUR) + Lieferzeit 30. Erste Lieferantenbestellung importiert (72 Positionen, 340 Stück), Lieferdatum Importdatum + 30 Tage.
+
+---
+
+**E98 — Interim-Margen-Aufschlag: pauschal +4,00 EUR auf den Brutto-VK. (NEU 2026-06-18)**
+
+*Auslöser:* Der GLD (Ø-EK netto, Basis für VK = EK×2) enthält nur den **Waren-EK**, nicht **Zoll, Versandkosten, Bankgebühren**. Dadurch ist der GLD zu niedrig und die Marge verzerrt — wir nehmen weniger ein als nötig.
+
+*Entscheidung:* Als **Interim-Schutz** pauschal **+4,00 EUR auf den Brutto-VK** (`constants.VK_AUFSCHLAG_EUR`), **nach** der ,90-Rundung addiert (ganzer Euro erhält das ,90-Ende). Gilt für **alle Lieferanten**, bis die echten Kostenanteile vorliegen.
+
+*Zukunft (offen, B68):* pro Lieferant **historische Mittelwerte** (Zoll/Versand/Bankgebühren aus den letzten N Rechnungen) ins `lieferanten_mapping.yaml`, und in GLD/VK einfließen lassen. Knüpft an B17/B18/E23 an. Offen: pauschal vs. echte Kostentabelle; in GLD oder (wie jetzt) direkt in den VK.
+
+*Code:* `pipeline/constants.py` (`VK_AUFSCHLAG_EUR = 4.00`), `pipeline/pricing.py` (VK = round_vk_90(EK×2) + Aufschlag), `pipeline/selfcheck.py` (#16 angepasst).
+
+*Wirkung (Lunalae, 2026-06-18):* Odessa Shorts 35,90 → 39,90; Odessa Top 41,90 → 45,90; Imogen Bodysuit 57,90 → 61,90. Alle weiter auf ,90, Self-Check 16/16.
