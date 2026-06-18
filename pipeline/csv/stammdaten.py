@@ -18,8 +18,8 @@ def _base_row(supplier: dict, run_date: str) -> dict:
     d["Steuerklasse"] = supplier.get("steuerklasse") or spec.DEFAULTS["Steuerklasse"]
     d["TARIC-Code"] = str(supplier.get("taric_code") or spec.DEFAULTS["TARIC-Code"])
     d["Herkunftsland"] = supplier.get("herkunftsland", "")
-    d["Lieferzeit in Tagen (Lieferant)"] = str(
-        supplier.get("lieferzeit_tage", spec.DEFAULTS["Lieferzeit in Tagen (Lieferant)"]))
+    d["Lieferzeit in Tagen (Lieferant)"] = ""   # E98: raus aus Stammdaten (nicht korrekt/nötig);
+    #   lieferzeit_tage lebt nur im Mapping fürs Lieferdatum der Bestellung
     d["Neu im Sortiment seit"] = run_date
     return d
 
@@ -80,7 +80,7 @@ def build_rows(vaeter: list[Vater], supplier: dict, run_date: str) -> list[dict]
                 "Artikelname": vnames["de"],
                 "Variationsname 1": "Größe", "Variationswert 1": "",
                 "Kategorie Ebene 1": ebene1, "Kategorie Ebene 2": ebene2,
-                "EK Netto (für GLD)": fmt_decimal(v.ek_netto),
+                "EK Netto (für GLD)": fmt_decimal(v.gld),
                 "Brutto-VK": fmt_decimal(v.vk_brutto),
                 "Netto-EK": fmt_decimal(v.ek_original),  # Lieferanten-EK in Original-Währung, z.B. AUD (E97)
                 "Global-Englisch: Artikelname": vnames["en"],
@@ -104,7 +104,7 @@ def build_rows(vaeter: list[Vater], supplier: dict, run_date: str) -> list[dict]
                     "Artikelname": knames["de"],
                     "Variationsname 1": "Größe", "Variationswert 1": k.groesse,
                     "Kategorie Ebene 1": ebene1, "Kategorie Ebene 2": ebene2,
-                    "EK Netto (für GLD)": fmt_decimal(v.ek_netto),
+                    "EK Netto (für GLD)": fmt_decimal(v.gld),
                     "Brutto-VK": fmt_decimal(v.vk_brutto),
                     "Netto-EK": fmt_decimal(v.ek_original),  # Lieferanten-EK in Original-Währung, z.B. AUD (E97)
                     "Global-Englisch: Artikelname": knames["en"],

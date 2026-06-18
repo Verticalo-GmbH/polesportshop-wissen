@@ -55,7 +55,8 @@ def apply_pricing(vaeter: list[Vater], ek_map: dict[tuple[str, str, str], float]
             continue
         ek_eur = round(ek * fx_to_eur, 2)
         v.ek_original = round(ek, 2)   # Lieferanten-Währung (z.B. AUD) -> Lieferanten-Netto-EK
-        v.ek_netto = ek_eur            # EUR -> GLD / VK
+        v.ek_netto = ek_eur            # EUR -> Basis der VK-Kalkulation
+        v.gld = round(ek_eur + C.GLD_AUFSCHLAG_EUR, 2)   # Ø-EK/GLD inkl. Kosten-Aufschlag (E98)
         # VK = (EK + EK-Aufschlag)*2 -> ,90, plus VK-Aufschlag (E98, erhält ,90).
         v.vk_brutto = round(round_vk_90((ek_eur + ek_aufschlag) * C.AUFSCHLAGSFAKTOR) + vk_aufschlag, 2)
         priced.append(v)

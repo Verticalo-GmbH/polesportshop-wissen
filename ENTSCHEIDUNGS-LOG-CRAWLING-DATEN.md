@@ -32,7 +32,7 @@
 - **E94** — Artikelnummer aus dem WaWi-Nummernkreis vorab vergeben (A-Nummern, „Weg B") — aktiviert die in E6 aufgeschobene A-Nummer-Strategie; Grund: Lager-Scan hängt an der Artikelnummer
 - **E95** — EAN/GTIN-Spalte im Stammdaten-Schema (48→49) + Barcode-Anreicherung pro Größe aus Lieferanten-Referenz (Lunalae UTC-Barcodes)
 - **E97** — Lieferanten-Netto-EK in Original-Währung (AUD) statt EUR + Lieferzeit/Lieferdatum pro Lieferant + Lieferantenbestellungs-Builder (Ameise-Import)
-- **E98** — Interim-Margen-Aufschlag differenziert nach Herkunft (Nicht-EU +5€ auf VK, EU +1€ auf EK), weil GLD Zoll/Versand/Bankgebühren nicht enthält; Zukunft pro Lieferant aus historischen Mittelwerten (B68)
+- **E98** — Interim-Margen-Aufschlag: VK differenziert nach Herkunft (Nicht-EU +5€ VK, EU +1€ EK) + GLD +2,30€/Stück (Buchhaltungs-Marge); Lieferzeit aus Stammdaten raus; Zukunft pro Lieferant aus historischen Mittelwerten (B68)
 
 ---
 
@@ -583,11 +583,14 @@ E89-Sara-Workflow bleibt unverändert (Sara entfernt 546 nach Approval). Vorlage
 
 *Entscheidung (differenziert, Erkennung über Lieferanten-Währung):*
 - **Nicht-EU-Lieferant** (Zoll + Versand + Bankgebühren, z.B. Rolling USD, Lunalae AUD): **+5,00 EUR auf den Brutto-VK**, nach der ,90-Rundung addiert (ganzer Euro erhält ,90). *(Erst-Ansatz +4 war zu gering, da brutto → auf 5 angehoben.)*
-- **EU/EUR-Lieferant** (kein Zoll, geringe Versandkosten, z.B. HotCakes/Griechenland): **+1,00 EUR auf den EK** → fließt über ×2 in den VK (≈ +2 brutto). Der dokumentierte EK/GLD bleibt unverändert, der Aufschlag wirkt nur in der VK-Kalkulation.
+- **EU/EUR-Lieferant** (kein Zoll, geringe Versandkosten, z.B. HotCakes/Griechenland): **+1,00 EUR auf den EK** → fließt über ×2 in den VK (≈ +2 brutto). Der dokumentierte EK bleibt unverändert, der Aufschlag wirkt nur in der VK-Kalkulation.
+- **GLD-Kosten-Aufschlag (für die Buchhaltungs-Marge): +2,30 EUR pro Kleidungsstück auf den GLD** (`EK Netto (für GLD)` = ek_eur + 2,30). Wirkt NUR auf den GLD (Ø-EK netto), nicht auf den VK — separat vom VK-Aufschlag. Sonst ist die Marge in der Buchhaltung verzerrt. Gilt für alle Lieferanten.
 - Gilt, bis die echten Kostenanteile vorliegen.
 
-*Zukunft (offen, B68):* pro Lieferant **historische Mittelwerte** (Zoll/Versand/Bankgebühren aus den letzten N Rechnungen) ins `lieferanten_mapping.yaml`, und in GLD/VK einfließen lassen. Knüpft an B17/B18/E23 an. Offen: pauschal vs. echte Kostentabelle; in GLD oder (wie jetzt) direkt in den VK.
+*Außerdem:* **`Lieferzeit in Tagen (Lieferant)` aus den Stammdaten entfernt** (leer) — war nicht korrekt/nötig. `lieferzeit_tage` bleibt nur im Mapping fürs Lieferdatum der Bestellung.
 
-*Code:* `pipeline/constants.py` (`VK_AUFSCHLAG_AUSLAND_EUR = 5.00`, `EK_AUFSCHLAG_EU_EUR = 1.00`), `pipeline/pricing.py` (`apply_pricing(..., ek_aufschlag, vk_aufschlag)`), `pipeline/orchestrator.py` (EU-Erkennung über `waehrung`), `pipeline/selfcheck.py` (#16 angepasst).
+*Zukunft (offen, B68):* pro Lieferant **historische Mittelwerte** (Zoll/Versand/Bankgebühren aus den letzten N Rechnungen) ins `lieferanten_mapping.yaml`, sowohl für den GLD-Aufschlag als auch den VK-Aufschlag. Knüpft an B17/B18/E23 an. Offen: pauschal vs. echte Kostentabelle.
 
-*Wirkung (2026-06-18):* Lunalae (AUD, +5 VK): Odessa Shorts 35,90 → 39,90, Top 41,90 → 45,90, Imogen Bodysuit 57,90 → 62,90. Rolling (USD, +5 VK): Ceci 37,90 → 42,90. HotCakes (EUR, +1 EK): Top Peonies 53,90 → 55,90, Shorts 41,90 → 43,90. Alle weiter auf ,90, je Self-Check 16/16.
+*Code:* `pipeline/constants.py` (`VK_AUFSCHLAG_AUSLAND_EUR = 5.00`, `EK_AUFSCHLAG_EU_EUR = 1.00`, `GLD_AUFSCHLAG_EUR = 2.30`), `pipeline/model.py` (`Vater.gld`), `pipeline/pricing.py` (`apply_pricing(..., ek_aufschlag, vk_aufschlag)` + `v.gld`), `pipeline/orchestrator.py` (EU-Erkennung über `waehrung`), `pipeline/csv/stammdaten.py` (GLD = `v.gld`, Lieferzeit leer), `pipeline/selfcheck.py` (#16 angepasst).
+
+*Wirkung (2026-06-18):* Lunalae (AUD, +5 VK, +2,30 GLD): Odessa Shorts VK 35,90 → 40,90 / GLD 18,01 → 20,31, Odessa Top VK 41,90 → 46,90 / GLD 21,06 → 23,36, Imogen Bodysuit VK 57,90 → 62,90 / GLD 28,99 → 31,29. Rolling (USD, +5 VK): Ceci 37,90 → 42,90. HotCakes (EUR, +1 EK): Top Peonies 53,90 → 55,90, Shorts 41,90 → 43,90. Alle VK weiter auf ,90, je Self-Check 16/16.

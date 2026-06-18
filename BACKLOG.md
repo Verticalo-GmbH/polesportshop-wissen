@@ -46,7 +46,7 @@ Aufgaben:
 **B68 — GLD enthält nur Waren-EK, nicht Zoll/Versand/Bankgebühren → Marge verzerrt. Interim +4€ auf VK. — NEU 2026-06-18**
 Stand: 2026-06-18. Bezug: B17, B18, E23, E98.
 Problem: Der GLD (Ø-EK netto, Basis für den Brutto-VK) enthält aktuell nur den Waren-EK. **Zoll, Versandkosten und Bankgebühren** (z.B. AUD-Auslandsüberweisung) fehlen → GLD zu niedrig → bei VK = EK×2 ist die Marge verzerrt, wir nehmen weniger ein als nötig.
-Interim-Maßnahme (E98, aktiv seit 2026-06-18): Margen-Schutz **differenziert nach Herkunft** — Nicht-EU-Lieferant **+5,00 EUR auf den Brutto-VK**, EU/EUR-Lieferant **+1,00 EUR auf den EK** (via ×2 in den VK). Bis die echten Kostenanteile vorliegen.
+Interim-Maßnahme (E98, aktiv seit 2026-06-18): zwei Hebel. (a) **VK-Schutz differenziert nach Herkunft** — Nicht-EU **+5,00 EUR auf den Brutto-VK**, EU/EUR **+1,00 EUR auf den EK** (via ×2 in den VK). (b) **GLD-Kosten-Aufschlag +2,30 EUR/Stück** auf den Ø-EK/GLD (gegen die verzerrte Buchhaltungs-Marge), nur GLD nicht VK. Beide bis die echten Kostenanteile vorliegen.
 Zukunft (zu diskutieren): pro Lieferant **historische Mittelwerte** (Zoll/Versand/Bankgebühren aus den letzten N Rechnungen) ins `lieferanten_mapping.yaml` aufnehmen und in die GLD/VK-Kalkulation einfließen lassen — knüpft direkt an B17/B18 (`lieferanten_zoll_versand.csv`) an, erweitert um Bankgebühren. Offene Entscheidung: pauschaler Aufschlag vs. echte Kostentabelle pro Lieferant vs. Mix; und ob der Aufschlag in den GLD oder (wie jetzt) direkt in den VK fließt.
 
 **B19 — WaWi-Merkmalswerte als Validierungs-Quelle.**

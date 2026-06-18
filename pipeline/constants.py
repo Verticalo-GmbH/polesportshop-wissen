@@ -19,6 +19,10 @@ AUFSCHLAGSFAKTOR = 2.0  # VK = EK_netto * 2.0, danach kaufmännisch auf ,90
 # Erkennung EU vs. Nicht-EU über die Lieferanten-Währung (EUR = EU).
 VK_AUFSCHLAG_AUSLAND_EUR = 5.00
 EK_AUFSCHLAG_EU_EUR = 1.00
+# GLD-Kosten-Aufschlag (E98): +2,30 EUR pro Kleidungsstück auf den Ø-EK/GLD, damit die
+# Buchhaltungs-Marge nicht verzerrt ist (GLD enthält sonst keine Zoll/Versand/Bankgebühren).
+# Wirkt NUR auf den GLD, nicht auf den VK. Zukunft: pro Lieferant aus historischen Daten (B68).
+GLD_AUFSCHLAG_EUR = 2.30
 
 # --- Sprachen ------------------------------------------------------------
 LANGUAGES = ["de", "en", "fr", "it", "es"]  # DE ist Master (Charter-Prinzip 6)
