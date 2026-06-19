@@ -10,12 +10,13 @@ Schema: `Artikelnummer; Menge; Lieferdatum; Zugehörige Auftragsnummer; Lieferan
   Firma/Benutzer sind WaWi-instanz-konstant (Defaults unten), Lieferant variiert pro Lieferant.
 - **EK** NICHT mitgeben: „Netto-EK aus Lieferantenartikel übernehmen = Ja" zieht ihn aus dem Artikel (E97).
 - **Lieferdatum** = Importdatum + Lieferzeit des Lieferanten (E97).
-- **Zugehörige Auftragsnummer** = Referenz fürs Lager (E99). **Beschreibend + stichpunktartig,
+- **Zugehörige Auftragsnummer** = Referenz fürs Lager (E99/E100). **Beschreibend + stichpunktartig,
   einzeilig, Trenner Pipe ` | `** — jede Info hilft dem Lager bei der Zuordnung. Aufbau:
-  `Rechnung <Nr> | <Kollektion/Quelle>` (z.B. `Rechnung #3124 | Diamante`,
-  `Rechnung #D413 | Odessa`, `Rechnung APRIL26`). Künftig kommen weitere Stichpunkte dazu
-  (z.B. vorab vergebene B-/Bestellnummern), pipe-getrennt. Fehlt eine Rechnungsnummer:
-  sinnvoller Zeitstempel. „Lieber zu viele Referenzen als zu wenige."
+  `Bestellung <B-Nr> | Rechnung <Nr> | <Kollektion/Quelle>`. Die **vorab vergebene B-Nummer**
+  (`<PREFIX>-<JAHR>-<NN>` pro Lieferant, E100) steht **führend** und ist der Matching-Schlüssel
+  fürs Lager (Wareneingang). Beispiele: `Bestellung LUN-2026-01 | Rechnung #3124 | Diamante`,
+  `Rechnung APRIL26` (wenn keine B-Nummer). Fehlt eine Rechnungsnummer: sinnvoller Zeitstempel.
+  „Lieber zu viele Referenzen als zu wenige."
 
 Mengen-Quelle: `EK_input/menge_<lieferant>.csv` (modell_basis;garment_type;farbe;groesse;menge).
 """

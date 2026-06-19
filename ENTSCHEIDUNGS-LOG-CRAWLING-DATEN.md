@@ -34,6 +34,7 @@
 - **E97** — Lieferanten-Netto-EK in Original-Währung (AUD) statt EUR + Lieferzeit/Lieferdatum pro Lieferant + Lieferantenbestellungs-Builder (Ameise-Import)
 - **E98** — Interim-Margen-Aufschlag: VK differenziert nach Herkunft (Nicht-EU +5€ VK, EU +1€ EK) + GLD +2,30€/Stück (Buchhaltungs-Marge); Lieferzeit aus Stammdaten raus; Zukunft pro Lieferant aus historischen Mittelwerten (B68)
 - **E99** — Lieferantenbestellung als fester 6. Pipeline-Output (wenn `menge_<x>.csv` vorliegt) + universelle Ameise-Vorlage (Header-Felder als Spalten) + Referenz-Konvention (pipe-getrennt, beschreibend, im Feld „Zugehörige Auftragsnummer")
+- **E100** — Vorab vergebene B-Nummern (`<PREFIX>-<JAHR>-<NN>` pro Lieferant) als Pre-Order-Identifier; an Lieferant + auf Etikett, führend in jeder BE-Referenz; löst Wareneingangs-Zuordnung + Indent-Orders (Artikel/BE erst bei Ware+EK)
 
 ---
 
@@ -613,3 +614,20 @@ E89-Sara-Workflow bleibt unverändert (Sara entfernt 546 nach Approval). Vorlage
 *Mengen-Quelle:* `EK_input/menge_<lieferant>.csv` (`modell_basis;garment_type;farbe;groesse;menge`) aus der Bestell-Rechnung. Diamante-Mengen aus Bestell-Mail-Regel, Odessa/Rolling aus Rechnung (gegen Summe verifiziert).
 
 *Code:* `pipeline/orchestrator.py` (6. Output + Registry-Key `menge` + Param `bestell_referenz`), `pipeline/csv/bestellung.py` (Header-Spalten + Referenz-Konvention).
+
+---
+
+**E100 — Vorab vergebene Bestellnummern (B-Nummern) als Pre-Order-Identifier. (NEU 2026-06-18)**
+
+*Auslöser:* Bei mehreren parallelen Lieferantenbestellungen mit teils identischen Artikeln kann das Lager eintreffende Pakete nicht eindeutig der richtigen Bestellung zuordnen (halbe Stunde Suchen). Außerdem werden Artikel teils als **Indent-Order** (Vorab-Bestellung neuer Styles) geordert, bevor sie in WaWi existieren und bevor der EK bekannt ist — eine echte JTL-BE ist dann noch nicht anlegbar.
+
+*Entscheidung:* Pro Bestellung wird **vorab eine B-Nummer** vergeben — Schema **`<PREFIX>-<JAHR>-<NN>` pro Lieferant, fortlaufend ab 01** (Prefix = erste 3 Buchstaben des Anzeigenamens, z.B. Lunalae → `LUN`, Rolling → `ROL`). Beispiel: `LUN-2026-01`.
+- Die B-Nummer geht **an den Lieferanten** (mit der Order) und landet auf dessen **Dokumenten + Etiketten**.
+- Sie kommt **ab sofort in jede Lieferantenbestellung** ins Feld „Zugehörige Auftragsnummer", **führend + pipe-getrennt**: `Bestellung <B-Nr> | Rechnung #<Nr> | <Kollektion>`.
+- Beim **Wareneingang** matcht das Lager das Paket über die B-Nummer eindeutig auf die BE — auch bei identischen Artikeln über mehrere Bestellungen.
+
+*Indent-Order-Fall (neue Artikel, EK unbekannt):* B-Nummer **jetzt** vergeben + übermitteln (Pre-Order-Identifier). Artikel + echte BE entstehen **später**, wenn Ware + Rechnung (EK) eintreffen — dann mit der B-Nummer als führender Referenz. Die echte JTL-Bestellnummer (BE…) kommt obendrauf, aber der Unique-Identifier steht schon vorab fest.
+
+*Ablage:* Order + B-Nummer als committetes Record unter `pipeline/orders/<B-Nr>_<kurz>.md` (Größen-Raster, Positionen, to-do bei Wareneingang). Nächste freie Nummer = höchste vergebene + 1 pro Lieferant.
+
+*Produktion (2026-06-18):* Lunalae May Indent Order (9 Styles, neue Farbwege, EK noch offen) → `LUN-2026-01` vergeben + an Lunalae übermittelt; Record `pipeline/orders/LUN-2026-01_may-indent.md`.
