@@ -12,10 +12,10 @@ Schema: `Artikelnummer; Menge; Lieferdatum; Zugehörige Auftragsnummer; Lieferan
 - **Lieferdatum** = Importdatum + Lieferzeit des Lieferanten (E97).
 - **Zugehörige Auftragsnummer** = Referenz fürs Lager (E99/E100). **Beschreibend + stichpunktartig,
   einzeilig, Trenner Pipe ` | `** — jede Info hilft dem Lager bei der Zuordnung. Aufbau:
-  `Bestellung <B-Nr> | Rechnung <Nr> | <Kollektion/Quelle>`. Die **vorab vergebene B-Nummer**
+  `Bestellung <Bestell-Ref> | Rechnung <Nr> | <Kollektion/Quelle>`. Die **vorab vergebene Bestell-Referenz**
   (`<PREFIX>-<JAHR>-<NN>` pro Lieferant, E100) steht **führend** und ist der Matching-Schlüssel
   fürs Lager (Wareneingang). Beispiele: `Bestellung LUN-2026-01 | Rechnung #3124 | Diamante`,
-  `Rechnung APRIL26` (wenn keine B-Nummer). Fehlt eine Rechnungsnummer: sinnvoller Zeitstempel.
+  `Rechnung APRIL26` (wenn keine Bestell-Referenz). Fehlt eine Rechnungsnummer: sinnvoller Zeitstempel.
   „Lieber zu viele Referenzen als zu wenige."
 
 Mengen-Quelle: `EK_input/menge_<lieferant>.csv` (modell_basis;garment_type;farbe;groesse;menge).

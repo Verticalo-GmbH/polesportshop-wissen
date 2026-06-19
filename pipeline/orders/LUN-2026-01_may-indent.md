@@ -1,9 +1,9 @@
-# B-Nummer LUN-2026-01 — Lunalae May Indent Order
+# Bestell-Referenz LUN-2026-01 — Lunalae May Indent Order
 
-**B-Nummer (vorab, an Lieferant übermittelt):** `LUN-2026-01`
+**Bestell-Referenz (vorab, an Lieferant übermittelt):** `LUN-2026-01`
 **Lieferant:** Lunalae (LUNALAE) · **Bestellt:** 2026-06-18 · **Status:** BESTELLT — Artikel + BE ausstehend bis Ware + Rechnung (EK) eintreffen.
 
-Indent-Order: **neue Styles/Farbwege** (im Wholesale-Sheet noch nicht/teilweise gepreist), daher **EK noch unbekannt**. Artikel existieren noch nicht. B-Nummer dient als Pre-Order-Identifier für die Wareneingangs-Zuordnung (E100).
+Indent-Order: **neue Styles/Farbwege** (im Wholesale-Sheet noch nicht/teilweise gepreist), daher **EK noch unbekannt**. Artikel existieren noch nicht. Bestell-Referenz dient als Pre-Order-Identifier für die Wareneingangs-Zuordnung (E100).
 
 ## Größen-Raster (laut Order-Mail)
 - **Tops / Bodysuits:** XS 3 · S 6 · M 8 · L 5 · XL 3
@@ -28,4 +28,4 @@ Indent-Order: **neue Styles/Farbwege** (im Wholesale-Sheet noch nicht/teilweise 
 3. **Lieferantenbestellung** mit Referenz **`Bestellung LUN-2026-01 | Rechnung #<Nr> | <Style/Kollektion>`** (Feld „Zugehörige Auftragsnummer").
 4. Lager matcht Wareneingang über `LUN-2026-01` (auf Lunalae-Dokumenten/Etiketten).
 
-**Nächste freie Lunalae-B-Nummer:** `LUN-2026-02`.
+**Nächste freie Lunalae-Bestell-Referenz:** `LUN-2026-02`.

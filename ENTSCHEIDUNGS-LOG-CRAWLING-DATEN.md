@@ -34,7 +34,7 @@
 - **E97** — Lieferanten-Netto-EK in Original-Währung (AUD) statt EUR + Lieferzeit/Lieferdatum pro Lieferant + Lieferantenbestellungs-Builder (Ameise-Import)
 - **E98** — Interim-Margen-Aufschlag: VK differenziert nach Herkunft (Nicht-EU +5€ VK, EU +1€ EK) + GLD +2,30€/Stück (Buchhaltungs-Marge); Lieferzeit aus Stammdaten raus; Zukunft pro Lieferant aus historischen Mittelwerten (B68)
 - **E99** — Lieferantenbestellung als fester 6. Pipeline-Output (wenn `menge_<x>.csv` vorliegt) + universelle Ameise-Vorlage (Header-Felder als Spalten) + Referenz-Konvention (pipe-getrennt, beschreibend, im Feld „Zugehörige Auftragsnummer")
-- **E100** — Vorab vergebene B-Nummern (`<PREFIX>-<JAHR>-<NN>` pro Lieferant) als Pre-Order-Identifier; an Lieferant + auf Etikett, führend in jeder BE-Referenz; löst Wareneingangs-Zuordnung + Indent-Orders (Artikel/BE erst bei Ware+EK)
+- **E100** — Vorab vergebene lieferantenspezifische Bestell-Referenzen (`<PREFIX>-<JAHR>-<NN>` pro Lieferant) als Pre-Order-Identifier; an Lieferant + auf Etikett, führend in jeder BE-Referenz; löst Wareneingangs-Zuordnung + Indent-Orders (Artikel/BE erst bei Ware+EK)
 
 ---
 
@@ -606,7 +606,7 @@ E89-Sara-Workflow bleibt unverändert (Sara entfernt 546 nach Approval). Vorlage
 *Entscheidung:*
 - **6. Output by default:** Der Orchestrator gibt neben den 5 Artikel-CSVs eine `6_Lieferantenbestellung_<KZ>_<stamp>.csv` aus, sobald `EK_input/menge_<x>.csv` vorliegt (Registry-Key `menge`). Lieferdatum = Importdatum + `lieferzeit_tage` (Mapping). So entsteht die Bestellung beim Standard-Lauf direkt mit (Tjorben-Direktive: „beim ersten Upload normal mit ausgeben").
 - **Universelle Ameise-Vorlage:** Header-Felder **Lieferant / Warenlager / Firma / Benutzer als CSV-Spalten** statt Ameise-Standardwerte → EINE Importvorlage für alle Lieferanten, keine pro-Lieferant-Vorlage. Warenlager/Firma/Benutzer sind WaWi-instanz-konstant (Defaults in `bestellung.py`: `Standardlager_WMS` / `Verticalo GmbH - Polesportshop` / `Tjorben Becker`), Lieferant = anzeigename pro Lauf.
-- **Referenz-Konvention (Feld „Zugehörige Auftragsnummer"):** beschreibend, stichpunktartig, **einzeilig mit Pipe ` | ` als Trenner** — Aufbau `Rechnung <Nr> | <Kollektion/Quelle>` (z.B. `Rechnung #3124 | Diamante`, `Rechnung #D413 | Odessa`). Pro Quelle gesetzt (bei mehreren Rechnungen je Position die richtige); fehlt eine Nummer → sinnvoller Zeitstempel (Rolling `APRIL26`). „Jede Info hilft dem Lager bei der Zuordnung." Künftig pipe-getrennt weitere Stichpunkte (vorab an Lieferanten vergebene B-/Bestellnummern, die auf Etikett/Dokumenten stehen — separates Thema, später).
+- **Referenz-Konvention (Feld „Zugehörige Auftragsnummer"):** beschreibend, stichpunktartig, **einzeilig mit Pipe ` | ` als Trenner** — Aufbau `Rechnung <Nr> | <Kollektion/Quelle>` (z.B. `Rechnung #3124 | Diamante`, `Rechnung #D413 | Odessa`). Pro Quelle gesetzt (bei mehreren Rechnungen je Position die richtige); fehlt eine Nummer → sinnvoller Zeitstempel (Rolling `APRIL26`). „Jede Info hilft dem Lager bei der Zuordnung." Künftig pipe-getrennt weitere Stichpunkte (vorab an Lieferanten vergebene Bestell-Referenzen, die auf Etikett/Dokumenten stehen — separates Thema, später).
 - **EK NICHT in der BE:** Einstellung „Netto-EK aus Lieferantenartikel übernehmen = Ja" zieht den (Original-Währungs-)EK aus dem Artikel (E97).
 
 *Schema BE:* `Artikelnummer; Menge; Lieferdatum; Zugehörige Auftragsnummer; Lieferant; Warenlager; Firma; Benutzer`. Identifizieren anhand Artikelnummer (A-Nummer, JTL-Default). Ameise-Import-Typ „Lieferanten > Lieferantenbestellungen", UTF-8.
@@ -617,17 +617,17 @@ E89-Sara-Workflow bleibt unverändert (Sara entfernt 546 nach Approval). Vorlage
 
 ---
 
-**E100 — Vorab vergebene Bestellnummern (B-Nummern) als Pre-Order-Identifier. (NEU 2026-06-18)**
+**E100 — Vorab vergebene lieferantenspezifische Bestell-Referenzen als Pre-Order-Identifier. (NEU 2026-06-18)**
 
 *Auslöser:* Bei mehreren parallelen Lieferantenbestellungen mit teils identischen Artikeln kann das Lager eintreffende Pakete nicht eindeutig der richtigen Bestellung zuordnen (halbe Stunde Suchen). Außerdem werden Artikel teils als **Indent-Order** (Vorab-Bestellung neuer Styles) geordert, bevor sie in WaWi existieren und bevor der EK bekannt ist — eine echte JTL-BE ist dann noch nicht anlegbar.
 
-*Entscheidung:* Pro Bestellung wird **vorab eine B-Nummer** vergeben — Schema **`<PREFIX>-<JAHR>-<NN>` pro Lieferant, fortlaufend ab 01** (Prefix = erste 3 Buchstaben des Anzeigenamens, z.B. Lunalae → `LUN`, Rolling → `ROL`). Beispiel: `LUN-2026-01`.
-- Die B-Nummer geht **an den Lieferanten** (mit der Order) und landet auf dessen **Dokumenten + Etiketten**.
-- Sie kommt **ab sofort in jede Lieferantenbestellung** ins Feld „Zugehörige Auftragsnummer", **führend + pipe-getrennt**: `Bestellung <B-Nr> | Rechnung #<Nr> | <Kollektion>`.
-- Beim **Wareneingang** matcht das Lager das Paket über die B-Nummer eindeutig auf die BE — auch bei identischen Artikeln über mehrere Bestellungen.
+*Entscheidung:* Pro Bestellung wird **vorab eine Bestell-Referenz** vergeben — Schema **`<PREFIX>-<JAHR>-<NN>` pro Lieferant, fortlaufend ab 01** (Prefix = erste 3 Buchstaben des Anzeigenamens, z.B. Lunalae → `LUN`, Rolling → `ROL`). Beispiel: `LUN-2026-01`.
+- Die Bestell-Referenz geht **an den Lieferanten** (mit der Order) und landet auf dessen **Dokumenten + Etiketten**.
+- Sie kommt **ab sofort in jede Lieferantenbestellung** ins Feld „Zugehörige Auftragsnummer", **führend + pipe-getrennt**: `Bestellung <Bestell-Ref> | Rechnung #<Nr> | <Kollektion>`.
+- Beim **Wareneingang** matcht das Lager das Paket über die Bestell-Referenz eindeutig auf die BE — auch bei identischen Artikeln über mehrere Bestellungen.
 
-*Indent-Order-Fall (neue Artikel, EK unbekannt):* B-Nummer **jetzt** vergeben + übermitteln (Pre-Order-Identifier). Artikel + echte BE entstehen **später**, wenn Ware + Rechnung (EK) eintreffen — dann mit der B-Nummer als führender Referenz. Die echte JTL-Bestellnummer (BE…) kommt obendrauf, aber der Unique-Identifier steht schon vorab fest.
+*Indent-Order-Fall (neue Artikel, EK unbekannt):* Bestell-Referenz **jetzt** vergeben + übermitteln (Pre-Order-Identifier). Artikel + echte BE entstehen **später**, wenn Ware + Rechnung (EK) eintreffen — dann mit der Bestell-Referenz als führender Referenz. Die echte JTL-Bestellnummer (BE…) kommt obendrauf, aber der Unique-Identifier steht schon vorab fest.
 
-*Ablage:* Order + B-Nummer als committetes Record unter `pipeline/orders/<B-Nr>_<kurz>.md` (Größen-Raster, Positionen, to-do bei Wareneingang). Nächste freie Nummer = höchste vergebene + 1 pro Lieferant.
+*Ablage:* Order + Bestell-Referenz als committetes Record unter `pipeline/orders/<Bestell-Ref>_<kurz>.md` (Größen-Raster, Positionen, to-do bei Wareneingang). Nächste freie Nummer = höchste vergebene + 1 pro Lieferant.
 
 *Produktion (2026-06-18):* Lunalae May Indent Order (9 Styles, neue Farbwege, EK noch offen) → `LUN-2026-01` vergeben + an Lunalae übermittelt; Record `pipeline/orders/LUN-2026-01_may-indent.md`.
