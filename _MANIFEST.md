@@ -1,6 +1,6 @@
 # Snapshot-Manifest
 
-**Snapshot-Tag:** `v1.26` (Shop-Qualität: Text-Swatches + Charm-VK + Artikeldetails-Anreicherung, E101; Bestell-Referenzen E100)
+**Snapshot-Tag:** `v1.26` (Shop-Qualität: Swatches (IMGSWATCHES) + Charm-VK + Artikeldetails-Anreicherung, E101; Bestell-Referenzen E100)
 **Stand:** 2026-06-18 (Berlin) · **Vorgänger:** `v1.25` (Lieferantenbestellung produktiv, E99) · `v1.24` (Konsolidierung) · E94–E101
 **Engine:** Claude Code lokal (Opus 4.8) · **Repo:** `https://github.com/verticalogmbh/polesportshop-wissen` · **Branch:** `main`
 
