@@ -82,10 +82,12 @@ def run(stammdaten, variationen, merkmale, attribute, crossselling, vaeter,
     chk(15, "Cross-Selling Kinder-Replikation links", left_has_kids or not crossselling)
 
     # Preise: VK = EK*2 -> ,90 (Komma-Dezimal)
-    from .pricing import round_vk_90
-    vk_calc_ok = all(round(v.vk_brutto, 2) == round(
-        round_vk_90((v.ek_netto + ek_aufschlag) * C.AUFSCHLAGSFAKTOR) + vk_aufschlag, 2)
+    from .pricing import round_vk_90, charm_vk
+    vk_calc_ok = all(round(v.vk_brutto, 2) == charm_vk(
+        round_vk_90((v.ek_netto + ek_aufschlag) * C.AUFSCHLAGSFAKTOR) + vk_aufschlag)
         for v in vaeter)
     fmt_ok = all(r["Brutto-VK"].endswith(",90") for r in stammdaten)
-    chk(16, "Preise VK = (EK+Aufschlag)×2 kaufm. ,90 + Komma-Dezimal", vk_calc_ok and fmt_ok)
+    no_round_ten = all(int(round(v.vk_brutto, 2)) % 10 != 0 for v in vaeter)
+    chk(16, "VK = (EK+Aufschlag)×2 ,90, Charm (keine runden Zehner), Komma-Dezimal",
+        vk_calc_ok and fmt_ok and no_round_ten)
     return res

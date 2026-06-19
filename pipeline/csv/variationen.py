@@ -1,6 +1,8 @@
 """
 CSV 2: Variationen (12 Spalten, run_brief §5).
-Eine Zeile pro Größen-Variante des Vaters. Darstellungsform DROPDOWN.
+Eine Zeile pro Größen-Variante des Vaters. Darstellungsform TEXTSWATCHES
+(Größen als Text-Swatches statt Dropdown, E101; JTL-Hinweis: greift per Ameise
+manchmal erst nach einmaligem manuellem Umschalten in WaWi).
 Variationsname lokalisiert (Größe/Size/Taille/Taglia/Talla); Werte universal.
 """
 from __future__ import annotations
@@ -35,7 +37,7 @@ def build_rows(vaeter: list[Vater], supplier: dict, run_date: str) -> list[dict]
             sort_wert = _rank(k.groesse) + 1  # XS=1, S=2, M=3, L=4, XL=5
             rows.append({
                 "Artikelnummer": v.artikelnummer,
-                "Variationsname": VARIATIONSNAME["de"], "Darstellungsform": "DROPDOWN",
+                "Variationsname": VARIATIONSNAME["de"], "Darstellungsform": "TEXTSWATCHES",
                 "Variationswertname": k.groesse,
                 "Global-Englisch: Variationsname": VARIATIONSNAME["en"],
                 "Global-Englisch: Variationswertname": k.groesse,

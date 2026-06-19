@@ -28,6 +28,14 @@ def round_vk_90(value: float) -> float:
     return round(n + 0.9, 2)
 
 
+def charm_vk(vk: float) -> float:
+    """Verkaufspsychologische Korrektur (E101): runde Zehner-Beträge vermeiden.
+    Endet der Euro-Betrag auf 0 (z.B. 40,90 / 50,90), 1 € runter -> X9,90 (39,90 / 49,90).
+    Alle anderen Endungen (46,90, 62,90) bleiben."""
+    euro = int(round(vk, 2))
+    return round(vk - 1.0, 2) if euro % 10 == 0 else round(vk, 2)
+
+
 def load_ek_csv(path: Path) -> dict[tuple[str, str, str], float]:
     ek: dict[tuple[str, str, str], float] = {}
     with path.open("r", encoding="utf-8") as f:
@@ -57,7 +65,8 @@ def apply_pricing(vaeter: list[Vater], ek_map: dict[tuple[str, str, str], float]
         v.ek_original = round(ek, 2)   # Lieferanten-Währung (z.B. AUD) -> Lieferanten-Netto-EK
         v.ek_netto = ek_eur            # EUR -> Basis der VK-Kalkulation
         v.gld = round(ek_eur + C.GLD_AUFSCHLAG_EUR, 2)   # Ø-EK/GLD inkl. Kosten-Aufschlag (E98)
-        # VK = (EK + EK-Aufschlag)*2 -> ,90, plus VK-Aufschlag (E98, erhält ,90).
-        v.vk_brutto = round(round_vk_90((ek_eur + ek_aufschlag) * C.AUFSCHLAGSFAKTOR) + vk_aufschlag, 2)
+        # VK = (EK + EK-Aufschlag)*2 -> ,90, plus VK-Aufschlag (E98); dann Charm-Korrektur (E101).
+        vk = round_vk_90((ek_eur + ek_aufschlag) * C.AUFSCHLAGSFAKTOR) + vk_aufschlag
+        v.vk_brutto = charm_vk(round(vk, 2))
         priced.append(v)
     return priced, missing

@@ -35,6 +35,7 @@
 - **E98** — Interim-Margen-Aufschlag: VK differenziert nach Herkunft (Nicht-EU +5€ VK, EU +1€ EK) + GLD +2,30€/Stück (Buchhaltungs-Marge); Lieferzeit aus Stammdaten raus; Zukunft pro Lieferant aus historischen Mittelwerten (B68)
 - **E99** — Lieferantenbestellung als fester 6. Pipeline-Output (wenn `menge_<x>.csv` vorliegt) + universelle Ameise-Vorlage (Header-Felder als Spalten) + Referenz-Konvention (pipe-getrennt, beschreibend, im Feld „Zugehörige Auftragsnummer")
 - **E100** — Vorab vergebene lieferantenspezifische Bestell-Referenzen (`<PREFIX>-<JAHR>-<NN>` pro Lieferant) als Pre-Order-Identifier; an Lieferant + auf Etikett, führend in jeder BE-Referenz; löst Wareneingangs-Zuordnung + Indent-Orders (Artikel/BE erst bei Ware+EK)
+- **E101** — Shop-Qualität: Variation-Darstellung TEXTSWATCHES (statt Dropdown) + Charm-VK (keine runden Zehner, 40,90→39,90) + Artikeldetails aus Crawl anreichern (verkaufsfördernd, nach Ermessen)
 
 ---
 
@@ -631,3 +632,17 @@ E89-Sara-Workflow bleibt unverändert (Sara entfernt 546 nach Approval). Vorlage
 *Ablage:* Order + Bestell-Referenz als committetes Record unter `pipeline/orders/<Bestell-Ref>_<kurz>.md` (Größen-Raster, Positionen, to-do bei Wareneingang). Nächste freie Nummer = höchste vergebene + 1 pro Lieferant.
 
 *Produktion (2026-06-18):* Lunalae May Indent Order (9 Styles, neue Farbwege, EK noch offen) → `LUN-2026-01` vergeben + an Lunalae übermittelt; Record `pipeline/orders/LUN-2026-01_may-indent.md`.
+
+---
+
+**E101 — Shop-Qualitäts-Anpassungen: Text-Swatches, Charm-VK, Artikeldetails-Anreicherung. (NEU 2026-06-18)**
+
+*Kontext:* Erste HotCakes-Artikel sind im Shop live; drei Verbesserungen für künftige Läufe (gelten für alle Lieferanten).
+
+1. **Variation-Darstellung `TEXTSWATCHES` statt `DROPDOWN`:** Größen als Text-Swatches (XS/S/M/L/XL als Buttons) statt Dropdown. `variationen.py` setzt `Darstellungsform = TEXTSWATCHES`. JTL-Mapping: DROPDOWN=SELECTBOX, RADIO, SWATCHES=IMGSWATCHES, TEXTBOX=TEXTSWATCHES. **Hinweis:** der Swatch-Wert greift per Ameise-Import laut JTL-Forum manchmal erst nach einmaligem manuellem Umschalten in WaWi — beim ersten Import prüfen.
+2. **Charm-VK (verkaufspsychologisch):** keine „runden" Zehner-Beträge. Endet der Brutto-VK-Euro-Betrag auf 0 (40,90 / 50,90 / 30,90), 1 € runter → X9,90 (39,90 / 49,90 / 29,90). Andere Endungen (46,90 / 62,90) bleiben. `pricing.charm_vk`, **nach** dem Margen-Aufschlag (E98) angewandt, erhält das ,90-Ende. Self-Check #16 prüft zusätzlich „keine runden Zehner".
+3. **Artikeldetails aus dem Crawl anreichern:** Beim Crawlen der Hersteller-Shops zusätzliche **verkaufsfördernde/entscheidungsrelevante** Infos ins Attribut `artikeldetails` aufnehmen — nach Claude-Ermessen, was dem Kunden hilft (Größen-/Passform-Hinweise zur Größenwahl, coole Features, Material-/Trage-Details). Ziel: Shop-Qualität mit sinnvollem Lieferanten-Content erhöhen. Stil weiter E74/E78/E82 (keine Em-Dashes, keine Doppelpunkte im Fließtext, keine Meta-Einleitungen).
+
+*Code:* `pipeline/csv/variationen.py` (TEXTSWATCHES), `pipeline/pricing.py` (`charm_vk`), `pipeline/selfcheck.py` (#16 erweitert). Verifiziert: Odessa Shorts 40,90 → 39,90, Odessa Top bleibt 46,90; Darstellungsform TEXTSWATCHES; 16/16.
+
+*Hinweis:* Bestehende Live-Artikel (HotCakes/Lunalae/Rolling) tragen noch DROPDOWN + alte Rundung; bei Bedarf per Re-Import auf den neuen Stand heben.

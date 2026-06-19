@@ -1,7 +1,7 @@
 # Snapshot-Manifest
 
-**Snapshot-Tag:** `v1.25` (Lieferantenbestellung produktiv + als fester 6. Pipeline-Output, E99)
-**Stand:** 2026-06-18 (Berlin) · **Vorgänger:** `v1.24` (Konsolidierungs-Build — Wissensbasis verschlankt) · `v1.23` (Code-only-Refactor) · E94–E99
+**Snapshot-Tag:** `v1.26` (Shop-Qualität: Text-Swatches + Charm-VK + Artikeldetails-Anreicherung, E101; Bestell-Referenzen E100)
+**Stand:** 2026-06-18 (Berlin) · **Vorgänger:** `v1.25` (Lieferantenbestellung produktiv, E99) · `v1.24` (Konsolidierung) · E94–E101
 **Engine:** Claude Code lokal (Opus 4.8) · **Repo:** `https://github.com/verticalogmbh/polesportshop-wissen` · **Branch:** `main`
 
 > **Lean-Hinweis (v1.23):** Dieses Manifest ist bewusst schlank. Datei-Integrität/Historie liefert **git** (kein SHA256-Block mehr), die E-Nummern der `SPEC_KONSTANTEN.md`-Index, offene Punkte der `BACKLOG.md`. Pro Snapshot nur noch: Build-Trail + Architektur-Stand + Slot-Pattern.
