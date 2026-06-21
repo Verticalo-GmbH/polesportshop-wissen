@@ -146,6 +146,10 @@ def _run_images(priced, sup) -> None:
         artnr = spec.vater_artnr(v.garment_type, v.modell_basis, v.farbe_raw)
         imgs = process.process_vater(v.image_urls[:10], profile)
         v.r2_bild_urls = r2.upload_vater(client, prefix, artnr, imgs)
+    # A-Nummern-Index pflegen (Galerie-Artikelnummern-Spanne).
+    r2.update_artikel_index(client, prefix,
+                            {spec.vater_artnr(v.garment_type, v.modell_basis, v.farbe_raw):
+                             v.artikelnummer for v in priced})
     name_map = {spec.vater_artnr(v.garment_type, v.modell_basis, v.farbe_raw):
                 spec.vater_artikelname(sup["marke_kurz"], v.garment_type,
                                        v.modell_basis, v.farbe_raw, "de")

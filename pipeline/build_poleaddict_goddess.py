@@ -175,6 +175,7 @@ def main() -> None:
         client = r2.make_client()
         imgs = process.process_vater(v.image_urls[:10], sup["crop_profile"])
         v.r2_bild_urls = r2.upload_vater(client, sup["r2_prefix"], vnr, imgs)
+        r2.update_artikel_index(client, sup["r2_prefix"], {vnr: v.artikelnummer})
         name_de = spec.vater_artikelname(sup["marke_kurz"], v.garment_type, v.modell_basis, v.farbe_raw, "de")
         r2.build_originals_index(client, sup["r2_prefix"], {vnr: name_de},
                                  titel=f"{sup['anzeigename']} Originalbilder")
