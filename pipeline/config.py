@@ -22,11 +22,25 @@ SPEC_KONSTANTEN_PATH = REPO_ROOT / "SPEC_KONSTANTEN.md"
 
 OUTPUTS_DIR = PIPELINE_DIR / "outputs"
 EK_INPUT_DIR = PIPELINE_DIR / "EK_input"
+# WaWi-Import-CSVs landen pro Lauf zusätzlich hier, damit Tjorben sie direkt findet.
+DOWNLOADS_DIR = Path.home() / "Downloads"
 
 
 def ensure_dirs() -> None:
     OUTPUTS_DIR.mkdir(parents=True, exist_ok=True)
     EK_INPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def copy_to_downloads(out_dir: Path) -> Path | None:
+    """Kopiert den Lauf-Output-Ordner (CSVs + Bericht) nach ~/Downloads, damit die
+    WaWi-Imports immer griffbereit liegen. Gibt das Ziel zurück (None bei Fehler)."""
+    import shutil
+    if not DOWNLOADS_DIR.exists():
+        return None
+    dest = DOWNLOADS_DIR / out_dir.name
+    shutil.rmtree(dest, ignore_errors=True)
+    shutil.copytree(out_dir, dest)
+    return dest
 
 
 # --- Lieferanten-Mapping -------------------------------------------------

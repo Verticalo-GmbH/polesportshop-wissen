@@ -241,11 +241,14 @@ def main() -> None:
     for typ, (p, n) in written.items():
         L.append(f"- {p.name}: {n} Zeilen")
     (out / f"run_{stamp}_GODDESS.md").write_text("\n".join(L), encoding="utf-8")
+    dl = config.copy_to_downloads(out)   # WaWi-Imports immer auch nach ~/Downloads
 
     print(f"Self-Check: {n_ok}/16 (#14 extern bewusst) | Lieferdatum {lieferdatum}")
     for typ, (p, n) in written.items():
         print(f"  {typ}: {n} -> {p.name}")
     print(f"Outputs: {out}")
+    if dl:
+        print(f"Downloads: {dl}")
 
 
 if __name__ == "__main__":

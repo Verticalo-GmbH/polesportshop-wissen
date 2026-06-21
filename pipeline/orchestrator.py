@@ -130,6 +130,7 @@ def run(supplier: str = "hotcakes", stamp: str | None = None,
     report = _report(sup, cfg, priced, missing, review, exclude, checks, written, stamp,
                      with_images, artnr_range)
     (out / f"run_{stamp}_{kz}.md").write_text(report, encoding="utf-8")
+    config.copy_to_downloads(out)   # WaWi-Imports immer auch nach ~/Downloads
 
     return {"out": out, "priced": priced, "missing": missing, "checks": checks,
             "written": written, "review": review, "exclude": exclude}
