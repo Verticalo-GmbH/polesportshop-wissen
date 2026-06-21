@@ -175,11 +175,13 @@ header{{padding:24px;background:#fff;border-bottom:1px solid #eee}}h1{{margin:0;
 h2{{font-size:15px;color:#444;margin:8px 0;display:flex;align-items:center;flex-wrap:wrap;gap:8px}}
 .badge{{color:#a0508c;font-size:12px;font-weight:600}}.artnr{{color:#555;font-size:12px;font-weight:600;margin-left:4px}}
 .dlall{{margin-left:auto;background:#a0508c;color:#fff;border:0;border-radius:6px;padding:6px 12px;font-size:13px;cursor:pointer}}.dlall:disabled{{opacity:.6;cursor:default}}
+.collbtn{{margin-top:12px;background:#7a2f66;color:#fff;border:0;border-radius:6px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer}}.collbtn:disabled{{opacity:.6;cursor:default}}
 .g{{display:flex;flex-wrap:wrap;gap:10px}}
 .g img{{height:220px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.12);object-fit:cover}}
 .g a{{display:inline-block}}</style></head><body>
 <header><div class="crumbs"><a href="../index.html">&larr; Alle Kollektionen</a></div><h1>{titel}</h1>
-<div class="sub">Klick auf ein Bild = Original in voller Auflösung. Oder „Alle herunterladen" je Artikel als ZIP. {sum(len(u) for u in groups.values())} Bilder, {len(groups)} Artikel.</div></header>
+<div class="sub">Klick auf ein Bild = Original in voller Auflösung. „Alle herunterladen" = ein Artikel als ZIP. {sum(len(u) for u in groups.values())} Bilder, {len(groups)} Artikel.</div>
+<button class="collbtn" data-name="{prefix}" onclick="zipAll(this)">⬇ Ganze Kollektion als ZIP</button></header>
 {''.join(cards)}
 <script>
 async function zipDownload(btn){{
@@ -193,6 +195,24 @@ async function zipDownload(btn){{
       zip.file(name+'-'+(i+1)+'.'+ext, b);
     }}
     saveAs(await zip.generateAsync({{type:'blob'}}), name+'.zip');
+  }}catch(e){{alert('Download fehlgeschlagen: '+e);}}
+  btn.disabled=false; btn.textContent=orig;
+}}
+async function zipAll(btn){{
+  const secs=[...document.querySelectorAll('section')], orig=btn.textContent;
+  btn.disabled=true; btn.textContent='Lädt…';
+  try{{
+    const zip=new JSZip();
+    for(const sec of secs){{
+      const b=sec.querySelector('.dlall'), folder=(b&&b.dataset.name)||'artikel';
+      const links=[...sec.querySelectorAll('a.dl')];
+      for(let i=0;i<links.length;i++){{
+        const u=links[i].href, r=await fetch(u), bl=await r.blob();
+        const ext=(u.split('.').pop()||'jpg').split('?')[0];
+        zip.folder(folder).file(folder+'-'+(i+1)+'.'+ext, bl);
+      }}
+    }}
+    saveAs(await zip.generateAsync({{type:'blob'}}), (btn.dataset.name||'kollektion')+'.zip');
   }}catch(e){{alert('Download fehlgeschlagen: '+e);}}
   btn.disabled=false; btn.textContent=orig;
 }}
