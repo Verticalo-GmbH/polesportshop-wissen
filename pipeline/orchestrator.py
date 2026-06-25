@@ -141,6 +141,12 @@ def run(supplier: str = "hotcakes", stamp: str | None = None,
             write_csv(p, bestellung.COLUMNS, be, quote_all=False)
             written["Lieferantenbestellung"] = (p, len(be))
 
+    # Artikel-Ledger (E102): nur der kanonische Lauf (persist=True) schreibt den
+    # aktuellen Stand der angelegten Artikel zentral fest (gekeyt auf A-Nummer).
+    if persist_counter:
+        from . import ledger
+        ledger.upsert(priced, sup, stand=run_date, quelle=cfg.get("scope", ""))
+
     artnr_range = (priced[0].artikelnummer, priced[-1].artikelnummer, artnr_next) if priced else None
     report = _report(sup, cfg, priced, missing, review, exclude, checks, written, stamp,
                      with_images, artnr_range, ek_auf=ek_auf, vk_auf=vk_auf)

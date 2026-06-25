@@ -61,12 +61,23 @@ Import-Reihenfolge: `1_Stammdaten` → `2_Variationen` → `3_Merkmale` → `4_A
 - **Konstanten/Schema:** `spec.py` (SPEC_KONSTANTEN §1–§7 verbatim), `constants.py`.
 - **Pipeline-Stages:**
   `crawl/shopify_json.py` (Crawl) → `extract.py` (Modell/Farbe/Typ-Split, Scope-Filter)
-  → `pricing.py` (VK = EK×2 → ,90) → `content.py`/`content/<lieferant>_content.json`
+  → `pricing.py` (Netto-VK = EK netto ×2, dann MwSt ×1,19 → ,90) → `content.py`/`content/<lieferant>_content.json`
   (Merkmale-Farbe/Style + Attribut-Texte, in `content_build.py` autoriert)
   → `csv/*` (5 CSV-Writer) → `selfcheck.py` (16 Punkte) → `orchestrator.py`.
 - **Bilder:** `images/process.py` (Crop fashion 2:3 1000×1500, <100 KB),
   `images/r2.py` (boto3 → R2, idempotent).
 - **Content neu bauen** (nach Text-/Farb-Änderung): `python -m pipeline.content_build`.
+
+## Artikel-Ledger (E102) — zentraler Stand aller Artikel
+
+`pipeline/state/artikel_ledger.json` (committet) hält **immer nur den letzten Stand**
+jedes angelegten Artikels, gekeyt auf die A-Nummer — wie ein Git-Working-Tree. Die
+**Historie liefert git** über die Commits dieser Datei (kein Durchsuchen alter
+`outputs/`-Ordner mehr). Pro Vater: Lieferant + WaWi-Nr, sprechender Schlüssel, Name,
+Modell/Typ/Farbe, Währung + fx, EK (original + EUR), GLD, Brutto-VK, Herkunftsland,
+Kinder `{A-Nummer: Größe}`, EAN je Größe, Quelle, Stand-Datum. Jeder **kanonische Lauf**
+(`persist_counter=True`) ruft `ledger.upsert(...)` und überschreibt die betroffenen
+A-Nummern. Modul: `ledger.py`.
 
 ## Betriebs-Modus
 
