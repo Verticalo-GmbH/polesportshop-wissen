@@ -398,6 +398,96 @@ lieferanten:
     max_groesse: null
     bemerkung: "Onboarding 2026-06-15 (erster Lieferant nach HotCakes via Code-Pipeline). VNDA-Plattform mit Anti-Bot -> Crawl via Claude-in-Chrome-Browser (shopify_json greift nicht). Erst-Lieferung: 4 Ceci-Botanica-Artikel (Top/Shorts in Schwarz/Weiß), Rechnung POLESPORTSHOP APRIL26, EK je 22 USD. Größen fix XS-XL (BR-Größen PP/P/M/G nicht übernommen). marke_kurz='Rolling' vor Artikelnamen. Markentext sagt 'portugiesischer Hersteller' — laut Rechnung tatsächlich Brasilien (SAO PAULO); Tjorben-Wording belassen, ggf. prüfen."
 
+  RAD_POLEWEAR:
+    anzeigename: "Rad Polewear"         # = WaWi-Lieferant (Nr. 1042)
+    kuerzel: RAD
+    hersteller: "RAD Polewear"          # WaWi-Herstellername; markentext-H2
+    marke_kurz: "RAD"                   # Präfix im Artikelnamen (Tjorben 2026-06-25), z.B. „RAD Top Mercy Schwarz"
+    artnr_prefix: RAD
+    herkunftsland: GR                   # griechische Marke (Markentext + Hecate/Chandra-Mythologie)
+    waehrung: EUR
+    fx_to_eur: 1.0
+    lieferzeit_tage: 30                 # Tjorben 2026-06-25; BE-Lieferdatum = Importdatum + 30
+    steuerklasse: "OSS2-undefiniert - Standard alle Länder"
+    shop_url: https://radpolewear.com
+    fallback_retailer_url: null
+    drive_ordner_id: null
+    drive_eingang_id: null
+    r2_prefix: rad
+    lieferantennummer_wawi: 1042
+    article_weight_kg: 0.05
+    taric_code: '62114390'
+    groessen_konvention: standard       # je Artikel exakt die bestellten Größen (Tjorben: Shop-Logik, nie XXL)
+    category: fashion
+    crop_profile: fashion
+    pose_sort: manufacturer_order
+    crawl_mechanik: shopify_json         # radpolewear.com ist Shopify (products.json offen)
+    # Brand-Story = offizieller Markentext (Tjorben 2026-06-25 DE geliefert; en/fr/it/es übersetzt). E72/E79.
+    brand_story_de: |
+      Das Team von Rad Polewear arbeitet gemeinsam daran, dass du dich bei Pole
+      Dance Training als etwas ganz Besonderes fühlst. Die griechische Marke
+      gehörte zu den ersten Unternehmen, die funktionale Kleidung für Pole Dance
+      und den Pole Sport anbot. Heute gehört Rad Polewear zu den Trendsettern im
+      Bereich Pole- und Aerial Sport Kleidung. Die Kollektionen von RAD Polewear
+      bestechen durch Komfort, Qualität und Attraktivität. Zudem bestrebt das
+      Unternehmen die Vision, ethisch und umweltfreundlich zu produzieren,
+      familienfreundliche Arbeitsprozesse zu schaffen und besonders Frauen auf
+      ihrem Karriereweg zu unterstützen. Faire, funktionale und vor allem
+      umwerfende Pole Dance Kleidung, bei RAD Polewear bekommst du das komplette
+      Paket.
+    brand_story_en: |
+      The team behind Rad Polewear works together so that you feel truly special
+      during your pole dance training. The Greek brand was one of the first
+      companies to offer functional clothing for pole dance and pole sport. Today
+      Rad Polewear is one of the trendsetters in pole and aerial sportswear. RAD
+      Polewear collections stand out through comfort, quality and appeal. The
+      company also pursues the vision of producing ethically and sustainably,
+      creating family-friendly working processes and supporting women in
+      particular on their career path. Fair, functional and above all stunning
+      pole dance wear, with RAD Polewear you get the complete package.
+    brand_story_fr: |
+      L'équipe de Rad Polewear travaille ensemble pour que tu te sentes vraiment
+      unique pendant ton entraînement de pole dance. La marque grecque a été
+      l'une des premières entreprises à proposer des vêtements fonctionnels pour
+      la pole dance et le pole sport. Aujourd'hui, Rad Polewear fait partie des
+      créateurs de tendances dans l'univers des vêtements de pole et d'aérien.
+      Les collections de RAD Polewear séduisent par leur confort, leur qualité et
+      leur attrait. L'entreprise poursuit aussi la vision de produire de façon
+      éthique et durable, de créer des processus de travail favorables à la
+      famille et de soutenir particulièrement les femmes dans leur parcours
+      professionnel. Des vêtements de pole dance justes, fonctionnels et surtout
+      époustouflants, avec RAD Polewear tu obtiens le paquet complet.
+    brand_story_it: |
+      Il team di Rad Polewear lavora insieme affinché tu ti senta davvero
+      speciale durante il tuo allenamento di pole dance. Il marchio greco è stato
+      una delle prime aziende a offrire abbigliamento funzionale per la pole
+      dance e il pole sport. Oggi Rad Polewear è tra i trendsetter nel campo
+      dell'abbigliamento per pole e aerial sport. Le collezioni di RAD Polewear
+      conquistano per comfort, qualità e fascino. L'azienda persegue inoltre la
+      visione di produrre in modo etico e sostenibile, di creare processi di
+      lavoro a misura di famiglia e di sostenere in particolare le donne nel loro
+      percorso professionale. Abbigliamento da pole dance equo, funzionale e
+      soprattutto travolgente, con RAD Polewear ottieni il pacchetto completo.
+    brand_story_es: |
+      El equipo de Rad Polewear trabaja en conjunto para que te sientas realmente
+      especial durante tu entrenamiento de pole dance. La marca griega fue una de
+      las primeras empresas en ofrecer ropa funcional para el pole dance y el
+      pole sport. Hoy Rad Polewear es una de las que marcan tendencia en el
+      ámbito de la ropa para pole y aerial sport. Las colecciones de RAD Polewear
+      destacan por su comodidad, calidad y atractivo. Además, la empresa persigue
+      la visión de producir de forma ética y sostenible, crear procesos de
+      trabajo que concilien con la familia y apoyar especialmente a las mujeres
+      en su carrera profesional. Ropa de pole dance justa, funcional y sobre todo
+      espectacular, con RAD Polewear consigues el paquete completo.
+    ameise_vorlagen:
+      stammdaten:       null
+      variationen:      null
+      merkmale:         null
+      attribute:        null
+      cross_selling:    null
+    max_groesse: null
+    bemerkung: "Onboarding 2026-06-25 (Code-Pipeline). Shopify (radpolewear.com), 9 Modelle alle Schwarz aus Bestellung #UM8DLUT8M. Größen je Artikel = bestellte Größen (nie XXL, Shop-Logik). Lara skirt als Shorts geführt (kein eigener Produkttyp — Merkmalsverwaltung statisch, Tjorben-Entscheidung). Modellnamen ohne Typ-Wort (Twinkle Tulle/Lara/Rad Strings). marke_kurz='RAD'."
+
 # ============================================================================
 # Schema-Dokumentation
 # ============================================================================

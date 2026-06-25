@@ -35,6 +35,10 @@ SUPPLIERS = {
                  "content": "lunalae_odessa_content.json", "builder": "lunalae_odessa",
                  "ean": "ean_lunalae.csv", "menge": "menge_lunalae.csv",
                  "scope": "Rechnung #D413 (Odessa)"},
+    "rad":      {"key": "RAD_POLEWEAR", "ek": "ek_rad.csv",
+                 "content": "rad_content.json", "builder": "rad",
+                 "menge": "menge_rad.csv",
+                 "scope": "Bestellung #UM8DLUT8M (9 Modelle, alle Schwarz)"},
 }
 
 
