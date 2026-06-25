@@ -57,6 +57,7 @@ KATEGORIE_SUB = {
     "Shorts": "Pole Dance Shorts",
     "Bodysuit": "Bodysuits",
     "Leggings": "Leggings",
+    "Accessoire": "Accessoires",   # eigene Shop-Kategorie (interner Schlüssel 52), z.B. Garter Belt
 }
 # §4 Sara-Pflicht-Zeile (Key 546)
 SARA_EBENE1 = "Intern"
@@ -70,8 +71,13 @@ PRODUKTTYP = {
     "Shorts":   {"de": "Shorts",   "en": "Shorts",   "fr": "Short",   "it": "Shorts","es": "Pantalones Cortos"},
     "Bodysuit": {"de": "Bodysuit", "en": "Bodysuit", "fr": "Body",    "it": "Body",  "es": "Body"},
     "Leggings": {"de": "Leggings", "en": "Leggings", "fr": "Legging", "it": "Leggings","es": "Leggings"},
-    # Reiner Anzeigename-Typ (kein Merkmal/keine Kategorie) — für Röcke, die als Bottom/Shorts gefiltert werden.
-    "Rock":     {"de": "Rock",     "en": "Skirt",    "fr": "Jupe",    "it": "Gonna", "es": "Falda"},
+    "Accessoire":{"de": "Accessoire","en": "Accessory","fr": "Accessoire","it": "Accessorio","es": "Accesorio"},
+    # Reine Anzeigename-Typen (kein Merkmal/keine Kategorie) — Artikel werden als
+    # Bottom/Shorts gefiltert, im Namen steht aber das echte Teil.
+    "Rock":         {"de": "Rock",         "en": "Skirt",        "fr": "Jupe",             "it": "Gonna",        "es": "Falda"},
+    # Garter Belt (Strapsgürtel-Accessoire): Markenwording, in allen Sprachen identisch
+    # (Tjorben 2026-06-25: „Name behält Garter Belt"); gefiltert als Shorts.
+    "Garter Belt":  {"de": "Garter Belt",  "en": "Garter Belt",  "fr": "Garter Belt",      "it": "Garter Belt",  "es": "Garter Belt"},
 }
 
 # --- §6 Farb-Lookup: token(lower) -> {lang: Name, 'merkmal': WaWi-Wert} --
@@ -108,6 +114,14 @@ COLOR_LOOKUP = {
     # Print-Familien (§6/§7): identisch; Merkmal-Farbe = Bunt (Default Multi-Print)
     "original": {"de": "Original", "en": "Original", "fr": "Original", "it": "Original", "es": "Original", "merkmal": "Bunt"},
     "heat":     {"de": "Heat", "en": "Heat", "fr": "Heat", "it": "Heat", "es": "Heat", "merkmal": "Bunt"},
+    # Paradise-Chick-Markenfarben (2026-06-25) — Markennamen bleiben in allen Sprachen
+    # identisch; Merkmal = Filterfarbe (am echten Produktbild bestimmt).
+    "lilly":         {"de": "Lilly", "en": "Lilly", "fr": "Lilly", "it": "Lilly", "es": "Lilly", "merkmal": "Weiß"},
+    "plum":          {"de": "Plum", "en": "Plum", "fr": "Plum", "it": "Plum", "es": "Plum", "merkmal": "Lila"},
+    "banana":        {"de": "Banana", "en": "Banana", "fr": "Banana", "it": "Banana", "es": "Banana", "merkmal": "Gelb"},
+    "shimmery-haze": {"de": "Shimmery Haze", "en": "Shimmery Haze", "fr": "Shimmery Haze", "it": "Shimmery Haze", "es": "Shimmery Haze", "merkmal": "Grün"},
+    "thunderstorm":  {"de": "Thunderstorm", "en": "Thunderstorm", "fr": "Thunderstorm", "it": "Thunderstorm", "es": "Thunderstorm", "merkmal": "Lila"},
+    "stripes":       {"de": "Stripes", "en": "Stripes", "fr": "Stripes", "it": "Stripes", "es": "Stripes", "merkmal": "Schwarz"},
 }
 
 # --- §5 SEO-Templates (deterministisch) ----------------------------------

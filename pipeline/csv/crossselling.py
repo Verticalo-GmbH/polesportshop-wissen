@@ -29,17 +29,24 @@ def _ids_links(v: Vater) -> list[str]:
     return [v.artikelnummer] + [k.artikelnummer for k in v.kinder]
 
 
-def build_rows(vaeter: list[Vater]) -> list[dict]:
+def build_rows(vaeter: list[Vater], extra_outfit_pairs: list[tuple[str, str]] | None = None) -> list[dict]:
     by_modell_farbe: dict[tuple, dict[str, Vater]] = defaultdict(dict)   # (modell,farbe) -> {typ: V}
     by_modell_typ: dict[tuple, list[Vater]] = defaultdict(list)          # (modell,typ) -> [V...]
+    by_vnr: dict[str, Vater] = {}                                         # Vater-ArtNr (sprechend) -> V
     for v in vaeter:
         by_modell_farbe[(v.modell_basis, v.farbe_raw)][v.garment_type] = v
         by_modell_typ[(v.modell_basis, v.garment_type)].append(v)
+        by_vnr[spec.vater_artnr(v.garment_type, v.modell_basis, v.farbe_raw)] = v
 
     rows: list[dict] = []
+    seen: set[tuple[str, str, str]] = set()
 
     def add_relation(a: Vater, b: Vater, gruppe: str):
         for left in _ids_links(a):
+            key = (left, b.artikelnummer, gruppe)
+            if key in seen:
+                continue
+            seen.add(key)
             rows.append({"Artikelnummer": left, "Artikelnummer Cross-Seller": b.artikelnummer,
                          "Cross-Selling-Gruppe": gruppe})
 
@@ -54,4 +61,14 @@ def build_rows(vaeter: list[Vater]) -> list[dict]:
         for sib in by_modell_typ[(v.modell_basis, v.garment_type)]:
             if sib is not v:
                 add_relation(v, sib, GRUPPE_AEHNLICH)
+
+    # Explizite Outfit-Paare des Lieferanten (sprechende Vater-ArtNr), wenn die
+    # generische Heuristik sie nicht erfasst (z.B. Outfit-Sets mit unterschiedlichem
+    # Modellnamen wie Bodysuit+Garter Belt oder Top+Short verschiedener Modell-Stämme).
+    # Beidseitig, Gruppe „Vervollständige Dein Outfit".
+    for a_vnr, b_vnr in (extra_outfit_pairs or []):
+        a, b = by_vnr.get(a_vnr), by_vnr.get(b_vnr)
+        if a and b:
+            add_relation(a, b, GRUPPE_OUTFIT)
+            add_relation(b, a, GRUPPE_OUTFIT)
     return rows

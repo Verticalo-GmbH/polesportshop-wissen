@@ -565,6 +565,90 @@ lieferanten:
     max_groesse: null
     bemerkung: "Onboarding 2026-06-25 (Code-Pipeline). Shopify (sharkpolewear.com), USD. NUR 12 NEUE Artikel aus Dens Link-Liste (Serenity/Capri Top+Shorts, Charlotte Shorts, Aura Top in Wine/Grape/Sapphira) aus Bestellung BE20261014488 (Rechnung #14); restliche Rechnungspositionen sind Bestandsartikel. Varianten = voller Shop-Stand XS–XL (nie XXL); BE = bestellte Mengen. EAN = Rechnungs-Barcode + Größe (Shop-Barcode beim Wine-Top fehlerhaft = Sapphira-Code; Rechnung ist führend). marke_kurz='Shark Polewear', hersteller='Shark'. Hinweis: Aura-Grape teilt sich Rechnungs-Barcode 500410800 mit Cherry-Black (Bestandsartikel) — Anomalie, Aura selbst unter den 12 eindeutig."
 
+  PARADISE_CHICK:
+    anzeigename: "Paradise Chick"        # = WaWi-Lieferant (Nr. 1095)
+    kuerzel: PC
+    hersteller: "Paradise Chick"         # WaWi-Herstellername; markentext-H2
+    marke_kurz: "Paradise Chick"         # Präfix im Artikelnamen (Tjorben 2026-06-25), z.B. „Paradise Chick Bodysuit Florida Lilly"
+    artnr_prefix: PC                     # nur „Artikelnummer (Lieferant)"; echte ArtNr = A-Nummernkreis, Barcode = HAN
+    herkunftsland: GR                    # Griechenland (handmade)
+    waehrung: EUR                        # Rechnung in EUR; EU -> +1 € EK-Margenschutz (E98)
+    fx_to_eur: 1.0
+    lieferzeit_tage: 30                  # Tjorben 2026-06-25
+    steuerklasse: "OSS2-undefiniert - Standard alle Länder"
+    shop_url: https://paradisechick.com
+    fallback_retailer_url: null
+    drive_ordner_id: null
+    drive_eingang_id: null
+    r2_prefix: paradisechick
+    lieferantennummer_wawi: 1095
+    article_weight_kg: 0.05
+    taric_code: '62114390'
+    groessen_konvention: standard        # Varianten = voller Shop-Stand (XS–XL) außer pures XXL; Garter Belt Kombigrößen (XS/S, M/L, XL/XXL)
+    category: fashion
+    crop_profile: fashion
+    pose_sort: manufacturer_order
+    crawl_mechanik: woocommerce_storeapi  # paradisechick.com ist WooCommerce (Store API /wp-json/wc/store/v1/products?slug=)
+    # Brand-Story = offizieller Markentext (Tjorben 2026-06-25 EN geliefert; DE Master + fr/it/es übersetzt). E72/E79.
+    brand_story_de: |
+      PARADISE CHICK ist eine griechische, handgefertigte Sport-Luxusmarke, die
+      stilvolle Polewear und Outfits aus hochwertigen Stoffen und einzigartigen
+      Prints schafft. Die Polewear-Marke, die dich elegant, einzigartig und
+      komfortabel fühlen lässt. Aus der Leidenschaft und Liebe zu Pole Dance,
+      Sommer und Musik wurde diese Marke geboren, mit dem Ziel, Stil und Eleganz
+      in die Pole-Community zu bringen. Bodysuits, Leggings und Badeanzüge von
+      PARADISE CHICK eignen sich auch für Aerial-Sport, Surfen und Schwimmen. Vor
+      allem aber kannst du sie im Alltag, beim Training und bei Ausflügen tragen.
+      Ein PARADISE CHICK zu sein ist eine Haltung!
+    brand_story_en: |
+      PARADISE CHICK is a Greek handmade sports luxury brand that creates stylish
+      polewear and outfits from high quality fabrics and unique prints. The
+      polewear brand that makes you feel elegant, unique and comfortable. From the
+      passion and love of pole dancing, summer and music, this brand was born with
+      the aim of bringing style and elegance to the pole community. PARADISE CHICK
+      bodysuits, leggings and swimsuits can also be used for aerial sports, surfing
+      and swimming. But most of all, you can wear them for everyday life, training
+      and outings. Being a PARADISE CHICK is an attitude!
+    brand_story_fr: |
+      PARADISE CHICK est une marque grecque de luxe sportif faite main, qui crée
+      des vêtements de pole et des tenues à partir de tissus de haute qualité et
+      d'imprimés uniques. La marque de polewear qui te fait te sentir élégante,
+      unique et à l'aise. Née de la passion et de l'amour de la pole dance, de
+      l'été et de la musique, cette marque a vu le jour avec l'objectif d'apporter
+      style et élégance à la communauté pole. Les bodysuits, leggings et maillots
+      de bain PARADISE CHICK peuvent aussi être utilisés pour les sports aériens,
+      le surf et la natation. Mais surtout, tu peux les porter au quotidien, à
+      l'entraînement et lors de tes sorties. Être une PARADISE CHICK, c'est une
+      attitude !
+    brand_story_it: |
+      PARADISE CHICK è un marchio greco di lusso sportivo fatto a mano, che crea
+      polewear e outfit eleganti con tessuti di alta qualità e stampe uniche. Il
+      marchio di polewear che ti fa sentire elegante, unica e a tuo agio. Dalla
+      passione e dall'amore per la pole dance, l'estate e la musica è nato questo
+      marchio, con l'obiettivo di portare stile ed eleganza nella community della
+      pole. I bodysuit, i leggings e i costumi da bagno PARADISE CHICK possono
+      essere usati anche per gli sport aerei, il surf e il nuoto. Ma soprattutto
+      puoi indossarli nella vita di tutti i giorni, in allenamento e nelle uscite.
+      Essere una PARADISE CHICK è un atteggiamento!
+    brand_story_es: |
+      PARADISE CHICK es una marca griega de lujo deportivo hecha a mano que crea
+      polewear y conjuntos con estilo a partir de tejidos de alta calidad y
+      estampados únicos. La marca de polewear que te hace sentir elegante, única y
+      cómoda. De la pasión y el amor por el pole dance, el verano y la música nació
+      esta marca, con el objetivo de aportar estilo y elegancia a la comunidad del
+      pole. Los bodysuits, leggings y bañadores de PARADISE CHICK también se pueden
+      usar para deportes aéreos, surf y natación. Pero sobre todo, puedes llevarlos
+      en el día a día, en los entrenamientos y en tus salidas. ¡Ser una PARADISE
+      CHICK es una actitud!
+    ameise_vorlagen:
+      stammdaten:       null
+      variationen:      null
+      merkmale:         null
+      attribute:        null
+      cross_selling:    null
+    max_groesse: null
+    bemerkung: "Onboarding 2026-06-25 (Code-Pipeline). WooCommerce (paradisechick.com, Store API). NUR 9 Artikel aus Sofias Link-Liste aus Rechnung ΤΙΜ-EU-0000000512 (280 Stk gesamt, Rest andere Modelle). EK = Netto = Rechnungs-Stückpreis × 0,55 (45 % Wholesale-Rabatt), in EUR. Standardschema-Namen (Typ-Modell-Farbe); Modellnamen Florida/Florida Strappy/Florida Stripes/Gigi/Gigi Active/Iconic. Garter Belt als Shorts geführt (statische Merkmalsverwaltung), name_typ='Garter Belt', Kombigrößen XS/S, M/L, XL/XXL (kein Größen-Filter-Merkmal). Iconic V-Short 'Stripes' = Variante (Merkmal-Farbe Schwarz). Keine Barcodes (Rechnung/Shop) — EAN/HAN leer, später nachpflegen. Varianten = voller Shop-Stand XS–XL (pures XXL raus); BE = bestellte Mengen je Größe."
+
 # ============================================================================
 # Schema-Dokumentation
 # ============================================================================

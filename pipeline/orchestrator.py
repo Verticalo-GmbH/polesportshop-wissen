@@ -43,6 +43,10 @@ SUPPLIERS = {
                  "content": "shark_content.json", "builder": "shark",
                  "ean": "ean_shark.csv", "menge": "menge_shark.csv",
                  "scope": "Bestellung BE20261014488 (12 neue Artikel)"},
+    "paradisechick": {"key": "PARADISE_CHICK", "ek": "ek_paradisechick.csv",
+                 "content": "paradisechick_content.json", "builder": "paradisechick",
+                 "menge": "menge_paradisechick.csv",
+                 "scope": "Rechnung ΤΙΜ-EU-0000000512 (9 Artikel)"},
 }
 
 
@@ -57,12 +61,14 @@ def run(supplier: str = "hotcakes", stamp: str | None = None,
     fx = float(sup.get("fx_to_eur", 1.0) or 1.0)
 
     # Väter-Quelle
+    builder_mod = None
     if cfg["builder"] is None:                       # Shopify-Crawl (HotCakes etc.)
         ds = extract.build_dataset(shopify_json.fetch_all_products(sup["shop_url"]))
         keep, review, exclude = ds["keep"], ds["review"], ds["exclude"]
-    else:                                            # Browser-Scrape-Builder (Rolling)
+    else:                                            # Builder-Modul (Rolling/RAD/Shark/Paradise Chick)
         from importlib import import_module
-        keep = import_module(f".suppliers.{cfg['builder']}", __package__).build_vaeter()
+        builder_mod = import_module(f".suppliers.{cfg['builder']}", __package__)
+        keep = builder_mod.build_vaeter()
         review, exclude = [], []
 
     # Pricing (EK aus Rechnung; fx falls Nicht-EUR). Interim-Margen-Schutz (E98)
@@ -98,7 +104,8 @@ def run(supplier: str = "hotcakes", stamp: str | None = None,
     va = variationen.build_rows(priced, sup, run_date)
     mk = merkmale.build_rows(priced, sup, content)
     at = attribute.build_rows(priced, sup, content)
-    cs = crossselling.build_rows(priced)
+    extra_pairs = getattr(builder_mod, "OUTFIT_PAIRS", None) if builder_mod else None
+    cs = crossselling.build_rows(priced, extra_outfit_pairs=extra_pairs)
 
     checks = selfcheck.run(sd, va, mk, at, cs, priced, ek_aufschlag=ek_auf, vk_aufschlag=vk_auf)
 

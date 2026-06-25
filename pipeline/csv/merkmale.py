@@ -15,8 +15,12 @@ from ..model import Vater
 COLUMNS = ["Lieferant", "Artikelnummer (Lieferant)", "Merkmalname", "Merkmalwertname 1"]
 
 
-def _style_merkmalname(garment_type: str) -> str:
+def _style_merkmalname(garment_type: str) -> str | None:
     # Bodysuit läuft über Style Tops (SPEC §7); Leggings über Style Shorts.
+    # Accessoires (z.B. Garter Belt) bekommen KEIN Style-Merkmal — sie tauchen sonst
+    # in den Shorts-/Tops-Style-Filtern auf, gehören aber in die Accessoires-Kategorie.
+    if garment_type == "Accessoire":
+        return None
     return "Style Tops" if garment_type in ("Top", "Bodysuit") else "Style Shorts"
 
 
@@ -39,18 +43,24 @@ def build_rows(vaeter: list[Vater], supplier: dict, content: dict) -> list[dict]
         style_name = _style_merkmalname(v.garment_type)
         style_werte = c["style_werte"]
 
-        # Vater: Farbe(n) + Style (keine Größe)
+        # Vater: Farbe(n) + Style (keine Größe). Accessoires: kein Style (style_name None).
         for f in farben:
             add(vnr, "Farbe Kleidung", f)
-        for w in style_werte:
-            add(vnr, style_name, w)
+        if style_name:
+            for w in style_werte:
+                add(vnr, style_name, w)
 
         # Kinder: Farbe(n) + Größe + Style
         for k in v.kinder:
             knr = spec.kind_artnr(vnr, k.groesse)
             for f in farben:
                 add(knr, "Farbe Kleidung", f)
-            add(knr, "Größe Kleidung", k.groesse)
-            for w in style_werte:
-                add(knr, style_name, w)
+            # Größe Kleidung nur für Standardgrößen — JTLs Größen-Merkmal ist eine
+            # statische Liste (XS..2XL). Kombi-/Sondergrößen (z.B. Garter Belt „XS/S“,
+            # „XL/XXL“) sind reine Variationswerte und bekommen kein Filter-Merkmal.
+            if k.groesse in spec.MERKMAL_GROESSE_ERLAUBT:
+                add(knr, "Größe Kleidung", k.groesse)
+            if style_name:
+                for w in style_werte:
+                    add(knr, style_name, w)
     return rows

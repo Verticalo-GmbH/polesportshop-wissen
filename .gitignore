@@ -4,6 +4,8 @@
 pipeline/.venv/
 pipeline/outputs/
 pipeline/EK_input/
+pipeline/.incoming/
+pipeline/.secrets/
 pipeline/**/__pycache__/
 pipeline/**/*.pyc
 # Secrets niemals committen (E33)
