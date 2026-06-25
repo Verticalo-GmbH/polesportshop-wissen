@@ -37,7 +37,7 @@ SUPPLIERS = {
                  "scope": "Rechnung #D413 (Odessa)"},
     "rad":      {"key": "RAD_POLEWEAR", "ek": "ek_rad.csv",
                  "content": "rad_content.json", "builder": "rad",
-                 "menge": "menge_rad.csv",
+                 "ean": "ean_rad.csv", "menge": "menge_rad.csv",
                  "scope": "Bestellung #UM8DLUT8M (9 Modelle, alle Schwarz)"},
     "shark":    {"key": "SHARK_POLEWEAR", "ek": "ek_shark.csv",
                  "content": "shark_content.json", "builder": "shark",

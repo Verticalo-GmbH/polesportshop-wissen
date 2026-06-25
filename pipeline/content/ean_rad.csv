@@ -1,0 +1,46 @@
+﻿modell_basis;garment_type;farbe;groesse;ean
+Mercy;Top;black;XS;T.MERCY.BL1
+Mercy;Top;black;S;T.MERCY.BL2
+Mercy;Top;black;M;T.MERCY.BL3
+Mercy;Top;black;L;T.MERCY.BL4
+Mercy;Top;black;XL;T.MERCY.BL5
+Mercy;Bottom;black;XS;B.MERCY.BL1
+Mercy;Bottom;black;S;B.MERCY.BL2
+Mercy;Bottom;black;M;B.MERCY.BL3
+Mercy;Bottom;black;L;B.MERCY.BL4
+Mercy;Bottom;black;XL;B.MERCY.BL5
+Hecate Twinkle;Top;black;XS;T.HECATETW.B1
+Hecate Twinkle;Top;black;S;T.HECATETW.B2
+Hecate Twinkle;Top;black;M;T.HECATETW.B3
+Hecate Twinkle;Top;black;L;T.HECATETW.B4
+Hecate Twinkle;Top;black;XL;T.HECATETW.B5
+Hecate Twinkle;Bottom;black;XS;B.HECATETW.B1
+Hecate Twinkle;Bottom;black;S;B.HECATETW.B2
+Hecate Twinkle;Bottom;black;M;B.HECATETW.B3
+Hecate Twinkle;Bottom;black;L;B.HECATETW.B4
+Hecate Twinkle;Bottom;black;XL;B.HECATETW.B5
+Chandra Twinkle;Top;black;XS;T.CHANDRATW.B1
+Chandra Twinkle;Top;black;S;T.CHANDRATW.B2
+Chandra Twinkle;Top;black;M;T.CHANDRATW.B3
+Chandra Twinkle;Top;black;L;T.CHANDRATW.B4
+Chandra Twinkle;Top;black;XL;T.CHANDRATW.B5
+Chandra Twinkle;Bottom;black;XS;B.CHANDRATW.B1
+Chandra Twinkle;Bottom;black;S;B.CHANDRATW.B2
+Chandra Twinkle;Bottom;black;M;B.CHANDRATW.B3
+Chandra Twinkle;Bottom;black;L;B.CHANDRATW.B4
+Chandra Twinkle;Bottom;black;XL;B.CHANDRATW.B5
+Twinkle Tulle;Bottom;black;XS;S.TWT.BL1
+Twinkle Tulle;Bottom;black;S;S.TWT.BL2
+Twinkle Tulle;Bottom;black;M;S.TWT.BL3
+Twinkle Tulle;Bottom;black;L;S.TWT.BL4
+Twinkle Tulle;Bottom;black;XL;S.TWT.BL5
+Lara;Bottom;black;XS;S.LARA.BL1
+Lara;Bottom;black;S;S.LARA.BL2
+Lara;Bottom;black;M;S.LARA.BL3
+Lara;Bottom;black;L;S.LARA.BL4
+Lara;Bottom;black;XL;S.LARA.BL5
+Rad Strings;Bottom;black;XS;B.RADSTING.BL1
+Rad Strings;Bottom;black;S;B.RADSTING.BL2
+Rad Strings;Bottom;black;M;B.RADSTING.BL3
+Rad Strings;Bottom;black;L;B.RADSTING.BL4
+Rad Strings;Bottom;black;XL;B.RADSTING.BL5

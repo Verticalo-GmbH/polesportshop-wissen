@@ -407,6 +407,7 @@ lieferanten:
     herkunftsland: GR                   # griechische Marke (Markentext + Hecate/Chandra-Mythologie)
     waehrung: EUR
     fx_to_eur: 1.0
+    barcode_feld: HAN                   # RAD-Barcodes = SKU-Codes (alphanum., z.B. T.MERCY.BL2) -> HAN-Feld (Tjorben 2026-06-25)
     lieferzeit_tage: 30                 # Tjorben 2026-06-25; BE-Lieferdatum = Importdatum + 30
     steuerklasse: "OSS2-undefiniert - Standard alle Länder"
     shop_url: https://radpolewear.com
