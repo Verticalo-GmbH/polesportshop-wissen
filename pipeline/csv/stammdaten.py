@@ -43,8 +43,8 @@ def _bild_fields(v: Vater) -> dict:
     return out
 
 
-def _names(marke: str, gtype: str, modell: str, farbe: str) -> dict[str, str]:
-    return {lang: spec.vater_artikelname(marke, gtype, modell, farbe, lang)
+def _names(marke: str, gtype: str, modell: str, farbe: str, name_typ: str | None = None) -> dict[str, str]:
+    return {lang: spec.vater_artikelname(marke, gtype, modell, farbe, lang, name_typ)
             for lang in C.LANGUAGES}
 
 
@@ -68,7 +68,7 @@ def build_rows(vaeter: list[Vater], supplier: dict, run_date: str) -> list[dict]
     # der sprechende Schlüssel bleibt in 'Artikelnummer (Lieferant)' für Merkmale/Attribute.
     for v in vaeter:
         vnr = spec.vater_artnr(v.garment_type, v.modell_basis, v.farbe_raw)
-        vnames = _names(marke, v.garment_type, v.modell_basis, v.farbe_raw)
+        vnames = _names(marke, v.garment_type, v.modell_basis, v.farbe_raw, v.name_typ)
         seo = _seo_fields(vnames)
 
         # --- Vater: 3 Kategorie-Zeilen ---

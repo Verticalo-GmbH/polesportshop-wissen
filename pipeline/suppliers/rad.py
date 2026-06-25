@@ -50,9 +50,12 @@ def build_vaeter() -> list[Vater]:
         groessen = [g for g in ALLOWED_GROESSEN if g in shop_sizes]
         kinder = [Kind(groesse=g, groesse_raw=g, position=i)
                   for i, g in enumerate(groessen)]
+        # „Lara" ist ein Rock: als Bottom/Shorts gefiltert (Merkmal/Kategorie statisch),
+        # aber im Anzeigenamen „Rock" (reiner Content, Tjorben 2026-06-25).
+        name_typ = "Rock" if modell == "Lara" else None
         vaeter.append(Vater(
             handle=handle, product_id=p.get("id", 0), title_raw=p.get("title", ""),
             vendor="RAD Polewear", modell_basis=modell, garment_type=typ, farbe_raw=farbe,
-            body_html=p.get("body_html", ""), image_urls=images, kinder=kinder,
+            name_typ=name_typ, body_html=p.get("body_html", ""), image_urls=images, kinder=kinder,
         ))
     return vaeter

@@ -156,7 +156,7 @@ def _run_images(priced, sup) -> None:
                              v.artikelnummer for v in priced})
     name_map = {spec.vater_artnr(v.garment_type, v.modell_basis, v.farbe_raw):
                 spec.vater_artikelname(sup["marke_kurz"], v.garment_type,
-                                       v.modell_basis, v.farbe_raw, "de")
+                                       v.modell_basis, v.farbe_raw, "de", v.name_typ)
                 for v in priced}
     marke = sup.get("hersteller") or sup.get("marke_kurz") or sup["anzeigename"]
     r2.build_originals_index(client, prefix, name_map,

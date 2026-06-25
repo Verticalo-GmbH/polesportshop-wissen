@@ -552,3 +552,9 @@ Trigger-Bedingung: nächster Lieferanten-Onboarding mit >15 Modellen in einem La
 *Stand:* offen, Priorität NIEDRIG (Monitoring), zu reviewen wenn Lieferanten-Volumen steigt.
 *Kontext:* Bei 21 Artikeln × ~10 Bilder/Artikel = ~210 Thumbnail-Vision-Calls pro Lauf. Bei 50 Artikeln × 10 Bilder × 20 Lieferanten = ~10.000 Vision-Calls pro Monat (Hochrechnung).
 *Trigger:* wenn Cowork-Credit-Verbrauch in Vision-Stage sichtbar dominiert, Re-Evaluation der `pose_sort`-Strategie pro Lieferant (`auto_vision` vs. `manufacturer_order` vs. `none`). Für HotCakes konkret: nach erstem v1.21-Trial-Lauf prüfen ob `auto_vision` weiter sinnvoll ist, oder ob B28-Verifikation mit mehr Datenpunkten zu `manufacturer_order` führt.
+
+**B69 — Eigenes Merkmal/Filter für Röcke (Rock/Skirt). — NEU 2026-06-25**
+*Bezug:* RAD „Lara skirt" (A1009311) — ein Rock, der mangels statischem Rock-Merkmal als Bottom/Shorts gefiltert wird. Der Anzeigename trägt bereits korrekt „Rock"/„Skirt" (Namens-Typ-Override `Vater.name_typ` + `PRODUKTTYP["Rock"]`), aber Merkmal/Kategorie laufen weiter als Shorts.
+*Stand:* offen, Priorität NIEDRIG. Filterlogik/Merkmalsverwaltung in der WaWi ist statisch (siehe Memory feedback_statische_merkmale) — neue Merkmalwerte/Kategorien nur bewusst + abgestimmt anlegen.
+*Aufgabe:* Wenn genug Röcke im Sortiment sind, ein sauberes Rock-Merkmal (Style-Wert oder eigene Kategorie) in WaWi anlegen und im Code (`spec.KATEGORIE_SUB`, `merkmale._style_merkmalname`, ggf. eigener `garment_type`) sauber abbilden, dann betroffene Artikel re-importieren.
+*Trigger:* mehrere Rock-Artikel im Sortiment ODER Tjorben-Freigabe für neuen Merkmalwert.

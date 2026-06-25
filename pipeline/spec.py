@@ -70,6 +70,8 @@ PRODUKTTYP = {
     "Shorts":   {"de": "Shorts",   "en": "Shorts",   "fr": "Short",   "it": "Shorts","es": "Pantalones Cortos"},
     "Bodysuit": {"de": "Bodysuit", "en": "Bodysuit", "fr": "Body",    "it": "Body",  "es": "Body"},
     "Leggings": {"de": "Leggings", "en": "Leggings", "fr": "Legging", "it": "Leggings","es": "Leggings"},
+    # Reiner Anzeigename-Typ (kein Merkmal/keine Kategorie) — für Röcke, die als Bottom/Shorts gefiltert werden.
+    "Rock":     {"de": "Rock",     "en": "Skirt",    "fr": "Jupe",    "it": "Gonna", "es": "Falda"},
 }
 
 # --- §6 Farb-Lookup: token(lower) -> {lang: Name, 'merkmal': WaWi-Wert} --
@@ -146,9 +148,10 @@ def color_localized(farbe_raw: str, lang: str) -> str:
 
 
 def vater_artikelname(marke_kurz: str, garment_type: str, modell: str,
-                      farbe_raw: str, lang: str) -> str:
-    """'{Marke} {Typ} {Modell} {Farbe}' (Farbe optional). E26/E58."""
-    typ = PRODUKTTYP[garment_type][lang]
+                      farbe_raw: str, lang: str, name_typ: str | None = None) -> str:
+    """'{Marke} {Typ} {Modell} {Farbe}' (Farbe optional). E26/E58.
+    name_typ überschreibt NUR das Typ-Wort im Anzeigenamen (Content), nicht garment_type."""
+    typ = PRODUKTTYP[name_typ or garment_type][lang]
     farbe = color_localized(farbe_raw, lang)
     parts = [marke_kurz, typ, modell] + ([farbe] if farbe else [])
     return " ".join(p for p in parts if p).strip()

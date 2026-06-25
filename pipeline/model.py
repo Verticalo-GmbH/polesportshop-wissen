@@ -43,7 +43,9 @@ class Vater:
 
     # Abgeleitete Identität (P2)
     modell_basis: str = ""       # Modell OHNE Typ und OHNE Farbe, z.B. "Arachne"
-    garment_type: str = ""       # normalisiert: Top|Bottom|Bodysuit|Leggings|Shorts
+    garment_type: str = ""       # normalisiert: Top|Bottom|Bodysuit|Leggings|Shorts (steuert Kategorie/Merkmal/ArtNr)
+    name_typ: Optional[str] = None  # Optionaler Typ-Wort-Override NUR für den Anzeigenamen (z.B. "Rock"
+                                    # für einen Rock, der als Bottom/Shorts gefiltert wird) — reiner Content, kein Merkmal
     farbe_raw: str = ""          # z.B. "tan" (Roh aus Titel); "" = keine Farb-Variante im Titel
     farbe_de: str = ""           # lokalisiert für DE-Artikelname (E92), in P4 gefüllt
 
