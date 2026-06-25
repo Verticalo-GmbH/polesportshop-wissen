@@ -33,6 +33,7 @@ lieferanten:
     artnr_prefix: PA            # NEU 2026-06-21 (Code-Pipeline-Onboarding) — Präfix für sprechende Artikelnummer (Lieferant), z.B. PA-Goddess-Top-Black. Bestätigt Tjorben.
     herkunftsland: PL           # KORRIGIERT 2026-06-21: war PT (Portugal), faktisch Polen — Rechnung WDT/10 + Produktseite "designed and sewn in Poland". Bestätigt Tjorben.
     waehrung: EUR
+    eu: true                        # EU-Tag (E103): steuert GLD-/VK-Aufschlag (EU +0,50 GLD/+1 EK; Nicht-EU +2,30 GLD/+5 VK)
     lieferzeit_tage: 45         # NEU 2026-06-21 (Tjorben) — Standard-Lieferzeit POLE ADDICT: BE-Lieferdatum = Importdatum + 45 Tage (E97/E99)
     steuerklasse: "OSS2-undefiniert - Standard alle Länder"
     shop_url: https://shop.poleaddict.eu   # KORRIGIERT 2026-06-21: war poleaddict.com; realer Shop (PrestaShop) ist shop.poleaddict.eu
@@ -168,6 +169,7 @@ lieferanten:
       diseñado para sí mismas.
     herkunftsland: GR
     waehrung: EUR
+    eu: true                        # EU-Tag (E103): steuert GLD-/VK-Aufschlag (EU +0,50 GLD/+1 EK; Nicht-EU +2,30 GLD/+5 VK)
     steuerklasse: "OSS2-undefiniert - Standard alle Länder"
     shop_url: https://hotcakespolewear.com
     fallback_retailer_url: https://eu.polejunkie.com/collections/hotcakes
@@ -202,6 +204,7 @@ lieferanten:
     artnr_prefix: LU
     herkunftsland: AU
     waehrung: AUD
+    eu: false                        # EU-Tag (E103): steuert GLD-/VK-Aufschlag (EU +0,50 GLD/+1 EK; Nicht-EU +2,30 GLD/+5 VK)
     fx_to_eur: 0.6104               # Tageskurs 2026-06-15 (AUD->EUR); EK*fx, dann *2 -> ,90
     steuerklasse: "OSS2-undefiniert - Standard alle Länder"
     shop_url: https://www.lunalae.com
@@ -319,6 +322,7 @@ lieferanten:
     artnr_prefix: RO                # Artikelnummer-Präfix (analog HC bei HotCakes)
     herkunftsland: BR
     waehrung: USD                   # Rechnung in USD; VK in EUR via fx_to_eur
+    eu: false                        # EU-Tag (E103): steuert GLD-/VK-Aufschlag (EU +0,50 GLD/+1 EK; Nicht-EU +2,30 GLD/+5 VK)
     fx_to_eur: 0.8612               # Tageskurs 2026-06-15 (USD->EUR); EK*fx, dann *2 -> ,90
     steuerklasse: "OSS2-undefiniert - Standard alle Länder"
     shop_url: https://www.shoprolling.com.br
@@ -406,6 +410,7 @@ lieferanten:
     artnr_prefix: RAD
     herkunftsland: GR                   # griechische Marke (Markentext + Hecate/Chandra-Mythologie)
     waehrung: EUR
+    eu: true                        # EU-Tag (E103): steuert GLD-/VK-Aufschlag (EU +0,50 GLD/+1 EK; Nicht-EU +2,30 GLD/+5 VK)
     fx_to_eur: 1.0
     barcode_feld: HAN                   # RAD-Barcodes = SKU-Codes (alphanum., z.B. T.MERCY.BL2) -> HAN-Feld (Tjorben 2026-06-25)
     lieferzeit_tage: 30                 # Tjorben 2026-06-25; BE-Lieferdatum = Importdatum + 30
@@ -497,6 +502,7 @@ lieferanten:
     artnr_prefix: SHARK
     herkunftsland: AE                   # Arabische Emirate (Tjorben 2026-06-25; Rechnung kam aus Tbilisi, Ursprung aber AE)
     waehrung: USD                       # Rechnung in USD; VK in EUR via fx_to_eur
+    eu: false                        # EU-Tag (E103): steuert GLD-/VK-Aufschlag (EU +0,50 GLD/+1 EK; Nicht-EU +2,30 GLD/+5 VK)
     barcode_feld: HAN                   # Shark-Codes (alphanum., z.B. 500425210XS) sind keine GTIN -> ins HAN-Feld, nicht EAN
     fx_to_eur: 0.8808                   # Tageskurs 2026-06-25 (USD->EUR)
     lieferzeit_tage: 60                 # Tjorben 2026-06-25; Versandfrist 14.08. + FedEx-Transit aus Georgien
@@ -573,6 +579,7 @@ lieferanten:
     artnr_prefix: PC                     # nur „Artikelnummer (Lieferant)"; echte ArtNr = A-Nummernkreis, Barcode = HAN
     herkunftsland: GR                    # Griechenland (handmade)
     waehrung: EUR                        # Rechnung in EUR; EU -> +1 € EK-Margenschutz (E98)
+    eu: true                        # EU-Tag (E103): steuert GLD-/VK-Aufschlag (EU +0,50 GLD/+1 EK; Nicht-EU +2,30 GLD/+5 VK)
     fx_to_eur: 1.0
     lieferzeit_tage: 30                  # Tjorben 2026-06-25
     steuerklasse: "OSS2-undefiniert - Standard alle Länder"

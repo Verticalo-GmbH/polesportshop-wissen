@@ -16,18 +16,17 @@ AUFSCHLAGSFAKTOR = 2.0  # Netto-VK = EK_netto * 2.0 (Keystone auf NETTO)
 # wurde ×2 fälschlich auf den Brutto gerechnet -> MwSt fraß die Marge, netto nur EK*1,68
 # = ~37% statt ~50%.) Strukturelle Sauber-Runde + Bestandsartikel-Repricing siehe Backlog.
 MWST_FAKTOR = 1.19
-# Interim-Margen-Schutz (E98), bis der GLD Zoll/Versand/Bankgebühren enthält (B68).
-# Nach Herkunft differenziert:
-# - Nicht-EU-Lieferant (Zoll + Versand + Bankgebühren): +5,00 EUR auf den Brutto-VK
-#   (ganzer Euro erhält das ,90-Ende).
-# - EU/EUR-Lieferant (kein Zoll, geringe Versandkosten): +1,00 EUR auf den EK -> via ×2 in den VK.
-# Erkennung EU vs. Nicht-EU über die Lieferanten-Währung (EUR = EU).
-VK_AUFSCHLAG_AUSLAND_EUR = 5.00
-EK_AUFSCHLAG_EU_EUR = 1.00
-# GLD-Kosten-Aufschlag (E98): +2,30 EUR pro Kleidungsstück auf den Ø-EK/GLD, damit die
-# Buchhaltungs-Marge nicht verzerrt ist (GLD enthält sonst keine Zoll/Versand/Bankgebühren).
-# Wirkt NUR auf den GLD, nicht auf den VK. Zukunft: pro Lieferant aus historischen Daten (B68).
-GLD_AUFSCHLAG_EUR = 2.30
+# Interim-Margen-Schutz (E98/E103), bis pro Lieferant historische Werte vorliegen (B68/B70).
+# Nach EU/Nicht-EU differenziert — gesteuert über den expliziten Lieferanten-Tag `eu:`
+# im Mapping (NICHT mehr über die Währung; ein EUR-fakturierender Nicht-EU-Lieferant
+# würde sonst falsch eingestuft). Drei Hebel:
+# - VK-Aufschlag (Brutto-VK): Nicht-EU +5,00 EUR (Zoll/Versand/Bank); EU 0 (statt dessen EK-Puffer).
+# - EK-Aufschlag (EU): +1,00 EUR auf den EK -> via ×2×MwSt in den VK.
+# - GLD-Aufschlag (Ø-EK/GLD): EU +0,50 EUR (Bank/Handling); Nicht-EU +2,30 EUR (Zoll+Versand+Bank).
+VK_AUFSCHLAG_AUSLAND_EUR = 5.00     # Nicht-EU, auf den Brutto-VK
+EK_AUFSCHLAG_EU_EUR = 1.00          # EU, auf den EK (fließt via ×2 in den VK)
+GLD_AUFSCHLAG_EU_EUR = 0.50         # EU, auf den GLD (innereuropäisch, kein Zoll)
+GLD_AUFSCHLAG_NICHTEU_EUR = 2.30    # Nicht-EU, auf den GLD (Zoll + Versand + Bank)
 
 # --- Sprachen ------------------------------------------------------------
 LANGUAGES = ["de", "en", "fr", "it", "es"]  # DE ist Master (Charter-Prinzip 6)

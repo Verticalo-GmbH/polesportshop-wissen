@@ -159,7 +159,7 @@ def main() -> None:
     v = build_vater()
     ek_map = pricing.load_ek_csv(config.EK_INPUT_DIR / "ek_poleaddict.csv")
     priced, missing = pricing.apply_pricing([v], ek_map, 1.0,
-                                            ek_aufschlag=C.EK_AUFSCHLAG_EU_EUR, vk_aufschlag=0.0)
+                                            ek_aufschlag=C.EK_AUFSCHLAG_EU_EUR, vk_aufschlag=0.0, gld_aufschlag=C.GLD_AUFSCHLAG_EU_EUR)
     if missing or not priced:
         raise SystemExit(f"EK fehlt: {missing}")
 
@@ -194,7 +194,7 @@ def main() -> None:
     at = attribute.build_rows(priced, sup, content)
     cs = build_crossselling(v)
     checks = selfcheck.run(sd, va, mk, at, cs, priced,
-                           ek_aufschlag=C.EK_AUFSCHLAG_EU_EUR, vk_aufschlag=0.0)
+                           ek_aufschlag=C.EK_AUFSCHLAG_EU_EUR, vk_aufschlag=0.0, gld_aufschlag=C.GLD_AUFSCHLAG_EU_EUR)
 
     # Lieferantenbestellung (6. Output): Lieferdatum = Importdatum + lieferzeit_tage (E97/E99).
     menge = {}

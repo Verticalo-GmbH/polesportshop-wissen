@@ -48,13 +48,15 @@ def load_ek_csv(path: Path) -> dict[tuple[str, str, str], float]:
 
 
 def apply_pricing(vaeter: list[Vater], ek_map: dict[tuple[str, str, str], float],
-                  fx_to_eur: float = 1.0, ek_aufschlag: float = 0.0, vk_aufschlag: float = 0.0):
+                  fx_to_eur: float = 1.0, ek_aufschlag: float = 0.0, vk_aufschlag: float = 0.0,
+                  gld_aufschlag: float = C.GLD_AUFSCHLAG_NICHTEU_EUR):
     """
     Setzt ek_netto (in EUR) + vk_brutto auf jedem Vater, für den ein EK existiert.
     fx_to_eur: Umrechnungsfaktor falls Rechnung nicht in EUR (z.B. USD 0.8612).
-    EK_eur = EK_roh * fx; VK = (EK_eur + ek_aufschlag) * 2.0 -> kaufm. ,90 + vk_aufschlag.
-    ek_aufschlag/vk_aufschlag: Interim-Margen-Schutz (E98), fließen NUR in den VK,
-    nicht in den dokumentierten EK/GLD. -> (priced, missing).
+    Netto-VK = (EK_eur + ek_aufschlag) * 2.0; Brutto-VK = *MwSt -> ,90 + vk_aufschlag.
+    GLD = EK_eur + gld_aufschlag (EU +0,50 / Nicht-EU +2,30, E98/E103).
+    ek_aufschlag/vk_aufschlag fließen NUR in den VK; gld_aufschlag NUR in den GLD.
+    Alle drei nach EU/Nicht-EU differenziert (Tag, vom Orchestrator gesetzt). -> (priced, missing).
     """
     priced, missing = [], []
     for v in vaeter:
@@ -65,7 +67,7 @@ def apply_pricing(vaeter: list[Vater], ek_map: dict[tuple[str, str, str], float]
         ek_eur = round(ek * fx_to_eur, 2)
         v.ek_original = round(ek, 2)   # Lieferanten-Währung (z.B. AUD) -> Lieferanten-Netto-EK
         v.ek_netto = ek_eur            # EUR -> Basis der VK-Kalkulation
-        v.gld = round(ek_eur + C.GLD_AUFSCHLAG_EUR, 2)   # Ø-EK/GLD inkl. Kosten-Aufschlag (E98)
+        v.gld = round(ek_eur + gld_aufschlag, 2)   # Ø-EK/GLD inkl. EU/Nicht-EU-Kosten-Aufschlag (E98/E103)
         # Keystone auf NETTO: Netto-VK = (EK + EK-Aufschlag)*2, dann MwSt OBENDRAUF (*1,19)
         # -> Brutto-VK, kaufm. auf ,90; plus VK-Aufschlag (E98, Nicht-EU); dann Charm (E101).
         vk = round_vk_90((ek_eur + ek_aufschlag) * C.AUFSCHLAGSFAKTOR * C.MWST_FAKTOR) + vk_aufschlag

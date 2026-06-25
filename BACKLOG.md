@@ -562,9 +562,12 @@ Trigger-Bedingung: nächster Lieferanten-Onboarding mit >15 Modellen in einem La
 **B70 — Preislogik strukturell sauber ziehen. — NEU 2026-06-25**
 *Bezug:* Beim Paradise-Chick-Import fiel auf, dass die Marge zu niedrig war (~37 % statt ~50 %). Ursache: die `×2` (`AUFSCHLAGSFAKTOR`) wurde fälschlich auf den **Brutto**-VK gerechnet, also inklusive 19 % MwSt — netto blieb nur `EK×1,68`. **Sofort-Fix 2026-06-25:** `MWST_FAKTOR=1,19` in `constants.py`; `pricing.py` + `selfcheck.py` rechnen die ×2 jetzt auf NETTO und addieren die MwSt obendrauf (Netto-VK = doppelter Netto-EK ≈ 52 % auf EK / ~46-48 % auf GLD). Paradise Chick neu bepreist (A1009325–333).
 *Stand:* Sofort-Fix erledigt, strukturelle Runde offen, Priorität MITTEL.
-*Offene Punkte für die strukturelle Runde:*
-1. **Bestandsartikel re-pricen:** HotCakes, Lunalae (+Odessa), Rolling, RAD, Shark wurden mit der alten (Brutto-)Logik angelegt → zu niedrige Marge. Preis-Update-Dateien erzeugen (VK neu) + in WaWi importieren. Reihenfolge/Umfang abstimmen.
-2. **Nicht-EU-Verzeichnis statt Währungs-Heuristik:** der +5-EUR-Puffer (Zoll/Versand/Bank) wird aktuell über `waehrung==EUR` als EU/Nicht-EU erkannt. Sauberer: ein explizites Feld pro Lieferant (`zollpflichtig`/`eu: true|false`), damit ein EUR-fakturierender Nicht-EU-Lieferant (oder umgekehrt) nicht falsch eingestuft wird. (Tjorben-Idee 2026-06-25.)
-3. **GLD-Aufschlag (+2,30 €, E98) im Margen-Kontext:** verzerrt die angezeigte Ø-Netto-EK-Marge nach unten. Zusammen mit B68 (historische Mittelwerte pro Lieferant) überdenken — gehört der Aufschlag in den GLD, oder besser in eine separate Kostenstelle?
-4. **Marge-Ziel dokumentieren:** soll der Standard „doppelter Netto-EK" (~50 % auf EK) bleiben, oder ein Ziel-% auf die angezeigte GLD-Marge? Policy in SPEC_KONSTANTEN festhalten.
-*Trigger:* nächste ruhige Runde / wenn die Bestandsartikel-Marge real weh tut.
+**Erledigt 2026-06-25 (E103, `pricing.py`/`constants.py`/`orchestrator.py`/Mapping):**
+- **Expliziter EU-Tag pro Lieferant** (`eu: true|false` im Mapping, Fallback Währung) steuert jetzt alle drei Aufschläge — statt der Währungs-Heuristik. (= alter Punkt 2.)
+- **GLD-Aufschlag differenziert:** EU **+0,50 €** (innereuropäisch, kein Zoll), Nicht-EU **+2,30 €** (Zoll+Versand+Bank). VK-Aufschlag wie gehabt (EU +1 € EK, Nicht-EU +5 € VK). Ledger + Sammel-Preisdatei neu gerechnet (EU-GLDs −1,80 €). (= alter Punkt 3, Interim-Teil.)
+
+*Offen für die strukturelle Runde:*
+1. **Bestandsartikel re-importieren:** Sammel-Preisdatei `~/Downloads/Preisupdate_Bestandsartikel_2026-06-25.csv` (415 Artikel, VK + GLD) erzeugt — Brutto-VK + EK Netto (für GLD) in WaWi importieren. VK = unstrittig; GLD korrigiert HotCakes (war ohne Aufschlag) + alle EU-Lieferanten (von +2,30 auf +0,50, inkl. PC). Auf Lagerbestand/Ø-EK-Verzerrung achten.
+2. **Historische Mittelwerte (B68):** GLD-/VK-Aufschläge pro Lieferant irgendwann aus echten Zoll-/Versand-/Bankdaten glattziehen statt Pauschalen — und klären, ob der Aufschlag dauerhaft in den GLD oder in eine separate Kostenstelle gehört.
+3. **Marge-Ziel dokumentieren:** Standard „doppelter Netto-EK" (~50 % auf EK) in SPEC_KONSTANTEN als Policy festhalten.
+*Trigger:* nächste ruhige Runde / wenn echte Zoll-/Versanddaten vorliegen.

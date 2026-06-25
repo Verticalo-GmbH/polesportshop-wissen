@@ -71,13 +71,16 @@ def run(supplier: str = "hotcakes", stamp: str | None = None,
         keep = builder_mod.build_vaeter()
         review, exclude = [], []
 
-    # Pricing (EK aus Rechnung; fx falls Nicht-EUR). Interim-Margen-Schutz (E98)
-    # nach Herkunft: Nicht-EU -> +5 EUR auf VK; EU/EUR -> +1 EUR auf EK (via ×2 in VK).
-    is_eur = (sup.get("waehrung", "EUR") == "EUR")
-    ek_auf = constants.EK_AUFSCHLAG_EU_EUR if is_eur else 0.0
-    vk_auf = 0.0 if is_eur else constants.VK_AUFSCHLAG_AUSLAND_EUR
+    # Pricing — Interim-Margen-Schutz (E98/E103) nach EU/Nicht-EU, gesteuert über den
+    # expliziten Lieferanten-Tag `eu:` (Fallback: Währung == EUR). Nicht-EU -> +5 € VK
+    # + 2,30 € GLD; EU -> +1 € EK + 0,50 € GLD.
+    eu = bool(sup.get("eu", sup.get("waehrung", "EUR") == "EUR"))
+    ek_auf = constants.EK_AUFSCHLAG_EU_EUR if eu else 0.0
+    vk_auf = 0.0 if eu else constants.VK_AUFSCHLAG_AUSLAND_EUR
+    gld_auf = constants.GLD_AUFSCHLAG_EU_EUR if eu else constants.GLD_AUFSCHLAG_NICHTEU_EUR
     ek_map = pricing.load_ek_csv(config.EK_INPUT_DIR / cfg["ek"])
-    priced, missing = pricing.apply_pricing(keep, ek_map, fx, ek_aufschlag=ek_auf, vk_aufschlag=vk_auf)
+    priced, missing = pricing.apply_pricing(keep, ek_map, fx, ek_aufschlag=ek_auf,
+                                            vk_aufschlag=vk_auf, gld_aufschlag=gld_auf)
 
     # Weg B (E94): A-Nummern aus dem WaWi-Nummernkreis vorab vergeben.
     artnr_next = numbering.assign(priced, start=start_artnr, persist=persist_counter)
@@ -149,7 +152,7 @@ def run(supplier: str = "hotcakes", stamp: str | None = None,
 
     artnr_range = (priced[0].artikelnummer, priced[-1].artikelnummer, artnr_next) if priced else None
     report = _report(sup, cfg, priced, missing, review, exclude, checks, written, stamp,
-                     with_images, artnr_range, ek_auf=ek_auf, vk_auf=vk_auf)
+                     with_images, artnr_range, ek_auf=ek_auf, vk_auf=vk_auf, gld_auf=gld_auf, eu=eu)
     (out / f"run_{stamp}_{kz}.md").write_text(report, encoding="utf-8")
     config.copy_to_downloads(out)   # WaWi-Imports immer auch nach ~/Downloads
 
@@ -182,18 +185,19 @@ def _run_images(priced, sup) -> None:
 
 
 def _report(sup, cfg, priced, missing, review, exclude, checks, written, stamp,
-            with_images, artnr_range=None, ek_auf=0.0, vk_auf=0.0) -> str:
+            with_images, artnr_range=None, ek_auf=0.0, vk_auf=0.0, gld_auf=0.0, eu=True) -> str:
     n_ok = sum(1 for c in checks if c[2])
     kz = sup["kuerzel"]
     L = [f"# Lauf-Bericht {sup['anzeigename']} {stamp}", "",
          f"**Lieferant:** {sup['anzeigename']} ({kz}) | **Pipeline:** lokal (Claude Code)",
          f"**Scope:** {len(priced)} Väter ({cfg['scope']}), {sum(len(v.kinder) for v in priced)} Kinder",
          f"**Währung:** EK {sup.get('waehrung','EUR')}, fx_to_eur {sup.get('fx_to_eur', 1.0)}",
-         "**Margen-Schutz (E98):** " + (
-             f"Nicht-EU → +{vk_auf:.2f} € auf den Brutto-VK (Zoll/Versand/Bank im Mittel)"
-             if vk_auf else
-             f"EU → +{ek_auf:.2f} € auf den EK (= +{ek_auf*2:.2f} € im VK)")
-         + " — angewendet, erzwungen via Self-Check #16.", ""]
+         f"**Herkunft:** {'EU (innereuropäisch)' if eu else 'Nicht-EU (Zoll/Versand)'}",
+         "**Margen-Schutz (E98/E103):** " + (
+             f"EU → +{ek_auf:.2f} € auf den EK (= ~+{ek_auf*2*1.19:.2f} € im VK) + {gld_auf:.2f} € auf den GLD"
+             if eu else
+             f"Nicht-EU → +{vk_auf:.2f} € auf den Brutto-VK + {gld_auf:.2f} € auf den GLD (Zoll/Versand/Bank)")
+         + " — angewendet, VK erzwungen via Self-Check #16.", ""]
     if artnr_range:
         L += [f"**Nummernkreis (Weg B, E94):** Väter {artnr_range[0]}–{artnr_range[1]} "
               f"(+ Kinder -001…). WaWi-Zähler 'Laufende Nummer' nach Import auf "
