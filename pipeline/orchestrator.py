@@ -136,7 +136,7 @@ def run(supplier: str = "hotcakes", stamp: str | None = None,
 
     artnr_range = (priced[0].artikelnummer, priced[-1].artikelnummer, artnr_next) if priced else None
     report = _report(sup, cfg, priced, missing, review, exclude, checks, written, stamp,
-                     with_images, artnr_range)
+                     with_images, artnr_range, ek_auf=ek_auf, vk_auf=vk_auf)
     (out / f"run_{stamp}_{kz}.md").write_text(report, encoding="utf-8")
     config.copy_to_downloads(out)   # WaWi-Imports immer auch nach ~/Downloads
 
@@ -169,13 +169,18 @@ def _run_images(priced, sup) -> None:
 
 
 def _report(sup, cfg, priced, missing, review, exclude, checks, written, stamp,
-            with_images, artnr_range=None) -> str:
+            with_images, artnr_range=None, ek_auf=0.0, vk_auf=0.0) -> str:
     n_ok = sum(1 for c in checks if c[2])
     kz = sup["kuerzel"]
     L = [f"# Lauf-Bericht {sup['anzeigename']} {stamp}", "",
          f"**Lieferant:** {sup['anzeigename']} ({kz}) | **Pipeline:** lokal (Claude Code)",
          f"**Scope:** {len(priced)} Väter ({cfg['scope']}), {sum(len(v.kinder) for v in priced)} Kinder",
-         f"**Währung:** EK {sup.get('waehrung','EUR')}, fx_to_eur {sup.get('fx_to_eur', 1.0)}", ""]
+         f"**Währung:** EK {sup.get('waehrung','EUR')}, fx_to_eur {sup.get('fx_to_eur', 1.0)}",
+         "**Margen-Schutz (E98):** " + (
+             f"Nicht-EU → +{vk_auf:.2f} € auf den Brutto-VK (Zoll/Versand/Bank im Mittel)"
+             if vk_auf else
+             f"EU → +{ek_auf:.2f} € auf den EK (= +{ek_auf*2:.2f} € im VK)")
+         + " — angewendet, erzwungen via Self-Check #16.", ""]
     if artnr_range:
         L += [f"**Nummernkreis (Weg B, E94):** Väter {artnr_range[0]}–{artnr_range[1]} "
               f"(+ Kinder -001…). WaWi-Zähler 'Laufende Nummer' nach Import auf "
