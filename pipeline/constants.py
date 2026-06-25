@@ -25,10 +25,14 @@ AUFSCHLAGSFAKTOR = 2.0  # LEGACY (altes „EK×2"-Modell) — vom Marge-Modell a
 # - VK-Aufschlag (Brutto-VK): Nicht-EU +5,00 EUR (Zoll/Versand/Bank); EU 0 (statt dessen EK-Puffer).
 # - EK-Aufschlag (EU): +1,00 EUR auf den EK -> via ×2×MwSt in den VK.
 # - GLD-Aufschlag (Ø-EK/GLD): EU +0,50 EUR (Bank/Handling); Nicht-EU +2,30 EUR (Zoll+Versand+Bank).
-VK_AUFSCHLAG_AUSLAND_EUR = 5.00     # Nicht-EU, auf den Brutto-VK
-EK_AUFSCHLAG_EU_EUR = 1.00          # EU, auf den EK (fließt via ×2 in den VK)
-GLD_AUFSCHLAG_EU_EUR = 0.50         # EU, auf den GLD (innereuropäisch, kein Zoll)
-GLD_AUFSCHLAG_NICHTEU_EUR = 2.30    # Nicht-EU, auf den GLD (Zoll + Versand + Bank)
+# GLD-Aufschlag = geschätzte Beschaffungs-Zusatzkosten je Stück; fließt in die GLD und
+# damit (über das Marge-Modell, ×1,98 auf den VK) in den Brutto-VK. Übergangs-Pauschalen,
+# bis historische Rechnungsdaten pro Lieferant vorliegen (B68):
+GLD_AUFSCHLAG_EU_EUR = 1.00        # EU: innereurop. Versand/Bank -> ~+2 € VK
+GLD_AUFSCHLAG_NICHTEU_EUR = 2.75   # Nicht-EU: Zoll+Versand+Bank (konservativ) -> ~+5 € VK
+# LEGACY (altes „EK×2"+Puffer-Modell, vom Marge-Modell E104 abgelöst — nicht mehr im VK):
+VK_AUFSCHLAG_AUSLAND_EUR = 5.00
+EK_AUFSCHLAG_EU_EUR = 1.00
 
 # --- Sprachen ------------------------------------------------------------
 LANGUAGES = ["de", "en", "fr", "it", "es"]  # DE ist Master (Charter-Prinzip 6)
