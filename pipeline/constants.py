@@ -29,7 +29,17 @@ AUFSCHLAGSFAKTOR = 2.0  # LEGACY (altes „EK×2"-Modell) — vom Marge-Modell a
 # damit (über das Marge-Modell, ×1,98 auf den VK) in den Brutto-VK. Übergangs-Pauschalen,
 # bis historische Rechnungsdaten pro Lieferant vorliegen (B68):
 GLD_AUFSCHLAG_EU_EUR = 1.00        # EU: innereurop. Versand/Bank -> ~+2 € VK
-GLD_AUFSCHLAG_NICHTEU_EUR = 2.75   # Nicht-EU: Zoll+Versand+Bank (konservativ) -> ~+5 € VK
+GLD_AUFSCHLAG_NICHTEU_EUR = 5.00   # Nicht-EU: Zoll (~12%) + Fracht + Bank, bewusst konservativ (Tjorben 2026-06-29)
+
+# Konservative FESTE Umrechnungskurse je Fremdwährung (Tjorben 2026-06-29): NICHT tageskurs-
+# abhängig, sondern bewusst „schlechter Kurs" als Puffer (lieber etwas höherer VK, damit die
+# Marge auch bei ungünstigem Kurs sicher steht). EK_eur = EK_fremd * Kurs. Ersetzt die alten
+# Tageskurse pro Lieferant (mapping fx_to_eur = nur noch Fallback).
+FX_KONSERVATIV = {
+    "EUR": 1.0,
+    "USD": 0.95,   # ~+8 % vs. Tageskurs 0,88 (deckt EUR/USD bis ~1,05)
+    "AUD": 0.65,   # ~+6 % vs. Tageskurs 0,61
+}
 # LEGACY (altes „EK×2"+Puffer-Modell, vom Marge-Modell E104 abgelöst — nicht mehr im VK):
 VK_AUFSCHLAG_AUSLAND_EUR = 5.00
 EK_AUFSCHLAG_EU_EUR = 1.00

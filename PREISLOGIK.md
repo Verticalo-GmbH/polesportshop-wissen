@@ -9,7 +9,8 @@ Wir rechnen den Verkaufspreis **aus den echten Kosten auf eine feste Ziel-Marge*
 1. **Netto-EK** des Lieferanten, in EUR umgerechnet (falls Rechnung in USD/AUD).
 2. **+ Beschaffungs-Aufschlag** = unsere **GLD** (Ø-Netto-EK, die „echten" Stück-Kosten):
    - **EU-Lieferant:** + **1,00 €** (innereurop. Versand/Bank, kein Zoll)
-   - **Nicht-EU-Lieferant:** + **2,75 €** (Zoll + Versand + Bank, bewusst konservativ)
+   - **Nicht-EU-Lieferant:** + **5,00 €** (Zoll ~12 % + Fracht + Bank, bewusst konservativ)
+   - Fremdwährungs-EK vorher mit **festem konservativem Kurs** in EUR (USD 0,95 / AUD 0,65) — bewusst „schlechter Kurs" als Puffer, **nicht** tageskursabhängig.
 3. **Brutto-VK** so gewählt, dass die **Marge = 40 %** (JTL-Spalte „Gewinn %", also Netto-VK gegen die GLD). Rechnerisch: `Netto-VK = GLD / 0,60`, dann **+ 19 % MwSt**.
 4. **Kaufmännisch auf X,90** runden (Charm: keine runden Zehner, z. B. 40,90 → 39,90).
 
@@ -23,7 +24,7 @@ Wir rechnen den Verkaufspreis **aus den echten Kosten auf eine feste Ziel-Marge*
 |---|---|---|---|---|---|
 | HotCakes (EU) | 21,00 € | +1,00 | 22,00 € | **43,90 €** | ~40 % |
 | Paradise Chick (EU) | 26,61 € | +1,00 | 27,61 € | **54,90 €** | ~40 % |
-| Shark (Nicht-EU) | 20,93 € | +2,75 | 23,68 € | **46,90 €** | ~40 % |
+| Shark (Nicht-EU, USD) | 22,57 € | +5,00 | 27,57 € | **54,90 €** | ~40 % |
 
 ## Übergangslösung → Zukunft
-Die Aufschläge **1,00 € / 2,75 €** sind **Pauschalen** (Schätzwerte für Zoll/Versand/Bank pro Stück). Sie sind bewusst eher konservativ, damit die Marge nicht von unterschätzten Kosten aufgefressen wird. **Nächster Schritt (Backlog B68/B70):** statt Pauschalen die **echten historischen Beschaffungskosten pro Lieferant** ansetzen — über eine Anbindung an ein Buchhaltungssystem, in dem die historischen Rechnungen je Lieferant sichtbar sind. Dann ist die GLD exakt, und der VK stimmt automatisch mit, ohne je wieder am Preis zu schrauben.
+Die Aufschläge **1,00 € (EU) / 5,00 € (Nicht-EU)** und die festen Kurse (USD 0,95 / AUD 0,65) sind **konservative Pauschalen** — bewusst eher zu hoch angesetzt, damit die Marge auch bei Zoll, Fracht und ungünstigem Wechselkurs sicher steht (lieber etwas höherer VK als die Arbeit umsonst). **Nächster Schritt (Backlog B68/B70):** statt Pauschalen die **echten historischen Beschaffungskosten pro Lieferant** ansetzen — über eine Anbindung an ein Buchhaltungssystem, in dem die historischen Rechnungen je Lieferant sichtbar sind. Dann ist die GLD exakt, und der VK stimmt automatisch mit, ohne je wieder am Preis zu schrauben.

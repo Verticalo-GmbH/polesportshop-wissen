@@ -66,7 +66,9 @@ def run(supplier: str = "hotcakes", stamp: str | None = None,
     run_date = datetime.now().strftime("%d.%m.%Y")
     sup = config.get_supplier(cfg["key"])
     spec.set_artnr_prefix(sup.get("artnr_prefix", "HC"))
-    fx = float(sup.get("fx_to_eur", 1.0) or 1.0)
+    # Konservativer fester Kurs nach Währung (E105); Fallback: Mapping-fx_to_eur.
+    fx = constants.FX_KONSERVATIV.get(sup.get("waehrung", "EUR"),
+                                      float(sup.get("fx_to_eur", 1.0) or 1.0))
 
     # Väter-Quelle
     builder_mod = None
