@@ -1,0 +1,20 @@
+# Validierungs-Grenze in CI (§1b LLM-Architektur-Standard, verticalo-ops):
+# fängt Commits, die den lokalen pre-commit-Hook umgehen.
+# Härtung (später, security-konzept): Actions auf vollen Commit-SHA pinnen.
+name: validate
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install deps
+        run: pip install -r pipeline/requirements.txt
+      - name: Validate artefacts (Schema-as-Code)
+        run: python -m pipeline.validate
