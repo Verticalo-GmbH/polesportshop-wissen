@@ -284,36 +284,6 @@ lieferanten:
     max_groesse: null
     bemerkung: "Onboarding 2026-06-15 (3. Lieferant via Code-Pipeline). Shopify, offen. Erst-Lieferung Rechnung #3124 (B2B, AUD): NUR die Diamante-May-Release-Artikel im Scope (Lookbook), Rest der Rechnung = Restock/out-of-scope. 10 Väter (Imogen/Demi/Sarah/Roxie-Top/Roxie-Bottoms × Schwarz/Taupe/Flieder). AU6-14 → XS-XL. Brand-Story = offizieller Markentext (Tjorben 2026-06-17)."
 
-  POLE_JUNKIE:
-    anzeigename: "Pole Junkie"
-    kuerzel: POLE-JUNKIE
-    hersteller: null            # Pole Junkie ist Retailer, nicht Hersteller — Hersteller pro Artikel zu pflegen
-    herkunftsland: null
-    waehrung: null
-    steuerklasse: "OSS2-undefiniert - Standard alle Länder"
-    shop_url: https://eu.polejunkie.com
-    fallback_retailer_url: null
-    drive_ordner_id: null
-    drive_eingang_id: null
-    r2_prefix: pole-junkie
-    lieferantennummer_wawi: null
-    article_weight_kg: 0.05     # NEU v1.16 (F3/B56) — Default für Pole-Bekleidung
-    taric_code: '62114390'      # NEU v1.16 (F6/B59) — TARIC für Pole-Bekleidung (pro Artikel ggf. anpassen wenn Pole Junkie Nicht-Bekleidung führt)
-    groessen_konvention: standard
-    category: fashion           # Default-Annahme
-    crop_profile: fashion
-    pose_sort: auto_vision
-    crawl_mechanik: shopify_json   # E48 + E49 (Owner-Direktive 2026-05-15) — Pole Junkie ist Shopify (validiert in der Auto-Detektion), Crawl explizit freigegeben durch Tjorben mit voller Verantwortungs-Übernahme. Bei Cease-and-Desist sofort eskalieren.
-    stil_inspiration: true         # E49 + E53 (2026-05-15) — Pole Junkie dient zusätzlich als REDUKTIONS-VORBILD für Artikeldetails-Texte. Bei Crawl-Modus B kann Cowork die Pole-Junkie-Produktseite für denselben Artikel oder ein Schwester-Modell aufrufen und die Reduktions-Struktur ableiten (welche Features, wie kurz, welche Reihenfolge). NIE Copy-Paste — eigene Formulierung in polesportshop-DNA (siehe cowork_anweisung_datenimports.md Sektion 5.5).
-    ameise_vorlagen:
-      stammdaten:       null
-      variationen:      null
-      merkmale:         null
-      attribute:        null
-      cross_selling:    null    # NEU v1.14 (E80)
-    max_groesse: null   # NEU v1.15
-    bemerkung: "Onboarding ausstehend. **WICHTIG (E49):** Pole-Junkie-Crawl ohne Halt-und-Nachfrage — Owner-Direktive Tjorben Becker 2026-05-15, volle rechtliche und operative Verantwortung wird übernommen. Im Lauf-Bericht jedes Pole-Junkie-Laufs den E49-Verweis dokumentieren (Audit-Spur). Bei expliziter Cease-and-Desist-Forderung sofort eskalieren und pausieren. Pole Junkie ist Retailer (multi-brand), pro Artikel den Hersteller aus den Produktdaten ableiten. **Plus (E53):** Pole Junkie ist Stil-Inspirations-Quelle für Artikeldetails-Reduktion — siehe `stil_inspiration: true`."
-
   ROLLING_CLOTHING:
     anzeigename: "Rolling Brand"     # = WaWi-Lieferantenname (Lieferant-Spalte Merkmale/Attribute muss exakt matchen)
     kuerzel: ROLLING

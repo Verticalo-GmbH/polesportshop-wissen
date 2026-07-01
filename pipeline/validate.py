@@ -18,6 +18,7 @@ import sys
 from pathlib import Path
 
 from . import content as content_mod
+from . import constants as C
 from .spec import MERKMAL_FARBE_ERLAUBT
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -48,9 +49,22 @@ def check_content(errors: list[str], warnings: list[str]) -> None:
                     errors.append(
                         f"{rel}:{vnr}: merkmal_farbe '{fb}' nicht in Whitelist "
                         f"(spec.MERKMAL_FARBE_ERLAUBT)")
-        # WARNING: Vollständigkeit über die bestehende Logik
-        for m in content_mod.validate(data, list(data.keys())):
+        # WARNING: Vollständigkeit. Technik-Content (Single-SKU, kein Kleidungsstück,
+        # z.B. PoleGrip) hat bewusst KEIN merkmal_farbe/style_werte — nur Attribut-Texte.
+        # Erkennung: Eintrag ohne beide Kleidungs-Keys. Für die läuft nur der Attribut-Check,
+        # nicht die content.validate()-Klamotten-Logik (sonst False-Positive-Warnungen).
+        kleidung = {k: c for k, c in data.items()
+                    if isinstance(c, dict) and ("merkmal_farbe" in c or "style_werte" in c)}
+        technik = {k: c for k, c in data.items()
+                   if isinstance(c, dict) and k not in kleidung}
+        for m in content_mod.validate(kleidung, list(kleidung)):
             warnings.append(f"{rel}: {m}")
+        for vnr, c in technik.items():
+            for a in content_mod.PER_MODEL_ATTRS:
+                entry = c.get("attribute", {}).get(a, {})
+                for lang in C.LANGUAGES:
+                    if not entry.get(lang):
+                        warnings.append(f"{rel}: {vnr}: attribute.{a}.{lang} fehlt")
 
 
 def check_mapping(errors: list[str], warnings: list[str]) -> None:

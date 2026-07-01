@@ -24,9 +24,9 @@ Abgleich von `polesportshop-wissen` gegen `verticalo-ops/standards/llm-architekt
 Vektor-DB/Embeddings/Hybrid-Retrieval (§3) · LLM-Judge + Eval-CI (§4 spätere Stufen) · Observability/Token-Kosten-Logging (§5) · semantische Dedup-Erkennung (§6) · Server-Alert/Server-Hygiene §1c (kein autonomer Dienst — n/a).
 
 ## Umsetzung (Stand 2026-07-01)
-- ✅ **P1** — `pipeline/validate.py` (Schema-as-Code über `content/*.json` + `lieferanten_mapping.yaml`, nutzt bestehende `content.validate` + `spec`-Whitelist). Trennt ERRORS (blocken: malformte JSON/YAML, Farbe außerhalb Whitelist, Struktur) von WARNINGS (Vollständigkeit). Aktuell: **0 Fehler, 3 Warnungen**.
+- ✅ **P1** — `pipeline/validate.py` (Schema-as-Code über `content/*.json` + `lieferanten_mapping.yaml`, nutzt bestehende `content.validate` + `spec`-Whitelist). Trennt ERRORS (blocken: malformte JSON/YAML, Farbe außerhalb Whitelist, Struktur) von WARNINGS (Vollständigkeit). Aktuell: **0 Fehler, 0 Warnungen**. Technik-Content (Single-SKU, kein Kleidungsstück, z.B. PoleGrip) wird erkannt (kein `merkmal_farbe`/`style_werte`) und nur auf Attribut-Vollständigkeit geprüft — nicht auf die Klamotten-Merkmale.
 - ✅ **P2** — `.github/workflows/validate.yml`: CI ruft `python -m pipeline.validate` bei jedem Push/PR (§1b).
 - ✅ **P3** — `.pre-commit-config.yaml`: lokaler Hook (§1a). Einmal aktivieren: `pip install pre-commit && pre-commit install`.
 - ⏳ **P4** — Golden-Set: bleibt Backlog (Kür).
 
-**Nebenbefund (WARNING, bitte fixen):** `POLE_JUNKIE` im Mapping hat weder `hersteller` noch `marke_kurz` → der Markentext-H2 würde bei einem Lauf leer bleiben. Beim nächsten Pole-Junkie-Onboarding den Markennamen nachtragen (siehe Prinzip „Markentext nie erfinden, immer erfragen").
+**Erledigt (2026-07-01):** Der frühere `POLE_JUNKIE`-Warnbefund entfällt — der Eintrag wurde aus `lieferanten_mapping.yaml` entfernt (Pole Junkie ist Retailer/Wettbewerb, kein Hersteller/keine Marke; Tjorben 2026-07-01). Die E49/E53-Historie im Entscheidungs-Log bleibt als Audit-Spur bestehen.
